@@ -8,6 +8,7 @@ import type { AppMenuItem } from "../../menu-items/menu.types";
 import { useSidebarStore } from "../../store/sidebarStore";
 import NavItemsRenderer from "../NavItems";
 import SidebarHeader from "./SidebarHeader";
+import { getFullscreenContainer } from "../../utils/getFullscreenContainer";
 
 type SidebarProps = {
   items?: AppMenuItem[];
@@ -84,7 +85,8 @@ export default function Sidebar({ items = [] }: SidebarProps) {
         onOpen={() => undefined}
         disableSwipeToOpen
         ModalProps={{
-          keepMounted: true,
+          keepMounted: false,
+          container: getFullscreenContainer
         }}
         slotProps={{
           paper: {
