@@ -1,0 +1,149 @@
+{
+  "common": {
+    "loading": "Loading..."
+  },
+  "api": {
+    "unexpectedError": "An unexpected error occurred."
+  },
+  "app": {
+    "title": "Public Transportation Dashboard",
+    "shortTitle": "Transport Panel"
+  },
+  "auth": {
+    "fields": {
+      "phone": "Phone number",
+      "password": "Password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "otp": "Verification code"
+    },
+    "actions": {
+      "togglePassword": "Show or hide password"
+    },
+    "logout": "Logout",
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to the public transportation dashboard to monitor trips, routes, revenue, and alerts.",
+      "submit": "Login",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Do not have an account?",
+      "contactAdmin": "Contact the administrator",
+      "success": "Logged in successfully.",
+      "invalidCredentials": "Phone number or password is incorrect.",
+      "accountNotActivated": "Account is not activated."
+    },
+    "reset": {
+      "title": "Reset password",
+      "phoneSubtitle": "Enter your Syrian phone number to receive a verification code.",
+      "otpSubtitle": "Enter the verification code sent to your phone number.",
+      "otpHint": "Enter the 5-digit verification code.",
+      "passwordSubtitle": "Enter your new account password.",
+      "successTitle": "Password changed successfully",
+      "successSubtitle": "You can now log in using your new password.",
+      "sendOtp": "Send verification code",
+      "verifyOtp": "Verify code",
+      "resendOtp": "Resend code",
+      "saveNewPassword": "Save new password",
+      "backToLogin": "Back to login",
+      "backToOtp": "Back to verification code",
+      "phoneHint": "Example: 09XXXXXXXX or +9639XXXXXXXX",
+      "otpSentTo": "Verification code was sent to:",
+      "changePhone": "Change phone number",
+      "redirecting": "Redirecting you to login...",
+      "steps": {
+        "phone": "Phone",
+        "otp": "Verify",
+        "password": "Password"
+      },
+      "errors": {
+        "verifyOtpFailed": "The verification code is invalid or expired.",
+        "invalidPhone": "Invalid phone number.",
+        "phoneNotRegistered": "Phone number is not registered.",
+        "sendOtpFailed": "Could not send the verification code. Please try again.",
+        "invalidOtpOrPassword": "Invalid OTP or password.",
+        "tooManyAttempts": "Too many failed attempts. Request a new OTP.",
+        "resetFailed": "Could not reset the password. Please try again."
+      }
+    },
+    "validation": {
+      "phoneRequired": "Phone number is required.",
+      "invalidSyrianPhone": "Enter a valid Syrian mobile number.",
+      "invalidOtp": "Verification code must be 5 digits.",
+      "otpRequired": "Verification code is required.",
+      "passwordRequired": "Password is required.",
+      "passwordMin": "Password must be at least 8 characters.",
+      "confirmPasswordRequired": "Password confirmation is required.",
+      "passwordsDoNotMatch": "Passwords do not match."
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "enable": "Enable notifications",
+    "permissionGranted": "Notifications enabled successfully.",
+    "permissionDenied": "Notification permission was denied.",
+    "permissionDefault": "Notification permission has not been selected yet.",
+    "notSupported": "Notifications are not supported in this browser.",
+    "newNotification": "New notification",
+    "markAllAsRead": "Mark all as read",
+    "clearAll": "Clear all",
+    "empty": "No notifications yet",
+    "windowsHint": "Make sure browser notifications are allowed in Windows settings."
+  },
+  "settings": {
+    "language": {
+      "title": "Language",
+      "arabic": "Arabic",
+      "english": "English"
+    },
+    "theme": {
+      "title": "Appearance Settings",
+      "mode": "Display Mode",
+      "light": "Light",
+      "dark": "Dark",
+      "palette": "Interface Colors",
+      "font": "Font",
+      "palettes": {
+        "energetic": "Energetic",
+        "electric": "Electric",
+        "solar": "Solar",
+        "classic": "Classic"
+      },
+      "fonts": {
+        "interCairo": "Inter / Cairo",
+        "robotoKufi": "Roboto / Noto Kufi Arabic",
+        "orbitronAmiri": "Orbitron / Amiri"
+      }
+    }
+  },
+  "layout": {
+    "openSidebar": "Open sidebar",
+    "collapseSidebar": "Collapse sidebar",
+    "expandSidebar": "Expand sidebar",
+    "fullscreen": "Fullscreen"
+  },
+  "profile": {
+    "account": "Account",
+    "my": "My profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "superAdmin": "Super Admin"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "home": "Home",
+    "management": "Management",
+    "companies": "Companies",
+    "lines": "Lines",
+    "employees": "Employees",
+    "roles": "Roles",
+    "employeesList": "Employees List",
+    "createEmployee": "Create Employee",
+    "operations": "Operations",
+    "buses": "Buses",
+    "drivers": "Drivers",
+    "tracking": "Tracking",
+    "alerts": "Alerts",
+    "revenue": "Revenue",
+    "reports": "Reports"
+  }
+}

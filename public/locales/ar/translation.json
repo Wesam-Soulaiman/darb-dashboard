@@ -1,0 +1,150 @@
+{
+  "common": {
+    "loading": "جاري التحميل...",
+    "user": "المستخدم"
+  },
+  "app": {
+    "title": "لوحة تحكم النقل العام",
+    "shortTitle": "لوحة النقل"
+  },
+  "api": {
+    "unexpectedError": "حدث خطأ غير متوقع."
+  },
+  "auth": {
+    "fields": {
+      "phone": "رقم الهاتف",
+      "password": "كلمة المرور",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "otp": "رمز التحقق"
+    },
+    "actions": {
+      "togglePassword": "إظهار أو إخفاء كلمة المرور"
+    },
+    "logout": "تسجيل الخروج",
+    "login": {
+      "title": "مرحباً بعودتك",
+      "subtitle": "سجّل الدخول إلى لوحة تحكم درب.",
+      "submit": "تسجيل الدخول",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "noAccount": "لا تملك حساباً؟",
+      "contactAdmin": "تواصل مع المسؤول",
+      "success": "تم تسجيل الدخول بنجاح.",
+      "invalidCredentials": "رقم الهاتف أو كلمة المرور غير صحيحة.",
+      "accountNotActivated": "الحساب غير مفعّل."
+    },
+    "reset": {
+      "title": "إعادة تعيين كلمة المرور",
+      "phoneSubtitle": "أدخل رقمك السوري لإرسال رمز تحقق.",
+      "otpSubtitle": "أدخل رمز التحقق المرسل إلى رقمك.",
+      "otpHint": "أدخل الرمز المكوّن من 5 أرقام.",
+      "passwordSubtitle": "أدخل كلمة المرور الجديدة لحسابك.",
+      "successTitle": "تم تغيير كلمة المرور بنجاح",
+      "successSubtitle": "يمكنك الآن تسجيل الدخول باستخدام كلمة المرور الجديدة.",
+      "sendOtp": "إرسال رمز التحقق",
+      "verifyOtp": "تأكيد الرمز",
+      "resendOtp": "إعادة إرسال الرمز",
+      "saveNewPassword": "حفظ كلمة المرور الجديدة",
+      "backToLogin": "العودة إلى تسجيل الدخول",
+      "backToOtp": "العودة إلى رمز التحقق",
+      "phoneHint": "مثال: 09XXXXXXXX أو +9639XXXXXXXX",
+      "otpSentTo": "تم إرسال رمز التحقق إلى الرقم:",
+      "changePhone": "تغيير رقم الهاتف",
+      "redirecting": "سيتم تحويلك إلى صفحة تسجيل الدخول...",
+      "steps": {
+        "phone": "الرقم",
+        "otp": "التحقق",
+        "password": "كلمة المرور"
+      },
+      "errors": {
+        "verifyOtpFailed": "رمز التحقق غير صحيح أو منتهي الصلاحية.",
+        "invalidPhone": "رقم الهاتف غير صالح.",
+        "phoneNotRegistered": "رقم الهاتف غير مسجل.",
+        "sendOtpFailed": "تعذر إرسال رمز التحقق. حاول مرة أخرى.",
+        "invalidOtpOrPassword": "رمز التحقق أو كلمة المرور غير صحيحة.",
+        "tooManyAttempts": "تم تجاوز عدد المحاولات المسموح. اطلب رمزاً جديداً.",
+        "resetFailed": "تعذر تغيير كلمة المرور. حاول مرة أخرى."
+      }
+    },
+    "validation": {
+      "phoneRequired": "رقم الهاتف مطلوب.",
+      "invalidSyrianPhone": "أدخل رقم هاتف سوري صحيح.",
+      "invalidOtp": "رمز التحقق يجب أن يتكون من 5 أرقام.",
+      "otpRequired": "رمز التحقق مطلوب.",
+      "passwordRequired": "كلمة المرور مطلوبة.",
+      "passwordMin": "يجب ألا تقل كلمة المرور عن 8 أحرف.",
+      "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب.",
+      "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين."
+    }
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "enable": "تفعيل الإشعارات",
+    "permissionGranted": "تم تفعيل الإشعارات بنجاح.",
+    "permissionDenied": "تم رفض صلاحية الإشعارات.",
+    "permissionDefault": "لم يتم تحديد صلاحية الإشعارات بعد.",
+    "notSupported": "الإشعارات غير مدعومة في هذا المتصفح.",
+    "newNotification": "إشعار جديد",
+    "markAllAsRead": "تحديد الكل كمقروء",
+    "clearAll": "مسح الكل",
+    "empty": "لا توجد إشعارات حالياً",
+    "windowsHint": "تأكد من السماح بإشعارات المتصفح من إعدادات Windows."
+  },
+  "settings": {
+    "language": {
+      "title": "اللغة",
+      "arabic": "العربية",
+      "english": "الإنجليزية"
+    },
+    "theme": {
+      "title": "إعدادات المظهر",
+      "mode": "وضع العرض",
+      "light": "فاتح",
+      "dark": "داكن",
+      "palette": "ألوان الواجهة",
+      "font": "الخط",
+      "palettes": {
+        "energetic": "حيوي",
+        "electric": "كهربائي",
+        "solar": "شمسي",
+        "classic": "كلاسيكي"
+      },
+      "fonts": {
+        "interCairo": "Inter / Cairo",
+        "robotoKufi": "Roboto / Noto Kufi Arabic",
+        "orbitronAmiri": "Orbitron / Amiri"
+      }
+    }
+  },
+  "layout": {
+    "openSidebar": "فتح القائمة",
+    "collapseSidebar": "طي القائمة",
+    "expandSidebar": "توسيع القائمة",
+    "fullscreen": "ملء الشاشة"
+  },
+  "profile": {
+    "account": "الحساب",
+    "my": "ملفي الشخصي",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    "superAdmin": "مشرف عام"
+  },
+  "sidebar": {
+    "dashboard": "لوحة التحكم",
+    "home": "الرئيسية",
+    "management": "الإدارة",
+    "companies": "الشركات",
+    "lines": "الخطوط",
+    "employees": "الموظفون",
+    "roles": "الأدوار",
+    "employeesList": "قائمة الموظفين",
+    "createEmployee": "إضافة موظف",
+    "operations": "التشغيل",
+    "buses": "الباصات",
+    "drivers": "السائقون",
+    "tracking": "التتبع",
+    "alerts": "التنبيهات",
+    "revenue": "الإيرادات",
+    "reports": "التقارير"
+  }
+}
