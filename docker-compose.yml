@@ -1,0 +1,15 @@
+services:
+  darb-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: darb-dashboard
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    environment:
+      - VITE_PROXY_TARGET=http://host.docker.internal:3000
