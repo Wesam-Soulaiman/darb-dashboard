@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
+import { getFullscreenContainer } from "../utils/getFullscreenContainer";
 import { useNotification } from "../contexts/NotificationContext";
 
 export default function NotificationMenu() {
@@ -44,6 +44,7 @@ export default function NotificationMenu() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        container={getFullscreenContainer}
         slotProps={{
           paper: {
             sx: {

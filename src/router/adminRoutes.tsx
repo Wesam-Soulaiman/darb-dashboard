@@ -15,7 +15,6 @@ const AdminLayout = Loadable(
 // const Dashboard = Loadable(
 //   lazy(() => import("../pages/admin/Dashboard/Dashboard")),
 // );
-
 const MyProfile = Loadable(
   lazy(() => import("../pages/admin/MyProfile/MyProfile")),
 );

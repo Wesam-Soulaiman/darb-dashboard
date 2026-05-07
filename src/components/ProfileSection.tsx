@@ -16,7 +16,7 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-
+import { getFullscreenContainer } from "../utils/getFullscreenContainer";
 import { useAuthContext } from "../contexts/AuthContext";
 
 export default function ProfileSection() {
@@ -68,6 +68,7 @@ export default function ProfileSection() {
         open={open}
         onClose={handleClose}
         onClick={handleClose}
+        container={getFullscreenContainer}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         slotProps={{
