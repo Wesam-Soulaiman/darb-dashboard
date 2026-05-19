@@ -172,7 +172,8 @@
       "organizations": "الشركات",
       "permissions": "الصلاحيات",
       "users": "المستخدمون",
-      "places": "الأماكن"
+      "places": "الأماكن",
+      "stops": "المواقف"
     },
     "dashboard": "لوحة التحكم",
     "home": "الرئيسية",
@@ -204,55 +205,104 @@
     "invalidEmail": "البريد الإلكتروني غير صالح",
     "invalidPhone": "رقم الهاتف غير صالح"
   },
+  "stops": {
+    "title": "المواقف",
+    "subtitle": "إدارة مواقف النقل وتحديد مواقعها على الخريطة",
+    "defaultName": "موقف",
+    "createTitle": "إضافة موقف جديد",
+    "editTitle": "تعديل الموقف",
+    "deleteTitle": "حذف الموقف",
+    "deleteDescription": "هل أنت متأكد من حذف الموقف {{name}}؟",
+    "actions": {
+      "create": "إضافة موقف",
+      "update": "تحديث الموقف",
+      "searchAroundMe": "ابحث حول موقعي",
+      "clearAroundMe": "إلغاء البحث حولي"
+    },
+    "form": {
+      "place": "المكان",
+      "name": "اسم الموقف",
+      "selectPlace": "اختر المكان",
+      "coordinates": "إحداثيات الموقف",
+      "mapLink": "رابط الموقع على الخريطة"
+    },
+    "table": {
+      "name": "اسم الموقف",
+      "place": "المكان",
+      "coordinates": "الإحداثيات",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "map": {
+      "selectPoint": "تحديد نقطة على الخريطة",
+      "savePoint": "حفظ الموقع",
+      "showStops": "عرض المواقف على الخريطة",
+      "noStopsTitle": "لا توجد مواقف لعرضها",
+      "noStopsDescription": "لا توجد مواقف تحتوي على إحداثيات ضمن النتائج الحالية.",
+      "visibleCount": "{{count}} موقف"
+    },
+    "toast": {
+      "createSuccess": "تم إنشاء الموقف بنجاح",
+      "createError": "فشل إنشاء الموقف",
+      "updateSuccess": "تم تحديث الموقف بنجاح",
+      "updateError": "فشل تحديث الموقف",
+      "deleteSuccess": "تم حذف الموقف بنجاح",
+      "deleteError": "فشل حذف الموقف"
+    },
+    "filters": {
+      "radius": "نطاق البحث بالمتر",
+      "searchingAroundMe": "يتم عرض المواقف ضمن {{radius}} متر من موقعك الحالي"
+    }
+  },
+
   "places": {
-  "title": "الأماكن",
-  "subtitle": "إدارة الأماكن وتحديد مراكزها على الخريطة",
-  "createTitle": "إضافة مكان جديد",
-  "editTitle": "تعديل المكان",
-  "deleteTitle": "حذف المكان",
-  "deleteDescription": "هل أنت متأكد من حذف المكان {{name}}؟",
-  "actions": {
-    "create": "إضافة مكان",
-    "update": "تحديث المكان"
+    "title": "الأماكن",
+    "subtitle": "إدارة الأماكن وتحديد مراكزها على الخريطة",
+    "createTitle": "إضافة مكان جديد",
+    "editTitle": "تعديل المكان",
+    "deleteTitle": "حذف المكان",
+    "deleteDescription": "هل أنت متأكد من حذف المكان {{name}}؟",
+    "actions": {
+      "create": "إضافة مكان",
+      "update": "تحديث المكان"
+    },
+    "form": {
+      "name": "اسم المكان",
+      "country": "الدولة",
+      "governate": "المحافظة",
+      "selectCountry": "اختر الدولة",
+      "selectGovernate": "اختر المحافظة",
+      "center": "مركز المكان",
+      "mapLink": "رابط الموقع على الخريطة"
+    },
+    "filters": {
+      "country": "الدولة",
+      "governate": "المحافظة",
+      "allCountries": "كل الدول",
+      "allGovernates": "كل المحافظات"
+    },
+    "table": {
+      "name": "اسم المكان",
+      "governateId": "المحافظة",
+      "center": "المركز",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "map": {
+      "selectPoint": "تحديد نقطة على الخريطة",
+      "savePoint": "حفظ الموقع",
+      "showPlaces": "عرض الأماكن على الخريطة",
+      "noPlacesTitle": "لا توجد أماكن لعرضها",
+      "noPlacesDescription": "لا توجد أماكن تحتوي على إحداثيات ضمن النتائج الحالية.",
+      "visibleCount": "{{count}} مكان"
+    },
+    "toast": {
+      "createSuccess": "تم إنشاء المكان بنجاح",
+      "createError": "فشل إنشاء المكان",
+      "updateSuccess": "تم تحديث المكان بنجاح",
+      "updateError": "فشل تحديث المكان",
+      "deleteSuccess": "تم حذف المكان بنجاح",
+      "deleteError": "فشل حذف المكان"
+    }
   },
-  "form": {
-    "name": "اسم المكان",
-    "country": "الدولة",
-    "governate": "المحافظة",
-    "selectCountry": "اختر الدولة",
-    "selectGovernate": "اختر المحافظة",
-    "center": "مركز المكان",
-    "mapLink": "رابط الموقع على الخريطة"
-  },
-  "filters": {
-    "country": "الدولة",
-    "governate": "المحافظة",
-    "allCountries": "كل الدول",
-    "allGovernates": "كل المحافظات"
-  },
-  "table": {
-    "name": "اسم المكان",
-    "governateId": "المحافظة",
-    "center": "المركز",
-    "createdAt": "تاريخ الإنشاء"
-  },
-  "map": {
-    "selectPoint": "تحديد نقطة على الخريطة",
-    "savePoint": "حفظ الموقع",
-    "showPlaces": "عرض الأماكن على الخريطة",
-    "noPlacesTitle": "لا توجد أماكن لعرضها",
-    "noPlacesDescription": "لا توجد أماكن تحتوي على إحداثيات ضمن النتائج الحالية.",
-    "visibleCount": "{{count}} مكان"
-  },
-  "toast": {
-    "createSuccess": "تم إنشاء المكان بنجاح",
-    "createError": "فشل إنشاء المكان",
-    "updateSuccess": "تم تحديث المكان بنجاح",
-    "updateError": "فشل تحديث المكان",
-    "deleteSuccess": "تم حذف المكان بنجاح",
-    "deleteError": "فشل حذف المكان"
-  }
-},
   "organizations": {
     "title": "الشركات",
     "subtitle": "إدارة الشركات التشغيلية ضمن منصة درب",

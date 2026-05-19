@@ -167,7 +167,8 @@
       "organizations": "Organizations",
       "permissions": "Permissions",
       "users": "Users",
-      "places": "Places"
+      "places": "Places",
+      "stops": "Stops"
     },
     "dashboard": "Dashboard",
     "home": "Home",
@@ -199,53 +200,101 @@
     "invalidEmail": "Invalid email address",
     "invalidPhone": "Invalid phone number"
   },
+  "stops": {
+    "title": "Stops",
+    "subtitle": "Manage transport stops and locate them on the map",
+    "defaultName": "Stop",
+    "createTitle": "Create New Stop",
+    "editTitle": "Edit Stop",
+    "deleteTitle": "Delete Stop",
+    "deleteDescription": "Are you sure you want to delete {{name}}?",
+    "actions": {
+      "create": "Create Stop",
+      "update": "Update Stop",
+      "searchAroundMe": "Search around me",
+      "clearAroundMe": "Clear nearby search"
+    },
+    "form": {
+      "place": "Place",
+      "name": "Stop name",
+      "selectPlace": "Select place",
+      "coordinates": "Stop coordinates",
+      "mapLink": "Map location link"
+    },
+    "table": {
+      "name": "Stop name",
+      "place": "Place",
+      "coordinates": "Coordinates",
+      "createdAt": "Created at"
+    },
+    "map": {
+      "selectPoint": "Select point on map",
+      "savePoint": "Save location",
+      "showStops": "Show stops on map",
+      "noStopsTitle": "No stops to show",
+      "noStopsDescription": "There are no stops with coordinates in the current results.",
+      "visibleCount": "{{count}} stops"
+    },
+    "toast": {
+      "createSuccess": "Stop created successfully",
+      "createError": "Failed to create stop",
+      "updateSuccess": "Stop updated successfully",
+      "updateError": "Failed to update stop",
+      "deleteSuccess": "Stop deleted successfully",
+      "deleteError": "Failed to delete stop"
+    },
+    "filters": {
+      "radius": "Search radius in meters",
+      "searchingAroundMe": "Showing stops within {{radius}} meters of your current location"
+    }
+  },
   "places": {
-  "title": "Places",
-  "subtitle": "Manage places and select their centers on the map",
-  "createTitle": "Create New Place",
-  "editTitle": "Edit Place",
-  "deleteTitle": "Delete Place",
-  "deleteDescription": "Are you sure you want to delete {{name}}?",
-  "actions": {
-    "create": "Create Place",
-    "update": "Update Place"
+    "title": "Places",
+    "subtitle": "Manage places and select their centers on the map",
+    "createTitle": "Create New Place",
+    "editTitle": "Edit Place",
+    "deleteTitle": "Delete Place",
+    "deleteDescription": "Are you sure you want to delete {{name}}?",
+    "actions": {
+      "create": "Create Place",
+      "update": "Update Place"
+    },
+    "form": {
+      "name": "Place name",
+      "country": "Country",
+      "governate": "Governate",
+      "selectCountry": "Select country",
+      "selectGovernate": "Select governate",
+      "center": "Place center",
+      "mapLink": "Map location link"
+    },
+    "filters": {
+      "country": "Country",
+      "governate": "Governate",
+      "allCountries": "All countries",
+      "allGovernates": "All governates"
+    },
+    "table": {
+      "name": "Place name",
+      "governateId": "Governate",
+      "center": "Center",
+      "createdAt": "Created at"
+    },
+    "map": {
+      "showPlaces": "Show places on map",
+      "noPlacesTitle": "No places to show",
+      "noPlacesDescription": "There are no places with coordinates in the current results.",
+      "visibleCount": "{{count}} places"
+    },
+    "toast": {
+      "createSuccess": "Place created successfully",
+      "createError": "Failed to create place",
+      "updateSuccess": "Place updated successfully",
+      "updateError": "Failed to update place",
+      "deleteSuccess": "Place deleted successfully",
+      "deleteError": "Failed to delete place"
+    }
   },
-  "form": {
-    "name": "Place name",
-    "country": "Country",
-    "governate": "Governate",
-    "selectCountry": "Select country",
-    "selectGovernate": "Select governate",
-    "center": "Place center",
-    "mapLink": "Map location link"
-  },
-  "filters": {
-    "country": "Country",
-    "governate": "Governate",
-    "allCountries": "All countries",
-    "allGovernates": "All governates"
-  },
-  "table": {
-    "name": "Place name",
-    "governateId": "Governate",
-    "center": "Center",
-    "createdAt": "Created at"
-  },
-  "map": {
-    "showPlaces": "Show places on map",
-    "noPlacesTitle": "No places to show",
-    "noPlacesDescription": "There are no places with coordinates in the current results.",
-    "visibleCount": "{{count}} places"
-  },
-  "toast": {
-    "createSuccess": "Place created successfully",
-    "createError": "Failed to create place",
-    "updateSuccess": "Place updated successfully",
-    "updateError": "Failed to update place",
-    "deleteSuccess": "Place deleted successfully",
-    "deleteError": "Failed to delete place"
-  }
-},
   "organizations": {
     "title": "Organizations",
     "subtitle": "Manage operating organizations in Darb platform",
