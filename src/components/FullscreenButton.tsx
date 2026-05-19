@@ -37,7 +37,7 @@ export default function FullscreenButton() {
 
   return (
     <Tooltip title={t("layout.fullscreen")}>
-      <IconButton color="primary" onClick={toggleFullscreen}>
+      <IconButton color="default" onClick={toggleFullscreen}>
         {isFullscreen ? (
           <FullscreenExitRoundedIcon />
         ) : (

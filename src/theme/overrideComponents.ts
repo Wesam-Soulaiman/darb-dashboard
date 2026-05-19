@@ -130,9 +130,7 @@ export const overrideComponents: Components<Omit<Theme, "components">> = {
     styleOverrides: {
       root: ({ theme }) => ({
         borderRadius: 12,
-        color: theme.palette.text.secondary,
         "&:hover": {
-          color: theme.palette.text.primary,
           backgroundColor: theme.palette.custom.hover,
         },
       }),

@@ -34,7 +34,7 @@ export default function NotificationMenu() {
 
   return (
     <>
-      <IconButton color="primary" onClick={handleOpen}>
+      <IconButton color="default" onClick={handleOpen}>
         <Badge badgeContent={unreadCount} color="error">
           <NotificationsRoundedIcon />
         </Badge>

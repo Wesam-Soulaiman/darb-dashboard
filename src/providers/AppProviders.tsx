@@ -5,6 +5,7 @@ import RTLProvider from "./RTLProvider";
 import ReactQueryProvider from "./ReactQueryProvider";
 import NotificationProvider from "./NotificationProvider";
 import AppToastContainer from "./AppToastContainer";
+import MyLocationProvider from "./MyLocationProvider";
 
 type AppProvidersProps = {
   children: ReactNode;
@@ -15,8 +16,10 @@ export default function AppProviders({ children }: AppProvidersProps) {
     <ThemeProvider>
       <RTLProvider>
         <ReactQueryProvider>
-          <NotificationProvider>{children}</NotificationProvider>
-          <AppToastContainer />
+          <MyLocationProvider autoRequest={false}>
+            <NotificationProvider>{children}</NotificationProvider>
+            <AppToastContainer />
+          </MyLocationProvider>
         </ReactQueryProvider>
       </RTLProvider>
     </ThemeProvider>

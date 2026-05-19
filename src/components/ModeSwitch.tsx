@@ -15,7 +15,7 @@ export default function ModeSwitch() {
 
   return (
     <Tooltip title={isDark ? t("settings.theme.light") : t("settings.theme.dark")}>
-      <IconButton color="primary" onClick={toggleMode}>
+      <IconButton color="warning" onClick={toggleMode}>
         {isDark ? <LightModeRoundedIcon /> : <DarkModeRoundedIcon />}
       </IconButton>
     </Tooltip>
