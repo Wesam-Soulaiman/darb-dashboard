@@ -18,7 +18,25 @@ const AdminLayout = Loadable(
 const MyProfile = Loadable(
   lazy(() => import("../pages/admin/MyProfile/MyProfile")),
 );
+const OrganizationsPage = Loadable(
+  lazy(() => import("../pages/admin/organizations/OrganizationsPage")),
+);
+const CreateOrganizationPage = Loadable(
+  lazy(() => import("../pages/admin/organizations/CreateOrganizationPage")),
+);
+const RolesPage = Loadable(
+  lazy(() => import("../pages/admin/roles/RolesPage")),
+);
 
+const PermissionsPage = Loadable(
+  lazy(() => import("../pages/admin/permissions/PermissionsPage")),
+);
+const UsersPage = Loadable(
+  lazy(() => import("../pages/admin/users/UsersPage")),
+);
+const PlacesPage = Loadable(
+  lazy(() => import("../pages/admin/places/PlacesPage")),
+);
 export const adminRoutes: RouteObject = {
   path: "/",
   element: <RootLayout />,
@@ -46,6 +64,35 @@ export const adminRoutes: RouteObject = {
               path: "dashboard/profile",
               element: <MyProfile />,
             },
+            {
+              path: "dashboard/organizations",
+              children: [
+                {
+                  index: true,
+                  element: <OrganizationsPage />,
+                },
+                {
+                  path: "create",
+                  element: <CreateOrganizationPage />,
+                },
+              ],
+            },
+            {
+  path: "dashboard/roles",
+  element: <RolesPage />,
+},
+{
+  path: "dashboard/permissions",
+  element: <PermissionsPage />,
+            },
+{
+  path: "dashboard/users",
+  element: <UsersPage />,
+            },
+{
+  path: "dashboard/places",
+  element: <PlacesPage />,
+},
           ],
         },
       ],

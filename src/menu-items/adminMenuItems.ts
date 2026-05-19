@@ -1,7 +1,6 @@
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import ManageAccountsRoundedIcon from "@mui/icons-material/ManageAccountsRounded";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
-import PersonAddAlt1RoundedIcon from "@mui/icons-material/PersonAddAlt1Rounded";
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
 import RouteRoundedIcon from "@mui/icons-material/RouteRounded";
 import DirectionsBusRoundedIcon from "@mui/icons-material/DirectionsBusRounded";
@@ -10,7 +9,8 @@ import NotificationsActiveRoundedIcon from "@mui/icons-material/NotificationsAct
 import PaidRoundedIcon from "@mui/icons-material/PaidRounded";
 import MapRoundedIcon from "@mui/icons-material/MapRounded";
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
-
+import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
+import PlaceRoundedIcon from "@mui/icons-material/PlaceRounded";
 import type { AppMenuItem } from "./menu.types";
 
 export const adminMenuItems: AppMenuItem[] = [
@@ -28,17 +28,18 @@ export const adminMenuItems: AppMenuItem[] = [
       },
     ],
   },
+
   {
     title: "management",
     type: "group",
     children: [
       {
-        id: "companies",
-        title: "companies",
-        path: "/admin/dashboard/companies",
-        icon: BusinessRoundedIcon,
+        id: "organizations",
+        title: "menu.organizations",
         type: "item",
-        permission: "companies.view",
+        path: "/admin/dashboard/organizations",
+        icon: BusinessRoundedIcon,
+        permission: "organizations.view",
       },
       {
         id: "lines",
@@ -63,24 +64,32 @@ export const adminMenuItems: AppMenuItem[] = [
             permission: "roles.view",
           },
           {
-            id: "employees",
-            title: "employeesList",
-            path: "/admin/dashboard/employees",
-            icon: GroupsRoundedIcon,
+            id: "permissions",
+            title: "menu.permissions",
+            path: "/admin/dashboard/permissions",
+            icon: SecurityRoundedIcon,
             type: "item",
-            permission: "employees.view",
+            permission: "permissions.view",
           },
           {
-            id: "employee-create",
-            title: "createEmployee",
-            path: "/admin/dashboard/employees/create",
-            icon: PersonAddAlt1RoundedIcon,
+            id: "users",
+            title: "menu.users",
+            path: "/admin/dashboard/users",
+            icon: GroupsRoundedIcon,
             type: "item",
-            permission: "employees.create",
+            permission: "users.view",
           },
         ],
       },
     ],
+  },
+  {
+    id: "places",
+    title: "menu.places",
+    path: "/admin/dashboard/places",
+    icon: PlaceRoundedIcon,
+    type: "item",
+    permission: "read:place",
   },
   {
     title: "operations",
