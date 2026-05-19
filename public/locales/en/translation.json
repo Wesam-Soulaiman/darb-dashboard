@@ -1,6 +1,40 @@
 {
   "common": {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "user:": "User",
+    "actions": "Actions",
+    "search": "Search",
+    "upload": "Upload image",
+    "remove": "Remove",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "saving": "Saving...",
+    "back": "Back",
+    "details": "Details",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close"
+  },
+  "pagination": {
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "location": {
+    "prepare": "Preparing your current location...",
+    "actions": {
+      "useMyLocation": "Use my current location"
+    },
+    "errors": {
+      "notSupported": "Geolocation is not supported by this browser",
+      "permissionDenied": "Location permission was denied",
+      "positionUnavailable": "Current location is unavailable",
+      "timeout": "Location request timed out",
+      "unknown": "An error occurred while getting your location"
+    }
+  },
+  "imagePicker": {
+    "pickFile": "Click to choose an image"
   },
   "api": {
     "unexpectedError": "An unexpected error occurred."
@@ -129,6 +163,12 @@
     "superAdmin": "Super Admin"
   },
   "sidebar": {
+    "menu": {
+      "organizations": "Organizations",
+      "permissions": "Permissions",
+      "users": "Users",
+      "places": "Places"
+    },
     "dashboard": "Dashboard",
     "home": "Home",
     "management": "Management",
@@ -145,5 +185,230 @@
     "alerts": "Alerts",
     "revenue": "Revenue",
     "reports": "Reports"
+  },
+  
+  "validation": {
+    "required": "This field is required",
+    "max100": "This field must not exceed 100 characters",
+    "max50": "This field must not exceed 50 characters",
+    "max150": "Text must not exceed 150 characters",
+    "max255": "Text must not exceed 255 characters",
+    "imageRequired": "Image is required",
+    "onlyImagesAllowed": "Only images are allowed",
+    "codeNameFormat": "Only English letters, numbers, hyphen, and underscore are allowed",
+    "invalidEmail": "Invalid email address",
+    "invalidPhone": "Invalid phone number"
+  },
+  "places": {
+  "title": "Places",
+  "subtitle": "Manage places and select their centers on the map",
+  "createTitle": "Create New Place",
+  "editTitle": "Edit Place",
+  "deleteTitle": "Delete Place",
+  "deleteDescription": "Are you sure you want to delete {{name}}?",
+  "actions": {
+    "create": "Create Place",
+    "update": "Update Place"
+  },
+  "form": {
+    "name": "Place name",
+    "country": "Country",
+    "governate": "Governate",
+    "selectCountry": "Select country",
+    "selectGovernate": "Select governate",
+    "center": "Place center",
+    "mapLink": "Map location link"
+  },
+  "filters": {
+    "country": "Country",
+    "governate": "Governate",
+    "allCountries": "All countries",
+    "allGovernates": "All governates"
+  },
+  "table": {
+    "name": "Place name",
+    "governateId": "Governate",
+    "center": "Center",
+    "createdAt": "Created at"
+  },
+  "map": {
+    "showPlaces": "Show places on map",
+    "noPlacesTitle": "No places to show",
+    "noPlacesDescription": "There are no places with coordinates in the current results.",
+    "visibleCount": "{{count}} places"
+  },
+  "toast": {
+    "createSuccess": "Place created successfully",
+    "createError": "Failed to create place",
+    "updateSuccess": "Place updated successfully",
+    "updateError": "Failed to update place",
+    "deleteSuccess": "Place deleted successfully",
+    "deleteError": "Failed to delete place"
+  }
+},
+  "organizations": {
+    "title": "Organizations",
+    "subtitle": "Manage operating organizations in Darb platform",
+    "createTitle": "Create organization",
+    "createSubtitle": "Enter organization details and icon",
+    "editTitle": "Edit organization",
+    "notFound": "Organization not found",
+    "empty": "No organizations found",
+    "searchPlaceholder": "Search by organization name or code",
+    "deleteConfirm": "Are you sure you want to delete {{name}}?",
+    "actions": {
+      "create": "Create organization",
+      "update": "Save changes"
+    },
+    "form": {
+      "icon": "Icon",
+      "iconHint": "Upload a clear organization icon. Recommended size: 512x512.",
+      "currentIcon": "Current icon",
+      "noIcon": "No icon selected",
+      "name": "Name",
+      "codeName": "Code name",
+      "codeNameHint": "Used internally and should be unique."
+    },
+    "table": {
+      "organization": "Organization",
+      "codeName": "Code name",
+      "createdAt": "Created at"
+    },
+    "toast": {
+      "createSuccess": "Organization created successfully",
+      "createError": "Failed to create organization",
+      "updateSuccess": "Organization updated successfully",
+      "updateError": "Failed to update organization",
+      "deleteSuccess": "Organization deleted successfully",
+      "deleteError": "Failed to delete organization"
+    }
+  },
+  "roles": {
+    "title": "Roles",
+    "subtitle": "Manage user roles and assign permissions",
+    "createTitle": "Create New Role",
+    "editTitle": "Edit Role",
+    "actions": {
+      "create": "Create Role",
+      "update": "Update Role"
+    },
+    "form": {
+      "name": "Role name",
+      "description": "Description"
+    },
+    "table": {
+      "name": "Role name",
+      "description": "Description",
+      "permissions": "Permissions",
+      "createdAt": "Created at"
+    },
+    "permissions": {
+      "title": "Manage Role Permissions",
+      "manage": "Manage permissions",
+      "count": "{{count}} permissions"
+    },
+    "toast": {
+      "createSuccess": "Role created successfully",
+      "createError": "Failed to create role",
+      "updateSuccess": "Role updated successfully",
+      "updateError": "Failed to update role",
+      "permissionsUpdateSuccess": "Role permissions updated successfully",
+      "permissionsUpdateError": "Failed to update role permissions"
+    }
+  },
+  "permissions": {
+    "title": "Permissions",
+    "subtitle": "View available permissions in the system",
+    "empty": "No permissions found",
+    "table": {
+      "action": "Action",
+      "resourceType": "Resource type",
+      "createdAt": "Created at"
+    },
+    "label": "{{action}} {{resource}}",
+    "actions": {
+      "manage": "Manage",
+      "create": "Create",
+      "read": "Read",
+      "update": "Update",
+      "delete": "Delete"
+    },
+    "resources": {
+      "permission": "Permissions",
+      "role": "Roles",
+      "user": "Users",
+      "organization": "Organizations",
+      "dummy": "Dummy",
+      "all": "All system"
+    }
+  },
+  "users": {
+    "title": "Users",
+    "subtitle": "Manage system users and link them to organizations",
+    "createTitle": "Create New User",
+    "editTitle": "Edit User",
+    "deleteTitle": "Delete User",
+    "deleteDescription": "Are you sure you want to delete {{name}}? This user will be soft-deleted.",
+    "rolesCount": "{{count}} roles",
+    "actions": {
+      "create": "Create User",
+      "update": "Update User"
+    },
+    "form": {
+      "phone": "Phone number",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "organization": "Organization",
+      "noOrganization": "No organization"
+    },
+    "table": {
+      "name": "Name",
+      "phone": "Phone",
+      "organizationId": "Organization",
+      "status": "Status",
+      "type": "Type",
+      "roles": "Roles",
+      "createdAt": "Created at"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "types": {
+      "superAdmin": "Super admin",
+      "user": "User"
+    },
+    "toast": {
+      "createSuccess": "User created successfully",
+      "createError": "Failed to create user",
+      "updateSuccess": "User updated successfully",
+      "updateError": "Failed to update user",
+      "deleteSuccess": "User deleted successfully",
+      "deleteError": "Failed to delete user",
+      "removeFromOrganizationSuccess": "User removed from organization successfully",
+      "removeFromOrganizationError": "Failed to remove user from organization",
+      "profileUpdateSuccess": "Profile updated successfully",
+      "profileUpdateError": "Failed to update profile"
+    }
+  },
+  "table": {
+    "exportCSV": "export CSV",
+    "search": "Search",
+    "rowsPerPage": "Rows per page",
+    "of": "of",
+    "id": "ID",
+    "actions": "Actions",
+    "noData": "No data found"
+  },
+  "thetypes": {
+    "organization": "organization"
+  },
+  "delete_pop": {
+    "tooltip": "Delete",
+    "title": "Delete {{thetypes}}",
+    "desc": "Are you sure you want to delete this {{thetypes}}? This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Delete"
   }
 }

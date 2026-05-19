@@ -1,7 +1,45 @@
 {
   "common": {
     "loading": "جاري التحميل...",
-    "user": "المستخدم"
+    "user": "المستخدم",
+    "actions": "الإجراءات",
+    "search": "بحث",
+    "upload": "رفع صورة",
+    "remove": "إزالة",
+    "view": "عرض",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "saving": "جاري الحفظ...",
+    "back": "رجوع",
+    "details": "التفاصيل",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "close": "إغلاق"
+  },
+  "pagination": {
+    "next": "التالي",
+    "previous": "السابق",
+    "page": "الصفحة"
+  },
+  "location": {
+    "prepare": "جارٍ تجهيز موقعك الحالي...",
+    "actions": {
+      "useMyLocation": "استخدام موقعي الحالي"
+    },
+    "errors": {
+      "notSupported": "الموقع الجغرافي غير مدعوم في هذا المتصفح",
+      "permissionDenied": "تم رفض صلاحية الوصول إلى الموقع",
+      "positionUnavailable": "تعذر تحديد الموقع الحالي",
+      "timeout": "انتهت مهلة تحديد الموقع",
+      "unknown": "حدث خطأ أثناء تحديد الموقع"
+    }
+  },
+  "loadingError": {
+    "title": "فشل تحميل البيانات",
+    "refetch": "إعادة التحميل"
+  },
+  "imagePicker": {
+    "pickFile": "اضغط لاختيار صورة"
   },
   "app": {
     "title": "لوحة تحكم النقل العام",
@@ -130,6 +168,12 @@
     "superAdmin": "مشرف عام"
   },
   "sidebar": {
+    "menu": {
+      "organizations": "الشركات",
+      "permissions": "الصلاحيات",
+      "users": "المستخدمون",
+      "places": "الأماكن"
+    },
     "dashboard": "لوحة التحكم",
     "home": "الرئيسية",
     "management": "الإدارة",
@@ -146,5 +190,232 @@
     "alerts": "التنبيهات",
     "revenue": "الإيرادات",
     "reports": "التقارير"
+  },
+  
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "max100": "يجب ألا يتجاوز الحقل 100 حرف",
+    "max50": "يجب ألا يتجاوز الحقل 50 حرف",
+    "max150": "يجب ألا يتجاوز النص 150 حرفًا",
+    "max255": "يجب ألا يتجاوز النص 255 حرفًا",
+    "imageRequired": "الصورة مطلوبة",
+    "onlyImagesAllowed": "يُسمح برفع الصور فقط",
+    "codeNameFormat": "يُسمح فقط بالأحرف الإنجليزية والأرقام والشرطة والشرطة السفلية",
+    "invalidEmail": "البريد الإلكتروني غير صالح",
+    "invalidPhone": "رقم الهاتف غير صالح"
+  },
+  "places": {
+  "title": "الأماكن",
+  "subtitle": "إدارة الأماكن وتحديد مراكزها على الخريطة",
+  "createTitle": "إضافة مكان جديد",
+  "editTitle": "تعديل المكان",
+  "deleteTitle": "حذف المكان",
+  "deleteDescription": "هل أنت متأكد من حذف المكان {{name}}؟",
+  "actions": {
+    "create": "إضافة مكان",
+    "update": "تحديث المكان"
+  },
+  "form": {
+    "name": "اسم المكان",
+    "country": "الدولة",
+    "governate": "المحافظة",
+    "selectCountry": "اختر الدولة",
+    "selectGovernate": "اختر المحافظة",
+    "center": "مركز المكان",
+    "mapLink": "رابط الموقع على الخريطة"
+  },
+  "filters": {
+    "country": "الدولة",
+    "governate": "المحافظة",
+    "allCountries": "كل الدول",
+    "allGovernates": "كل المحافظات"
+  },
+  "table": {
+    "name": "اسم المكان",
+    "governateId": "المحافظة",
+    "center": "المركز",
+    "createdAt": "تاريخ الإنشاء"
+  },
+  "map": {
+    "selectPoint": "تحديد نقطة على الخريطة",
+    "savePoint": "حفظ الموقع",
+    "showPlaces": "عرض الأماكن على الخريطة",
+    "noPlacesTitle": "لا توجد أماكن لعرضها",
+    "noPlacesDescription": "لا توجد أماكن تحتوي على إحداثيات ضمن النتائج الحالية.",
+    "visibleCount": "{{count}} مكان"
+  },
+  "toast": {
+    "createSuccess": "تم إنشاء المكان بنجاح",
+    "createError": "فشل إنشاء المكان",
+    "updateSuccess": "تم تحديث المكان بنجاح",
+    "updateError": "فشل تحديث المكان",
+    "deleteSuccess": "تم حذف المكان بنجاح",
+    "deleteError": "فشل حذف المكان"
+  }
+},
+  "organizations": {
+    "title": "الشركات",
+    "subtitle": "إدارة الشركات التشغيلية ضمن منصة درب",
+    "createTitle": "إضافة شركة جديدة",
+    "createSubtitle": "أدخل بيانات الشركة وأيقونتها",
+    "editTitle": "تعديل بيانات الشركة",
+    "notFound": "الشركة غير موجودة",
+    "empty": "لا توجد شركات لعرضها",
+    "searchPlaceholder": "ابحث باسم الشركة أو الرمز",
+    "deleteConfirm": "هل أنت متأكد من حذف {{name}}؟",
+    "actions": {
+      "create": "إضافة شركة",
+      "update": "حفظ التعديلات"
+    },
+    "form": {
+      "icon": "الأيقونة",
+      "iconHint": "ارفع أيقونة واضحة للمنظمة. الحجم المقترح: 512x512.",
+      "currentIcon": "الأيقونة الحالية",
+      "noIcon": "لم يتم اختيار أيقونة",
+      "name": "الاسم",
+      "codeName": "الاسم البرمجي",
+      "codeNameHint": "يُستخدم داخليًا ويُفضّل أن يكون فريدًا."
+    },
+    "table": {
+      "organization": "الشركة",
+      "codeName": "الرمز",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "toast": {
+      "createSuccess": "تم إنشاء الشركة بنجاح",
+      "createError": "فشل إنشاء الشركة",
+      "updateSuccess": "تم تعديل الشركة بنجاح",
+      "updateError": "فشل تعديل الشركة",
+      "deleteSuccess": "تم حذف الشركة بنجاح",
+      "deleteError": "فشل حذف الشركة"
+    }
+  },
+  "roles": {
+    "title": "الأدوار",
+    "subtitle": "إدارة أدوار المستخدمين وربطها بالصلاحيات",
+    "createTitle": "إضافة دور جديد",
+    "editTitle": "تعديل الدور",
+    "actions": {
+      "create": "إضافة دور",
+      "update": "تحديث الدور"
+    },
+    "form": {
+      "name": "اسم الدور",
+      "description": "الوصف"
+    },
+    "table": {
+      "name": "اسم الدور",
+      "description": "الوصف",
+      "permissions": "الصلاحيات",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "permissions": {
+      "title": "إدارة صلاحيات الدور",
+      "manage": "إدارة الصلاحيات",
+      "count": "{{count}} صلاحية"
+    },
+    "toast": {
+      "createSuccess": "تم إنشاء الدور بنجاح",
+      "createError": "فشل إنشاء الدور",
+      "updateSuccess": "تم تحديث الدور بنجاح",
+      "updateError": "فشل تحديث الدور",
+      "permissionsUpdateSuccess": "تم تحديث صلاحيات الدور بنجاح",
+      "permissionsUpdateError": "فشل تحديث صلاحيات الدور"
+    }
+  },
+  "permissions": {
+    "title": "الصلاحيات",
+    "subtitle": "عرض الصلاحيات المتاحة في النظام",
+    "empty": "لا توجد صلاحيات",
+    "table": {
+      "action": "الإجراء",
+      "resourceType": "نوع المورد",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "label": "{{action}} {{resource}}",
+    "actions": {
+      "manage": "إدارة",
+      "create": "إنشاء",
+      "read": "عرض",
+      "update": "تعديل",
+      "delete": "حذف"
+    },
+    "resources": {
+      "permission": "الصلاحيات",
+      "role": "الأدوار",
+      "user": "المستخدمين",
+      "organization": "الشركات",
+      "dummy": "تجريبي",
+      "all": "كل النظام"
+    }
+  },
+  "users": {
+    "title": "المستخدمون",
+    "subtitle": "إدارة مستخدمي النظام وربطهم بالشركات",
+    "createTitle": "إضافة مستخدم جديد",
+    "editTitle": "تعديل المستخدم",
+    "deleteTitle": "حذف المستخدم",
+    "deleteDescription": "هل أنت متأكد من حذف المستخدم {{name}}؟ سيتم حذفه بشكل منطقي من النظام.",
+    "rolesCount": "{{count}} دور",
+    "actions": {
+      "create": "إضافة مستخدم",
+      "update": "تحديث المستخدم"
+    },
+    "form": {
+      "phone": "رقم الهاتف",
+      "firstName": "الاسم الأول",
+      "lastName": "الاسم الأخير",
+      "email": "البريد الإلكتروني",
+      "organization": "الشركة",
+      "noOrganization": "بدون شركة"
+    },
+    "table": {
+      "name": "الاسم",
+      "phone": "رقم الهاتف",
+      "organizationId": "الشركة",
+      "status": "الحالة",
+      "type": "النوع",
+      "roles": "الأدوار",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "types": {
+      "superAdmin": "مشرف عام",
+      "user": "مستخدم"
+    },
+    "toast": {
+      "createSuccess": "تم إنشاء المستخدم بنجاح",
+      "createError": "فشل إنشاء المستخدم",
+      "updateSuccess": "تم تحديث المستخدم بنجاح",
+      "updateError": "فشل تحديث المستخدم",
+      "deleteSuccess": "تم حذف المستخدم بنجاح",
+      "deleteError": "فشل حذف المستخدم",
+      "removeFromOrganizationSuccess": "تمت إزالة المستخدم من الشركة بنجاح",
+      "removeFromOrganizationError": "فشل إزالة المستخدم من الشركة",
+      "profileUpdateSuccess": "تم تحديث الملف الشخصي بنجاح",
+      "profileUpdateError": "فشل تحديث الملف الشخصي"
+    }
+  },
+  "table": {
+    "exportCSV": "CSV تصدير",
+    "search": "بحث",
+    "rowsPerPage": "عدد الصفوف لكل صفحة",
+    "of": "of",
+    "id": "رقم التعريف",
+    "actions": "الإجراءات",
+    "noData": "لا توجد بيانات"
+  },
+  "thetypes": {
+    "organization": "الشركة"
+  },
+  "delete_pop": {
+    "tooltip": "حذف",
+    "title": "حذف {{thetypes}}",
+    "desc": "هل أنت متأكد من حذف {{thetypes}}؟ لا يمكن التراجع عن هذه العملية.",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد الحذف"
   }
 }
