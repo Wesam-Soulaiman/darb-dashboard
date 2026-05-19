@@ -24,7 +24,7 @@ import AuthCard from "../components/AuthCard";
 import {
   loginSchema,
   type LoginFormValues,
-} from "../../../schemas/authSchemas";
+} from "../../../schemas/auth/authSchemas";
 import { useSignIn } from "../../../hooks/auth/useSignIn";
 import { normalizeSyrianPhone } from "../../../utils/syrianPhone";
 

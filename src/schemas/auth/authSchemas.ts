@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { isValidSyrianMobile } from "../utils/syrianPhone";
+import { isValidSyrianMobile } from "../../utils/syrianPhone";
 
 export const loginSchema = z.object({
   phone: z

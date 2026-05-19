@@ -17,7 +17,7 @@ import { useTranslation } from "react-i18next";
 import {
   resetNewPasswordSchema,
   type ResetNewPasswordFormValues,
-} from "../../../../schemas/resetPasswordSchemas";
+} from "../../../../schemas/auth/resetPasswordSchemas";
 
 type NewPasswordStepProps = {
   onBack: () => void;
