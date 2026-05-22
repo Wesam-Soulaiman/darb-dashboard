@@ -47,17 +47,5 @@ export const getPermissionsTableColumns = ({
         </Typography>
       ),
     },
-    {
-      accessorKey: "createdAt",
-      header: t("permissions.table.createdAt"),
-      enableGlobalFilter: false,
-      Cell: ({ row }) => (
-        <Typography component="span">
-          {row.original.createdAt
-            ? new Date(row.original.createdAt).toLocaleDateString("ar-SY")
-            : "-"}
-        </Typography>
-      ),
-    },
   ];
 };

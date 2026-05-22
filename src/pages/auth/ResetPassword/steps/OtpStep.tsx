@@ -14,7 +14,7 @@ import OtpInput from "../../components/OtpInput";
 import {
   resetOtpSchema,
   type ResetOtpFormValues,
-} from "../../../../schemas/resetPasswordSchemas";
+} from "../../../../schemas/auth/resetPasswordSchemas";
 import { formatSyrianPhone } from "../../../../utils/syrianPhone";
 
 type OtpStepProps = {

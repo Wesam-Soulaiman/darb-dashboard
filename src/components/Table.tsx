@@ -222,8 +222,6 @@ const Table = <T extends MRT_RowData>({
     enableColumnOrdering: false,
 
     enableColumnFilters,
-
-    // لا نستخدم global filter الداخلي الخاص بـ MRT لأنه سبب warning سابقًا.
     enableGlobalFilter: false,
 
     manualFiltering,
@@ -381,6 +379,7 @@ const Table = <T extends MRT_RowData>({
         renderFilters={renderMobileFilters}
         searchFields={mobileSearchFields}
         pageSize={mobilePageSize}
+        enableSearch={enableGlobalFilter}
         isLoading={Boolean(state?.isLoading)}
         isError={isError}
         refetch={refetch}

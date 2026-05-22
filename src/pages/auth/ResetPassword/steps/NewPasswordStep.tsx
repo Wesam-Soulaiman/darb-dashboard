@@ -30,10 +30,16 @@ export default function NewPasswordStep({
 }: NewPasswordStepProps) {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const passwordInputType = useMemo(
     () => (showPassword ? "text" : "password"),
     [showPassword],
+  );
+
+  const confirmPasswordInputType = useMemo(
+    () => (showConfirmPassword ? "text" : "password"),
+    [showConfirmPassword],
   );
 
   const {
@@ -98,7 +104,7 @@ export default function NewPasswordStep({
           <TextField
             {...field}
             label={t("auth.fields.confirmPassword")}
-            type={passwordInputType}
+            type={confirmPasswordInputType}
             autoComplete="new-password"
             error={Boolean(errors.confirmPassword)}
             helperText={
@@ -111,6 +117,23 @@ export default function NewPasswordStep({
                 startAdornment: (
                   <InputAdornment position="start">
                     <LockRoundedIcon color="primary" />
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      edge="end"
+                      aria-label={t("auth.actions.togglePassword")}
+                      onClick={() =>
+                        setShowConfirmPassword((value) => !value)
+                      }
+                    >
+                      {showConfirmPassword ? (
+                        <VisibilityOffRoundedIcon />
+                      ) : (
+                        <VisibilityRoundedIcon />
+                      )}
+                    </IconButton>
                   </InputAdornment>
                 ),
               },

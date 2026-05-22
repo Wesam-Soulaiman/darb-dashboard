@@ -125,7 +125,7 @@ export default function ResetPassword() {
 
       window.setTimeout(() => {
         navigate("/auth/login", { replace: true });
-      }, 1600);
+      }, 3000);
     } catch (error) {
       const status = getApiStatusCode(error);
 

@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+
 import LoadingDataError from "./LoadingDataError";
 
 type SearchField<T> = keyof T & string;
@@ -19,6 +20,7 @@ interface MobileCardsViewProps<T> {
   renderFilters?: ReactNode;
   searchFields?: SearchField<T>[];
   pageSize?: number;
+  enableSearch?: boolean;
   isLoading?: boolean;
   isError?: boolean;
   refetch?: () => void;
@@ -35,6 +37,7 @@ const MobileCardsView = <T,>({
   renderFilters,
   searchFields = [],
   pageSize = 10,
+  enableSearch = true,
   isLoading = false,
   isError = false,
   refetch,
@@ -49,16 +52,24 @@ const MobileCardsView = <T,>({
   const [localSearch, setLocalSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const search = manualFiltering ? globalFilter ?? "" : localSearch;
+  const search = enableSearch
+    ? manualFiltering
+      ? globalFilter ?? ""
+      : localSearch
+    : "";
 
   const filteredData = useMemo(() => {
-    if (manualFiltering) {
+    if (!enableSearch || manualFiltering) {
       return data;
     }
 
     const value = search.trim().toLowerCase();
 
     if (!value) {
+      return data;
+    }
+
+    if (!searchFields.length) {
       return data;
     }
 
@@ -73,7 +84,7 @@ const MobileCardsView = <T,>({
         return String(fieldValue).toLowerCase().includes(value);
       }),
     );
-  }, [data, manualFiltering, search, searchFields]);
+  }, [data, enableSearch, manualFiltering, search, searchFields]);
 
   const pageCount = Math.max(1, Math.ceil(filteredData.length / pageSize));
 
@@ -116,13 +127,15 @@ const MobileCardsView = <T,>({
     <Stack spacing={2}>
       {renderFilters}
 
-      <TextField
-        fullWidth
-        value={search}
-        onChange={handleSearchChange}
-        placeholder={t("table.search")}
-        size="small"
-      />
+      {enableSearch ? (
+        <TextField
+          fullWidth
+          value={search}
+          onChange={handleSearchChange}
+          placeholder={t("table.search")}
+          size="small"
+        />
+      ) : null}
 
       {paginatedData.length > 0 ? (
         <Box
@@ -152,7 +165,7 @@ const MobileCardsView = <T,>({
         </Box>
       )}
 
-      {pageCount > 1 && (
+      {pageCount > 1 ? (
         <Box
           sx={{
             display: "flex",
@@ -169,7 +182,7 @@ const MobileCardsView = <T,>({
             boundaryCount={1}
           />
         </Box>
-      )}
+      ) : null}
     </Stack>
   );
 };

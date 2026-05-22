@@ -85,7 +85,7 @@
       "saveNewPassword": "حفظ كلمة المرور الجديدة",
       "backToLogin": "العودة إلى تسجيل الدخول",
       "backToOtp": "العودة إلى رمز التحقق",
-      "phoneHint": "مثال: 09XXXXXXXX أو +9639XXXXXXXX",
+      "phoneHint": "مثال: 09XXXXXXXX أو 9639XXXXXXXX+",
       "otpSentTo": "تم إرسال رمز التحقق إلى الرقم:",
       "changePhone": "تغيير رقم الهاتف",
       "redirecting": "سيتم تحويلك إلى صفحة تسجيل الدخول...",
@@ -96,7 +96,7 @@
       },
       "errors": {
         "verifyOtpFailed": "رمز التحقق غير صحيح أو منتهي الصلاحية.",
-        "invalidPhone": "رقم الهاتف غير صالح.",
+        "invalidPhone": "الرمز السابق لازال صالح",
         "phoneNotRegistered": "رقم الهاتف غير مسجل.",
         "sendOtpFailed": "تعذر إرسال رمز التحقق. حاول مرة أخرى.",
         "invalidOtpOrPassword": "رمز التحقق أو كلمة المرور غير صحيحة.",
@@ -193,7 +193,6 @@
     "revenue": "الإيرادات",
     "reports": "التقارير"
   },
-  
   "validation": {
     "required": "هذا الحقل مطلوب",
     "max100": "يجب ألا يتجاوز الحقل 100 حرف",
@@ -323,7 +322,6 @@
       "searchingAroundMe": "يتم عرض المواقف ضمن {{radius}} متر من موقعك الحالي"
     }
   },
-
   "places": {
     "title": "الأماكن",
     "subtitle": "إدارة الأماكن وتحديد مراكزها على الخريطة",

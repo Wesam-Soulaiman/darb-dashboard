@@ -31,7 +31,7 @@ const PermissionsPage = () => {
   );
 
   const exportFields = useMemo<Array<keyof Permission & string>>(
-    () => ["id", "action", "resourceType", "createdAt"],
+    () => ["id", "action", "resourceType"],
     [],
   );
 
@@ -79,8 +79,7 @@ const PermissionsPage = () => {
             exportFields={exportFields}
             enableExport
             enablePagination
-            enableGlobalFilter
-            mobileSearchFields={["action", "resourceType"]}
+            enableGlobalFilter={false}
             mobilePageSize={10}
             renderMobileCard={renderPermissionCard}
             state={{
