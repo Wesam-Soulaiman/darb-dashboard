@@ -12,6 +12,7 @@ import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
 import PlaceRoundedIcon from "@mui/icons-material/PlaceRounded";
 import SignpostRoundedIcon from "@mui/icons-material/SignpostRounded";
+import AltRouteRoundedIcon from "@mui/icons-material/AltRouteRounded";
 import type { AppMenuItem } from "./menu.types";
 
 export const adminMenuItems: AppMenuItem[] = [
@@ -99,6 +100,14 @@ export const adminMenuItems: AppMenuItem[] = [
     icon: SignpostRoundedIcon,
     type: "item",
     permission: "read:stop",
+  },
+  {
+    id: "routes",
+    title: "menu.routes",
+    path: "/admin/dashboard/routes",
+    icon: AltRouteRoundedIcon,
+    type: "item",
+    permission: "read:route",
   },
   {
     title: "operations",

@@ -168,7 +168,8 @@
       "permissions": "Permissions",
       "users": "Users",
       "places": "Places",
-      "stops": "Stops"
+      "stops": "Stops",
+      "routes": "Routes"
     },
     "dashboard": "Dashboard",
     "home": "Home",
@@ -198,7 +199,75 @@
     "onlyImagesAllowed": "Only images are allowed",
     "codeNameFormat": "Only English letters, numbers, hyphen, and underscore are allowed",
     "invalidEmail": "Invalid email address",
-    "invalidPhone": "Invalid phone number"
+    "invalidPhone": "Invalid phone number",
+    "routeLineMinPoints": "Select at least two points for the route",
+    "invalidNumber": "Invalid number"
+  },
+  "routes": {
+    "title": "Routes",
+    "subtitle": "Manage transit routes, lines, and fares",
+    "createTitle": "Create New Route",
+    "editTitle": "Edit Route",
+    "deleteTitle": "Delete Route",
+    "deleteDescription": "Are you sure you want to delete {{name}}?",
+    "actions": {
+      "create": "Create Route",
+      "update": "Update Route"
+    },
+    "stops": {
+      "title": "Manage Route Stops",
+      "manage": "Manage route stops",
+      "description": "Select the stops linked to this route and set their order.",
+      "ordering": "Ordering",
+      "toast": {
+        "updateSuccess": "Route stops updated successfully",
+        "updateError": "Failed to update route stops"
+      }
+    },
+    "form": {
+      "name": "Route name",
+      "originPlace": "Origin place",
+      "destinationPlace": "Destination place",
+      "selectOriginPlace": "Select origin place",
+      "selectDestinationPlace": "Select destination place",
+      "mode": "Transit mode",
+      "price": "Price",
+      "line": "Route line",
+      "pointsCount": "{{count}} selected points"
+    },
+    "table": {
+      "name": "Route name",
+      "originPlace": "Origin",
+      "destinationPlace": "Destination",
+      "mode": "Mode",
+      "price": "Price",
+      "length": "Length"
+    },
+    "map": {
+      "selectLine": "Select route line",
+      "saveLine": "Save line",
+      "undoPoint": "Undo",
+      "clearLine": "Clear line"
+    },
+    "modes": {
+      "air": "Air",
+      "bus": "Bus",
+      "cableway": "Cableway",
+      "coach": "Coach",
+      "lift": "Lift",
+      "metro": "Metro",
+      "monorail": "Monorail",
+      "rail": "Rail",
+      "tram": "Tram"
+    },
+    "toast": {
+      "createSuccess": "Route created successfully",
+      "createError": "Failed to create route",
+      "updateSuccess": "Route updated successfully",
+      "updateError": "Failed to update route",
+      "deleteSuccess": "Route deleted successfully",
+      "deleteError": "Failed to delete route"
+    }
   },
   "stops": {
     "title": "Stops",
@@ -208,6 +277,7 @@
     "editTitle": "Edit Stop",
     "deleteTitle": "Delete Stop",
     "deleteDescription": "Are you sure you want to delete {{name}}?",
+    "empty": "No stops",
     "actions": {
       "create": "Create Stop",
       "update": "Update Stop",

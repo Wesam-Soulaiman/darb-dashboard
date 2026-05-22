@@ -41,6 +41,10 @@ const PlacesPage = Loadable(
 const StopsPage = Loadable(
   lazy(() => import("../pages/admin/stops/StopsPage")),
 );
+
+const RoutesPage = Loadable(
+  lazy(() => import("../pages/admin/routes/RoutesPage")),
+);
 export const adminRoutes: RouteObject = {
   path: "/",
   element: <RootLayout />,
@@ -100,6 +104,10 @@ export const adminRoutes: RouteObject = {
 {
   path: "dashboard/stops",
   element: <StopsPage />,
+            },
+{
+  path: "dashboard/routes",
+  element: <RoutesPage />,
 },
           ],
         },

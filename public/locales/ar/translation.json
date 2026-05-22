@@ -173,7 +173,8 @@
       "permissions": "الصلاحيات",
       "users": "المستخدمون",
       "places": "الأماكن",
-      "stops": "المواقف"
+      "stops": "المواقف",
+      "routes": "المسارات"
     },
     "dashboard": "لوحة التحكم",
     "home": "الرئيسية",
@@ -203,7 +204,75 @@
     "onlyImagesAllowed": "يُسمح برفع الصور فقط",
     "codeNameFormat": "يُسمح فقط بالأحرف الإنجليزية والأرقام والشرطة والشرطة السفلية",
     "invalidEmail": "البريد الإلكتروني غير صالح",
-    "invalidPhone": "رقم الهاتف غير صالح"
+    "invalidPhone": "رقم الهاتف غير صالح",
+    "routeLineMinPoints": "يجب تحديد نقطتين على الأقل للمسار",
+    "invalidNumber": "الرقم غير صالح"
+  },
+  "routes": {
+    "title": "المسارات",
+    "subtitle": "إدارة مسارات النقل وخطوطها وأسعارها",
+    "createTitle": "إضافة مسار جديد",
+    "editTitle": "تعديل المسار",
+    "deleteTitle": "حذف المسار",
+    "deleteDescription": "هل أنت متأكد من حذف المسار {{name}}؟",
+    "actions": {
+      "create": "إضافة مسار",
+      "update": "تحديث المسار"
+    },
+    "stops": {
+      "title": "إدارة مواقف المسار",
+      "manage": "إدارة مواقف المسار",
+      "description": "اختر المواقف المرتبطة بهذا المسار وحدد ترتيبها.",
+      "ordering": "الترتيب",
+      "toast": {
+        "updateSuccess": "تم تحديث مواقف المسار بنجاح",
+        "updateError": "فشل تحديث مواقف المسار"
+      }
+    },
+    "form": {
+      "name": "اسم المسار",
+      "originPlace": "مكان الانطلاق",
+      "destinationPlace": "مكان الوصول",
+      "selectOriginPlace": "اختر مكان الانطلاق",
+      "selectDestinationPlace": "اختر مكان الوصول",
+      "mode": "نوع النقل",
+      "price": "السعر",
+      "line": "خط المسار",
+      "pointsCount": "{{count}} نقطة محددة"
+    },
+    "table": {
+      "name": "اسم المسار",
+      "originPlace": "الانطلاق",
+      "destinationPlace": "الوصول",
+      "mode": "نوع النقل",
+      "price": "السعر",
+      "length": "الطول"
+    },
+    "map": {
+      "selectLine": "تحديد خط المسار",
+      "saveLine": "حفظ الخط",
+      "undoPoint": "تراجع",
+      "clearLine": "مسح الخط"
+    },
+    "modes": {
+      "air": "طيران",
+      "bus": "حافلة",
+      "cableway": "تلفريك",
+      "coach": "حافلة سفر",
+      "lift": "مصعد",
+      "metro": "مترو",
+      "monorail": "قطار أحادي",
+      "rail": "قطار",
+      "tram": "ترام"
+    },
+    "toast": {
+      "createSuccess": "تم إنشاء المسار بنجاح",
+      "createError": "فشل إنشاء المسار",
+      "updateSuccess": "تم تحديث المسار بنجاح",
+      "updateError": "فشل تحديث المسار",
+      "deleteSuccess": "تم حذف المسار بنجاح",
+      "deleteError": "فشل حذف المسار"
+    }
   },
   "stops": {
     "title": "المواقف",
@@ -213,6 +282,7 @@
     "editTitle": "تعديل الموقف",
     "deleteTitle": "حذف الموقف",
     "deleteDescription": "هل أنت متأكد من حذف الموقف {{name}}؟",
+    "empty": "لا توجد مواقف",
     "actions": {
       "create": "إضافة موقف",
       "update": "تحديث الموقف",

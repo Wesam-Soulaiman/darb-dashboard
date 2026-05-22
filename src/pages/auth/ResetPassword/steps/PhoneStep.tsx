@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import {
   resetPhoneSchema,
   type ResetPhoneFormValues,
-} from "../../../../schemas/resetPasswordSchemas";
+} from "../../../../schemas/auth/resetPasswordSchemas";
 
 type PhoneStepProps = {
   onSubmit: (phone: string) => Promise<void>;

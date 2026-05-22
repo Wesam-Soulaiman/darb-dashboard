@@ -134,7 +134,6 @@ const PlaceForm = ({
     <Card
       variant="outlined"
       sx={{
-        borderRadius: 4,
         overflow: "hidden",
         borderColor: "divider",
         boxShadow: "none",
