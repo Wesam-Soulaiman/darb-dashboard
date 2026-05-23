@@ -123,7 +123,7 @@ export const getOrganizationsTableColumns = ({
     {
       id: "actions",
       header: t("table.actions"),
-      size: 150,
+      size: 190,
       enableGlobalFilter: false,
       enableSorting: false,
       enableColumnFilter: false,

@@ -23,7 +23,7 @@ const getCenterText = (place: Place) => {
     return "-";
   }
 
-  return `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+  return `${lat.toFixed(5)} - ${lon.toFixed(5)}`;
 };
 
 export const getPlacesCard = ({ t }: PlacesCardProps) => {
@@ -32,7 +32,6 @@ export const getPlacesCard = ({ t }: PlacesCardProps) => {
       key={place.id}
       variant="outlined"
       sx={{
-        borderRadius: 3,
         overflow: "hidden",
         borderColor: "divider",
         boxShadow: "none",
@@ -50,28 +49,26 @@ export const getPlacesCard = ({ t }: PlacesCardProps) => {
             >
               {place.name}
             </Typography>
-
-            <Typography variant="body2" color="text.secondary" noWrap>
-              #{place.id}
-            </Typography>
           </Stack>
 
           <Divider />
 
-          <Stack spacing={0.75}>
-            <Typography variant="caption" color="text.secondary">
-              {t("places.table.governateId")}
-            </Typography>
+          <Stack spacing={0.75} direction={{xs: "row"}} sx={{justifyContent: "space-between"}}>
+            <Stack spacing={0.75}>
+              <Typography variant="caption" color="text.secondary">
+                {t("places.table.governateId")}
+              </Typography>
 
-            <Typography variant="body2">{place.governateId}</Typography>
-          </Stack>
+              <Typography variant="body2">{place.governateId}</Typography>
+            </Stack>
 
-          <Stack spacing={0.75}>
-            <Typography variant="caption" color="text.secondary">
-              {t("places.table.center")}
-            </Typography>
+            <Stack spacing={0.75}>
+              <Typography variant="caption" color="text.secondary">
+                {t("places.table.center")}
+              </Typography>
 
-            <Typography variant="body2">{getCenterText(place)}</Typography>
+              <Typography variant="body2">{getCenterText(place)}</Typography>
+            </Stack>
           </Stack>
 
           <Stack

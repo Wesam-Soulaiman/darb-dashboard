@@ -26,7 +26,7 @@ const getCenterText = (place: Place) => {
     return "-";
   }
 
-  return `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+  return `${lat.toFixed(5)} - ${lon.toFixed(5)}`;
 };
 
 export const getPlacesTableColumns = ({

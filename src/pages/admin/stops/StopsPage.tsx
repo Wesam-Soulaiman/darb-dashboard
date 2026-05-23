@@ -278,6 +278,7 @@ const StopsPage = () => {
               direction={{ xs: "column", md: "row" }}
               spacing={1.5}
               sx={{
+                display: { xs: "none", sm: "flex" },
                 alignItems: { xs: "stretch", md: "center" },
                 justifyContent: "space-between",
               }}
@@ -315,7 +316,11 @@ const StopsPage = () => {
             </Stack>
 
             {within && (
-              <Typography variant="body2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ display: { xs: "none", sm: "block" } }}
+              >
                 {t("stops.filters.searchingAroundMe", {
                   radius: withinRadius,
                 })}

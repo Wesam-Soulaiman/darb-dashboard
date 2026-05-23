@@ -1,8 +1,10 @@
 import { apiClient } from "../apiClient";
 import type {
+  AssignOrganizationRoutePayload,
   CreateOrganizationPayload,
   Organization,
   OrganizationsResponse,
+  RemoveOrganizationRoutePayload,
   UpdateOrganizationPayload,
 } from "../../types/organization.types";
 
@@ -66,6 +68,26 @@ export const organizationsApi = {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+      },
+    );
+
+    return response.data;
+  },
+
+  assignRoute: async (id: number, payload: AssignOrganizationRoutePayload) => {
+    const response = await apiClient.post<Organization>(
+      `${ORGANIZATIONS_ENDPOINT}/${id}/routes`,
+      payload,
+    );
+
+    return response.data;
+  },
+
+  removeRoute: async (id: number, payload: RemoveOrganizationRoutePayload) => {
+    const response = await apiClient.delete<Organization>(
+      `${ORGANIZATIONS_ENDPOINT}/${id}/routes`,
+      {
+        data: payload,
       },
     );
 

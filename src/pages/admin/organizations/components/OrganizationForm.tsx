@@ -213,7 +213,7 @@ const OrganizationForm = ({
                   spacing={2}
                   sx={{
                     p: 2,
-                    borderRadius: 3,
+                    borderRadius: 1,
                     bgcolor: "background.default",
                     border: "1px solid",
                     borderColor: errors.icon ? "error.main" : "divider",

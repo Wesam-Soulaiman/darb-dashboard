@@ -385,6 +385,39 @@
       "create": "إضافة شركة",
       "update": "حفظ التعديلات"
     },
+    "routes": {
+      "title": "إدارة خطوط الشركة",
+      "tooltip": "إدارة الخطوط",
+      "selectRoute": "اختر خطاً",
+      "assign": "ربط",
+      "remove": "إزالة الخط",
+      "assignedRoutes": "الخطوط المرتبطة",
+      "noAssignedRoutes": "لا توجد خطوط مرتبطة بهذه الشركة",
+      "toast": {
+        "assignSuccess": "تم ربط الخط بالشركة بنجاح",
+        "assignError": "فشل ربط الخط بالشركة",
+        "removeSuccess": "تم إزالة الخط من الشركة بنجاح",
+        "removeError": "فشل إزالة الخط من الشركة"
+      }
+    },
+    "profile": {
+      "subtitle": "ملف الشركة التشغيلي والخطوط المرتبطة بها",
+      "backToOrganizations": "العودة إلى الشركات",
+      "routesCount": "{{count}} خط مرتبط",
+      "routesMap": "خريطة خطوط الشركة",
+      "routesMapDescription": "تعرض الخريطة جميع المسارات المرتبطة بهذه الشركة.",
+      "assignedRoutes": "الخطوط المرتبطة",
+      "noAssignedRoutes": "لا توجد خطوط مرتبطة بهذه الشركة",
+      "noRoutesOnMapTitle": "لا توجد خطوط لعرضها على الخريطة",
+      "noRoutesOnMapDescription": "اربط مسارات بهذه الشركة حتى تظهر هنا.",
+      "visibleRoutes": "{{count}} خط على الخريطة",
+      "mode": "نوع النقل",
+      "price": "السعر",
+      "openRoutesMap": "عرض الخريطة",
+      "assignedRoutesDescription": "يمكنك ربط خطوط جديدة بهذه الشركة أو إزالة الخطوط المرتبطة بها.",
+      "routeStart": "بداية الخط",
+      "routeEnd": "نهاية الخط"
+    },
     "form": {
       "icon": "الأيقونة",
       "iconHint": "ارفع أيقونة واضحة للمنظمة. الحجم المقترح: 512x512.",

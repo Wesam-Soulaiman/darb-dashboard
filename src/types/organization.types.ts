@@ -1,8 +1,18 @@
+import type { TransitRoute } from "./route.types";
+
+export interface OrganizationRoute {
+  id: number;
+  route: TransitRoute;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Organization {
   id: number;
   name: string;
   codeName: string;
   icon: string;
+  orgRoutes?: OrganizationRoute[];
   createdAt: string;
   updatedAt: string;
 }
@@ -22,3 +32,9 @@ export interface UpdateOrganizationPayload {
   codeName?: string;
   icon?: File | null;
 }
+
+export interface AssignOrganizationRoutePayload {
+  routeId: string;
+}
+
+export type RemoveOrganizationRoutePayload = AssignOrganizationRoutePayload;

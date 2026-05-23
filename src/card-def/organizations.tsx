@@ -26,7 +26,6 @@ export const getOrganizationCardDef = ({ t }: GetOrganizationCardDefArgs) => {
       key={organization.id}
       variant="outlined"
       sx={{
-        borderRadius: 3,
         overflow: "hidden",
         borderColor: "divider",
         boxShadow: "none",

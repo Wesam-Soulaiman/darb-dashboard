@@ -5,6 +5,8 @@ import { organizationsApi } from "../../api/organizations/organizationsApi";
 import type {
   CreateOrganizationPayload,
   UpdateOrganizationPayload,
+  AssignOrganizationRoutePayload,
+  RemoveOrganizationRoutePayload,
 } from "../../types/organization.types";
 import { getApiErrorMessage } from "../../api/apiError";
 
@@ -93,6 +95,58 @@ export const useDeleteOrganization = () => {
     onError: (error) => {
       toast.error(
         getApiErrorMessage(error, t("organizations.toast.deleteError")),
+      );
+    },
+  });
+};
+
+export const useAssignOrganizationRoute = (id: number) => {
+  const queryClient = useQueryClient();
+  const { t } = useTranslation();
+
+  return useMutation({
+    mutationFn: (payload: AssignOrganizationRoutePayload) =>
+      organizationsApi.assignRoute(id, payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: organizationsQueryKeys.all,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: organizationsQueryKeys.detail(id),
+      });
+
+      toast.success(t("organizations.routes.toast.assignSuccess"));
+    },
+    onError: (error) => {
+      toast.error(
+        getApiErrorMessage(error, t("organizations.routes.toast.assignError")),
+      );
+    },
+  });
+};
+
+export const useRemoveOrganizationRoute = (id: number) => {
+  const queryClient = useQueryClient();
+  const { t } = useTranslation();
+
+  return useMutation({
+    mutationFn: (payload: RemoveOrganizationRoutePayload) =>
+      organizationsApi.removeRoute(id, payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: organizationsQueryKeys.all,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: organizationsQueryKeys.detail(id),
+      });
+
+      toast.success(t("organizations.routes.toast.removeSuccess"));
+    },
+    onError: (error) => {
+      toast.error(
+        getApiErrorMessage(error, t("organizations.routes.toast.removeError")),
       );
     },
   });

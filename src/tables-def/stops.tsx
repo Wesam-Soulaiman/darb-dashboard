@@ -20,7 +20,7 @@ const getCoordinatesText = (stop: Stop) => {
     return "-";
   }
 
-  return `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+  return `${lat.toFixed(5)} - ${lon.toFixed(5)}`;
 };
 
 export const getStopsTableColumns = ({
@@ -28,15 +28,6 @@ export const getStopsTableColumns = ({
   places,
 }: StopsColumnsProps): MRT_ColumnDef<Stop>[] => {
   return [
-    {
-      accessorKey: "id",
-      header: t("table.id"),
-      size: 220,
-      enableColumnFilter: false,
-      Cell: ({ row }) => (
-        <Typography component="span">{row.original.id}</Typography>
-      ),
-    },
     {
       accessorKey: "name",
       header: t("stops.table.name"),

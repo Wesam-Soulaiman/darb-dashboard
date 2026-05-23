@@ -21,6 +21,9 @@ const MyProfile = Loadable(
 const OrganizationsPage = Loadable(
   lazy(() => import("../pages/admin/organizations/OrganizationsPage")),
 );
+const OrganizationProfilePage = Loadable(
+  lazy(() => import("../pages/admin/organizations/OrganizationProfilePage")),
+);
 const CreateOrganizationPage = Loadable(
   lazy(() => import("../pages/admin/organizations/CreateOrganizationPage")),
 );
@@ -82,6 +85,10 @@ export const adminRoutes: RouteObject = {
                 {
                   path: "create",
                   element: <CreateOrganizationPage />,
+                },
+                {
+                  path: ":id",
+                  element: <OrganizationProfilePage />,
                 },
               ],
             },

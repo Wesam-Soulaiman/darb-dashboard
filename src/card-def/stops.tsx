@@ -25,7 +25,7 @@ const getCoordinatesText = (stop: Stop) => {
     return "-";
   }
 
-  return `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+  return `${lat.toFixed(5)} - ${lon.toFixed(5)}`;
 };
 
 export const getStopsCard = ({ t, places }: StopsCardProps) => {
@@ -37,7 +37,6 @@ export const getStopsCard = ({ t, places }: StopsCardProps) => {
         key={stop.id}
         variant="outlined"
         sx={{
-          borderRadius: 3,
           overflow: "hidden",
           borderColor: "divider",
           boxShadow: "none",
@@ -49,30 +48,28 @@ export const getStopsCard = ({ t, places }: StopsCardProps) => {
               <Typography noWrap sx={{ fontWeight: 900, lineHeight: 1.4 }}>
                 {stop.name || t("stops.defaultName")}
               </Typography>
-
-              <Typography variant="body2" color="text.secondary" noWrap>
-                #{stop.id}
-              </Typography>
             </Stack>
 
             <Divider />
 
-            <Stack spacing={0.75}>
-              <Typography variant="caption" color="text.secondary">
-                {t("stops.table.place")}
-              </Typography>
+            <Stack spacing={0.75} direction={{xs: "row"}} sx={{justifyContent: "space-between"}}>
+              <Stack spacing={0.75}>
+                <Typography variant="caption" color="text.secondary">
+                  {t("stops.table.place")}
+                </Typography>
 
-              <Typography variant="body2">
-                {place?.name ?? stop.placeId}
-              </Typography>
-            </Stack>
+                <Typography variant="body2">
+                  {place?.name ?? stop.placeId}
+                </Typography>
+              </Stack>
 
-            <Stack spacing={0.75}>
-              <Typography variant="caption" color="text.secondary">
-                {t("stops.table.coordinates")}
-              </Typography>
+              <Stack spacing={0.75}>
+                <Typography variant="caption" color="text.secondary">
+                  {t("stops.table.coordinates")}
+                </Typography>
 
-              <Typography variant="body2">{getCoordinatesText(stop)}</Typography>
+                <Typography variant="body2">{getCoordinatesText(stop)}</Typography>
+              </Stack>
             </Stack>
 
             <Stack

@@ -379,6 +379,39 @@
       "create": "Create organization",
       "update": "Save changes"
     },
+    "routes": {
+      "title": "Manage organization routes",
+      "tooltip": "Manage routes",
+      "selectRoute": "Select a route",
+      "assign": "Assign",
+      "remove": "Remove route",
+      "assignedRoutes": "Assigned routes",
+      "noAssignedRoutes": "No routes assigned to this organization",
+      "toast": {
+        "assignSuccess": "Route assigned to organization successfully",
+        "assignError": "Failed to assign route to organization",
+        "removeSuccess": "Route removed from organization successfully",
+        "removeError": "Failed to remove route from organization"
+      }
+    },
+    "profile": {
+      "subtitle": "Organization operational profile and assigned routes",
+      "backToOrganizations": "Back to organizations",
+      "routesCount": "{{count}} assigned routes",
+      "routesMap": "Organization routes map",
+      "routesMapDescription": "The map displays all routes assigned to this organization.",
+      "assignedRoutes": "Assigned routes",
+      "noAssignedRoutes": "No routes assigned to this organization",
+      "noRoutesOnMapTitle": "No routes to show on the map",
+      "noRoutesOnMapDescription": "Assign routes to this organization so they appear here.",
+      "visibleRoutes": "{{count}} routes on map",
+      "mode": "Mode",
+      "price": "Price",
+      "openRoutesMap": "View map",
+      "assignedRoutesDescription": "You can assign new routes to this organization or remove currently assigned routes.",
+      "routeStart": "Route start",
+      "routeEnd": "Route end"
+    },
     "form": {
       "icon": "Icon",
       "iconHint": "Upload a clear organization icon. Recommended size: 512x512.",
