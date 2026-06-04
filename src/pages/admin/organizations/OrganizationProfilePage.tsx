@@ -14,10 +14,11 @@ import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import RouteRoundedIcon from "@mui/icons-material/RouteRounded";
+import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+import DirectionsBusRoundedIcon from "@mui/icons-material/DirectionsBusRounded";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import LoadingDataError from "../../../components/LoadingDataError";
 import { useOrganization } from "../../../hooks/organizations/useOrganizations";
 import type { OrganizationRoute } from "../../../types/organization.types";
@@ -140,6 +141,28 @@ const OrganizationProfilePage = () => {
             alignItems: "center",
           }}
         >
+          <Button
+            component={RouterLink}
+            to={`/admin/dashboard/organizations/${currentOrganization.id}/users`}
+            variant="outlined"
+            startIcon={<GroupsRoundedIcon />}
+            sx={{
+              borderRadius: 2,
+            }}
+          >
+            {t("users.organizationUsers.manageUsers")}
+          </Button>
+          <Button
+            component={RouterLink}
+            to={`/admin/dashboard/organizations/${currentOrganization.id}/buses`}
+            variant="outlined"
+            startIcon={<DirectionsBusRoundedIcon />}
+            sx={{
+              borderRadius: 2,
+            }}
+          >
+            {t("buses.actions.manageBuses")}
+          </Button>
           <OrganizationRoutesMap orgRoutes={orgRoutes} />
           <UpdateOrganization organization={currentOrganization} />
           <DeleteOrganization organization={currentOrganization} />

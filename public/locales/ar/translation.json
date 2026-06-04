@@ -14,7 +14,9 @@
     "details": "التفاصيل",
     "save": "حفظ",
     "cancel": "إلغاء",
-    "close": "إغلاق"
+    "close": "إغلاق",
+    "all": "الكل",
+    "clear": "مسح"
   },
   "pagination": {
     "next": "التالي",
@@ -165,7 +167,10 @@
     "my": "ملفي الشخصي",
     "settings": "الإعدادات",
     "logout": "تسجيل الخروج",
-    "superAdmin": "مشرف عام"
+    "superAdmin": "مشرف عام",
+    "subtitle": "عرض وتعديل معلومات حسابك",
+    "edit": "تعديل الملف الشخصي",
+    "mustChangePassword": "يجب تغيير كلمة المرور"
   },
   "sidebar": {
     "menu": {
@@ -205,7 +210,75 @@
     "invalidEmail": "البريد الإلكتروني غير صالح",
     "invalidPhone": "رقم الهاتف غير صالح",
     "routeLineMinPoints": "يجب تحديد نقطتين على الأقل للمسار",
-    "invalidNumber": "الرقم غير صالح"
+    "invalidNumber": "الرقم غير صالح",
+    "integer": "يجب أن يكون الرقم صحيحاً",
+    "min1": "يجب أن تكون القيمة أكبر من صفر",
+    "invalidYear": "سنة غير صالحة"
+  },
+  "buses": {
+    "title": "الباصات",
+    "subtitle": "إدارة باصات الشركة وحالاتها التشغيلية",
+    "createTitle": "إضافة باص جديد",
+    "updateTitle": "تعديل بيانات الباص",
+    "noOrganizationTitle": "لا توجد شركة مرتبطة بالحساب",
+    "noOrganizationMessage": "لا يمكن عرض الباصات لأن الحساب الحالي غير مرتبط بشركة. اختر شركة من صفحة الشركات أو تأكد من ربط المستخدم بشركة.",
+    "actions": {
+      "create": "إضافة باص",
+      "update": "حفظ التعديلات",
+      "manageBuses": "إدارة الباصات",
+      "backToOrganization": "العودة إلى الشركة"
+    },
+    "filters": {
+      "help": "يمكنك البحث برقم اللوحة أو كود الباص أو الشركة المصنعة أو الموديل، ويمكنك استخدام فلاتر الحالة والنوع."
+    },
+    "form": {
+      "plateNumber": "رقم اللوحة",
+      "type": "نوع الباص",
+      "capacity": "السعة",
+      "manufacturer": "الشركة المصنعة",
+      "model": "الموديل",
+      "year": "سنة الصنع",
+      "registrationExpiry": "تاريخ انتهاء التسجيل",
+      "status": "الحالة",
+      "lastMaintenanceDate": "تاريخ آخر صيانة",
+      "nextMaintenanceDate": "تاريخ الصيانة القادمة"
+    },
+    "table": {
+      "busCode": "كود الباص",
+      "plateNumber": "رقم اللوحة",
+      "type": "النوع",
+      "capacity": "السعة",
+      "manufacturer": "الشركة المصنعة",
+      "model": "الموديل",
+      "year": "السنة",
+      "status": "الحالة",
+      "registrationExpiry": "انتهاء التسجيل",
+      "createdAt": "تاريخ الإضافة"
+    },
+    "types": {
+      "STANDARD": "عادي",
+      "MINIBUS": "ميني باص",
+      "ARTICULATED": "مفصلي"
+    },
+    "statuses": {
+      "AVAILABLE": "متاح",
+      "IN_SERVICE": "قيد الخدمة",
+      "MAINTENANCE": "صيانة",
+      "OUT_OF_SERVICE": "خارج الخدمة"
+    },
+    "delete": {
+      "title": "حذف الباص",
+      "tooltip": "حذف الباص",
+      "message": "هل أنت متأكد من حذف الباص صاحب اللوحة {{plateNumber}}؟ لا يمكن حذف الباص إذا كان قيد الخدمة."
+    },
+    "toast": {
+      "createSuccess": "تم إنشاء الباص بنجاح",
+      "createError": "تعذر إنشاء الباص",
+      "updateSuccess": "تم تحديث بيانات الباص بنجاح",
+      "updateError": "تعذر تحديث بيانات الباص",
+      "deleteSuccess": "تم حذف الباص بنجاح",
+      "deleteError": "تعذر حذف الباص"
+    }
   },
   "routes": {
     "title": "المسارات",
@@ -501,6 +574,46 @@
     }
   },
   "users": {
+    "superAdmin": {
+    "title": "المستخدمون",
+    "subtitle": "عرض المستخدمين وإنشاء مدراء الشركات",
+    "createOrgAdmin": "إضافة مدير شركة"
+  },
+  "organizationUsers": {
+    "title": "مستخدمي الشركة",
+    "subtitle": "إدارة موظفي الشركة والأدوار والملفات التشغيلية",
+    "createStaff": "إضافة موظف",
+    "assignRole": "تغيير الدور",
+    "profile": "الملف التشغيلي",
+    "roleName": "الدور",
+    "employeeCode": "رمز الموظف",
+    "status": "الحالة",
+    "hireDate": "تاريخ التوظيف",
+    "licenseNumber": "رقم الرخصة",
+    "licenseExpiry": "انتهاء الرخصة",
+    "removeTitle": "إزالة المستخدم من الشركة",
+    "removeDescription": "هل أنت متأكد من إزالة {{name}} من هذه الشركة؟",
+    "removeTooltip": "إزالة من الشركة",
+    "noOrganization": "لا يوجد شركة مرتبطة بهذا الحساب"
+  },
+  "status": {
+    "ACTIVE": "نشط",
+    "ON_LEAVE": "في إجازة",
+    "TERMINATED": "منتهي الخدمة"
+  },
+  "details": {
+    "title": "تفاصيل المستخدم",
+    "notFound": "لم يتم العثور على المستخدم",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "roles": "الأدوار",
+    "permissions": "الصلاحيات"
+  },
+  "delete": {
+    "title": "حذف المستخدم",
+    "description": "هل أنت متأكد من حذف {{name}}؟",
+    "tooltip": "حذف المستخدم"
+  },
     "title": "المستخدمون",
     "subtitle": "إدارة مستخدمي النظام وربطهم بالشركات",
     "createTitle": "إضافة مستخدم جديد",
@@ -529,10 +642,6 @@
       "roles": "الأدوار",
       "createdAt": "تاريخ الإنشاء"
     },
-    "status": {
-      "active": "نشط",
-      "inactive": "غير نشط"
-    },
     "types": {
       "superAdmin": "مشرف عام",
       "user": "مستخدم"
@@ -547,7 +656,9 @@
       "removeFromOrganizationSuccess": "تمت إزالة المستخدم من الشركة بنجاح",
       "removeFromOrganizationError": "فشل إزالة المستخدم من الشركة",
       "profileUpdateSuccess": "تم تحديث الملف الشخصي بنجاح",
-      "profileUpdateError": "فشل تحديث الملف الشخصي"
+      "profileUpdateError": "فشل تحديث الملف الشخصي",
+      "roleUpdateSuccess": "تم تحديث دور المستخدم بنجاح",
+      "roleUpdateError": "تعذر تحديث دور المستخدم"
     }
   },
   "table": {

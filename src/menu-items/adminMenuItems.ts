@@ -119,7 +119,7 @@ export const adminMenuItems: AppMenuItem[] = [
         path: "/admin/dashboard/buses",
         icon: DirectionsBusRoundedIcon,
         type: "item",
-        permission: "buses.view",
+        permission: "read:bus",
       },
       {
         id: "drivers",

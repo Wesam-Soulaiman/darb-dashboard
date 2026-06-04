@@ -14,7 +14,8 @@
     "details": "Details",
     "save": "Save",
     "cancel": "Cancel",
-    "close": "Close"
+    "close": "Close",
+    "clear": "Clear"
   },
   "pagination": {
     "next": "Next",
@@ -160,7 +161,10 @@
     "my": "My profile",
     "settings": "Settings",
     "logout": "Logout",
-    "superAdmin": "Super Admin"
+    "superAdmin": "Super Admin",
+    "subtitle": "View and update your account information",
+    "edit": "Edit Profile",
+    "mustChangePassword": "Must change password"
   },
   "sidebar": {
     "menu": {
@@ -201,7 +205,75 @@
     "invalidEmail": "Invalid email address",
     "invalidPhone": "Invalid phone number",
     "routeLineMinPoints": "Select at least two points for the route",
-    "invalidNumber": "Invalid number"
+    "invalidNumber": "Invalid number",
+    "integer": "Value must be an integer",
+    "min1": "Value must be greater than zero",
+    "invalidYear": "Invalid year"
+  },
+  "buses": {
+    "title": "Buses",
+    "subtitle": "Manage organization buses and operational statuses",
+    "createTitle": "Create New Bus",
+    "updateTitle": "Update Bus",
+    "noOrganizationTitle": "No organization linked to this account",
+    "noOrganizationMessage": "Buses cannot be displayed because the current account is not linked to an organization. Select an organization or make sure the user is linked to one.",
+    "actions": {
+      "create": "Create Bus",
+      "update": "Save Changes",
+      "manageBuses": "Manage Buses",
+      "backToOrganization": "Back to Organization"
+    },
+    "filters": {
+      "help": "Search by plate number, bus code, manufacturer, or model. You can also filter by status and type."
+    },
+    "form": {
+      "plateNumber": "Plate Number",
+      "type": "Bus Type",
+      "capacity": "Capacity",
+      "manufacturer": "Manufacturer",
+      "model": "Model",
+      "year": "Year",
+      "registrationExpiry": "Registration Expiry",
+      "status": "Status",
+      "lastMaintenanceDate": "Last Maintenance Date",
+      "nextMaintenanceDate": "Next Maintenance Date"
+    },
+    "table": {
+      "busCode": "Bus Code",
+      "plateNumber": "Plate Number",
+      "type": "Type",
+      "capacity": "Capacity",
+      "manufacturer": "Manufacturer",
+      "model": "Model",
+      "year": "Year",
+      "status": "Status",
+      "registrationExpiry": "Registration Expiry",
+      "createdAt": "Created At"
+    },
+    "types": {
+      "STANDARD": "Standard",
+      "MINIBUS": "Minibus",
+      "ARTICULATED": "Articulated"
+    },
+    "statuses": {
+      "AVAILABLE": "Available",
+      "IN_SERVICE": "In Service",
+      "MAINTENANCE": "Maintenance",
+      "OUT_OF_SERVICE": "Out of Service"
+    },
+    "delete": {
+      "title": "Delete Bus",
+      "tooltip": "Delete bus",
+      "message": "Are you sure you want to delete bus with plate number {{plateNumber}}? Buses currently in service cannot be deleted."
+    },
+    "toast": {
+      "createSuccess": "Bus created successfully",
+      "createError": "Failed to create bus",
+      "updateSuccess": "Bus updated successfully",
+      "updateError": "Failed to update bus",
+      "deleteSuccess": "Bus deleted successfully",
+      "deleteError": "Failed to delete bus"
+    }
   },
   "routes": {
     "title": "Routes",
@@ -495,6 +567,46 @@
     }
   },
   "users": {
+    "superAdmin": {
+    "title": "Users",
+    "subtitle": "View users and create organization admins",
+    "createOrgAdmin": "Add Organization Admin"
+  },
+  "organizationUsers": {
+    "title": "Organization Users",
+    "subtitle": "Manage organization staff, roles, and operational profiles",
+    "createStaff": "Add Staff",
+    "assignRole": "Change Role",
+    "profile": "Operational Profile",
+    "roleName": "Role",
+    "employeeCode": "Employee Code",
+    "status": "Status",
+    "hireDate": "Hire Date",
+    "licenseNumber": "License Number",
+    "licenseExpiry": "License Expiry",
+    "removeTitle": "Remove user from organization",
+    "removeDescription": "Are you sure you want to remove {{name}} from this organization?",
+    "removeTooltip": "Remove from organization",
+    "noOrganization": "No organization is linked to this account"
+  },
+  "status": {
+    "ACTIVE": "Active",
+    "ON_LEAVE": "On Leave",
+    "TERMINATED": "Terminated"
+  },
+  "details": {
+    "title": "User Details",
+    "notFound": "User was not found",
+    "active": "Active",
+    "inactive": "Inactive",
+    "roles": "Roles",
+    "permissions": "Permissions"
+  },
+  "delete": {
+    "title": "Delete user",
+    "description": "Are you sure you want to delete {{name}}?",
+    "tooltip": "Delete user"
+  },
     "title": "Users",
     "subtitle": "Manage system users and link them to organizations",
     "createTitle": "Create New User",
@@ -523,10 +635,6 @@
       "roles": "Roles",
       "createdAt": "Created at"
     },
-    "status": {
-      "active": "Active",
-      "inactive": "Inactive"
-    },
     "types": {
       "superAdmin": "Super admin",
       "user": "User"
@@ -541,7 +649,9 @@
       "removeFromOrganizationSuccess": "User removed from organization successfully",
       "removeFromOrganizationError": "Failed to remove user from organization",
       "profileUpdateSuccess": "Profile updated successfully",
-      "profileUpdateError": "Failed to update profile"
+      "profileUpdateError": "Failed to update profile",
+      "roleUpdateSuccess": "User role updated successfully",
+      "roleUpdateError": "Could not update user role"
     }
   },
   "table": {

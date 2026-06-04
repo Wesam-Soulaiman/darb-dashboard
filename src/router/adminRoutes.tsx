@@ -15,18 +15,23 @@ const AdminLayout = Loadable(
 // const Dashboard = Loadable(
 //   lazy(() => import("../pages/admin/Dashboard/Dashboard")),
 // );
+
 const MyProfile = Loadable(
   lazy(() => import("../pages/admin/MyProfile/MyProfile")),
 );
+
 const OrganizationsPage = Loadable(
   lazy(() => import("../pages/admin/organizations/OrganizationsPage")),
 );
+
 const OrganizationProfilePage = Loadable(
   lazy(() => import("../pages/admin/organizations/OrganizationProfilePage")),
 );
+
 const CreateOrganizationPage = Loadable(
   lazy(() => import("../pages/admin/organizations/CreateOrganizationPage")),
 );
+
 const RolesPage = Loadable(
   lazy(() => import("../pages/admin/roles/RolesPage")),
 );
@@ -34,9 +39,11 @@ const RolesPage = Loadable(
 const PermissionsPage = Loadable(
   lazy(() => import("../pages/admin/permissions/PermissionsPage")),
 );
+
 const UsersPage = Loadable(
   lazy(() => import("../pages/admin/users/UsersPage")),
 );
+
 const PlacesPage = Loadable(
   lazy(() => import("../pages/admin/places/PlacesPage")),
 );
@@ -48,6 +55,11 @@ const StopsPage = Loadable(
 const RoutesPage = Loadable(
   lazy(() => import("../pages/admin/routes/RoutesPage")),
 );
+
+const BusesPage = Loadable(
+  lazy(() => import("../pages/admin/buses/BusesPage")),
+);
+
 export const adminRoutes: RouteObject = {
   path: "/",
   element: <RootLayout />,
@@ -69,7 +81,7 @@ export const adminRoutes: RouteObject = {
             },
             {
               path: "dashboard",
-              // element: <Dashboard />,
+              element: <Navigate to="/admin/dashboard/profile" replace />,
             },
             {
               path: "dashboard/profile",
@@ -87,35 +99,44 @@ export const adminRoutes: RouteObject = {
                   element: <CreateOrganizationPage />,
                 },
                 {
+                  path: ":orgId/buses",
+                  element: <BusesPage />,
+                },
+                {
                   path: ":id",
                   element: <OrganizationProfilePage />,
                 },
+                
               ],
             },
             {
-  path: "dashboard/roles",
-  element: <RolesPage />,
-},
-{
-  path: "dashboard/permissions",
-  element: <PermissionsPage />,
+              path: "dashboard/buses",
+              element: <BusesPage />,
             },
-{
-  path: "dashboard/users",
-  element: <UsersPage />,
+            {
+              path: "dashboard/roles",
+              element: <RolesPage />,
             },
-{
-  path: "dashboard/places",
-  element: <PlacesPage />,
+            {
+              path: "dashboard/permissions",
+              element: <PermissionsPage />,
             },
-{
-  path: "dashboard/stops",
-  element: <StopsPage />,
+            {
+              path: "dashboard/users",
+              element: <UsersPage />,
             },
-{
-  path: "dashboard/routes",
-  element: <RoutesPage />,
-},
+            {
+              path: "dashboard/places",
+              element: <PlacesPage />,
+            },
+            {
+              path: "dashboard/stops",
+              element: <StopsPage />,
+            },
+            {
+              path: "dashboard/routes",
+              element: <RoutesPage />,
+            },
           ],
         },
       ],
