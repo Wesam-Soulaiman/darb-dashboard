@@ -3,6 +3,8 @@ import { Navigate, type RouteObject } from "react-router-dom";
 
 import Loadable from "../components/Loadable";
 import RequireAuth from "./routing/RequireAuth";
+import RequirePasswordChange from "./routing/RequirePasswordChange";
+import RedirectIfPasswordAlreadyChanged from "./routing/RedirectIfPasswordAlreadyChanged";
 
 const RootLayout = Loadable(
   lazy(() => import("../layouts/RootLayout/RootLayout")),
@@ -10,6 +12,10 @@ const RootLayout = Loadable(
 
 const AdminLayout = Loadable(
   lazy(() => import("../layouts/AdminLayout/AdminLayout")),
+);
+
+const ChangePasswordPage = Loadable(
+  lazy(() => import("../pages/auth/MustChangePassword/ChangePasswordPage")),
 );
 
 // const Dashboard = Loadable(
@@ -60,6 +66,10 @@ const BusesPage = Loadable(
   lazy(() => import("../pages/admin/buses/BusesPage")),
 );
 
+const SchedulesPage = Loadable(
+  lazy(() => import("../pages/admin/schedules/SchedulesPage")),
+);
+
 export const adminRoutes: RouteObject = {
   path: "/",
   element: <RootLayout />,
@@ -72,70 +82,91 @@ export const adminRoutes: RouteObject = {
       element: <RequireAuth />,
       children: [
         {
-          path: "admin",
-          element: <AdminLayout />,
+          element: <RedirectIfPasswordAlreadyChanged />,
           children: [
             {
-              index: true,
-              element: <Navigate to="/admin/dashboard" replace />,
+              path: "admin/change-password",
+              element: <ChangePasswordPage />,
             },
+          ],
+        },
+        {
+          element: <RequirePasswordChange />,
+          children: [
             {
-              path: "dashboard",
-              element: <Navigate to="/admin/dashboard/profile" replace />,
-            },
-            {
-              path: "dashboard/profile",
-              element: <MyProfile />,
-            },
-            {
-              path: "dashboard/organizations",
+              path: "admin",
+              element: <AdminLayout />,
               children: [
                 {
                   index: true,
-                  element: <OrganizationsPage />,
+                  element: <Navigate to="/admin/dashboard" replace />,
                 },
                 {
-                  path: "create",
-                  element: <CreateOrganizationPage />,
+                  path: "dashboard",
+                  element: <Navigate to="/admin/dashboard/profile" replace />,
                 },
                 {
-                  path: ":orgId/buses",
+                  path: "dashboard/profile",
+                  element: <MyProfile />,
+                },
+                {
+                  path: "dashboard/organizations",
+                  children: [
+                    {
+                      index: true,
+                      element: <OrganizationsPage />,
+                    },
+                    {
+                      path: "create",
+                      element: <CreateOrganizationPage />,
+                    },
+                    {
+                      path: ":orgId/buses",
+                      element: <BusesPage />,
+                    },
+                    {
+                      path: ":orgId/schedules",
+                      element: <SchedulesPage />,
+                    },
+                    {
+                      path: ":id",
+                      element: <OrganizationProfilePage />,
+                    },
+                  ],
+                },
+                {
+                  path: "dashboard/schedules",
+                  element: <SchedulesPage />,
+                },
+                {
+                  path: "dashboard/buses",
                   element: <BusesPage />,
                 },
                 {
-                  path: ":id",
-                  element: <OrganizationProfilePage />,
+                  path: "dashboard/roles",
+                  element: <RolesPage />,
                 },
-                
+                {
+                  path: "dashboard/permissions",
+                  element: <PermissionsPage />,
+                },
+                {
+                  path: "dashboard/users",
+                  element: <UsersPage />,
+                },
+                {
+                  path: "dashboard/places",
+                  element: <PlacesPage />,
+                },
+                {
+                  path: "dashboard/stops",
+                  element: <StopsPage />,
+                },
+                {
+                  path: "dashboard/routes",
+                  element: <RoutesPage />,
+                },
               ],
-            },
-            {
-              path: "dashboard/buses",
-              element: <BusesPage />,
-            },
-            {
-              path: "dashboard/roles",
-              element: <RolesPage />,
-            },
-            {
-              path: "dashboard/permissions",
-              element: <PermissionsPage />,
-            },
-            {
-              path: "dashboard/users",
-              element: <UsersPage />,
-            },
-            {
-              path: "dashboard/places",
-              element: <PlacesPage />,
-            },
-            {
-              path: "dashboard/stops",
-              element: <StopsPage />,
-            },
-            {
-              path: "dashboard/routes",
-              element: <RoutesPage />,
             },
           ],
         },

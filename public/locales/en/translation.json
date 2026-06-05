@@ -15,7 +15,9 @@
     "save": "Save",
     "cancel": "Cancel",
     "close": "Close",
-    "clear": "Clear"
+    "clear": "Clear",
+    "active": "Active",
+    "inactive": "Inactive"
   },
   "pagination": {
     "next": "Next",
@@ -109,6 +111,20 @@
       "passwordMin": "Password must be at least 8 characters.",
       "confirmPasswordRequired": "Password confirmation is required.",
       "passwordsDoNotMatch": "Passwords do not match."
+    },
+    "changePassword": {
+      "title": "Change Password",
+      "subtitle": "You must set a new password before using the system",
+      "mustChangeMessage": "Your account was created with a temporary password. Please change it to continue.",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Change Password",
+      "loginAgainMessage": "After changing your password, you will be signed out so you can sign in again with the new password.",
+      "toast": {
+        "success": "Password changed successfully",
+        "error": "Could not change password"
+      }
     }
   },
   "notifications": {
@@ -208,7 +224,102 @@
     "invalidNumber": "Invalid number",
     "integer": "Value must be an integer",
     "min1": "Value must be greater than zero",
-    "invalidYear": "Invalid year"
+    "invalidYear": "Invalid year",
+    "selectAtLeastOneDay": "Select at least one operating day",
+    "endDateAfterStartDate": "End date must be after start date",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordUppercase": "Password must contain at least one uppercase letter",
+    "passwordLowercase": "Password must contain at least one lowercase letter",
+    "passwordNumber": "Password must contain at least one number",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "passwordSameAsCurrent": "New password cannot be the same as the current password"
+  },
+  "schedules": {
+    "title": "Schedules",
+    "subtitle": "Manage weekly operating patterns and validity windows",
+    "createTitle": "Create Schedule",
+    "updateTitle": "Update Schedule",
+    "noOrganizationTitle": "No organization linked to this account",
+    "noOrganizationMessage": "Schedules cannot be displayed because the current account is not linked to an organization. Select an organization or make sure the user is linked to one.",
+    "actions": {
+      "create": "Create Schedule",
+      "update": "Save Changes",
+      "manageSchedules": "Manage Schedules",
+      "backToOrganization": "Back to Organization"
+    },
+    "form": {
+      "name": "Schedule Name",
+      "serviceCode": "Service Code",
+      "serviceCodeHint": "Unique code inside the organization, e.g. WEEKDAY or RAMADAN",
+      "operatingDays": "Operating Days",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "isActive": "Active"
+    },
+    "table": {
+      "name": "Name",
+      "serviceCode": "Service Code",
+      "operatingDays": "Operating Days",
+      "startDate": "Start",
+      "endDate": "End",
+      "validity": "Validity",
+      "isActive": "Status",
+      "updatedAt": "Updated At"
+    },
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "daysShort": {
+      "monday": "Mon",
+      "tuesday": "Tue",
+      "wednesday": "Wed",
+      "thursday": "Thu",
+      "friday": "Fri",
+      "saturday": "Sat",
+      "sunday": "Sun"
+    },
+    "delete": {
+      "title": "Delete Schedule",
+      "message": "Are you sure you want to delete schedule {{name}}? A schedule with active trips cannot be deleted.",
+      "tooltip": "Delete schedule"
+    },
+    "exceptions": {
+      "title": "Schedule Exceptions",
+      "empty": "No exceptions for this schedule.",
+      "form": {
+        "date": "Exception Date",
+        "type": "Exception Type",
+        "note": "Note"
+      },
+      "types": {
+        "1": "Added Service",
+        "2": "Removed Service"
+      },
+      "actions": {
+        "add": "Add",
+        "delete": "Delete exception"
+      },
+      "toast": {
+        "createSuccess": "Exception added successfully",
+        "createError": "Failed to add exception",
+        "deleteSuccess": "Exception deleted successfully",
+        "deleteError": "Failed to delete exception"
+      }
+    },
+    "toast": {
+      "createSuccess": "Schedule created successfully",
+      "createError": "Failed to create schedule",
+      "updateSuccess": "Schedule updated successfully",
+      "updateError": "Failed to update schedule",
+      "deleteSuccess": "Schedule deleted successfully",
+      "deleteError": "Failed to delete schedule"
+    }
   },
   "buses": {
     "title": "Buses",
