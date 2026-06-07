@@ -4,15 +4,22 @@ import { useTranslation } from "react-i18next";
 
 import PopupButton from "../../../../components/PopupButton";
 import { useCreateUser } from "../../../../hooks/users/useUsers";
-import type { UserFormValues } from "../../../../schemas/users/userSchemas";
-import UserForm from "./UserForm";
+import CreateUserForm from "./CreateUserForm";
+import type { CreateUserFormValues } from "../../../../schemas/users/userSchemas";
 
-const CreateUser = () => {
+type CreateUserProps = {
+  mode: "super-admin" | "company-admin";
+  organizationId?: number | null;
+};
+
+const CreateUser = ({ mode, organizationId = null }: CreateUserProps) => {
   const { t } = useTranslation();
   const createUser = useCreateUser();
 
+  const isSuperAdminMode = mode === "super-admin";
+
   const handleSubmit = async (
-    values: UserFormValues,
+    values: CreateUserFormValues,
     handleClose: () => void,
   ) => {
     await createUser.mutateAsync({
@@ -20,7 +27,13 @@ const CreateUser = () => {
       firstName: values.firstName,
       lastName: values.lastName,
       email: values.email,
-      organizationId: values.organizationId ?? null,
+      organizationId: isSuperAdminMode
+        ? values.organizationId
+        : organizationId,
+      isActive: values.isActive,
+      hireDate: values.hireDate,
+      licenseNumber: values.licenseNumber || undefined,
+      licenseExpiry: values.licenseExpiry || undefined,
     });
 
     handleClose();
@@ -39,15 +52,22 @@ const CreateUser = () => {
             alignSelf: { xs: "stretch", sm: "center" },
           }}
         >
-          {t("users.actions.create")}
+          {isSuperAdminMode
+            ? t("users.actions.create")
+            : t("users.organizationUsers.createStaff")}
         </Button>
       )}
       DialogRender={({ props, handleClose }) => (
         <Dialog {...props} maxWidth="sm" fullWidth>
-          <DialogTitle>{t("users.createTitle")}</DialogTitle>
+          <DialogTitle>
+            {isSuperAdminMode
+              ? t("users.createTitle")
+              : t("users.organizationUsers.createStaff")}
+          </DialogTitle>
 
           <DialogContent dividers>
-            <UserForm
+            <CreateUserForm
+              showOrganizationField={isSuperAdminMode}
               loading={createUser.isPending}
               submitLabel={t("users.actions.create")}
               onSubmit={(values) => handleSubmit(values, handleClose)}

@@ -1,15 +1,21 @@
 import { apiClient } from "../apiClient";
 import type {
+  AssignUserRolePayload,
+  AssignUserRoleResponse,
+  CreatedUser,
   CreateUserPayload,
   GetUsersParams,
+  OperationalProfile,
+  UnassignUserRolePayload,
+  UnassignUserRoleResponse,
   UpdateMyProfilePayload,
+  UpdateOperationalProfilePayload,
   UpdateUserPayload,
   User,
   UsersResponse,
 } from "../../types/user.types";
 
 const USERS_ENDPOINT = "/users";
-const ORGANIZATIONS_ENDPOINT = "/organizations";
 const ME_ENDPOINT = "/me";
 
 export const usersApi = {
@@ -28,7 +34,7 @@ export const usersApi = {
   },
 
   create: async (payload: CreateUserPayload) => {
-    const response = await apiClient.post<User>(USERS_ENDPOINT, payload);
+    const response = await apiClient.post<CreatedUser>(USERS_ENDPOINT, payload);
 
     return response.data;
   },
@@ -46,30 +52,36 @@ export const usersApi = {
     await apiClient.delete<void>(`${USERS_ENDPOINT}/${id}`);
   },
 
-  getOrganizationUsers: async (orgId: number, params?: GetUsersParams) => {
-    const response = await apiClient.get<UsersResponse>(
-      `${ORGANIZATIONS_ENDPOINT}/${orgId}/users`,
-      {
-        params,
-      },
-    );
-
-    return response.data;
-  },
-
-  createOrganizationUser: async (orgId: number, payload: CreateUserPayload) => {
-    const response = await apiClient.post<User>(
-      `${ORGANIZATIONS_ENDPOINT}/${orgId}/users`,
+  assignRole: async (userId: number, payload: AssignUserRolePayload) => {
+    const response = await apiClient.patch<AssignUserRoleResponse>(
+      `${USERS_ENDPOINT}/${userId}/roles`,
       payload,
     );
 
     return response.data;
   },
 
-  removeFromOrganization: async (orgId: number, id: number) => {
-    await apiClient.delete<void>(
-      `${ORGANIZATIONS_ENDPOINT}/${orgId}/users/${id}`,
+  unassignRole: async (userId: number, payload: UnassignUserRolePayload) => {
+    const response = await apiClient.delete<UnassignUserRoleResponse>(
+      `${USERS_ENDPOINT}/${userId}/roles`,
+      {
+        data: payload,
+      },
     );
+
+    return response.data;
+  },
+
+  updateOperationalProfile: async (
+    userId: number,
+    payload: UpdateOperationalProfilePayload,
+  ) => {
+    const response = await apiClient.patch<OperationalProfile>(
+      `${USERS_ENDPOINT}/${userId}/profile`,
+      payload,
+    );
+
+    return response.data;
   },
 
   getMe: async () => {

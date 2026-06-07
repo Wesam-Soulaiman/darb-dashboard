@@ -2,27 +2,30 @@ import { useTranslation } from "react-i18next";
 
 import DeletePopupAction from "../../../../components/actions/DeletePopupAction";
 import { useDeleteUser } from "../../../../hooks/users/useUsers";
-import type { User } from "../../../../types/user.types";
+import type { UserListItem } from "../../../../types/user.types";
 
 type DeleteUserProps = {
-  user: User;
+  user: UserListItem;
 };
 
 const DeleteUser = ({ user }: DeleteUserProps) => {
   const { t } = useTranslation();
   const deleteUser = useDeleteUser();
 
+  const userName =
+    `${user.firstName} ${user.lastName}`.trim();
+
   return (
-    <DeletePopupAction
+    <DeletePopupAction<UserListItem>
       item={user}
-      loading={deleteUser.isPending}
-      title={t("users.deleteTitle")}
-      description={t("users.deleteDescription", {
-        name: `${user.firstName} ${user.lastName}`,
+      title={t("users.delete.title")}
+      description={t("users.delete.description", {
+        name: userName,
       })}
-      tooltip={t("common.delete")}
+      tooltip={t("users.delete.tooltip")}
       confirmLabel={t("common.delete")}
       cancelLabel={t("common.cancel")}
+      loading={deleteUser.isPending}
       onConfirm={async (selectedUser) => {
         await deleteUser.mutateAsync(selectedUser.id);
       }}

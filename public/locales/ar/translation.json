@@ -18,7 +18,8 @@
     "all": "الكل",
     "clear": "مسح",
     "active": "نشط",
-    "inactive": "غير نشط"
+    "inactive": "غير نشط",
+    "retry": "إعادة المحاولة"
   },
   "pagination": {
     "next": "التالي",
@@ -687,45 +688,64 @@
   },
   "users": {
     "superAdmin": {
-    "title": "المستخدمون",
-    "subtitle": "عرض المستخدمين وإنشاء مدراء الشركات",
-    "createOrgAdmin": "إضافة مدير شركة"
-  },
-  "organizationUsers": {
-    "title": "مستخدمي الشركة",
-    "subtitle": "إدارة موظفي الشركة والأدوار والملفات التشغيلية",
-    "createStaff": "إضافة موظف",
-    "assignRole": "تغيير الدور",
-    "profile": "الملف التشغيلي",
-    "roleName": "الدور",
-    "employeeCode": "رمز الموظف",
-    "status": "الحالة",
-    "hireDate": "تاريخ التوظيف",
-    "licenseNumber": "رقم الرخصة",
-    "licenseExpiry": "انتهاء الرخصة",
-    "removeTitle": "إزالة المستخدم من الشركة",
-    "removeDescription": "هل أنت متأكد من إزالة {{name}} من هذه الشركة؟",
-    "removeTooltip": "إزالة من الشركة",
-    "noOrganization": "لا يوجد شركة مرتبطة بهذا الحساب"
-  },
-  "status": {
-    "ACTIVE": "نشط",
-    "ON_LEAVE": "في إجازة",
-    "TERMINATED": "منتهي الخدمة"
-  },
-  "details": {
-    "title": "تفاصيل المستخدم",
-    "notFound": "لم يتم العثور على المستخدم",
-    "active": "نشط",
-    "inactive": "غير نشط",
-    "roles": "الأدوار",
-    "permissions": "الصلاحيات"
-  },
-  "delete": {
-    "title": "حذف المستخدم",
-    "description": "هل أنت متأكد من حذف {{name}}؟",
-    "tooltip": "حذف المستخدم"
-  },
+      "title": "المستخدمون",
+      "subtitle": "عرض المستخدمين وإنشاء مدراء الشركات",
+      "createOrgAdmin": "إضافة مدير شركة"
+    },
+    "organizationUsers": {
+      "title": "مستخدمي الشركة",
+      "subtitle": "إدارة موظفي الشركة والأدوار والملفات التشغيلية",
+      "createStaff": "إضافة موظف",
+      "assignRole": "إضافة دور",
+      "profile": "الملف التشغيلي",
+      "roleName": "الدور",
+      "employeeCode": "رمز الموظف",
+      "status": "الحالة",
+      "hireDate": "تاريخ التوظيف",
+      "licenseNumber": "رقم الرخصة",
+      "licenseExpiry": "انتهاء الرخصة",
+      "removeTitle": "إزالة المستخدم من الشركة",
+      "removeDescription": "هل أنت متأكد من إزالة {{name}} من هذه الشركة؟",
+      "removeTooltip": "إزالة من الشركة",
+      "noOrganization": "لا يوجد شركة مرتبطة بهذا الحساب",
+      "unassignRoleTitle": "إزالة الدور",
+      "unassignRoleDescription": "هل أنت متأكد من إزالة الدور {{role}} من هذا المستخدم؟",
+      "unassignRoleTooltip": "إزالة الدور",
+      "unassignRoleConfirm": "إزالة",
+      "addRole": "إضافة دور",
+      "removeRole": "إزالة دور",
+      "allRolesAssigned": "جميع الأدوار المتاحة معيّنة لهذا المستخدم",
+      "selectRoleToRemove": "اختر الدور الذي تريد إزالته من المستخدم",
+      "removeSelectedRoleWarning": "سيتم إزالة الدور {{role}} من المستخدم"
+    },
+    "status": {
+      "ACTIVE": "نشط",
+      "ON_LEAVE": "في إجازة",
+      "TERMINATED": "منتهي الخدمة"
+    },
+    "details": {
+      "title": "تفاصيل المستخدم",
+      "notFound": "لم يتم العثور على المستخدم",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "roles": "الأدوار",
+      "permissions": "الصلاحيات",
+      "loadError": "تعذر تحميل تفاصيل المستخدم",
+      "userId": "معرّف المستخدم: {{id}}",
+      "accountInformation": "معلومات الحساب",
+      "accountType": "نوع الحساب",
+      "regularUser": "مستخدم",
+      "organizationRole": "دور الشركة #{{id}}",
+      "globalRole": "دور عام",
+      "rolePermissions": "صلاحيات الدور",
+      "noRoles": "لا توجد أدوار معيّنة لهذا المستخدم",
+      "noPermissions": "لا توجد صلاحيات متاحة"
+    },
+    "delete": {
+      "title": "حذف المستخدم",
+      "description": "هل أنت متأكد من حذف {{name}}؟",
+      "tooltip": "حذف المستخدم"
+    },
     "title": "المستخدمون",
     "subtitle": "إدارة مستخدمي النظام وربطهم بالشركات",
     "createTitle": "إضافة مستخدم جديد",
@@ -736,6 +756,10 @@
     "actions": {
       "create": "إضافة مستخدم",
       "update": "تحديث المستخدم"
+    },
+    "filters": {
+      "mobileDescription": "تصفية المستخدمين حسب الحالة والدور والشركة",
+      "rolePlaceholder": "اكتب اسم الدور"
     },
     "form": {
       "phone": "رقم الهاتف",
@@ -752,7 +776,8 @@
       "status": "الحالة",
       "type": "النوع",
       "roles": "الأدوار",
-      "createdAt": "تاريخ الإنشاء"
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "آخر تحديث"
     },
     "types": {
       "superAdmin": "مشرف عام",
@@ -770,7 +795,9 @@
       "profileUpdateSuccess": "تم تحديث الملف الشخصي بنجاح",
       "profileUpdateError": "فشل تحديث الملف الشخصي",
       "roleUpdateSuccess": "تم تحديث دور المستخدم بنجاح",
-      "roleUpdateError": "تعذر تحديث دور المستخدم"
+      "roleUpdateError": "تعذر تحديث دور المستخدم",
+      "roleRemoveSuccess": "تمت إزالة الدور من المستخدم بنجاح",
+      "roleRemoveError": "تعذر إزالة الدور من المستخدم"
     }
   },
   "table": {
@@ -780,7 +807,10 @@
     "of": "of",
     "id": "رقم التعريف",
     "actions": "الإجراءات",
-    "noData": "لا توجد بيانات"
+    "noData": "لا توجد بيانات",
+    "filters": "الفلاتر",
+    "clearFilters": "مسح الفلاتر",
+    "all": "الكل"
   },
   "thetypes": {
     "organization": "الشركة"

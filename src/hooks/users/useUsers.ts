@@ -5,9 +5,12 @@ import { toast } from "react-toastify";
 import { usersApi } from "../../api/users/usersApi";
 import { getApiErrorMessage } from "../../api/apiError";
 import type {
+  AssignUserRolePayload,
   CreateUserPayload,
   GetUsersParams,
+  UnassignUserRolePayload,
   UpdateMyProfilePayload,
+  UpdateOperationalProfilePayload,
   UpdateUserPayload,
 } from "../../types/user.types";
 
@@ -15,24 +18,22 @@ export const usersQueryKeys = {
   all: ["users"] as const,
 
   lists: () => [...usersQueryKeys.all, "list"] as const,
+
   list: (params?: GetUsersParams) =>
     [...usersQueryKeys.lists(), params ?? {}] as const,
 
   details: () => [...usersQueryKeys.all, "details"] as const,
-  detail: (id: number) => [...usersQueryKeys.details(), id] as const,
 
-  organizationLists: () =>
-    [...usersQueryKeys.all, "organization-list"] as const,
-  organizationList: (orgId: number, params?: GetUsersParams) =>
-    [...usersQueryKeys.organizationLists(), orgId, params ?? {}] as const,
+  detail: (id: number) => [...usersQueryKeys.details(), id] as const,
 
   me: () => [...usersQueryKeys.all, "me"] as const,
 };
 
-export const useUsers = (params?: GetUsersParams) => {
+export const useUsers = (params?: GetUsersParams, enabled = true) => {
   return useQuery({
     queryKey: usersQueryKeys.list(params),
     queryFn: () => usersApi.getAll(params),
+    enabled,
   });
 };
 
@@ -41,17 +42,6 @@ export const useUser = (id?: number) => {
     queryKey: usersQueryKeys.detail(id as number),
     queryFn: () => usersApi.getById(id as number),
     enabled: Boolean(id),
-  });
-};
-
-export const useOrganizationUsers = (
-  orgId?: number,
-  params?: GetUsersParams,
-) => {
-  return useQuery({
-    queryKey: usersQueryKeys.organizationList(orgId as number, params),
-    queryFn: () => usersApi.getOrganizationUsers(orgId as number, params),
-    enabled: Boolean(orgId),
   });
 };
 
@@ -68,6 +58,7 @@ export const useCreateUser = () => {
 
   return useMutation({
     mutationFn: (payload: CreateUserPayload) => usersApi.create(payload),
+
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: usersQueryKeys.all,
@@ -75,26 +66,7 @@ export const useCreateUser = () => {
 
       toast.success(t("users.toast.createSuccess"));
     },
-    onError: (error) => {
-      toast.error(getApiErrorMessage(error, t("users.toast.createError")));
-    },
-  });
-};
 
-export const useCreateOrganizationUser = (orgId: number) => {
-  const queryClient = useQueryClient();
-  const { t } = useTranslation();
-
-  return useMutation({
-    mutationFn: (payload: CreateUserPayload) =>
-      usersApi.createOrganizationUser(orgId, payload),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: usersQueryKeys.all,
-      });
-
-      toast.success(t("users.toast.createSuccess"));
-    },
     onError: (error) => {
       toast.error(getApiErrorMessage(error, t("users.toast.createError")));
     },
@@ -107,6 +79,7 @@ export const useUpdateUser = (id: number) => {
 
   return useMutation({
     mutationFn: (payload: UpdateUserPayload) => usersApi.update(id, payload),
+
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: usersQueryKeys.all,
@@ -118,6 +91,7 @@ export const useUpdateUser = (id: number) => {
 
       toast.success(t("users.toast.updateSuccess"));
     },
+
     onError: (error) => {
       toast.error(getApiErrorMessage(error, t("users.toast.updateError")));
     },
@@ -130,6 +104,7 @@ export const useDeleteUser = () => {
 
   return useMutation({
     mutationFn: (id: number) => usersApi.delete(id),
+
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: usersQueryKeys.all,
@@ -137,28 +112,88 @@ export const useDeleteUser = () => {
 
       toast.success(t("users.toast.deleteSuccess"));
     },
+
     onError: (error) => {
       toast.error(getApiErrorMessage(error, t("users.toast.deleteError")));
     },
   });
 };
 
-export const useRemoveUserFromOrganization = (orgId: number) => {
+export const useAssignUserRole = (userId: number) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (id: number) => usersApi.removeFromOrganization(orgId, id),
+    mutationFn: (payload: AssignUserRolePayload) =>
+      usersApi.assignRole(userId, payload),
+
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: usersQueryKeys.all,
       });
 
-      toast.success(t("users.toast.removeFromOrganizationSuccess"));
+      queryClient.invalidateQueries({
+        queryKey: usersQueryKeys.detail(userId),
+      });
+
+      toast.success(t("users.toast.roleUpdateSuccess"));
     },
+
+    onError: (error) => {
+      toast.error(getApiErrorMessage(error, t("users.toast.roleUpdateError")));
+    },
+  });
+};
+
+export const useUnassignUserRole = (userId: number) => {
+  const queryClient = useQueryClient();
+  const { t } = useTranslation();
+
+  return useMutation({
+    mutationFn: (payload: UnassignUserRolePayload) =>
+      usersApi.unassignRole(userId, payload),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: usersQueryKeys.all,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: usersQueryKeys.detail(userId),
+      });
+
+      toast.success(t("users.toast.roleRemoveSuccess"));
+    },
+
+    onError: (error) => {
+      toast.error(getApiErrorMessage(error, t("users.toast.roleRemoveError")));
+    },
+  });
+};
+
+export const useUpdateOperationalProfile = (userId: number) => {
+  const queryClient = useQueryClient();
+  const { t } = useTranslation();
+
+  return useMutation({
+    mutationFn: (payload: UpdateOperationalProfilePayload) =>
+      usersApi.updateOperationalProfile(userId, payload),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: usersQueryKeys.all,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: usersQueryKeys.detail(userId),
+      });
+
+      toast.success(t("users.toast.profileUpdateSuccess"));
+    },
+
     onError: (error) => {
       toast.error(
-        getApiErrorMessage(error, t("users.toast.removeFromOrganizationError")),
+        getApiErrorMessage(error, t("users.toast.profileUpdateError")),
       );
     },
   });
@@ -171,6 +206,7 @@ export const useUpdateMyProfile = () => {
   return useMutation({
     mutationFn: (payload: UpdateMyProfilePayload) =>
       usersApi.updateMyProfile(payload),
+
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: usersQueryKeys.me(),
@@ -178,6 +214,7 @@ export const useUpdateMyProfile = () => {
 
       toast.success(t("users.toast.profileUpdateSuccess"));
     },
+
     onError: (error) => {
       toast.error(
         getApiErrorMessage(error, t("users.toast.profileUpdateError")),
