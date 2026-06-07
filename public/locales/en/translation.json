@@ -241,6 +241,14 @@
     "updateTitle": "Update Schedule",
     "noOrganizationTitle": "No organization linked to this account",
     "noOrganizationMessage": "Schedules cannot be displayed because the current account is not linked to an organization. Select an organization or make sure the user is linked to one.",
+    "addTitle": "Add New Exception",
+    "addDescription": "Select the date and exception type, and optionally add a note explaining the reason.",
+    "listTitle": "Recorded Exceptions",
+    "listDescription": "Dates where service differs from the weekly operating pattern.",
+    "loadError": "Failed to load schedule exceptions.",
+    "emptyDescription": "Add an exception to run service on an additional date or stop it on a specific date.",
+    "noNote": "No note was added for this exception.",
+    "createdAt": "Added at",
     "actions": {
       "create": "Create Schedule",
       "update": "Save Changes",
@@ -254,7 +262,9 @@
       "operatingDays": "Operating Days",
       "startDate": "Start Date",
       "endDate": "End Date",
-      "isActive": "Active"
+      "isActive": "Active",
+      "notePlaceholder": "Example: Additional service for an event or suspension for a public holiday",
+      "noteHint": "Optional, but useful for explaining the exception"
     },
     "table": {
       "name": "Name",
@@ -296,6 +306,10 @@
         "date": "Exception Date",
         "type": "Exception Type",
         "note": "Note"
+      },
+      "delete": {
+        "title": "Delete Exception",
+        "message": "Are you sure you want to delete the exception recorded for {{date}}? This action cannot be undone."
       },
       "types": {
         "1": "Added Service",

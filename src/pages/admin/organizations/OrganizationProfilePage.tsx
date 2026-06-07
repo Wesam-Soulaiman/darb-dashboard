@@ -16,6 +16,7 @@ import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import RouteRoundedIcon from "@mui/icons-material/RouteRounded";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 import DirectionsBusRoundedIcon from "@mui/icons-material/DirectionsBusRounded";
+import EventAvailableRoundedIcon from "@mui/icons-material/EventAvailableRounded";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -162,6 +163,17 @@ const OrganizationProfilePage = () => {
             }}
           >
             {t("buses.actions.manageBuses")}
+          </Button>
+          <Button
+            component={RouterLink}
+            to={`/admin/dashboard/organizations/${currentOrganization.id}/schedules`}
+            variant="outlined"
+            startIcon={<EventAvailableRoundedIcon />}
+            sx={{
+              borderRadius: 2,
+            }}
+          >
+            {t("schedules.actions.manageSchedules")}
           </Button>
           <OrganizationRoutesMap orgRoutes={orgRoutes} />
           <UpdateOrganization organization={currentOrganization} />

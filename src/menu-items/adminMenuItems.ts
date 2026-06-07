@@ -13,6 +13,7 @@ import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
 import PlaceRoundedIcon from "@mui/icons-material/PlaceRounded";
 import SignpostRoundedIcon from "@mui/icons-material/SignpostRounded";
 import AltRouteRoundedIcon from "@mui/icons-material/AltRouteRounded";
+import EventAvailableRoundedIcon from "@mui/icons-material/EventAvailableRounded";
 import type { AppMenuItem } from "./menu.types";
 
 export const adminMenuItems: AppMenuItem[] = [
@@ -26,11 +27,9 @@ export const adminMenuItems: AppMenuItem[] = [
         title: "home",
         type: "item",
         icon: DashboardRoundedIcon,
-        permission: "dashboard.access",
       },
     ],
   },
-
   {
     title: "management",
     type: "group",
@@ -41,7 +40,7 @@ export const adminMenuItems: AppMenuItem[] = [
         type: "item",
         path: "/admin/dashboard/organizations",
         icon: BusinessRoundedIcon,
-        permission: "organizations.view",
+        permission: "read:organization",
       },
       {
         id: "lines",
@@ -49,7 +48,7 @@ export const adminMenuItems: AppMenuItem[] = [
         path: "/admin/dashboard/lines",
         icon: RouteRoundedIcon,
         type: "item",
-        permission: "lines.view",
+        permission: "read:line",
       },
       {
         id: "employees-management",
@@ -63,7 +62,7 @@ export const adminMenuItems: AppMenuItem[] = [
             path: "/admin/dashboard/roles",
             icon: ManageAccountsRoundedIcon,
             type: "item",
-            permission: "roles.view",
+            permission: "read:role",
           },
           {
             id: "permissions",
@@ -71,7 +70,7 @@ export const adminMenuItems: AppMenuItem[] = [
             path: "/admin/dashboard/permissions",
             icon: SecurityRoundedIcon,
             type: "item",
-            permission: "permissions.view",
+            permission: "read:permission",
           },
           {
             id: "users",
@@ -79,7 +78,7 @@ export const adminMenuItems: AppMenuItem[] = [
             path: "/admin/dashboard/users",
             icon: GroupsRoundedIcon,
             type: "item",
-            permission: "users.view",
+            permission: "read:user",
           },
         ],
       },
@@ -122,12 +121,20 @@ export const adminMenuItems: AppMenuItem[] = [
         permission: "read:bus",
       },
       {
+        id: "schedules",
+        title: "schedules",
+        path: "/admin/dashboard/schedules",
+        icon: EventAvailableRoundedIcon,
+        type: "item",
+        permission: "read:schedule",
+      },
+      {
         id: "drivers",
         title: "drivers",
         path: "/admin/dashboard/drivers",
         icon: BadgeRoundedIcon,
         type: "item",
-        permission: "drivers.view",
+        permission: "read:driver",
       },
       {
         id: "tracking",
@@ -135,7 +142,7 @@ export const adminMenuItems: AppMenuItem[] = [
         path: "/admin/dashboard/tracking",
         icon: MapRoundedIcon,
         type: "item",
-        permission: "tracking.view",
+        permission: "read:tracking",
       },
       {
         id: "alerts",
@@ -143,7 +150,7 @@ export const adminMenuItems: AppMenuItem[] = [
         path: "/admin/dashboard/alerts",
         icon: NotificationsActiveRoundedIcon,
         type: "item",
-        permission: "alerts.view",
+        permission: "read:alert",
       },
       {
         id: "revenue",
@@ -151,7 +158,7 @@ export const adminMenuItems: AppMenuItem[] = [
         path: "/admin/dashboard/revenue",
         icon: PaidRoundedIcon,
         type: "item",
-        permission: "revenue.view",
+        permission: "read:revenue",
       },
       {
         id: "reports",
@@ -159,7 +166,7 @@ export const adminMenuItems: AppMenuItem[] = [
         path: "/admin/dashboard/reports",
         icon: AssessmentRoundedIcon,
         type: "item",
-        permission: "reports.view",
+        permission: "read:report",
       },
     ],
   },
