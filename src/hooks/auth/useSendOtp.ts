@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { authApi, type SendOtpPayload } from "../../api/auth/authApi";
+import { authApi } from "../../api/auth/authApi";
+import type { SendOtpPayload } from "../../types/auth.types";
 
 export function useSendOtp() {
   return useMutation({

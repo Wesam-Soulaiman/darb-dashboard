@@ -5,7 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { getApiErrorMessage, getApiStatusCode } from "../../api/apiError";
 import { saveAuthSession } from "../../core/auth/authStorage";
-import { authApi, type SignInPayload } from "../../api/auth/authApi";
+import { authApi } from "../../api/auth/authApi";
+import type { SignInPayload } from "../../types/auth.types";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 type LocationState = {

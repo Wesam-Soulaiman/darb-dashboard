@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { authApi, type ForgotPasswordPayload } from "../../api/auth/authApi";
+import { authApi } from "../../api/auth/authApi";
+import type { ForgotPasswordPayload } from "../../types/auth.types";
 
 export function useForgotPassword() {
   return useMutation({
