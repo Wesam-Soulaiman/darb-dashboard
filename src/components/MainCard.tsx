@@ -50,7 +50,6 @@ export default function MainCard({
         (theme) => ({
           overflow: "hidden",
           position: "relative",
-          borderRadius: 3,
 
           border: border ? "1px solid" : "none",
           borderColor: glass

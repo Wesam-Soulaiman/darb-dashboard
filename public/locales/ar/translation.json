@@ -187,7 +187,8 @@
     "superAdmin": "مشرف عام",
     "subtitle": "عرض وتعديل معلومات حسابك",
     "edit": "تعديل الملف الشخصي",
-    "mustChangePassword": "يجب تغيير كلمة المرور"
+    "mustChangePassword": "يجب تغيير كلمة المرور",
+    "changePassword": "تغيير كلمة المرور"
   },
   "sidebar": {
     "menu": {

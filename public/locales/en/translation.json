@@ -180,7 +180,8 @@
     "superAdmin": "Super Admin",
     "subtitle": "View and update your account information",
     "edit": "Edit Profile",
-    "mustChangePassword": "Must change password"
+    "mustChangePassword": "Must change password",
+    "changePassword": "Change password"
   },
   "sidebar": {
     "menu": {
