@@ -2,6 +2,21 @@ import { z } from "zod";
 
 const dateStringSchema = z.string().min(1, "validation.required");
 
+const hexColorSchema = z
+  .string()
+  .trim()
+  .min(1, "validation.required")
+  .regex(/^#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/, "validation.invalidColor")
+  .transform((value) => {
+    const color = value.toUpperCase();
+
+    if (/^#[0-9A-F]{6}$/.test(color)) {
+      return `${color}FF`;
+    }
+
+    return color;
+  });
+
 export const scheduleSchema = z
   .object({
     name: z
@@ -21,6 +36,8 @@ export const scheduleSchema = z
     friday: z.boolean(),
     saturday: z.boolean(),
     sunday: z.boolean(),
+
+    color: hexColorSchema,
 
     startDate: dateStringSchema,
     endDate: dateStringSchema,

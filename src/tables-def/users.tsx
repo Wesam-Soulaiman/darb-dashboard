@@ -226,7 +226,8 @@ export const getUsersTableColumns = ({
       ),
     },
     {
-      accessorKey: "profile.employeeCode",
+      id: "employeeCode",
+      accessorFn: (row) => row.profile?.employeeCode ?? "",
       header: t("users.organizationUsers.employeeCode"),
       enableGlobalFilter: false,
       enableColumnFilter: false,
@@ -234,11 +235,7 @@ export const getUsersTableColumns = ({
         const employeeCode = row.original.profile?.employeeCode;
 
         return employeeCode ? (
-          <Chip
-            label={employeeCode}
-            size="small"
-            variant="outlined"
-          />
+          <Chip label={employeeCode} size="small" variant="outlined" />
         ) : (
           <Typography variant="body2" color="text.secondary">
             -
@@ -294,7 +291,8 @@ export const getUsersTableColumns = ({
       },
     },
     {
-      accessorKey: "profile.hireDate",
+      id: "hireDate",
+      accessorFn: (row) => row.profile?.hireDate ?? "",
       header: t("users.organizationUsers.hireDate"),
       enableGlobalFilter: false,
       enableColumnFilter: false,
@@ -305,7 +303,8 @@ export const getUsersTableColumns = ({
       ),
     },
     {
-      accessorKey: "profile.licenseExpiry",
+      id: "licenseExpiry",
+      accessorFn: (row) => row.profile?.licenseExpiry ?? "",
       header: t("users.organizationUsers.licenseExpiry"),
       enableGlobalFilter: false,
       enableColumnFilter: false,

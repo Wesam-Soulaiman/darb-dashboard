@@ -12,15 +12,12 @@ type UpdateScheduleProps = {
 
 const toDateInputValue = (value?: string | null) => {
   if (!value) return "";
-  return value.slice(0, 10);
+  return String(value).slice(0, 10);
 };
 
 const UpdateSchedule = ({ schedule }: UpdateScheduleProps) => {
   const { t } = useTranslation();
-  const updateSchedule = useUpdateSchedule(
-    schedule.organizationId,
-    schedule.id,
-  );
+  const updateSchedule = useUpdateSchedule(schedule.organizationId, schedule.id);
 
   const handleSubmit = async (
     values: ScheduleFormValues,
@@ -34,26 +31,28 @@ const UpdateSchedule = ({ schedule }: UpdateScheduleProps) => {
     <UpdatePopupAction
       title={t("schedules.updateTitle")}
       tooltip={t("schedules.actions.update")}
-      maxWidth="sm"
+      maxWidth="md"
       fullWidth
     >
       {({ handleClose }) => (
         <ScheduleForm
+          showCard={false}
           loading={updateSchedule.isPending}
           submitLabel={t("schedules.actions.update")}
           defaultValues={{
-            name: schedule.name,
-            serviceCode: schedule.serviceCode,
-            monday: schedule.monday,
-            tuesday: schedule.tuesday,
-            wednesday: schedule.wednesday,
-            thursday: schedule.thursday,
-            friday: schedule.friday,
-            saturday: schedule.saturday,
-            sunday: schedule.sunday,
+            name: schedule.name ?? "",
+            serviceCode: schedule.serviceCode ?? "",
+            monday: Boolean(schedule.monday),
+            tuesday: Boolean(schedule.tuesday),
+            wednesday: Boolean(schedule.wednesday),
+            thursday: Boolean(schedule.thursday),
+            friday: Boolean(schedule.friday),
+            saturday: Boolean(schedule.saturday),
+            sunday: Boolean(schedule.sunday),
+            color: schedule.color ?? "#3A7CDF",
             startDate: toDateInputValue(schedule.startDate),
             endDate: toDateInputValue(schedule.endDate),
-            isActive: schedule.isActive,
+            isActive: Boolean(schedule.isActive),
           }}
           onSubmit={(values) => handleSubmit(values, handleClose)}
         />

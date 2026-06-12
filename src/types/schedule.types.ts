@@ -2,6 +2,14 @@ import type { PagePaginatedResponse } from "./user.types";
 
 export type ScheduleExceptionType = 1 | 2;
 
+export interface ScheduleException {
+  id: number;
+  exceptionDate: string | null;
+  exceptionType: ScheduleExceptionType;
+  note?: string | null;
+  createdAt: string | null;
+}
+
 export interface Schedule {
   id: number;
   organizationId: number;
@@ -14,19 +22,13 @@ export interface Schedule {
   friday: boolean;
   saturday: boolean;
   sunday: boolean;
-  startDate: string;
-  endDate: string;
+  color: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  exceptions?: ScheduleException[];
   isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface ScheduleException {
-  id: number;
-  exceptionDate: string;
-  exceptionType: ScheduleExceptionType;
-  note?: string | null;
-  createdAt: string;
+  createdAt: string | null;
+  updatedAt: string | null;
 }
 
 export type SchedulesResponse = PagePaginatedResponse<Schedule>;
@@ -48,6 +50,7 @@ export interface CreateSchedulePayload {
   friday: boolean;
   saturday: boolean;
   sunday: boolean;
+  color: string;
   startDate: string;
   endDate: string;
   isActive: boolean;

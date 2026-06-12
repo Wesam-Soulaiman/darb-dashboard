@@ -174,19 +174,13 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
       ButtonComponentRender={({ handleOpen }) => (
         <Tooltip title={t("schedules.exceptions.title")}>
           <IconButton
-            size="small"
             color="primary"
             onClick={() => {
               setIsDialogOpen(true);
               handleOpen();
             }}
-            sx={{
-              border: "1px solid",
-              borderColor: "divider",
-              borderRadius: 1.5,
-            }}
           >
-            <EventBusyRoundedIcon fontSize="small" />
+            <EventBusyRoundedIcon />
           </IconButton>
         </Tooltip>
       )}
@@ -470,7 +464,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
 
                   {!exceptions.isLoading && (
                     <Chip
-                      size="small"
+                      size="medium"
                       label={exceptions.data?.length ?? 0}
                       color="primary"
                       variant="outlined"
@@ -487,7 +481,6 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                       placeItems: "center",
                       border: "1px solid",
                       borderColor: "divider",
-                      borderRadius: 3,
                     }}
                   >
                     <Stack spacing={1.5} sx={{ alignItems: "center" }}>
@@ -655,7 +648,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                                 }}
                               >
                                 <Chip
-                                  size="small"
+                                  size="medium"
                                   color={getExceptionColor(
                                     exception.exceptionType,
                                   )}
@@ -666,7 +659,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                                 />
 
                                 <Chip
-                                  size="small"
+                                  size="medium"
                                   variant="outlined"
                                   icon={<CalendarMonthRoundedIcon />}
                                   label={formatDate(

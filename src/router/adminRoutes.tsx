@@ -17,7 +17,9 @@ const AdminLayout = Loadable(
 const ChangePasswordPage = Loadable(
   lazy(() => import("../pages/auth/MustChangePassword/ChangePasswordPage")),
 );
-
+const ScheduleCalendarPage = Loadable(
+  lazy(() => import("../pages/admin/schedules/ScheduleCalendarPage")),
+);
 // const Dashboard = Loadable(
 //   lazy(() => import("../pages/admin/Dashboard/Dashboard")),
 // );
@@ -125,6 +127,10 @@ export const adminRoutes: RouteObject = {
                       element: <BusesPage />,
                     },
                     {
+                      path: ":orgId/schedules/calendar",
+                      element: <ScheduleCalendarPage />,
+                    },
+                    {
                       path: ":orgId/schedules",
                       element: <SchedulesPage />,
                     },
@@ -133,6 +139,10 @@ export const adminRoutes: RouteObject = {
                       element: <OrganizationProfilePage />,
                     },
                   ],
+                },
+                {
+                  path: "dashboard/schedules/calendar",
+                  element: <ScheduleCalendarPage />,
                 },
                 {
                   path: "dashboard/schedules",

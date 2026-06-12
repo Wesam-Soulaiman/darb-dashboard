@@ -40,11 +40,23 @@ const CreateSchedule = ({ orgId }: CreateScheduleProps) => {
         </Button>
       )}
       DialogRender={({ props, handleClose }) => (
-        <Dialog {...props} maxWidth="sm" fullWidth>
+        <Dialog
+          {...props}
+          maxWidth="md"
+          fullWidth
+          slotProps={{
+            paper: {
+              sx: {
+                borderRadius: 3,
+              },
+            },
+          }}
+        >
           <DialogTitle>{t("schedules.createTitle")}</DialogTitle>
 
           <DialogContent dividers>
             <ScheduleForm
+              showCard={false}
               loading={createSchedule.isPending}
               submitLabel={t("schedules.actions.create")}
               onSubmit={(values) => handleSubmit(values, handleClose)}

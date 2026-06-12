@@ -12,6 +12,7 @@ import {
 import EventAvailableRoundedIcon from "@mui/icons-material/EventAvailableRounded";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
+import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { MRT_ColumnFiltersState } from "material-react-table";
@@ -231,6 +232,22 @@ const SchedulesPage = () => {
               {t("schedules.actions.backToOrganization")}
             </Button>
           )}
+
+          <Button
+            component={RouterLink}
+            to={
+              params.orgId
+                ? `/admin/dashboard/organizations/${orgId}/schedules/calendar`
+                : "/admin/dashboard/schedules/calendar"
+            }
+            variant="outlined"
+            startIcon={<CalendarMonthRoundedIcon />}
+            sx={{
+              borderRadius: 2,
+            }}
+          >
+            {t("schedules.calendar.open")}
+          </Button>
 
           <CreateSchedule orgId={orgId} />
         </Stack>
