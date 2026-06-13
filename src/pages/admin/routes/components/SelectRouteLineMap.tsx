@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Dialog,
@@ -19,7 +19,6 @@ import {
   Marker,
   Polyline,
   TileLayer,
-  useMap,
   useMapEvents,
 } from "react-leaflet";
 import { useTranslation } from "react-i18next";
@@ -43,7 +42,7 @@ const Transition = Slide as React.ComponentType<
   }
 >;
 
-type MapPoint = [number, number]; // [lat, lon]
+type MapPoint = [number, number];
 
 type SelectRouteLineMapProps = {
   points: MapPoint[];
@@ -66,25 +65,6 @@ const LineClickHandler = ({
   return null;
 };
 
-const FitLineBounds = ({ points }: { points: MapPoint[] }) => {
-  const map = useMap();
-
-  useEffect(() => {
-    if (points.length === 0) return;
-
-    if (points.length === 1) {
-      map.setView(points[0], 14);
-      return;
-    }
-
-    map.fitBounds(L.latLngBounds(points), {
-      padding: [48, 48],
-    });
-  }, [map, points]);
-
-  return null;
-};
-
 const SelectRouteLineMap = ({
   points,
   onSelectLine,
@@ -94,11 +74,13 @@ const SelectRouteLineMap = ({
   const [open, setOpen] = useState(false);
   const [draftPoints, setDraftPoints] = useState<MapPoint[]>(points);
 
-  const center = draftPoints[0] ?? DEFAULT_CENTER;
-
   const handleOpen = () => {
     setDraftPoints(points);
     setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const handleUndo = () => {
@@ -125,14 +107,14 @@ const SelectRouteLineMap = ({
       <Dialog
         fullScreen
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={handleClose}
         slots={{
           transition: Transition,
         }}
       >
         <DialogContent sx={{ p: 0 }}>
           <MapContainer
-            center={center}
+            center={DEFAULT_CENTER}
             zoom={13}
             style={{
               width: "100%",
@@ -144,12 +126,15 @@ const SelectRouteLineMap = ({
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            <FitLineBounds points={draftPoints} />
-
-            {draftPoints.length > 1 && <Polyline positions={draftPoints} />}
+            {draftPoints.length > 1 && (
+              <Polyline positions={draftPoints} />
+            )}
 
             {draftPoints.map((point, index) => (
-              <Marker key={`${point[0]}-${point[1]}-${index}`} position={point} />
+              <Marker
+                key={`${point[0]}-${point[1]}-${index}`}
+                position={point}
+              />
             ))}
 
             <LineClickHandler
@@ -190,7 +175,7 @@ const SelectRouteLineMap = ({
             </Stack>
 
             <Stack direction="row" spacing={1}>
-              <Button onClick={() => setOpen(false)}>
+              <Button onClick={handleClose}>
                 {t("common.cancel")}
               </Button>
 
