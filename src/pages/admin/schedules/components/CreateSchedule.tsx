@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
 import PopupButton from "../../../../components/PopupButton";
@@ -15,10 +17,15 @@ const CreateSchedule = ({ orgId }: CreateScheduleProps) => {
   const { t } = useTranslation();
   const createSchedule = useCreateSchedule(orgId);
 
-  const handleSubmit = async (
-    values: ScheduleFormValues,
-    handleClose: () => void,
-  ) => {
+  const defaultValues = useMemo(
+    () => ({
+      startDate: dayjs().format("YYYY-MM-DD"),
+      endDate: dayjs().format("YYYY-MM-DD"),
+    }),
+    [],
+  );
+
+  const handleSubmit = async (values: ScheduleFormValues, handleClose: () => void) => {
     await createSchedule.mutateAsync(values);
     handleClose();
   };
@@ -29,11 +36,20 @@ const CreateSchedule = ({ orgId }: CreateScheduleProps) => {
         <Button
           variant="contained"
           startIcon={<AddRoundedIcon />}
-          onClick={handleOpen}
+          onClick={(event) => {
+            event.currentTarget.blur();
+
+            requestAnimationFrame(() => {
+              handleOpen();
+            });
+          }}
           sx={{
             borderRadius: 2,
             px: 2.5,
-            alignSelf: { xs: "stretch", sm: "center" },
+            alignSelf: {
+              xs: "stretch",
+              sm: "center",
+            },
           }}
         >
           {t("schedules.actions.create")}
@@ -44,21 +60,41 @@ const CreateSchedule = ({ orgId }: CreateScheduleProps) => {
           {...props}
           maxWidth="md"
           fullWidth
+          disableRestoreFocus
           slotProps={{
             paper: {
               sx: {
                 borderRadius: 3,
+                maxHeight: {
+                  xs: "calc(100dvh - 16px)",
+                  sm: "calc(100dvh - 64px)",
+                },
               },
             },
           }}
         >
           <DialogTitle>{t("schedules.createTitle")}</DialogTitle>
 
-          <DialogContent dividers>
+          <DialogContent
+            dividers
+            sx={{
+              px: {
+                xs: 2,
+                sm: 3,
+              },
+              py: 2.5,
+
+              "& .MuiFormControl-root": {
+                m: 0,
+              },
+            }}
+          >
             <ScheduleForm
               showCard={false}
               loading={createSchedule.isPending}
               submitLabel={t("schedules.actions.create")}
+              defaultValues={defaultValues}
+              disableSubmitWhenPristine={false}
               onSubmit={(values) => handleSubmit(values, handleClose)}
             />
           </DialogContent>

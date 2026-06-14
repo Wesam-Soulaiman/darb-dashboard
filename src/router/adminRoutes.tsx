@@ -14,6 +14,14 @@ const AdminLayout = Loadable(
   lazy(() => import("../layouts/AdminLayout/AdminLayout")),
 );
 
+const TripsPage = Loadable(
+  lazy(() => import("../pages/admin/trips/TripsPage")),
+);
+
+const TripSetupPage = Loadable(
+  lazy(() => import("../pages/admin/trips/TripSetupPage")),
+);
+
 const ChangePasswordPage = Loadable(
   lazy(() => import("../pages/auth/MustChangePassword/ChangePasswordPage")),
 );
@@ -135,6 +143,14 @@ export const adminRoutes: RouteObject = {
                       element: <SchedulesPage />,
                     },
                     {
+                      path: ":orgId/trips/:tripId/setup",
+                      element: <TripSetupPage />,
+                    },
+                    {
+                      path: ":orgId/trips",
+                      element: <TripsPage />,
+                    },
+                    {
                       path: ":id",
                       element: <OrganizationProfilePage />,
                     },
@@ -147,6 +163,14 @@ export const adminRoutes: RouteObject = {
                 {
                   path: "dashboard/schedules",
                   element: <SchedulesPage />,
+                },
+                {
+  path: "dashboard/trips/:tripId/setup",
+  element: <TripSetupPage />,
+},
+                {
+                  path: "dashboard/trips",
+                  element: <TripsPage />,
                 },
                 {
                   path: "dashboard/buses",

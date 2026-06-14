@@ -21,7 +21,13 @@
     "reset": "Reset",
     "today": "Today",
     "month": "Month",
-    "week": "Week"
+    "week": "Week",
+    "all": "All",
+    "notAvailable": "Not specified",
+    "clickAgainToConfirm": "Click again to confirm",
+    "deleting": "Deleting...",
+    "retry": "Retry",
+    "done": "Done"
   },
   "pagination": {
     "next": "Next",
@@ -194,7 +200,9 @@
       "users": "Users",
       "places": "Places",
       "stops": "Stops",
-      "routes": "Routes"
+      "routes": "Routes",
+      "trips": "Trips",
+      "schedules": "Schedules"
     },
     "dashboard": "Dashboard",
     "home": "Home",
@@ -213,7 +221,6 @@
     "revenue": "Revenue",
     "reports": "Reports"
   },
-  
   "validation": {
     "required": "This field is required",
     "max100": "This field must not exceed 100 characters",
@@ -237,7 +244,251 @@
     "passwordLowercase": "Password must contain at least one lowercase letter",
     "passwordNumber": "Password must contain at least one number",
     "passwordsDoNotMatch": "Passwords do not match",
-    "passwordSameAsCurrent": "New password cannot be the same as the current password"
+    "passwordSameAsCurrent": "New password cannot be the same as the current password",
+    "max120": "Must not exceed 120 characters",
+    "invalidGtfsTime": "Invalid time format. Use HH:MM:SS like 08:30:00",
+    "invalidGtfsPickupType": "Invalid pickup value",
+    "invalidGtfsDropOffType": "Invalid drop-off value",
+    "invalidGtfsTimepoint": "Invalid timepoint value",
+    "departureAfterArrival": "Departure time must be after or equal to arrival time",
+    "min2Stops": "Add at least two stops",
+    "uniqueStopSequence": "Stop sequence must be unique",
+    "endTimeAfterStartTime": "End time must be after start time"
+  },
+  "trips": {
+    "title": "Trips",
+    "subtitle": "Manage trips and connect them to routes, service schedules, and buses",
+    "createTitle": "Add New Trip",
+    "updateTitle": "Edit Trip",
+    "noOrganizationTitle": "No organization linked",
+    "noOrganizationMessage": "A valid organization must be selected to manage its trips.",
+    "actions": {
+      "create": "Add Trip",
+      "update": "Save Changes",
+      "manageOperations": "Set Up Trip",
+      "backToOrganization": "Back to Organization",
+      "manageTrips": "Manage Trips"
+    },
+    "uxGuide": {
+      "title": "How do you start?",
+      "description": "Create the basic trip first, then use Set Up Trip to configure stops, times, and recurring departure windows."
+    },
+    "form": {
+      "simpleModeTitle": "Basic Trip Information",
+      "simpleModeDescription": "Choose the route and service schedule, then enter the destination shown to staff and passengers.",
+      "requirementsTitle": "Trip Creation Requirements",
+      "requireRoutesMessage": "At least one route must be assigned to this organization before creating a trip.",
+      "requireSchedulesMessage": "At least one service schedule must exist before creating a trip.",
+      "route": "Route",
+      "routeHint": "Choose the route on which this trip operates",
+      "noRoutes": "No routes are assigned to this organization",
+      "schedule": "Service Schedule",
+      "scheduleHint": "Choose the days and period during which the trip operates",
+      "noSchedules": "No service schedules are available",
+      "headsign": "Trip Destination",
+      "headsignPlaceholder": "Example: To University",
+      "headsignHint": "Enter a clear destination that staff and passengers can understand",
+      "defaultBus": "Default Bus",
+      "defaultBusHint": "Optional. A different bus can be assigned later",
+      "noDefaultBus": "No Default Bus",
+      "blockId": "Operating Block",
+      "blockIdPlaceholder": "Example: Morning-A",
+      "blockIdHint": "Optional. Used to group trips operated by the same bus",
+      "isActive": "Trip is Active",
+      "advancedTitle": "Advanced Settings",
+      "advancedDescription": "Operating values that staff do not normally need to change",
+      "setupAfterCreate": "After creating the trip, use Set Up Trip to configure stops, times, and frequency windows.",
+      "gtfsRouteChip": "Linked to Route",
+      "gtfsScheduleChip": "Linked to Service Schedule",
+      "gtfsDirectionChip": "Direction Configured Automatically"
+    },
+    "table": {
+      "headsign": "Destination",
+      "blockId": "Operating Block",
+      "route": "Route",
+      "schedule": "Service Schedule",
+      "serviceCode": "Service Code",
+      "defaultBus": "Default Bus",
+      "noDefaultBus": "Not Set",
+      "isActive": "Status",
+      "updatedAt": "Last Updated"
+    },
+    "delete": {
+      "title": "Delete Trip",
+      "message": "Are you sure you want to delete “{{headsign}}”? A trip cannot be deleted while it is referenced by active operations.",
+      "tooltip": "Delete Trip"
+    },
+    "toast": {
+      "createSuccess": "Trip created successfully",
+      "createError": "Could not create the trip",
+      "updateSuccess": "Trip updated successfully",
+      "updateError": "Could not update the trip",
+      "deleteSuccess": "Trip deleted successfully",
+      "deleteError": "Could not delete the trip"
+    },
+    "stopTimes": {
+      "toast": {
+        "updateSuccess": "Trip stops and times saved successfully",
+        "updateError": "Could not save the trip stops and times"
+      }
+    },
+    "frequencies": {
+      "toast": {
+        "updateSuccess": "Trip frequency windows saved successfully",
+        "updateError": "Could not save the trip frequency windows"
+      }
+    },
+    "preview": {
+      "status": {
+        "allowed": "Allowed",
+        "forced": "Exceptional Service",
+        "blocked": "Blocked",
+        "inactive": "Inactive"
+      }
+    },
+    "gtfsPickupTypes": {
+      "0": "Regular Pickup",
+      "1": "No Pickup",
+      "2": "Must Contact the Agency",
+      "3": "Must Coordinate with the Driver"
+    },
+    "gtfsDropOffTypes": {
+      "0": "Regular Drop-off",
+      "1": "No Drop-off",
+      "2": "Must Contact the Agency",
+      "3": "Must Coordinate with the Driver"
+    },
+    "timePicker": {
+      "description": "Select the hour and minutes without typing the time manually.",
+      "serviceDay": "Service Day",
+      "sameDay": "Same Service Day",
+      "nextDay_one": "Next Day",
+      "nextDay_other": "{{count}} Days Later",
+      "gtfsValue": "Value Sent to the System"
+    },
+    "setup": {
+      "title": "Trip Setup",
+      "back": "Back to Trips",
+      "loading": "Loading trip setup...",
+      "invalidTrip": "The trip or organization information is invalid.",
+      "unsavedChanges": "You Have Unsaved Changes",
+      "allSaved": "All Changes Are Saved",
+      "saveDescription": "Stops, times, and frequency windows will be saved as part of the trip setup.",
+      "save": "Save Trip Setup",
+      "reset": "Discard Changes",
+      "noRouteStopsTitle": "No Stops Are Linked to This Route",
+      "noRouteStopsDescription": "Stops must be added to the route before configuring the trip stops and times.",
+      "summary": {
+        "description": "Review the trip details, then configure stops, times, and departure behavior.",
+        "route": "Route",
+        "schedule": "Service Schedule",
+        "bus": "Default Bus",
+        "block": "Operating Block"
+      },
+      "progress": {
+        "stops": "Enabled Stops: {{count}}",
+        "frequency": "Operating Windows: {{count}}",
+        "fixedTimes": "Fixed Times Without Frequency"
+      },
+      "routePlanner": {
+        "title": "Visual Route Planner",
+        "description": "Select any stop to edit its times or let the bus skip it. The route appears as a metro map on desktop and a vertical timeline on mobile.",
+        "generatorTitle": "Quick Time Generator",
+        "generatorDescription": "Choose the trip start time and the average travel and dwell durations, then generate the full route schedule.",
+        "enabledStopsCount": "Enabled Stops: {{count}}",
+        "skippedStopsCount": "Skipped Stops: {{count}}",
+        "startTime": "Trip Start Time",
+        "defaultTravelMinutes": "Average Travel Minutes",
+        "defaultDwellMinutes": "Average Dwell Minutes",
+        "generate": "Generate Times",
+        "metroTitle": "Route Map",
+        "metroDescription": "Adjust the travel duration between stops, then select a stop to edit its details.",
+        "timelineTitle": "Stop Timeline",
+        "timelineDescription": "Select a stop card to view and edit its times and settings.",
+        "totalStops": "Total Stops: {{count}}",
+        "startStation": "Starting Point",
+        "endStation": "Final Stop",
+        "stationNumber": "Stop {{number}}",
+        "arrivalShort": "Arrival",
+        "departureShort": "Departure",
+        "skipped": "Skipped",
+        "editStop": "Edit Stop",
+        "travelMinutesShort": "Minutes",
+        "travelDuration": "{{count}} Minutes from the Previous Stop",
+        "travelMinutes": "Travel Minutes from the Previous Stop",
+        "busStopsHere": "The Bus Stops Here",
+        "busSkipsStop": "The Bus Passes Without Stopping",
+        "editingStation": "Editing Stop {{number}}",
+        "stopEnabled": "Stop at This Station",
+        "stopEnabledDescription": "This station will be included in the trip stop times sent to the system.",
+        "stopDisabled": "Skip This Station",
+        "stopDisabledDescription": "The station remains part of the route but will not be sent as a trip stop.",
+        "arrivalTime": "Arrival Time",
+        "departureTime": "Departure Time",
+        "dwellMinutes": "Dwell Time at the Stop in Minutes",
+        "advancedSettings": "Advanced GTFS Settings",
+        "advancedSettingsDescription": "These settings are not required during normal operation.",
+        "pickupType": "Passenger Pickup Policy",
+        "dropOffType": "Passenger Drop-off Policy",
+        "exactTime": "Time Is Exact",
+        "editSavedLocally": "Changes will be saved when you select Save Trip Setup.",
+        "changesReady": "Changes Ready to Save"
+      },
+      "frequency": {
+        "title": "Trip Frequency Windows",
+        "description": "Define one or more operating periods during which the trip repeats. Each period can have a different departure interval.",
+        "confirmRemoveWindow": "Click again to remove this period",
+        "repeatQuestion": "Does This Trip Repeat During the Day?",
+        "repeatQuestionDescription": "Enable this option when the trip departs every fixed number of minutes.",
+        "fixedTripTitle": "The Trip Uses Fixed Stop Times",
+        "fixedTripDescription": "No repeated departures will be generated. The saved stop times will be used.",
+        "windowsTitle": "Operating Periods",
+        "windowsDescription": "Each period can have its own start time, end time, and departure interval.",
+        "windowsCount": "Periods: {{count}}",
+        "estimatedDepartures": "Estimated Departures: {{count}}",
+        "windowTitle": "Operating Period {{number}}",
+        "windowSubtitle": "Set the operating time and departure interval",
+        "startTime": "Period Start Time",
+        "endTime": "Period End Time",
+        "headwayMinutes": "Depart Every How Many Minutes?",
+        "headwayDescription": "Example: 10 means one departure every ten minutes.",
+        "exactTimes": "Use Exact Departure Times",
+        "exactTimesDescription": "Generated times are treated as exact scheduled departures rather than approximate times.",
+        "windowSummary": "Period Summary",
+        "windowSummaryValue": "From {{start}} to {{end}}, every {{minutes}} minutes — about {{count}} departures",
+        "addWindow": "Add Operating Period",
+        "removeWindow": "Remove Operating Period",
+        "noWindows": "Add at least one operating period."
+      },
+      "preview": {
+        "title": "Departure Preview",
+        "description": "Choose a date to check the trip status and the departures generated from the service schedule and exceptions.",
+        "unsavedTitle": "The Preview Does Not Include Current Changes",
+        "unsavedWarning": "Save the trip setup first to include the new stops and operating windows in the preview.",
+        "date": "Preview Date",
+        "action": "Preview Departures",
+        "loading": "Loading Preview...",
+        "error": "Could Not Load the Trip Preview.",
+        "result": "Preview Result",
+        "departuresCount": "Departures: {{count}}",
+        "departureNumber": "Departure {{number}}",
+        "noDepartures": "There Are No Departures on This Date.",
+        "statusDescription": {
+          "allowed": "The service schedule allows this trip to operate on this date.",
+          "forced": "Exceptional service was added for this trip on this date.",
+          "blocked": "The trip is blocked by a service schedule exception.",
+          "inactive": "The trip or its service schedule is inactive."
+        }
+      },
+      "validation": {
+        "minimumStops": "Enable at least two stops.",
+        "invalidStopTimes": "Check the arrival and departure times of the stops.",
+        "invalidStopOrder": "A stop arrives before the previous stop departs.",
+        "frequencyRequired": "Add at least one operating period.",
+        "invalidFrequencies": "Check the times and intervals of the operating periods.",
+        "overlappingFrequencies": "Some operating periods overlap. Adjust their start and end times."
+      }
+    }
   },
   "schedules": {
     "title": "Schedules",
@@ -739,68 +990,68 @@
   },
   "users": {
     "superAdmin": {
-    "title": "Users",
-    "subtitle": "View users and create organization admins",
-    "createOrgAdmin": "Add Organization Admin"
-  },
-  "organizationUsers": {
-    "title": "Organization Users",
-    "subtitle": "Manage organization staff, roles, and operational profiles",
-    "createStaff": "Add Staff",
-    "assignRole": "Change Role",
-    "profile": "Operational Profile",
-    "roleName": "Role",
-    "employeeCode": "Employee Code",
-    "status": "Status",
-    "hireDate": "Hire Date",
-    "licenseNumber": "License Number",
-    "licenseExpiry": "License Expiry",
-    "removeTitle": "Remove user from organization",
-    "removeDescription": "Are you sure you want to remove {{name}} from this organization?",
-    "removeTooltip": "Remove from organization",
-    "noOrganization": "No organization is linked to this account",
-    "unassignRoleTitle": "Remove role",
-    "unassignRoleDescription": "Are you sure you want to remove the role {{role}} from this user?",
-    "unassignRoleTooltip": "Remove role",
-    "unassignRoleConfirm": "Remove",
-    "addRole": "Add role",
-    "removeRole": "Remove role",
-    "allRolesAssigned": "All available roles are already assigned to this user",
-    "selectRoleToRemove": "Select the role you want to remove from this user",
-    "removeSelectedRoleWarning": "The role {{role}} will be removed from the user"
-  },
-  "filters": {
+      "title": "Users",
+      "subtitle": "View users and create organization admins",
+      "createOrgAdmin": "Add Organization Admin"
+    },
+    "organizationUsers": {
+      "title": "Organization Users",
+      "subtitle": "Manage organization staff, roles, and operational profiles",
+      "createStaff": "Add Staff",
+      "assignRole": "Change Role",
+      "profile": "Operational Profile",
+      "roleName": "Role",
+      "employeeCode": "Employee Code",
+      "status": "Status",
+      "hireDate": "Hire Date",
+      "licenseNumber": "License Number",
+      "licenseExpiry": "License Expiry",
+      "removeTitle": "Remove user from organization",
+      "removeDescription": "Are you sure you want to remove {{name}} from this organization?",
+      "removeTooltip": "Remove from organization",
+      "noOrganization": "No organization is linked to this account",
+      "unassignRoleTitle": "Remove role",
+      "unassignRoleDescription": "Are you sure you want to remove the role {{role}} from this user?",
+      "unassignRoleTooltip": "Remove role",
+      "unassignRoleConfirm": "Remove",
+      "addRole": "Add role",
+      "removeRole": "Remove role",
+      "allRolesAssigned": "All available roles are already assigned to this user",
+      "selectRoleToRemove": "Select the role you want to remove from this user",
+      "removeSelectedRoleWarning": "The role {{role}} will be removed from the user"
+    },
+    "filters": {
       "mobileDescription": "Filter users by status, role, and organization",
       "rolePlaceholder": "Enter role name"
     },
-  "status": {
-    "ACTIVE": "Active",
-    "ON_LEAVE": "On Leave",
-    "TERMINATED": "Terminated"
-  },
-  "details": {
-    "title": "User Details",
-    "notFound": "User was not found",
-    "active": "Active",
-    "inactive": "Inactive",
-    "roles": "Roles",
-    "permissions": "Permissions",
-    "loadError": "Could not load user details",
-    "userId": "User ID: {{id}}",
-    "accountInformation": "Account information",
-    "accountType": "Account type",
-    "regularUser": "User",
-    "organizationRole": "Organization role #{{id}}",
-    "globalRole": "Global role",
-    "rolePermissions": "Role permissions",
-    "noRoles": "No roles are assigned to this user",
-    "noPermissions": "No permissions are available"
-  },
-  "delete": {
-    "title": "Delete user",
-    "description": "Are you sure you want to delete {{name}}?",
-    "tooltip": "Delete user"
-  },
+    "status": {
+      "ACTIVE": "Active",
+      "ON_LEAVE": "On Leave",
+      "TERMINATED": "Terminated"
+    },
+    "details": {
+      "title": "User Details",
+      "notFound": "User was not found",
+      "active": "Active",
+      "inactive": "Inactive",
+      "roles": "Roles",
+      "permissions": "Permissions",
+      "loadError": "Could not load user details",
+      "userId": "User ID: {{id}}",
+      "accountInformation": "Account information",
+      "accountType": "Account type",
+      "regularUser": "User",
+      "organizationRole": "Organization role #{{id}}",
+      "globalRole": "Global role",
+      "rolePermissions": "Role permissions",
+      "noRoles": "No roles are assigned to this user",
+      "noPermissions": "No permissions are available"
+    },
+    "delete": {
+      "title": "Delete user",
+      "description": "Are you sure you want to delete {{name}}?",
+      "tooltip": "Delete user"
+    },
     "title": "Users",
     "subtitle": "Manage system users and link them to organizations",
     "createTitle": "Create New User",

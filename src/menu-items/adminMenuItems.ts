@@ -12,8 +12,8 @@ import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
 import PlaceRoundedIcon from "@mui/icons-material/PlaceRounded";
 import SignpostRoundedIcon from "@mui/icons-material/SignpostRounded";
-import AltRouteRoundedIcon from "@mui/icons-material/AltRouteRounded";
 import EventAvailableRoundedIcon from "@mui/icons-material/EventAvailableRounded";
+import TimelineRoundedIcon from "@mui/icons-material/TimelineRounded";
 import type { AppMenuItem } from "./menu.types";
 
 export const adminMenuItems: AppMenuItem[] = [
@@ -41,14 +41,6 @@ export const adminMenuItems: AppMenuItem[] = [
         path: "/admin/dashboard/organizations",
         icon: BusinessRoundedIcon,
         permission: "read:organization",
-      },
-      {
-        id: "lines",
-        title: "lines",
-        path: "/admin/dashboard/lines",
-        icon: RouteRoundedIcon,
-        type: "item",
-        permission: "read:line",
       },
       {
         id: "employees-management",
@@ -104,7 +96,7 @@ export const adminMenuItems: AppMenuItem[] = [
     id: "routes",
     title: "menu.routes",
     path: "/admin/dashboard/routes",
-    icon: AltRouteRoundedIcon,
+    icon: RouteRoundedIcon,
     type: "item",
     permission: "read:route",
   },
@@ -127,6 +119,14 @@ export const adminMenuItems: AppMenuItem[] = [
         icon: EventAvailableRoundedIcon,
         type: "item",
         permission: "read:schedule",
+      },
+      {
+        id: "trips",
+        title: "trips",
+        path: "/admin/dashboard/trips",
+        icon: TimelineRoundedIcon,
+        type: "item",
+        permission: "read:trip",
       },
       {
         id: "drivers",
