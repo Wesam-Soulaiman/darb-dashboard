@@ -1,9 +1,4 @@
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
+import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useTranslation } from "react-i18next";
 
@@ -13,6 +8,7 @@ import type { TripFormValues } from "../../../../schemas/organizations/tripSchem
 import type { Bus } from "../../../../types/bus.types";
 import type { OrganizationRoute } from "../../../../types/organization.types";
 import type { Schedule } from "../../../../types/schedule.types";
+import type { TripDriverRef } from "../../../../types/trip.types";
 import TripForm from "./TripForm";
 import { buildTripPayload } from "./tripPayload";
 
@@ -21,6 +17,7 @@ type CreateTripProps = {
   orgRoutes: OrganizationRoute[];
   schedules: Schedule[];
   buses: Bus[];
+  drivers: TripDriverRef[];
 };
 
 const blurActiveElement = () => {
@@ -31,19 +28,11 @@ const blurActiveElement = () => {
   }
 };
 
-const CreateTrip = ({
-  orgId,
-  orgRoutes,
-  schedules,
-  buses,
-}: CreateTripProps) => {
+const CreateTrip = ({ orgId, orgRoutes, schedules, buses, drivers }: CreateTripProps) => {
   const { t } = useTranslation();
   const createTrip = useCreateTrip(orgId);
 
-  const handleSubmit = async (
-    values: TripFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: TripFormValues, handleClose: () => void) => {
     await createTrip.mutateAsync(buildTripPayload(values));
 
     blurActiveElement();
@@ -66,9 +55,19 @@ const CreateTrip = ({
               handleOpen();
             });
           }}
+          disabled={
+            orgRoutes.length === 0 ||
+            schedules.length === 0 ||
+            buses.length === 0 ||
+            drivers.length === 0
+          }
           sx={{
             borderRadius: 2,
             px: 2.5,
+            alignSelf: {
+              xs: "stretch",
+              sm: "center",
+            },
           }}
         >
           {t("trips.actions.create")}
@@ -81,22 +80,45 @@ const CreateTrip = ({
           fullWidth
           disableRestoreFocus
           onClose={() => {
+            if (createTrip.isPending) {
+              return;
+            }
+
             blurActiveElement();
 
             requestAnimationFrame(() => {
               handleClose();
             });
           }}
+          slotProps={{
+            paper: {
+              sx: {
+                borderRadius: 3,
+                maxHeight: {
+                  xs: "calc(100dvh - 16px)",
+                  sm: "calc(100dvh - 64px)",
+                },
+              },
+            },
+          }}
         >
-          <DialogTitle>
-            {t("trips.createTitle")}
-          </DialogTitle>
+          <DialogTitle>{t("trips.createTitle")}</DialogTitle>
 
-          <DialogContent dividers>
+          <DialogContent
+            dividers
+            sx={{
+              px: {
+                xs: 2,
+                sm: 3,
+              },
+              py: 2.5,
+            }}
+          >
             <TripForm
               orgRoutes={orgRoutes}
               schedules={schedules}
               buses={buses}
+              drivers={drivers}
               loading={createTrip.isPending}
               submitLabel={t("trips.actions.create")}
               disableSubmitWhenPristine={false}

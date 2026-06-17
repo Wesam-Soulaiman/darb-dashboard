@@ -628,6 +628,12 @@ const TripSetupPage = () => {
           bgcolor: "background.paper",
           boxShadow: 12,
           backdropFilter: "blur(12px)",
+          borderWidth: 1.5,
+          borderStyle: "solid",
+          borderColor: "primary.main",
+          "&:hover": {
+            borderColor: "primary.dark",
+          },
         }}
       >
         <CardContent

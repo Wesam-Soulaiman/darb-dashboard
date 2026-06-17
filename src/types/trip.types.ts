@@ -1,10 +1,6 @@
 import type { PagePaginatedResponse } from "./user.types";
 
-export type TripCalendarStatus =
-  | "allowed"
-  | "forced"
-  | "blocked"
-  | "inactive";
+export type TripCalendarStatus = "allowed" | "forced" | "blocked" | "inactive";
 
 export type TripDirectionId = 0;
 
@@ -48,6 +44,13 @@ export interface TripFrequency {
   exactTimes: boolean;
 }
 
+export interface TripDriverRef {
+  id: number;
+  firstName: string;
+  lastName: string;
+  phone: string;
+}
+
 export interface Trip {
   id: number;
   organizationId: number;
@@ -58,7 +61,8 @@ export interface Trip {
   headsign: string;
   directionId: TripDirectionId;
 
-  defaultBus?: TripBusRef | null;
+  defaultBus?: TripBusRef;
+  defaultDriver: TripDriverRef;
   blockId?: string | null;
 
   isActive: boolean;
@@ -87,8 +91,9 @@ export interface CreateTripPayload {
   routeId: string;
   scheduleId: number;
   headsign: string;
+  defaultDriverId: number;
   directionId: TripDirectionId;
-  defaultBusId?: number;
+  defaultBusId: number;
   blockId?: string;
   isActive: boolean;
 }

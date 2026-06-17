@@ -306,6 +306,9 @@
       "defaultBus": "الباص الافتراضي",
       "defaultBusHint": "اختياري، ويمكن تشغيل الرحلة بباص آخر لاحقاً",
       "noDefaultBus": "بدون باص افتراضي",
+      "defaultDriver": "السائق الافتراضي",
+      "defaultDriverHint": "اختياري، ويمكن تعيين سائق آخر للانطلاقة لاحقاً",
+      "noDefaultDriver": "بدون سائق افتراضي",
 
       "blockId": "مجموعة التشغيل",
       "blockIdPlaceholder": "مثال: Morning-A",
@@ -319,7 +322,15 @@
 
       "gtfsRouteChip": "مرتبطة بخط",
       "gtfsScheduleChip": "مرتبطة بجدول تشغيل",
-      "gtfsDirectionChip": "اتجاه الرحلة مضبوط تلقائياً"
+      "gtfsDirectionChip": "اتجاه الرحلة مضبوط تلقائياً",
+      "selectRoute": "اختر الخط",
+      "selectSchedule": "اختر جدول التشغيل",
+      "selectDefaultDriver": "اختر السائق الافتراضي",
+      "selectDefaultBus": "اختر الباص الافتراضي",
+      "noDrivers": "لا يوجد سائقون متاحون",
+      "noBuses": "لا توجد باصات متاحة",
+      "requireDriversMessage": "يجب إضافة سائق واحد على الأقل قبل إنشاء الرحلة.",
+      "requireBusesMessage": "يجب إضافة باص واحد على الأقل قبل إنشاء الرحلة."
     },
 
     "table": {
@@ -331,7 +342,9 @@
       "defaultBus": "الباص الافتراضي",
       "noDefaultBus": "غير محدد",
       "isActive": "الحالة",
-      "updatedAt": "آخر تحديث"
+      "updatedAt": "آخر تحديث",
+      "defaultDriver": "السائق الافتراضي",
+      "noDefaultDriver": "غير محدد"
     },
 
     "delete": {

@@ -291,6 +291,9 @@
       "defaultBus": "Default Bus",
       "defaultBusHint": "Optional. A different bus can be assigned later",
       "noDefaultBus": "No Default Bus",
+      "defaultDriver": "Default Driver",
+      "defaultDriverHint": "Optional. A different driver can be assigned to the run later",
+      "noDefaultDriver": "No Default Driver",
       "blockId": "Operating Block",
       "blockIdPlaceholder": "Example: Morning-A",
       "blockIdHint": "Optional. Used to group trips operated by the same bus",
@@ -300,7 +303,15 @@
       "setupAfterCreate": "After creating the trip, use Set Up Trip to configure stops, times, and frequency windows.",
       "gtfsRouteChip": "Linked to Route",
       "gtfsScheduleChip": "Linked to Service Schedule",
-      "gtfsDirectionChip": "Direction Configured Automatically"
+      "gtfsDirectionChip": "Direction Configured Automatically",
+      "selectRoute": "Select a route",
+      "selectSchedule": "Select a service schedule",
+      "selectDefaultDriver": "Select the default driver",
+      "selectDefaultBus": "Select the default bus",
+      "noDrivers": "No drivers are available",
+      "noBuses": "No buses are available",
+      "requireDriversMessage": "At least one driver must be added before creating a trip.",
+      "requireBusesMessage": "At least one bus must be added before creating a trip."
     },
     "table": {
       "headsign": "Destination",
@@ -311,7 +322,9 @@
       "defaultBus": "Default Bus",
       "noDefaultBus": "Not Set",
       "isActive": "Status",
-      "updatedAt": "Last Updated"
+      "updatedAt": "Last Updated",
+      "defaultDriver": "Default Driver",
+      "noDefaultDriver": "Not Set"
     },
     "delete": {
       "title": "Delete Trip",

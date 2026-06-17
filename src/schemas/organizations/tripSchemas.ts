@@ -7,38 +7,27 @@ const optionalStringSchema = z
   .optional()
   .transform((value) => value || undefined);
 
-const optionalIdSchema = z
+const requiredIdSchema = z
   .string()
   .trim()
-  .optional()
-  .transform((value) => value || undefined);
+  .min(1, "validation.required")
+  .regex(/^\d+$/, "validation.required");
 
 export const tripSchema = z.object({
-  routeId: z
-    .string()
-    .trim()
-    .min(1, "validation.required"),
+  routeId: z.string().trim().min(1, "validation.required"),
 
-  scheduleId: z
-    .string()
-    .trim()
-    .min(1, "validation.required"),
+  scheduleId: z.string().trim().min(1, "validation.required"),
 
-  headsign: z
-    .string()
-    .trim()
-    .min(1, "validation.required")
-    .max(120, "validation.max120"),
+  headsign: z.string().trim().min(1, "validation.required").max(120, "validation.max120"),
 
-  defaultBusId: optionalIdSchema,
+  defaultBusId: requiredIdSchema,
+  defaultDriverId: requiredIdSchema,
 
   blockId: optionalStringSchema,
 
   isActive: z.boolean(),
 });
 
-export type TripFormInputValues =
-  z.input<typeof tripSchema>;
+export type TripFormInputValues = z.input<typeof tripSchema>;
 
-export type TripFormValues =
-  z.output<typeof tripSchema>;
+export type TripFormValues = z.output<typeof tripSchema>;

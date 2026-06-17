@@ -6,7 +6,7 @@ import type { TripFormValues } from "../../../../schemas/organizations/tripSchem
 import type { Bus } from "../../../../types/bus.types";
 import type { OrganizationRoute } from "../../../../types/organization.types";
 import type { Schedule } from "../../../../types/schedule.types";
-import type { Trip } from "../../../../types/trip.types";
+import type { Trip, TripDriverRef } from "../../../../types/trip.types";
 import TripForm from "./TripForm";
 import { buildTripPayload } from "./tripPayload";
 
@@ -15,25 +15,15 @@ type UpdateTripProps = {
   orgRoutes: OrganizationRoute[];
   schedules: Schedule[];
   buses: Bus[];
+  drivers: TripDriverRef[];
 };
 
-const UpdateTrip = ({
-  trip,
-  orgRoutes,
-  schedules,
-  buses,
-}: UpdateTripProps) => {
+const UpdateTrip = ({ trip, orgRoutes, schedules, buses, drivers }: UpdateTripProps) => {
   const { t } = useTranslation();
 
-  const updateTrip = useUpdateTrip(
-    trip.organizationId,
-    trip.id,
-  );
+  const updateTrip = useUpdateTrip(trip.organizationId, trip.id);
 
-  const handleSubmit = async (
-    values: TripFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: TripFormValues, handleClose: () => void) => {
     await updateTrip.mutateAsync(buildTripPayload(values));
 
     handleClose();
@@ -51,21 +41,19 @@ const UpdateTrip = ({
           orgRoutes={orgRoutes}
           schedules={schedules}
           buses={buses}
+          drivers={drivers}
           loading={updateTrip.isPending}
           submitLabel={t("trips.actions.update")}
           defaultValues={{
             routeId: trip.route.id,
             scheduleId: String(trip.schedule.id),
             headsign: trip.headsign,
-            defaultBusId: trip.defaultBus
-              ? String(trip.defaultBus.id)
-              : "",
+            defaultDriverId: trip.defaultDriver ? String(trip.defaultDriver.id) : "",
+            defaultBusId: trip.defaultBus ? String(trip.defaultBus.id) : "",
             blockId: trip.blockId ?? "",
             isActive: trip.isActive,
           }}
-          onSubmit={(values) =>
-            handleSubmit(values, handleClose)
-          }
+          onSubmit={(values) => handleSubmit(values, handleClose)}
         />
       )}
     </UpdatePopupAction>

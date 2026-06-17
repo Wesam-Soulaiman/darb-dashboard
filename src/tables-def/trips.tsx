@@ -1,8 +1,4 @@
-import {
-  Chip,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Chip, Stack, Typography } from "@mui/material";
 import type { TFunction } from "i18next";
 import type { MRT_ColumnDef } from "material-react-table";
 
@@ -12,7 +8,7 @@ import UpdateTrip from "../pages/admin/trips/components/UpdateTrip";
 import type { Bus } from "../types/bus.types";
 import type { OrganizationRoute } from "../types/organization.types";
 import type { Schedule } from "../types/schedule.types";
-import type { Trip } from "../types/trip.types";
+import type { Trip, TripDriverRef } from "../types/trip.types";
 
 type TripsColumnsProps = {
   t: TFunction;
@@ -20,6 +16,7 @@ type TripsColumnsProps = {
   orgRoutes: OrganizationRoute[];
   schedules: Schedule[];
   buses: Bus[];
+  drivers: TripDriverRef[];
 };
 
 export const getTripsTableColumns = ({
@@ -28,6 +25,7 @@ export const getTripsTableColumns = ({
   orgRoutes,
   schedules,
   buses,
+  drivers,
 }: TripsColumnsProps): MRT_ColumnDef<Trip>[] => [
   {
     accessorKey: "headsign",
@@ -36,17 +34,11 @@ export const getTripsTableColumns = ({
 
     Cell: ({ row }) => (
       <Stack spacing={0.25}>
-        <Typography sx={{ fontWeight: 900 }}>
-          {row.original.headsign}
-        </Typography>
+        <Typography sx={{ fontWeight: 900 }}>{row.original.headsign}</Typography>
 
         {row.original.blockId && (
-          <Typography
-            variant="caption"
-            color="text.secondary"
-          >
-            {t("trips.table.blockId")}:{" "}
-            {row.original.blockId}
+          <Typography variant="caption" color="text.secondary">
+            {t("trips.table.blockId")}: {row.original.blockId}
           </Typography>
         )}
       </Stack>
@@ -58,47 +50,63 @@ export const getTripsTableColumns = ({
     header: t("trips.table.route"),
     filterVariant: "select",
 
-    filterSelectOptions: orgRoutes.map(
-      (orgRoute) => ({
-        label: orgRoute.route.name,
-        value: orgRoute.route.id,
-      }),
-    ),
+    filterSelectOptions: orgRoutes.map((orgRoute) => ({
+      label: orgRoute.route.name,
+      value: orgRoute.route.id,
+    })),
 
     Cell: ({ row }) => (
-      <Typography sx={{ fontWeight: 800 }}>
-        {row.original.route.name}
-      </Typography>
+      <Typography sx={{ fontWeight: 800 }}>{row.original.route.name}</Typography>
     ),
   },
   {
     id: "scheduleId",
-    accessorFn: (row) =>
-      String(row.schedule.id),
+    accessorFn: (row) => String(row.schedule.id),
     header: t("trips.table.schedule"),
     filterVariant: "select",
 
-    filterSelectOptions: schedules.map(
-      (schedule) => ({
-        label: `${schedule.name} (${schedule.serviceCode})`,
-        value: String(schedule.id),
-      }),
-    ),
+    filterSelectOptions: schedules.map((schedule) => ({
+      label: `${schedule.name} (${schedule.serviceCode})`,
+      value: String(schedule.id),
+    })),
 
     Cell: ({ row }) => (
       <Stack spacing={0.25}>
-        <Typography sx={{ fontWeight: 800 }}>
-          {row.original.schedule.name}
-        </Typography>
+        <Typography sx={{ fontWeight: 800 }}>{row.original.schedule.name}</Typography>
 
-        <Typography
-          variant="caption"
-          color="text.secondary"
-        >
+        <Typography variant="caption" color="text.secondary">
           {row.original.schedule.serviceCode}
         </Typography>
       </Stack>
     ),
+  },
+  {
+    id: "defaultDriver",
+    header: t("trips.table.defaultDriver"),
+    enableColumnFilter: false,
+    enableSorting: false,
+
+    Cell: ({ row }) =>
+      row.original.defaultDriver ? (
+        <Stack spacing={0.25}>
+          <Typography sx={{ fontWeight: 800 }}>
+            {row.original.defaultDriver.firstName} {row.original.defaultDriver.lastName}
+          </Typography>
+
+          {row.original.defaultDriver.phone && (
+            <Typography variant="caption" color="text.secondary">
+              {row.original.defaultDriver.phone}
+            </Typography>
+          )}
+        </Stack>
+      ) : (
+        <Chip
+          size="small"
+          color="error"
+          variant="outlined"
+          label={t("trips.table.noDefaultDriver")}
+        />
+      ),
   },
   {
     id: "defaultBus",
@@ -113,16 +121,14 @@ export const getTripsTableColumns = ({
             {row.original.defaultBus.plateNumber}
           </Typography>
 
-          <Typography
-            variant="caption"
-            color="text.secondary"
-          >
+          <Typography variant="caption" color="text.secondary">
             {row.original.defaultBus.busCode}
           </Typography>
         </Stack>
       ) : (
         <Chip
           size="small"
+          color="error"
           variant="outlined"
           label={t("trips.table.noDefaultBus")}
         />
@@ -147,16 +153,8 @@ export const getTripsTableColumns = ({
     Cell: ({ row }) => (
       <Chip
         size="small"
-        color={
-          row.original.isActive
-            ? "success"
-            : "default"
-        }
-        label={
-          row.original.isActive
-            ? t("common.active")
-            : t("common.inactive")
-        }
+        color={row.original.isActive ? "success" : "default"}
+        label={row.original.isActive ? t("common.active") : t("common.inactive")}
       />
     ),
   },
@@ -167,9 +165,7 @@ export const getTripsTableColumns = ({
 
     Cell: ({ row }) =>
       row.original.updatedAt
-        ? new Date(
-            row.original.updatedAt,
-          ).toLocaleDateString(locale)
+        ? new Date(row.original.updatedAt).toLocaleDateString(locale)
         : "-",
   },
   {
@@ -181,20 +177,15 @@ export const getTripsTableColumns = ({
     enableColumnActions: false,
 
     Cell: ({ row }) => (
-      <Stack
-        direction="row"
-        spacing={0.5}
-        sx={{ alignItems: "center" }}
-      >
-        <ManageTripOperations
-          trip={row.original}
-        />
+      <Stack direction="row" spacing={0.5} sx={{ alignItems: "center" }}>
+        <ManageTripOperations trip={row.original} />
 
         <UpdateTrip
           trip={row.original}
           orgRoutes={orgRoutes}
           schedules={schedules}
           buses={buses}
+          drivers={drivers}
         />
 
         <DeleteTrip trip={row.original} />

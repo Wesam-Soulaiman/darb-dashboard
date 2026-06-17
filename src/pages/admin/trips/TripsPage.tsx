@@ -15,16 +15,14 @@ import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import TimelineRoundedIcon from "@mui/icons-material/TimelineRounded";
 import type { MRT_ColumnFiltersState } from "material-react-table";
 import { useTranslation } from "react-i18next";
-import {
-  Link as RouterLink,
-  useParams,
-} from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 
 import { getTripsCard } from "../../../card-def/trips";
 import Table from "../../../components/Table";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import { usePagePagination } from "../../../hooks/common/usePagePagination";
 import { useBuses } from "../../../hooks/organizations/useBuses";
+import { useDrivers } from "../../../hooks/organizations/useDrivers";
 import { useOrganization } from "../../../hooks/organizations/useOrganizations";
 import { useSchedules } from "../../../hooks/organizations/useSchedules";
 import { useTrips } from "../../../hooks/organizations/useTrips";
@@ -35,22 +33,14 @@ import CreateTrip from "./components/CreateTrip";
 const DEFAULT_TRIPS_LIMIT = 20;
 const OPTIONS_LIMIT = 100;
 
-const getFilterValue = (
-  filters: MRT_ColumnFiltersState,
-  id: string,
-) => {
-  const value = filters.find(
-    (filter) => filter.id === id,
-  )?.value;
+const getFilterValue = (filters: MRT_ColumnFiltersState, id: string) => {
+  const value = filters.find((filter) => filter.id === id)?.value;
 
   if (typeof value === "string") {
     return value;
   }
 
-  if (
-    typeof value === "number" ||
-    typeof value === "boolean"
-  ) {
+  if (typeof value === "number" || typeof value === "boolean") {
     return String(value);
   }
 
@@ -61,52 +51,28 @@ const TripsPage = () => {
   const { t, i18n } = useTranslation();
   const params = useParams();
 
-  const { user, isSuperAdmin } =
-    useAuthContext();
+  const { user, isSuperAdmin } = useAuthContext();
 
   const routeOrgId = Number(params.orgId);
-  const userOrgId = Number(
-    user?.organizationId,
-  );
+  const userOrgId = Number(user?.organizationId);
 
-  const orgId =
-    Number.isFinite(routeOrgId) &&
-    routeOrgId > 0
-      ? routeOrgId
-      : userOrgId;
+  const orgId = Number.isFinite(routeOrgId) && routeOrgId > 0 ? routeOrgId : userOrgId;
 
-  const hasValidOrgId =
-    Number.isFinite(orgId) && orgId > 0;
+  const hasValidOrgId = Number.isFinite(orgId) && orgId > 0;
 
   const [search, setSearch] = useState("");
 
-  const [
-    columnFilters,
-    setColumnFilters,
-  ] = useState<MRT_ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([]);
 
   const pagePagination = usePagePagination({
     initialPageSize: DEFAULT_TRIPS_LIMIT,
   });
 
-  const routeIdValue = getFilterValue(
-    columnFilters,
-    "routeId",
-  );
+  const routeIdValue = getFilterValue(columnFilters, "routeId");
+  const scheduleIdValue = getFilterValue(columnFilters, "scheduleId");
+  const isActiveValue = getFilterValue(columnFilters, "isActive");
 
-  const scheduleIdValue = getFilterValue(
-    columnFilters,
-    "scheduleId",
-  );
-
-  const isActiveValue = getFilterValue(
-    columnFilters,
-    "isActive",
-  );
-
-  const organization = useOrganization(
-    hasValidOrgId ? orgId : Number.NaN,
-  );
+  const organization = useOrganization(hasValidOrgId ? orgId : Number.NaN);
 
   const schedules = useSchedules(orgId, {
     page: 1,
@@ -118,20 +84,19 @@ const TripsPage = () => {
     limit: OPTIONS_LIMIT,
   });
 
+  const drivers = useDrivers(orgId, {
+    page: 1,
+    limit: OPTIONS_LIMIT,
+  });
+
   const trips = useTrips(orgId, {
     page: pagePagination.page,
     limit: pagePagination.limit,
     search: search.trim() || undefined,
     routeId: routeIdValue || undefined,
-    scheduleId: scheduleIdValue
-      ? Number(scheduleIdValue)
-      : undefined,
+    scheduleId: scheduleIdValue ? Number(scheduleIdValue) : undefined,
     isActive:
-      isActiveValue === "true"
-        ? true
-        : isActiveValue === "false"
-          ? false
-          : undefined,
+      isActiveValue === "true" ? true : isActiveValue === "false" ? false : undefined,
   });
 
   const orgRoutes = useMemo(
@@ -139,19 +104,13 @@ const TripsPage = () => {
     [organization.data?.orgRoutes],
   );
 
-  const schedulesList = useMemo(
-    () => schedules.data?.data ?? [],
-    [schedules.data?.data],
-  );
+  const schedulesList = useMemo(() => schedules.data?.data ?? [], [schedules.data?.data]);
 
-  const busesList = useMemo(
-    () => buses.data?.data ?? [],
-    [buses.data?.data],
-  );
+  const busesList = useMemo(() => buses.data?.data ?? [], [buses.data?.data]);
 
-  const locale = i18n.language.startsWith("ar")
-    ? "ar-SY"
-    : "en-US";
+  const driversList = useMemo(() => drivers.data?.data ?? [], [drivers.data?.data]);
+
+  const locale = i18n.language.startsWith("ar") ? "ar-SY" : "en-US";
 
   const columns = useMemo(
     () =>
@@ -161,14 +120,9 @@ const TripsPage = () => {
         orgRoutes,
         schedules: schedulesList,
         buses: busesList,
+        drivers: driversList,
       }),
-    [
-      busesList,
-      locale,
-      orgRoutes,
-      schedulesList,
-      t,
-    ],
+    [busesList, driversList, locale, orgRoutes, schedulesList, t],
   );
 
   const renderTripCard = useMemo(
@@ -178,18 +132,12 @@ const TripsPage = () => {
         orgRoutes,
         schedules: schedulesList,
         buses: busesList,
+        drivers: driversList,
       }),
-    [
-      busesList,
-      orgRoutes,
-      schedulesList,
-      t,
-    ],
+    [busesList, driversList, orgRoutes, schedulesList, t],
   );
 
-  const exportFields = useMemo<
-    Array<keyof Trip & string>
-  >(
+  const exportFields = useMemo<Array<keyof Trip & string>>(
     () => [
       "id",
       "organizationId",
@@ -203,9 +151,7 @@ const TripsPage = () => {
     [],
   );
 
-  const handleSearchChange = (
-    value: string,
-  ) => {
+  const handleSearchChange = (value: string) => {
     setSearch(value);
     pagePagination.reset();
   };
@@ -213,34 +159,20 @@ const TripsPage = () => {
   const handleColumnFiltersChange = (
     updater:
       | MRT_ColumnFiltersState
-      | ((
-          old: MRT_ColumnFiltersState,
-        ) => MRT_ColumnFiltersState),
+      | ((old: MRT_ColumnFiltersState) => MRT_ColumnFiltersState),
   ) => {
     setColumnFilters((current) =>
-      typeof updater === "function"
-        ? updater(current)
-        : updater,
+      typeof updater === "function" ? updater(current) : updater,
     );
 
     pagePagination.reset();
   };
 
-  const setMobileFilter = (
-    id:
-      | "routeId"
-      | "scheduleId"
-      | "isActive",
-    value: string,
-  ) => {
+  const setMobileFilter = (id: "routeId" | "scheduleId" | "isActive", value: string) => {
     handleColumnFiltersChange((current) => {
-      const remaining = current.filter(
-        (filter) => filter.id !== id,
-      );
+      const remaining = current.filter((filter) => filter.id !== id);
 
-      return value
-        ? [...remaining, { id, value }]
-        : remaining;
+      return value ? [...remaining, { id, value }] : remaining;
     });
   };
 
@@ -253,25 +185,18 @@ const TripsPage = () => {
   if (!hasValidOrgId) {
     return (
       <Stack spacing={2}>
-        <Typography
-          variant="h5"
-          sx={{ fontWeight: 900 }}
-        >
+        <Typography variant="h5" sx={{ fontWeight: 900 }}>
           {t("trips.noOrganizationTitle")}
         </Typography>
 
-        <Typography color="text.secondary">
-          {t("trips.noOrganizationMessage")}
-        </Typography>
+        <Typography color="text.secondary">{t("trips.noOrganizationMessage")}</Typography>
 
         {isSuperAdmin && (
           <Button
             component={RouterLink}
             to="/admin/dashboard/organizations"
             variant="outlined"
-            startIcon={
-              <ArrowBackRoundedIcon />
-            }
+            startIcon={<ArrowBackRoundedIcon />}
             sx={{ alignSelf: "flex-start" }}
           >
             {t("organizations.title")}
@@ -297,11 +222,7 @@ const TripsPage = () => {
           },
         }}
       >
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ alignItems: "center" }}
-        >
+        <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
           <Box
             sx={{
               width: 54,
@@ -318,16 +239,11 @@ const TripsPage = () => {
           </Box>
 
           <Box>
-            <Typography
-              variant="h4"
-              sx={{ fontWeight: 900 }}
-            >
+            <Typography variant="h4" sx={{ fontWeight: 900 }}>
               {t("trips.title")}
             </Typography>
 
-            <Typography color="text.secondary">
-              {t("trips.subtitle")}
-            </Typography>
+            <Typography color="text.secondary">{t("trips.subtitle")}</Typography>
           </Box>
         </Stack>
 
@@ -343,13 +259,9 @@ const TripsPage = () => {
               component={RouterLink}
               to={`/admin/dashboard/organizations/${orgId}`}
               variant="outlined"
-              startIcon={
-                <ArrowBackRoundedIcon />
-              }
+              startIcon={<ArrowBackRoundedIcon />}
             >
-              {t(
-                "trips.actions.backToOrganization",
-              )}
+              {t("trips.actions.backToOrganization")}
             </Button>
           )}
 
@@ -358,33 +270,21 @@ const TripsPage = () => {
             orgRoutes={orgRoutes}
             schedules={schedulesList}
             buses={busesList}
+            drivers={driversList}
           />
         </Stack>
       </Stack>
 
-      <Card
-        variant="outlined"
-      >
+      <Card variant="outlined">
         <CardContent>
-          <Stack
-            direction="row"
-            spacing={1.5}
-            sx={{ alignItems: "flex-start" }}
-          >
+          <Stack direction="row" spacing={1.5} sx={{ alignItems: "flex-start" }}>
             <TimelineRoundedIcon color="primary" />
 
             <Box>
-              <Typography sx={{ fontWeight: 900 }}>
-                {t("trips.uxGuide.title")}
-              </Typography>
+              <Typography sx={{ fontWeight: 900 }}>{t("trips.uxGuide.title")}</Typography>
 
-              <Typography
-                variant="body2"
-                color="text.secondary"
-              >
-                {t(
-                  "trips.uxGuide.description",
-                )}
+              <Typography variant="body2" color="text.secondary">
+                {t("trips.uxGuide.description")}
               </Typography>
             </Box>
           </Stack>
@@ -397,9 +297,7 @@ const TripsPage = () => {
           overflow: "hidden",
         }}
       >
-        <CardContent
-          sx={{ p: { xs: 1.5, md: 2 } }}
-        >
+        <CardContent sx={{ p: { xs: 1.5, md: 2 } }}>
           <Table<Trip>
             columns={columns}
             data={trips.data?.data ?? []}
@@ -407,33 +305,16 @@ const TripsPage = () => {
             enableExport
             enablePagination
             manualPagination
-            rowCount={
-              trips.data?.meta.total ?? 0
-            }
-            onPaginationChange={
-              pagePagination.onPaginationChange
-            }
+            rowCount={trips.data?.meta.total ?? 0}
+            onPaginationChange={pagePagination.onPaginationChange}
             enableGlobalFilter
             enableColumnFilters
             manualFiltering
-            onGlobalFilterChange={(value) =>
-              handleSearchChange(
-                String(value ?? ""),
-              )
-            }
-            onColumnFiltersChange={
-              handleColumnFiltersChange
-            }
-            mobileSearchFields={[
-              "headsign",
-              "blockId",
-            ]}
-            mobilePageSize={
-              pagePagination.pagination.pageSize
-            }
-            renderMobileCard={
-              renderTripCard
-            }
+            onGlobalFilterChange={(value) => handleSearchChange(String(value ?? ""))}
+            onColumnFiltersChange={handleColumnFiltersChange}
+            mobileSearchFields={["headsign", "blockId"]}
+            mobilePageSize={pagePagination.pagination.pageSize}
+            renderMobileCard={renderTripCard}
             renderMobileFilters={
               <Stack spacing={1.5}>
                 <TextField
@@ -442,103 +323,55 @@ const TripsPage = () => {
                   fullWidth
                   label={t("trips.form.route")}
                   value={routeIdValue}
-                  onChange={(event) =>
-                    setMobileFilter(
-                      "routeId",
-                      event.target.value,
-                    )
-                  }
+                  onChange={(event) => setMobileFilter("routeId", event.target.value)}
                 >
-                  <MenuItem value="">
-                    {t("common.all")}
-                  </MenuItem>
+                  <MenuItem value="">{t("common.all")}</MenuItem>
 
-                  {orgRoutes.map(
-                    (orgRoute) => (
-                      <MenuItem
-                        key={orgRoute.route.id}
-                        value={
-                          orgRoute.route.id
-                        }
-                      >
-                        {orgRoute.route.name}
-                      </MenuItem>
-                    ),
-                  )}
+                  {orgRoutes.map((orgRoute) => (
+                    <MenuItem key={orgRoute.route.id} value={orgRoute.route.id}>
+                      {orgRoute.route.name}
+                    </MenuItem>
+                  ))}
                 </TextField>
 
                 <TextField
                   select
                   size="small"
                   fullWidth
-                  label={t(
-                    "trips.form.schedule",
-                  )}
+                  label={t("trips.form.schedule")}
                   value={scheduleIdValue}
-                  onChange={(event) =>
-                    setMobileFilter(
-                      "scheduleId",
-                      event.target.value,
-                    )
-                  }
+                  onChange={(event) => setMobileFilter("scheduleId", event.target.value)}
                 >
-                  <MenuItem value="">
-                    {t("common.all")}
-                  </MenuItem>
+                  <MenuItem value="">{t("common.all")}</MenuItem>
 
-                  {schedulesList.map(
-                    (schedule) => (
-                      <MenuItem
-                        key={schedule.id}
-                        value={String(
-                          schedule.id,
-                        )}
-                      >
-                        {schedule.name}
-                      </MenuItem>
-                    ),
-                  )}
+                  {schedulesList.map((schedule) => (
+                    <MenuItem key={schedule.id} value={String(schedule.id)}>
+                      {schedule.name}
+                    </MenuItem>
+                  ))}
                 </TextField>
 
                 <TextField
                   select
                   size="small"
                   fullWidth
-                  label={t(
-                    "trips.form.isActive",
-                  )}
+                  label={t("trips.form.isActive")}
                   value={isActiveValue}
-                  onChange={(event) =>
-                    setMobileFilter(
-                      "isActive",
-                      event.target.value,
-                    )
-                  }
+                  onChange={(event) => setMobileFilter("isActive", event.target.value)}
                 >
-                  <MenuItem value="">
-                    {t("common.all")}
-                  </MenuItem>
+                  <MenuItem value="">{t("common.all")}</MenuItem>
 
-                  <MenuItem value="true">
-                    {t("common.active")}
-                  </MenuItem>
+                  <MenuItem value="true">{t("common.active")}</MenuItem>
 
-                  <MenuItem value="false">
-                    {t("common.inactive")}
-                  </MenuItem>
+                  <MenuItem value="false">{t("common.inactive")}</MenuItem>
                 </TextField>
 
                 <Button
                   color="inherit"
                   variant="outlined"
-                  startIcon={
-                    <ClearRoundedIcon />
-                  }
+                  startIcon={<ClearRoundedIcon />}
                   onClick={handleClearFilters}
-                  disabled={
-                    !search &&
-                    columnFilters.length === 0
-                  }
+                  disabled={!search && columnFilters.length === 0}
                   fullWidth
                 >
                   {t("common.clear")}
@@ -551,13 +384,12 @@ const TripsPage = () => {
                 trips.isFetching ||
                 organization.isLoading ||
                 schedules.isLoading ||
-                buses.isLoading,
+                buses.isLoading ||
+                drivers.isLoading,
 
-              showAlertBanner:
-                trips.isError,
+              showAlertBanner: trips.isError,
 
-              pagination:
-                pagePagination.pagination,
+              pagination: pagePagination.pagination,
 
               globalFilter: search,
 
@@ -565,19 +397,13 @@ const TripsPage = () => {
             }}
             isError={trips.isError}
             refetch={trips.refetch}
-            isRefetching={
-              trips.isRefetching
-            }
+            isRefetching={trips.isRefetching}
             initialState={{
               showGlobalFilter: false,
               showColumnFilters: true,
             }}
             muiPaginationProps={{
-              rowsPerPageOptions: [
-                10,
-                20,
-                50,
-              ],
+              rowsPerPageOptions: [10, 20, 50],
             }}
           />
         </CardContent>

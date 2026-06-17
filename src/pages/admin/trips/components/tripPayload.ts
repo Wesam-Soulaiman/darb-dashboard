@@ -1,27 +1,16 @@
 import type { TripFormValues } from "../../../../schemas/organizations/tripSchemas";
 import type { CreateTripPayload } from "../../../../types/trip.types";
 
-export const buildTripPayload = (
-  values: TripFormValues,
-): CreateTripPayload => {
-  const defaultBusId = values.defaultBusId
-    ? Number(values.defaultBusId)
-    : undefined;
-
+export const buildTripPayload = (values: TripFormValues): CreateTripPayload => {
   return {
     routeId: values.routeId,
-
     scheduleId: Number(values.scheduleId),
-
     headsign: values.headsign.trim(),
 
-    directionId: 0,
+    defaultDriverId: Number(values.defaultDriverId),
+    defaultBusId: Number(values.defaultBusId),
 
-    ...(Number.isFinite(defaultBusId) && defaultBusId
-      ? {
-          defaultBusId,
-        }
-      : {}),
+    directionId: 0,
 
     ...(values.blockId
       ? {
