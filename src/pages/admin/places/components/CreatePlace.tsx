@@ -11,10 +11,7 @@ const CreatePlace = () => {
   const { t } = useTranslation();
   const createPlace = useCreatePlace();
 
-  const handleSubmit = async (
-    values: PlaceFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: PlaceFormValues, handleClose: () => void) => {
     await createPlace.mutateAsync({
       name: values.name,
       governateId: values.governateId,

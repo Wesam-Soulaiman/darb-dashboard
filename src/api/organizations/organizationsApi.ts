@@ -27,17 +27,13 @@ const buildOrganizationFormData = (
 
 export const organizationsApi = {
   getAll: async () => {
-    const response = await apiClient.get<OrganizationsResponse>(
-      ORGANIZATIONS_ENDPOINT,
-    );
+    const response = await apiClient.get<OrganizationsResponse>(ORGANIZATIONS_ENDPOINT);
 
     return response.data.data;
   },
 
   getById: async (id: number) => {
-    const response = await apiClient.get<Organization>(
-      `${ORGANIZATIONS_ENDPOINT}/${id}`,
-    );
+    const response = await apiClient.get<Organization>(`${ORGANIZATIONS_ENDPOINT}/${id}`);
 
     return response.data;
   },

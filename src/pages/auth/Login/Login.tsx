@@ -21,10 +21,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import AuthCard from "../components/AuthCard";
-import {
-  loginSchema,
-  type LoginFormValues,
-} from "../../../schemas/auth/authSchemas";
+import { loginSchema, type LoginFormValues } from "../../../schemas/auth/authSchemas";
 import { useSignIn } from "../../../hooks/auth/useSignIn";
 import { normalizeSyrianPhone } from "../../../utils/syrianPhone";
 
@@ -95,9 +92,7 @@ export default function Login() {
                 placeholder="09XXXXXXXX"
                 autoComplete="tel"
                 error={Boolean(errors.phone)}
-                helperText={
-                  errors.phone?.message ? t(errors.phone.message) : " "
-                }
+                helperText={errors.phone?.message ? t(errors.phone.message) : " "}
                 slotProps={{
                   input: {
                     startAdornment: (
@@ -121,9 +116,7 @@ export default function Login() {
                 type={passwordInputType}
                 autoComplete="current-password"
                 error={Boolean(errors.password)}
-                helperText={
-                  errors.password?.message ? t(errors.password.message) : " "
-                }
+                helperText={errors.password?.message ? t(errors.password.message) : " "}
                 slotProps={{
                   input: {
                     startAdornment: (
@@ -151,7 +144,7 @@ export default function Login() {
               />
             )}
           />
-          
+
           <Button
             type="submit"
             variant="contained"

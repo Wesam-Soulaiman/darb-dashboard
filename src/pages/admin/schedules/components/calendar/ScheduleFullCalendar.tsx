@@ -1,21 +1,10 @@
 import { useRef } from "react";
-import {
-  Alert,
-  Box,
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import arLocale from "@fullcalendar/core/locales/ar";
-import type {
-  DateSelectArg,
-  EventClickArg,
-  EventInput,
-} from "@fullcalendar/core";
+import type { DateSelectArg, EventClickArg, EventInput } from "@fullcalendar/core";
 import type { DateClickArg } from "@fullcalendar/interaction";
 import { useTranslation } from "react-i18next";
 
@@ -147,7 +136,6 @@ const ScheduleFullCalendar = ({
                     >
                       {eventInfo.event.title}
                     </Box>
-
                   </Stack>
                 );
               }}

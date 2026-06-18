@@ -1,11 +1,7 @@
 import { useMemo, useState } from "react";
 import { Button, Stack, Typography } from "@mui/material";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
-import type {
-  DateSelectArg,
-  EventClickArg,
-  EventInput,
-} from "@fullcalendar/core";
+import type { DateSelectArg, EventClickArg, EventInput } from "@fullcalendar/core";
 import type { DateClickArg } from "@fullcalendar/interaction";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -21,10 +17,7 @@ import {
   useSchedules,
   useUpdateSchedule,
 } from "../../../hooks/organizations/useSchedules";
-import type {
-  Schedule,
-  ScheduleException,
-} from "../../../types/schedule.types";
+import type { Schedule, ScheduleException } from "../../../types/schedule.types";
 import type {
   ScheduleFormInputValues,
   ScheduleFormValues,
@@ -60,8 +53,7 @@ const ScheduleCalendarPage = () => {
   const routeOrgId = Number(params.orgId);
   const userOrgId = Number(user?.organizationId);
 
-  const orgId =
-    Number.isFinite(routeOrgId) && routeOrgId > 0 ? routeOrgId : userOrgId;
+  const orgId = Number.isFinite(routeOrgId) && routeOrgId > 0 ? routeOrgId : userOrgId;
 
   const hasValidOrgId = Number.isFinite(orgId) && orgId > 0;
 
@@ -79,9 +71,7 @@ const ScheduleCalendarPage = () => {
   const [scheduleDialogMode, setScheduleDialogMode] =
     useState<ScheduleDialogMode>("create");
 
-  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
-    null,
-  );
+  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
 
   const [scheduleDefaultValues, setScheduleDefaultValues] = useState<
     Partial<ScheduleFormInputValues>

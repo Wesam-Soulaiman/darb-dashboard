@@ -14,15 +14,13 @@ import type {
 export const schedulesQueryKeys = {
   all: ["schedules"] as const,
 
-  org: (orgId: number) =>
-    [...schedulesQueryKeys.all, "organization", orgId] as const,
+  org: (orgId: number) => [...schedulesQueryKeys.all, "organization", orgId] as const,
 
   lists: (orgId: number) => [...schedulesQueryKeys.org(orgId), "list"] as const,
   list: (orgId: number, params?: GetSchedulesParams) =>
     [...schedulesQueryKeys.lists(orgId), params ?? {}] as const,
 
-  details: (orgId: number) =>
-    [...schedulesQueryKeys.org(orgId), "details"] as const,
+  details: (orgId: number) => [...schedulesQueryKeys.org(orgId), "details"] as const,
   detail: (orgId: number, id: number) =>
     [...schedulesQueryKeys.details(orgId), id] as const,
 
@@ -51,8 +49,7 @@ export const useCreateSchedule = (orgId: number) => {
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (payload: CreateSchedulePayload) =>
-      schedulesApi.create(orgId, payload),
+    mutationFn: (payload: CreateSchedulePayload) => schedulesApi.create(orgId, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: schedulesQueryKeys.org(orgId),
@@ -126,10 +123,7 @@ export const useScheduleExceptions = (
   });
 };
 
-export const useCreateScheduleException = (
-  orgId: number,
-  scheduleId: number,
-) => {
+export const useCreateScheduleException = (orgId: number, scheduleId: number) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
@@ -144,17 +138,12 @@ export const useCreateScheduleException = (
       toast.success(t("schedules.exceptions.toast.createSuccess"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("schedules.exceptions.toast.createError")),
-      );
+      toast.error(getApiErrorMessage(error, t("schedules.exceptions.toast.createError")));
     },
   });
 };
 
-export const useDeleteScheduleException = (
-  orgId: number,
-  scheduleId: number,
-) => {
+export const useDeleteScheduleException = (orgId: number, scheduleId: number) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
@@ -169,9 +158,7 @@ export const useDeleteScheduleException = (
       toast.success(t("schedules.exceptions.toast.deleteSuccess"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("schedules.exceptions.toast.deleteError")),
-      );
+      toast.error(getApiErrorMessage(error, t("schedules.exceptions.toast.deleteError")));
     },
   });
 };

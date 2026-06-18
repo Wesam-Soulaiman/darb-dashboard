@@ -16,10 +16,7 @@ import CreateRoute from "./components/CreateRoute";
 
 const DEFAULT_ROUTES_LIMIT = 20;
 
-const getFilterValue = (
-  filters: MRT_ColumnFiltersState,
-  id: string,
-): string => {
+const getFilterValue = (filters: MRT_ColumnFiltersState, id: string): string => {
   const value = filters.find((filter) => filter.id === id)?.value;
 
   if (typeof value === "string") return value;
@@ -32,8 +29,7 @@ const RoutesPage = () => {
   const { t } = useTranslation();
 
   const [search, setSearch] = useState("");
-  const [columnFilters, setColumnFilters] =
-    useState<MRT_ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([]);
 
   const cursorPagination = useCursorPagination({
     initialPageSize: DEFAULT_ROUTES_LIMIT,
@@ -48,15 +44,10 @@ const RoutesPage = () => {
   }, [places.data?.data]);
 
   const originPlaceIdValue = getFilterValue(columnFilters, "originPlaceId");
-  const destinationPlaceIdValue = getFilterValue(
-    columnFilters,
-    "destinationPlaceId",
-  );
+  const destinationPlaceIdValue = getFilterValue(columnFilters, "destinationPlaceId");
   const modeValue = getFilterValue(columnFilters, "mode");
 
-  const originPlaceId = originPlaceIdValue
-    ? Number(originPlaceIdValue)
-    : undefined;
+  const originPlaceId = originPlaceIdValue ? Number(originPlaceIdValue) : undefined;
 
   const destinationPlaceId = destinationPlaceIdValue
     ? Number(destinationPlaceIdValue)
@@ -159,9 +150,7 @@ const RoutesPage = () => {
               {t("routes.title")}
             </Typography>
 
-            <Typography color="text.secondary">
-              {t("routes.subtitle")}
-            </Typography>
+            <Typography color="text.secondary">{t("routes.subtitle")}</Typography>
           </Box>
         </Stack>
 

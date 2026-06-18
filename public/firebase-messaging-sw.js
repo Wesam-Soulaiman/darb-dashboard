@@ -1,9 +1,5 @@
-importScripts(
-  "https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js",
-);
-importScripts(
-  "https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js",
-);
+importScripts("https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js");
+importScripts("https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js");
 
 firebase.initializeApp({
   apiKey: "AIzaSyCVa6P5V6-gcUEtjSXXQbmGpXqGOQm2zs4",
@@ -17,9 +13,7 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 const getTitle = (payload) => {
-  return (
-    payload?.notification?.title || payload?.data?.title || "New Notification"
-  );
+  return payload?.notification?.title || payload?.data?.title || "New Notification";
 };
 
 const getBody = (payload) => {

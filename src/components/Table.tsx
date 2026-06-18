@@ -158,9 +158,7 @@ const Table = <T extends MRT_RowData>({
     () => ({
       ...state,
       showProgressBars: state?.isLoading,
-      ...(manualPagination && state?.pagination
-        ? { pagination: state.pagination }
-        : {}),
+      ...(manualPagination && state?.pagination ? { pagination: state.pagination } : {}),
       ...(manualFiltering && state?.columnFilters
         ? { columnFilters: state.columnFilters }
         : {}),
@@ -184,13 +182,10 @@ const Table = <T extends MRT_RowData>({
   const handleExportRows = (rows: MRT_Row<T>[]) => {
     const rowData: CsvRow[] = rows.map((row) => {
       if (!exportFields?.length) {
-        return Object.entries(row.original).reduce<CsvRow>(
-          (acc, [key, value]) => {
-            acc[key] = toCsvValue(value);
-            return acc;
-          },
-          {},
-        );
+        return Object.entries(row.original).reduce<CsvRow>((acc, [key, value]) => {
+          acc[key] = toCsvValue(value);
+          return acc;
+        }, {});
       }
 
       return exportFields.reduce<CsvRow>((acc, field) => {
@@ -268,9 +263,7 @@ const Table = <T extends MRT_RowData>({
       isError && refetch
         ? {
             color: "error",
-            children: (
-              <LoadingDataError refetch={refetch} loading={isRefetching} />
-            ),
+            children: <LoadingDataError refetch={refetch} loading={isRefetching} />,
           }
         : undefined,
 
@@ -325,11 +318,7 @@ const Table = <T extends MRT_RowData>({
                   setCustomSearchOpen((prev) => !prev);
                 }}
               >
-                {customSearchOpen ? (
-                  <CloseRoundedIcon />
-                ) : (
-                  <SearchRoundedIcon />
-                )}
+                {customSearchOpen ? <CloseRoundedIcon /> : <SearchRoundedIcon />}
               </IconButton>
             </Tooltip>
 
@@ -360,9 +349,7 @@ const Table = <T extends MRT_RowData>({
         {enableExport && (
           <Button
             variant="outlined"
-            onClick={() =>
-              handleExportRows(table.getPrePaginationRowModel().rows)
-            }
+            onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
           >
             {t("table.exportCSV")}
           </Button>
@@ -385,9 +372,7 @@ const Table = <T extends MRT_RowData>({
         refetch={refetch}
         isRefetching={isRefetching}
         manualFiltering={manualFiltering}
-        globalFilter={
-          typeof state?.globalFilter === "string" ? state.globalFilter : ""
-        }
+        globalFilter={typeof state?.globalFilter === "string" ? state.globalFilter : ""}
         onGlobalFilterChange={(value) => {
           onGlobalFilterChange?.(value);
         }}

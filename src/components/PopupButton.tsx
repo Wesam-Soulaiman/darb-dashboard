@@ -2,10 +2,7 @@ import { Button, Slide } from "@mui/material";
 import type { ButtonProps, DialogProps, SlideProps } from "@mui/material";
 import { forwardRef, useState, type ReactNode } from "react";
 
-const Transition = forwardRef<unknown, SlideProps>(function Transition(
-  props,
-  ref,
-) {
+const Transition = forwardRef<unknown, SlideProps>(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 

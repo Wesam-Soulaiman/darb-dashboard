@@ -21,15 +21,11 @@ const headerSx = {
   borderBottomColor: "divider",
 } as const;
 
-export default function SidebarHeader({
-  forceOpen = false,
-}: SidebarHeaderProps) {
+export default function SidebarHeader({ forceOpen = false }: SidebarHeaderProps) {
   const { t } = useTranslation();
 
   const desktopOpen = useSidebarStore((state) => state.desktopOpen);
-  const toggleDesktopSidebar = useSidebarStore(
-    (state) => state.toggleDesktopSidebar,
-  );
+  const toggleDesktopSidebar = useSidebarStore((state) => state.toggleDesktopSidebar);
 
   const isOpen = forceOpen || desktopOpen;
 

@@ -11,14 +11,7 @@ type GetSchedulesCardProps = {
 };
 
 const DAYS: Array<{
-  key:
-    | "monday"
-    | "tuesday"
-    | "wednesday"
-    | "thursday"
-    | "friday"
-    | "saturday"
-    | "sunday";
+  key: "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday";
   labelKey: string;
 }> = [
   { key: "monday", labelKey: "schedules.daysShort.monday" },
@@ -44,9 +37,7 @@ export const getSchedulesCard = ({ t }: GetSchedulesCardProps) => {
             }}
           >
             <Stack spacing={0.5}>
-              <Typography sx={{ fontWeight: 900 }}>
-                {schedule.name}
-              </Typography>
+              <Typography sx={{ fontWeight: 900 }}>{schedule.name}</Typography>
 
               <Typography variant="body2" color="text.secondary">
                 {schedule.serviceCode}
@@ -54,9 +45,7 @@ export const getSchedulesCard = ({ t }: GetSchedulesCardProps) => {
             </Stack>
 
             <Chip
-              label={
-                schedule.isActive ? t("common.active") : t("common.inactive")
-              }
+              label={schedule.isActive ? t("common.active") : t("common.inactive")}
               color={schedule.isActive ? "success" : "default"}
               size="small"
             />

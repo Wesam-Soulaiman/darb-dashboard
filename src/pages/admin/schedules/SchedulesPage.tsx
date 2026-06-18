@@ -28,10 +28,7 @@ import CreateSchedule from "./components/CreateSchedule";
 
 const DEFAULT_SCHEDULES_LIMIT = 20;
 
-const getFilterValue = (
-  filters: MRT_ColumnFiltersState,
-  id: string,
-): string => {
+const getFilterValue = (filters: MRT_ColumnFiltersState, id: string): string => {
   const value = filters.find((filter) => filter.id === id)?.value;
 
   if (typeof value === "string") return value;
@@ -49,14 +46,12 @@ const SchedulesPage = () => {
   const routeOrgId = Number(params.orgId);
   const userOrgId = Number(user?.organizationId);
 
-  const orgId =
-    Number.isFinite(routeOrgId) && routeOrgId > 0 ? routeOrgId : userOrgId;
+  const orgId = Number.isFinite(routeOrgId) && routeOrgId > 0 ? routeOrgId : userOrgId;
 
   const hasValidOrgId = Number.isFinite(orgId) && orgId > 0;
 
   const [search, setSearch] = useState("");
-  const [columnFilters, setColumnFilters] =
-    useState<MRT_ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([]);
 
   const pagePagination = usePagePagination({
     initialPageSize: DEFAULT_SCHEDULES_LIMIT,
@@ -69,11 +64,7 @@ const SchedulesPage = () => {
     limit: pagePagination.limit,
     search: search.trim() || undefined,
     isActive:
-      isActiveValue === "true"
-        ? true
-        : isActiveValue === "false"
-          ? false
-          : undefined,
+      isActiveValue === "true" ? true : isActiveValue === "false" ? false : undefined,
   });
 
   const columns = useMemo(
@@ -133,9 +124,7 @@ const SchedulesPage = () => {
 
   const setMobileIsActiveFilter = (value: string) => {
     handleColumnFiltersChange((current) => {
-      const withoutCurrentFilter = current.filter(
-        (filter) => filter.id !== "isActive",
-      );
+      const withoutCurrentFilter = current.filter((filter) => filter.id !== "isActive");
 
       return value
         ? [...withoutCurrentFilter, { id: "isActive", value }]
@@ -206,9 +195,7 @@ const SchedulesPage = () => {
               {t("schedules.title")}
             </Typography>
 
-            <Typography color="text.secondary">
-              {t("schedules.subtitle")}
-            </Typography>
+            <Typography color="text.secondary">{t("schedules.subtitle")}</Typography>
           </Box>
         </Stack>
 
@@ -274,9 +261,7 @@ const SchedulesPage = () => {
             enableGlobalFilter
             enableColumnFilters
             manualFiltering
-            onGlobalFilterChange={(value) =>
-              handleSearchChange(String(value ?? ""))
-            }
+            onGlobalFilterChange={(value) => handleSearchChange(String(value ?? ""))}
             onColumnFiltersChange={handleColumnFiltersChange}
             mobileSearchFields={["name", "serviceCode"]}
             mobilePageSize={pagePagination.pagination.pageSize}
@@ -288,9 +273,7 @@ const SchedulesPage = () => {
                   size="small"
                   label={t("schedules.form.isActive")}
                   value={isActiveValue}
-                  onChange={(event) =>
-                    setMobileIsActiveFilter(event.target.value)
-                  }
+                  onChange={(event) => setMobileIsActiveFilter(event.target.value)}
                   fullWidth
                 >
                   <MenuItem value="">{t("common.all")}</MenuItem>

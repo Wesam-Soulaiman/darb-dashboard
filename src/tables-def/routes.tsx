@@ -73,9 +73,7 @@ export const getRoutesTableColumns = ({
       })),
       enableSorting: false,
       Cell: ({ row }) => (
-        <Typography component="span">
-          {t(`routes.modes.${row.original.mode}`)}
-        </Typography>
+        <Typography component="span">{t(`routes.modes.${row.original.mode}`)}</Typography>
       ),
     },
     {
@@ -93,9 +91,7 @@ export const getRoutesTableColumns = ({
       header: t("routes.table.length"),
       enableColumnFilter: false,
       Cell: ({ row }) => (
-        <Typography component="span">
-          {row.original.length ?? 0}
-        </Typography>
+        <Typography component="span">{row.original.length ?? 0}</Typography>
       ),
     },
     {

@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Chip,
-  IconButton,
-  Stack,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Chip, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import type { TFunction } from "i18next";
 import type { MRT_ColumnDef } from "material-react-table";
 import { Link } from "react-router-dom";
@@ -57,9 +49,7 @@ export const getOrganizationsTableColumns = ({
       header: t("table.id"),
       size: 80,
       enableGlobalFilter: false,
-      Cell: ({ row }) => (
-        <Typography component="span">{row.original.id}</Typography>
-      ),
+      Cell: ({ row }) => <Typography component="span">{row.original.id}</Typography>,
     },
     {
       accessorKey: "name",

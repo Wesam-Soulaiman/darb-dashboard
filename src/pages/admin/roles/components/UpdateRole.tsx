@@ -14,10 +14,7 @@ const UpdateRole = ({ role }: UpdateRoleProps) => {
   const { t } = useTranslation();
   const updateRole = useUpdateRole(role.id);
 
-  const handleSubmit = async (
-    values: RoleFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: RoleFormValues, handleClose: () => void) => {
     await updateRole.mutateAsync({
       name: values.name,
       description: values.description,

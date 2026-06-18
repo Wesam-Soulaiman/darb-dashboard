@@ -1,10 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Tooltip,
-} from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, IconButton, Tooltip } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import type { DialogProps, IconButtonProps } from "@mui/material";
 

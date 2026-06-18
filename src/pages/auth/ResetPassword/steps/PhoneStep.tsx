@@ -46,9 +46,7 @@ export default function PhoneStep({ onSubmit }: PhoneStepProps) {
             autoComplete="tel"
             error={Boolean(errors.phone)}
             helperText={
-              errors.phone?.message
-                ? t(errors.phone.message)
-                : t("auth.reset.phoneHint")
+              errors.phone?.message ? t(errors.phone.message) : t("auth.reset.phoneHint")
             }
             slotProps={{
               input: {

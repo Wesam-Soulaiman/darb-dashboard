@@ -27,9 +27,7 @@ export const resetNewPasswordSchema = z
       .min(1, "auth.validation.passwordRequired")
       .min(8, "auth.validation.passwordMin"),
 
-    confirmPassword: z
-      .string()
-      .min(1, "auth.validation.confirmPasswordRequired"),
+    confirmPassword: z.string().min(1, "auth.validation.confirmPasswordRequired"),
   })
   .refine((values) => values.password === values.confirmPassword, {
     message: "auth.validation.passwordsDoNotMatch",

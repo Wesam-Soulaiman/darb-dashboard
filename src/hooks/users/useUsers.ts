@@ -19,8 +19,7 @@ export const usersQueryKeys = {
 
   lists: () => [...usersQueryKeys.all, "list"] as const,
 
-  list: (params?: GetUsersParams) =>
-    [...usersQueryKeys.lists(), params ?? {}] as const,
+  list: (params?: GetUsersParams) => [...usersQueryKeys.lists(), params ?? {}] as const,
 
   details: () => [...usersQueryKeys.all, "details"] as const,
 
@@ -124,8 +123,7 @@ export const useAssignUserRole = (userId: number) => {
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (payload: AssignUserRolePayload) =>
-      usersApi.assignRole(userId, payload),
+    mutationFn: (payload: AssignUserRolePayload) => usersApi.assignRole(userId, payload),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -192,9 +190,7 @@ export const useUpdateOperationalProfile = (userId: number) => {
     },
 
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("users.toast.profileUpdateError")),
-      );
+      toast.error(getApiErrorMessage(error, t("users.toast.profileUpdateError")));
     },
   });
 };
@@ -204,8 +200,7 @@ export const useUpdateMyProfile = () => {
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (payload: UpdateMyProfilePayload) =>
-      usersApi.updateMyProfile(payload),
+    mutationFn: (payload: UpdateMyProfilePayload) => usersApi.updateMyProfile(payload),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -216,9 +211,7 @@ export const useUpdateMyProfile = () => {
     },
 
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("users.toast.profileUpdateError")),
-      );
+      toast.error(getApiErrorMessage(error, t("users.toast.profileUpdateError")));
     },
   });
 };

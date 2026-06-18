@@ -40,10 +40,7 @@ export const usersApi = {
   },
 
   update: async (id: number, payload: UpdateUserPayload) => {
-    const response = await apiClient.patch<User>(
-      `${USERS_ENDPOINT}/${id}`,
-      payload,
-    );
+    const response = await apiClient.patch<User>(`${USERS_ENDPOINT}/${id}`, payload);
 
     return response.data;
   },
@@ -91,10 +88,7 @@ export const usersApi = {
   },
 
   updateMyProfile: async (payload: UpdateMyProfilePayload) => {
-    const response = await apiClient.patch<User>(
-      `${ME_ENDPOINT}/profile`,
-      payload,
-    );
+    const response = await apiClient.patch<User>(`${ME_ENDPOINT}/profile`, payload);
 
     return response.data;
   },

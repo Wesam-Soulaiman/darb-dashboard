@@ -35,10 +35,6 @@ export const updateOrganizationSchema = z.object({
     .nullable(),
 });
 
-export type CreateOrganizationFormValues = z.infer<
-  typeof createOrganizationSchema
->;
+export type CreateOrganizationFormValues = z.infer<typeof createOrganizationSchema>;
 
-export type UpdateOrganizationFormValues = z.infer<
-  typeof updateOrganizationSchema
->;
+export type UpdateOrganizationFormValues = z.infer<typeof updateOrganizationSchema>;

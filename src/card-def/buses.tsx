@@ -40,9 +40,7 @@ export const getBusesCard = ({ t }: GetBusesCardProps) => {
             }}
           >
             <Stack spacing={0.5}>
-              <Typography sx={{ fontWeight: 900 }}>
-                {bus.plateNumber}
-              </Typography>
+              <Typography sx={{ fontWeight: 900 }}>{bus.plateNumber}</Typography>
 
               <Typography variant="body2" color="text.secondary">
                 {bus.busCode}
@@ -57,11 +55,7 @@ export const getBusesCard = ({ t }: GetBusesCardProps) => {
           </Stack>
 
           <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap" }}>
-            <Chip
-              label={t(`buses.types.${bus.type}`)}
-              size="small"
-              variant="outlined"
-            />
+            <Chip label={t(`buses.types.${bus.type}`)} size="small" variant="outlined" />
 
             <Chip
               label={`${t("buses.table.capacity")}: ${bus.capacity}`}

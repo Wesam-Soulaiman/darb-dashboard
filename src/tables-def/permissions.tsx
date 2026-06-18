@@ -21,9 +21,7 @@ export const getPermissionsTableColumns = ({
       header: t("table.id"),
       size: 80,
       enableGlobalFilter: false,
-      Cell: ({ row }) => (
-        <Typography component="span">{row.original.id}</Typography>
-      ),
+      Cell: ({ row }) => <Typography component="span">{row.original.id}</Typography>,
     },
     {
       accessorKey: "action",

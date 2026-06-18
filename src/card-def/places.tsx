@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  Divider,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, Divider, Stack, Typography } from "@mui/material";
 import type { TFunction } from "i18next";
 
 import type { Place } from "../types/place.types";
@@ -53,7 +47,11 @@ export const getPlacesCard = ({ t }: PlacesCardProps) => {
 
           <Divider />
 
-          <Stack spacing={0.75} direction={{xs: "row"}} sx={{justifyContent: "space-between"}}>
+          <Stack
+            spacing={0.75}
+            direction={{ xs: "row" }}
+            sx={{ justifyContent: "space-between" }}
+          >
             <Stack spacing={0.75}>
               <Typography variant="caption" color="text.secondary">
                 {t("places.table.governateId")}

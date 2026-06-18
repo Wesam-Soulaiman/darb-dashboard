@@ -23,9 +23,7 @@ const DeleteSchedule = ({ schedule }: DeleteScheduleProps) => {
       confirmLabel={t("common.delete")}
       cancelLabel={t("common.cancel")}
       loading={deleteSchedule.isPending}
-      onConfirm={(selectedSchedule) =>
-        deleteSchedule.mutateAsync(selectedSchedule.id)
-      }
+      onConfirm={(selectedSchedule) => deleteSchedule.mutateAsync(selectedSchedule.id)}
     />
   );
 };

@@ -20,11 +20,7 @@ type NavItemProps = {
   forceOpen?: boolean;
 };
 
-export default function NavItem({
-  item,
-  level = 0,
-  forceOpen = false,
-}: NavItemProps) {
+export default function NavItem({ item, level = 0, forceOpen = false }: NavItemProps) {
   const { t } = useTranslation();
   const theme = useTheme();
   const { pathname } = useLocation();
@@ -50,14 +46,9 @@ export default function NavItem({
         mx: 0.25,
         borderRadius: 3,
         justifyContent: isOpen ? "flex-start" : "center",
-        color: isSelected
-          ? theme.palette.primary.main
-          : theme.palette.text.secondary,
+        color: isSelected ? theme.palette.primary.main : theme.palette.text.secondary,
         backgroundColor: isSelected
-          ? alpha(
-              theme.palette.primary.main,
-              theme.palette.mode === "dark" ? 0.18 : 0.1,
-            )
+          ? alpha(theme.palette.primary.main, theme.palette.mode === "dark" ? 0.18 : 0.1)
           : "transparent",
         "&:hover": {
           color: theme.palette.primary.main,
@@ -109,7 +100,10 @@ export default function NavItem({
 
   if (!isOpen) {
     return (
-      <Tooltip title={t(`sidebar.${item.title}`)} placement={theme.direction === "rtl" ? "left" : "right"}>
+      <Tooltip
+        title={t(`sidebar.${item.title}`)}
+        placement={theme.direction === "rtl" ? "left" : "right"}
+      >
         {button}
       </Tooltip>
     );

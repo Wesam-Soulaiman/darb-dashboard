@@ -9,12 +9,9 @@ import type {
   SignInResponse,
 } from "../../types/auth.types";
 
-export function normalizeAuthResponse(
-  response: RawAuthResponse,
-): SignInResponse {
+export function normalizeAuthResponse(response: RawAuthResponse): SignInResponse {
   const payload = response.data ?? response;
-  const accessToken =
-    payload.accessToken ?? payload.access_token ?? payload.token;
+  const accessToken = payload.accessToken ?? payload.access_token ?? payload.token;
   const refreshToken = payload.refreshToken ?? payload.refresh_token;
   const user = payload.user;
 

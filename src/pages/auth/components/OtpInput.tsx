@@ -69,10 +69,7 @@ export default function OtpInput({
     focusInput(nextIndex);
   };
 
-  const handleKeyDown = (
-    event: KeyboardEvent<HTMLDivElement>,
-    index: number,
-  ) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>, index: number) => {
     const key = event.key;
 
     if (key === "Backspace") {
@@ -117,10 +114,7 @@ export default function OtpInput({
 
     if (!pastedValue) return;
 
-    const nextDigits = Array.from(
-      { length },
-      (_, index) => pastedValue[index] ?? "",
-    );
+    const nextDigits = Array.from({ length }, (_, index) => pastedValue[index] ?? "");
 
     updateValue(nextDigits);
 

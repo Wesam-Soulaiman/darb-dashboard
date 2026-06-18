@@ -13,17 +13,14 @@ import type {
 export const busesQueryKeys = {
   all: ["buses"] as const,
 
-  org: (orgId: number) =>
-    [...busesQueryKeys.all, "organization", orgId] as const,
+  org: (orgId: number) => [...busesQueryKeys.all, "organization", orgId] as const,
 
   lists: (orgId: number) => [...busesQueryKeys.org(orgId), "list"] as const,
   list: (orgId: number, params?: GetBusesParams) =>
     [...busesQueryKeys.lists(orgId), params ?? {}] as const,
 
-  details: (orgId: number) =>
-    [...busesQueryKeys.org(orgId), "details"] as const,
-  detail: (orgId: number, id: number) =>
-    [...busesQueryKeys.details(orgId), id] as const,
+  details: (orgId: number) => [...busesQueryKeys.org(orgId), "details"] as const,
+  detail: (orgId: number, id: number) => [...busesQueryKeys.details(orgId), id] as const,
 };
 
 export const useBuses = (orgId: number, params?: GetBusesParams) => {
@@ -66,8 +63,7 @@ export const useUpdateBus = (orgId: number, id: number) => {
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (payload: UpdateBusPayload) =>
-      busesApi.update(orgId, id, payload),
+    mutationFn: (payload: UpdateBusPayload) => busesApi.update(orgId, id, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: busesQueryKeys.org(orgId),

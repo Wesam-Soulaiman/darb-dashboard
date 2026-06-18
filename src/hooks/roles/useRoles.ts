@@ -14,8 +14,7 @@ import type {
 export const rolesQueryKeys = {
   all: ["roles"] as const,
   lists: () => [...rolesQueryKeys.all, "list"] as const,
-  list: (params?: GetRolesParams) =>
-    [...rolesQueryKeys.lists(), params ?? {}] as const,
+  list: (params?: GetRolesParams) => [...rolesQueryKeys.lists(), params ?? {}] as const,
 };
 
 export const useRoles = (params?: GetRolesParams) => {
@@ -78,9 +77,7 @@ export const useAssignRolePermissions = (id: number) => {
       toast.success(t("roles.toast.permissionsUpdateSuccess"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("roles.toast.permissionsUpdateError")),
-      );
+      toast.error(getApiErrorMessage(error, t("roles.toast.permissionsUpdateError")));
     },
   });
 };
@@ -100,9 +97,7 @@ export const useRemoveRolePermissions = (id: number) => {
       toast.success(t("roles.toast.permissionsUpdateSuccess"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("roles.toast.permissionsUpdateError")),
-      );
+      toast.error(getApiErrorMessage(error, t("roles.toast.permissionsUpdateError")));
     },
   });
 };

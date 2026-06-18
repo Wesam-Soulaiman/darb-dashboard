@@ -1,11 +1,5 @@
 import { useMemo, useState } from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 import type { MRT_ColumnFiltersState } from "material-react-table";
 import { useTranslation } from "react-i18next";
@@ -27,14 +21,9 @@ const getStringFilter = (
   filters: MRT_ColumnFiltersState,
   id: string,
 ): string | undefined => {
-  const value = filters.find(
-    (filter) => filter.id === id,
-  )?.value;
+  const value = filters.find((filter) => filter.id === id)?.value;
 
-  if (
-    typeof value !== "string" ||
-    !value.trim()
-  ) {
+  if (typeof value !== "string" || !value.trim()) {
     return undefined;
   }
 
@@ -45,33 +34,23 @@ const getNumberFilter = (
   filters: MRT_ColumnFiltersState,
   id: string,
 ): number | undefined => {
-  const value = filters.find(
-    (filter) => filter.id === id,
-  )?.value;
+  const value = filters.find((filter) => filter.id === id)?.value;
 
-  if (
-    value === "" ||
-    value === null ||
-    value === undefined
-  ) {
+  if (value === "" || value === null || value === undefined) {
     return undefined;
   }
 
   const parsedValue = Number(value);
 
-  return Number.isFinite(parsedValue)
-    ? parsedValue
-    : undefined;
+  return Number.isFinite(parsedValue) ? parsedValue : undefined;
 };
 
 const SuperAdminUsersPage = () => {
   const { t } = useTranslation();
 
-  const [globalFilter, setGlobalFilter] =
-    useState("");
+  const [globalFilter, setGlobalFilter] = useState("");
 
-  const [columnFilters, setColumnFilters] =
-    useState<MRT_ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([]);
 
   const pagePagination = usePagePagination({
     initialPageSize: 20,
@@ -79,20 +58,13 @@ const SuperAdminUsersPage = () => {
 
   const organizations = useOrganizations();
 
-  const status = getStringFilter(
-    columnFilters,
-    "status",
-  ) as OperationalProfileStatus | undefined;
+  const status = getStringFilter(columnFilters, "status") as
+    | OperationalProfileStatus
+    | undefined;
 
-  const roleName = getStringFilter(
-    columnFilters,
-    "roleName",
-  );
+  const roleName = getStringFilter(columnFilters, "roleName");
 
-  const organizationId = getNumberFilter(
-    columnFilters,
-    "organizationId",
-  );
+  const organizationId = getNumberFilter(columnFilters, "organizationId");
 
   const users = useUsers({
     page: pagePagination.page,
@@ -133,11 +105,7 @@ const SuperAdminUsersPage = () => {
         onFiltersChange={pagePagination.reset}
       />
     ),
-    [
-      columnFilters,
-      organizations.data,
-      pagePagination.reset,
-    ],
+    [columnFilters, organizations.data, pagePagination.reset],
   );
 
   return (
@@ -153,11 +121,7 @@ const SuperAdminUsersPage = () => {
           },
         }}
       >
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ alignItems: "center" }}
-        >
+        <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
           <Box
             sx={{
               width: 52,
@@ -174,10 +138,7 @@ const SuperAdminUsersPage = () => {
           </Box>
 
           <Box>
-            <Typography
-              variant="h4"
-              sx={{ fontWeight: 900 }}
-            >
+            <Typography variant="h4" sx={{ fontWeight: 900 }}>
               {t("users.superAdmin.title")}
             </Typography>
 
@@ -197,9 +158,7 @@ const SuperAdminUsersPage = () => {
           boxShadow: "none",
         }}
       >
-        <CardContent
-          sx={{ p: { xs: 1.5, md: 2 } }}
-        >
+        <CardContent sx={{ p: { xs: 1.5, md: 2 } }}>
           <Table<UserListItem>
             columns={columns}
             data={users.data?.data ?? []}
@@ -217,12 +176,8 @@ const SuperAdminUsersPage = () => {
             ]}
             enablePagination
             manualPagination
-            rowCount={
-              users.data?.meta.total ?? 0
-            }
-            onPaginationChange={
-              pagePagination.onPaginationChange
-            }
+            rowCount={users.data?.meta.total ?? 0}
+            onPaginationChange={pagePagination.onPaginationChange}
             enableGlobalFilter
             manualFiltering
             onGlobalFilterChange={(value) => {
@@ -232,45 +187,27 @@ const SuperAdminUsersPage = () => {
             enableColumnFilters
             onColumnFiltersChange={(updater) => {
               setColumnFilters((current) =>
-                typeof updater === "function"
-                  ? updater(current)
-                  : updater,
+                typeof updater === "function" ? updater(current) : updater,
               );
 
               pagePagination.reset();
             }}
-            mobileSearchFields={[
-              "firstName",
-              "lastName",
-              "phone",
-              "email",
-            ]}
-            mobilePageSize={
-              pagePagination.pagination.pageSize
-            }
+            mobileSearchFields={["firstName", "lastName", "phone", "email"]}
+            mobilePageSize={pagePagination.pagination.pageSize}
             renderMobileCard={renderCard}
             renderMobileFilters={mobileFilters}
             state={{
-              isLoading:
-                users.isLoading ||
-                users.isFetching,
+              isLoading: users.isLoading || users.isFetching,
               showAlertBanner: users.isError,
-              pagination:
-                pagePagination.pagination,
+              pagination: pagePagination.pagination,
               globalFilter,
               columnFilters,
             }}
             isError={users.isError}
             refetch={users.refetch}
-            isRefetching={
-              users.isRefetching
-            }
+            isRefetching={users.isRefetching}
             muiPaginationProps={{
-              rowsPerPageOptions: [
-                10,
-                20,
-                50,
-              ],
+              rowsPerPageOptions: [10, 20, 50],
               showFirstButton: true,
               showLastButton: true,
             }}

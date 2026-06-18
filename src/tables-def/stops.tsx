@@ -52,9 +52,7 @@ export const getStopsTableColumns = ({
         const place = places.find((item) => item.id === row.original.placeId);
 
         return (
-          <Typography component="span">
-            {place?.name ?? row.original.placeId}
-          </Typography>
+          <Typography component="span">{place?.name ?? row.original.placeId}</Typography>
         );
       },
     },
@@ -63,9 +61,7 @@ export const getStopsTableColumns = ({
       header: t("stops.table.coordinates"),
       enableColumnFilter: false,
       Cell: ({ row }) => (
-        <Typography component="span">
-          {getCoordinatesText(row.original)}
-        </Typography>
+        <Typography component="span">{getCoordinatesText(row.original)}</Typography>
       ),
     },
     {

@@ -8,6 +8,5 @@ export const locationQueryKeys = {
 
   governates: (params?: GetGovernatesParams) =>
     [...locationQueryKeys.all, "governates", params ?? {}] as const,
-  governate: (id: number) =>
-    [...locationQueryKeys.all, "governates", id] as const,
+  governate: (id: number) => [...locationQueryKeys.all, "governates", id] as const,
 };

@@ -11,10 +11,7 @@ const CreateRoute = () => {
   const { t } = useTranslation();
   const createRoute = useCreateRoute();
 
-  const handleSubmit = async (
-    values: RouteFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: RouteFormValues, handleClose: () => void) => {
     await createRoute.mutateAsync({
       name: values.name,
       originPlaceId: values.originPlaceId,

@@ -11,8 +11,7 @@ export function getApiErrorMessage(
   fallback = "An unexpected error occurred.",
 ): string {
   if (axios.isAxiosError<ApiErrorResponse>(error)) {
-    const message =
-      error.response?.data?.message || error.response?.data?.error;
+    const message = error.response?.data?.message || error.response?.data?.error;
 
     if (typeof message === "string" && message.trim()) {
       return message;

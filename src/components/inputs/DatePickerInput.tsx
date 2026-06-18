@@ -3,10 +3,7 @@ import { FormControl } from "@mui/material";
 import { DatePicker, type DatePickerProps } from "@mui/x-date-pickers";
 import type { Dayjs } from "dayjs";
 
-type DatePickerInputProps = Omit<
-  DatePickerProps,
-  "value" | "onChange" | "slotProps"
-> & {
+type DatePickerInputProps = Omit<DatePickerProps, "value" | "onChange" | "slotProps"> & {
   name: string;
   label: string;
   value: Dayjs | null;

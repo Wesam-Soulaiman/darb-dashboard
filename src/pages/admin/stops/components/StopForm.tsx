@@ -50,14 +50,10 @@ const StopForm = ({
   const placesData: Place[] = places.data?.data ?? [];
 
   const initialLat =
-    defaultValues?.coordinates?.coordinates?.[1] ??
-    location?.lat ??
-    DEFAULT_CENTER[0];
+    defaultValues?.coordinates?.coordinates?.[1] ?? location?.lat ?? DEFAULT_CENTER[0];
 
   const initialLon =
-    defaultValues?.coordinates?.coordinates?.[0] ??
-    location?.lon ??
-    DEFAULT_CENTER[1];
+    defaultValues?.coordinates?.coordinates?.[0] ?? location?.lon ?? DEFAULT_CENTER[1];
 
   const {
     control,

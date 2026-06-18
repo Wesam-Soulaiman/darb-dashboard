@@ -51,9 +51,7 @@ export const schedulesApi = {
   },
 
   delete: async (orgId: number, id: number) => {
-    await apiClient.delete<void>(
-      `${getOrganizationSchedulesEndpoint(orgId)}/${id}`,
-    );
+    await apiClient.delete<void>(`${getOrganizationSchedulesEndpoint(orgId)}/${id}`);
   },
 
   getExceptions: async (orgId: number, scheduleId: number) => {
@@ -77,11 +75,7 @@ export const schedulesApi = {
     return response.data;
   },
 
-  deleteException: async (
-    orgId: number,
-    scheduleId: number,
-    exceptionId: number,
-  ) => {
+  deleteException: async (orgId: number, scheduleId: number, exceptionId: number) => {
     await apiClient.delete<void>(
       `${getOrganizationSchedulesEndpoint(
         orgId,

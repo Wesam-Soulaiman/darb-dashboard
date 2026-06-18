@@ -19,10 +19,7 @@ const UpdateBus = ({ bus }: UpdateBusProps) => {
   const { t } = useTranslation();
   const updateBus = useUpdateBus(bus.organizationId, bus.id);
 
-  const handleSubmit = async (
-    values: UpdateBusFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: UpdateBusFormValues, handleClose: () => void) => {
     await updateBus.mutateAsync({
       plateNumber: values.plateNumber,
       type: values.type,
@@ -63,9 +60,7 @@ const UpdateBus = ({ bus }: UpdateBusProps) => {
             lastMaintenanceDate: toDateInputValue(bus.lastMaintenanceDate),
             nextMaintenanceDate: toDateInputValue(bus.nextMaintenanceDate),
           }}
-          onSubmit={(values) =>
-            handleSubmit(values as UpdateBusFormValues, handleClose)
-          }
+          onSubmit={(values) => handleSubmit(values as UpdateBusFormValues, handleClose)}
         />
       )}
     </UpdatePopupAction>

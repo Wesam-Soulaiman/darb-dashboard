@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  Divider,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, Divider, Stack, Typography } from "@mui/material";
 import type { TFunction } from "i18next";
 
 import type { Stop } from "../types/stop.types";
@@ -52,15 +46,17 @@ export const getStopsCard = ({ t, places }: StopsCardProps) => {
 
             <Divider />
 
-            <Stack spacing={0.75} direction={{xs: "row"}} sx={{justifyContent: "space-between"}}>
+            <Stack
+              spacing={0.75}
+              direction={{ xs: "row" }}
+              sx={{ justifyContent: "space-between" }}
+            >
               <Stack spacing={0.75}>
                 <Typography variant="caption" color="text.secondary">
                   {t("stops.table.place")}
                 </Typography>
 
-                <Typography variant="body2">
-                  {place?.name ?? stop.placeId}
-                </Typography>
+                <Typography variant="body2">{place?.name ?? stop.placeId}</Typography>
               </Stack>
 
               <Stack spacing={0.75}>

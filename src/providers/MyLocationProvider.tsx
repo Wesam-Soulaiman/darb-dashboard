@@ -37,8 +37,7 @@ const MyLocationProvider = ({
   const [permissionState, setPermissionState] =
     useState<MyLocationPermissionState>("unknown");
 
-  const isSupported =
-    typeof navigator !== "undefined" && "geolocation" in navigator;
+  const isSupported = typeof navigator !== "undefined" && "geolocation" in navigator;
 
   const clearLocationError = useCallback(() => {
     setError(null);
@@ -133,9 +132,7 @@ const MyLocationProvider = ({
   );
 
   return (
-    <MyLocationContext.Provider value={value}>
-      {children}
-    </MyLocationContext.Provider>
+    <MyLocationContext.Provider value={value}>{children}</MyLocationContext.Provider>
   );
 };
 

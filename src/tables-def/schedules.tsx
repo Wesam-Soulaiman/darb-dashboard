@@ -12,14 +12,7 @@ interface SchedulesColumnsProps {
 }
 
 const DAYS: Array<{
-  key:
-    | "monday"
-    | "tuesday"
-    | "wednesday"
-    | "thursday"
-    | "friday"
-    | "saturday"
-    | "sunday";
+  key: "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday";
   labelKey: string;
 }> = [
   { key: "monday", labelKey: "schedules.daysShort.monday" },
@@ -42,9 +35,7 @@ export const getSchedulesTableColumns = ({
       enableColumnFilter: false,
       Cell: ({ row }) => (
         <Stack spacing={0.25}>
-          <Typography sx={{ fontWeight: 900 }}>
-            {row.original.name}
-          </Typography>
+          <Typography sx={{ fontWeight: 900 }}>{row.original.name}</Typography>
         </Stack>
       ),
     },
@@ -105,9 +96,7 @@ export const getSchedulesTableColumns = ({
       ],
       Cell: ({ row }) => (
         <Chip
-          label={
-            row.original.isActive ? t("common.active") : t("common.inactive")
-          }
+          label={row.original.isActive ? t("common.active") : t("common.inactive")}
           color={row.original.isActive ? "success" : "default"}
           size="small"
         />

@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  Chip,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, Chip, Stack, Typography } from "@mui/material";
 import type { TFunction } from "i18next";
 
 import type { Permission } from "../types/permission.types";

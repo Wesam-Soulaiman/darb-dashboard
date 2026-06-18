@@ -16,10 +16,7 @@ const UpdateMyProfile = ({ user }: UpdateMyProfileProps) => {
   const { t } = useTranslation();
   const updateProfile = useUpdateMyProfile();
 
-  const handleSubmit = async (
-    values: MyProfileFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: MyProfileFormValues, handleClose: () => void) => {
     await updateProfile.mutateAsync(values);
 
     handleClose();
@@ -28,11 +25,7 @@ const UpdateMyProfile = ({ user }: UpdateMyProfileProps) => {
   return (
     <PopupButton
       ButtonComponentRender={({ handleOpen }) => (
-        <Button
-          variant="outlined"
-          startIcon={<EditRoundedIcon />}
-          onClick={handleOpen}
-        >
+        <Button variant="outlined" startIcon={<EditRoundedIcon />} onClick={handleOpen}>
           {t("profile.edit")}
         </Button>
       )}

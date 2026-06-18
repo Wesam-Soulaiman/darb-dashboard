@@ -19,13 +19,7 @@ export default function NavItemsRenderer({
       {items.map((item) => {
         switch (item.type) {
           case "group":
-            return (
-              <NavGroup
-                key={item.title}
-                item={item}
-                forceOpen={forceOpen}
-              />
-            );
+            return <NavGroup key={item.title} item={item} forceOpen={forceOpen} />;
 
           case "item":
             return (

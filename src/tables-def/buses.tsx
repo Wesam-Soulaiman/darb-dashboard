@@ -27,9 +27,7 @@ const getStatusColor = (
   }
 };
 
-export const getBusesTableColumns = ({
-  t,
-}: BusesColumnsProps): MRT_ColumnDef<Bus>[] => {
+export const getBusesTableColumns = ({ t }: BusesColumnsProps): MRT_ColumnDef<Bus>[] => {
   return [
     {
       accessorKey: "busCode",
@@ -51,9 +49,7 @@ export const getBusesTableColumns = ({
       enableGlobalFilter: true,
       enableColumnFilter: false,
       Cell: ({ row }) => (
-        <Typography sx={{ fontWeight: 800 }}>
-          {row.original.plateNumber}
-        </Typography>
+        <Typography sx={{ fontWeight: 800 }}>{row.original.plateNumber}</Typography>
       ),
     },
     {

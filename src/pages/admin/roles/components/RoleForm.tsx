@@ -4,10 +4,7 @@ import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import {
-  roleSchema,
-  type RoleFormValues,
-} from "../../../../schemas/roles/roleSchemas";
+import { roleSchema, type RoleFormValues } from "../../../../schemas/roles/roleSchemas";
 
 type RoleFormProps = {
   defaultValues?: Partial<RoleFormValues>;

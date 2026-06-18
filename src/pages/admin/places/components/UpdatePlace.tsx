@@ -42,10 +42,7 @@ const UpdatePlace = ({ place }: UpdatePlaceProps) => {
   const { t } = useTranslation();
   const updatePlace = useUpdatePlace(place.id);
 
-  const handleSubmit = async (
-    values: PlaceFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: PlaceFormValues, handleClose: () => void) => {
     await updatePlace.mutateAsync({
       name: values.name,
       governateId: values.governateId,

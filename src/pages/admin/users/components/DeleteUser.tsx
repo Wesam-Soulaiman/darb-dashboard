@@ -12,8 +12,7 @@ const DeleteUser = ({ user }: DeleteUserProps) => {
   const { t } = useTranslation();
   const deleteUser = useDeleteUser();
 
-  const userName =
-    `${user.firstName} ${user.lastName}`.trim();
+  const userName = `${user.firstName} ${user.lastName}`.trim();
 
   return (
     <DeletePopupAction<UserListItem>

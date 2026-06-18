@@ -24,10 +24,7 @@ type NewPasswordStepProps = {
   onSubmit: (password: string) => Promise<void>;
 };
 
-export default function NewPasswordStep({
-  onBack,
-  onSubmit,
-}: NewPasswordStepProps) {
+export default function NewPasswordStep({ onBack, onSubmit }: NewPasswordStepProps) {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -66,9 +63,7 @@ export default function NewPasswordStep({
             type={passwordInputType}
             autoComplete="new-password"
             error={Boolean(errors.password)}
-            helperText={
-              errors.password?.message ? t(errors.password.message) : " "
-            }
+            helperText={errors.password?.message ? t(errors.password.message) : " "}
             slotProps={{
               input: {
                 startAdornment: (
@@ -108,9 +103,7 @@ export default function NewPasswordStep({
             autoComplete="new-password"
             error={Boolean(errors.confirmPassword)}
             helperText={
-              errors.confirmPassword?.message
-                ? t(errors.confirmPassword.message)
-                : " "
+              errors.confirmPassword?.message ? t(errors.confirmPassword.message) : " "
             }
             slotProps={{
               input: {
@@ -124,9 +117,7 @@ export default function NewPasswordStep({
                     <IconButton
                       edge="end"
                       aria-label={t("auth.actions.togglePassword")}
-                      onClick={() =>
-                        setShowConfirmPassword((value) => !value)
-                      }
+                      onClick={() => setShowConfirmPassword((value) => !value)}
                     >
                       {showConfirmPassword ? (
                         <VisibilityOffRoundedIcon />

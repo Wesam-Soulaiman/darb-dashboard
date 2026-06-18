@@ -49,9 +49,7 @@ type ScheduleExceptionsProps = {
   schedule: Schedule;
 };
 
-const getExceptionColor = (
-  type: ScheduleExceptionType,
-): "success" | "error" => {
+const getExceptionColor = (type: ScheduleExceptionType): "success" | "error" => {
   return type === 1 ? "success" : "error";
 };
 
@@ -114,11 +112,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm<
-    ScheduleExceptionFormInputValues,
-    unknown,
-    ScheduleExceptionFormValues
-  >({
+  } = useForm<ScheduleExceptionFormInputValues, unknown, ScheduleExceptionFormValues>({
     resolver: zodResolver(scheduleExceptionSchema),
     mode: "onChange",
     defaultValues: {
@@ -133,9 +127,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
     return t(message);
   };
 
-  const handleCreateException = async (
-    values: ScheduleExceptionFormValues,
-  ) => {
+  const handleCreateException = async (values: ScheduleExceptionFormValues) => {
     await createException.mutateAsync({
       exceptionDate: values.exceptionDate,
       exceptionType: values.exceptionType as ScheduleExceptionType,
@@ -156,10 +148,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
   const handleDialogClose = (
     event: object,
     reason: "backdropClick" | "escapeKeyDown",
-    originalOnClose?: (
-      event: object,
-      reason: "backdropClick" | "escapeKeyDown",
-    ) => void,
+    originalOnClose?: (event: object, reason: "backdropClick" | "escapeKeyDown") => void,
   ) => {
     if (createException.isPending || deleteException.isPending) {
       return;
@@ -189,9 +178,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
           {...props}
           maxWidth="md"
           fullWidth
-          onClose={(event, reason) =>
-            handleDialogClose(event, reason, props.onClose)
-          }
+          onClose={(event, reason) => handleDialogClose(event, reason, props.onClose)}
           slotProps={{
             paper: {
               sx: {
@@ -209,11 +196,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
               borderColor: "divider",
             }}
           >
-            <Stack
-              direction="row"
-              spacing={1.5}
-              sx={{ alignItems: "center" }}
-            >
+            <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
               <Box
                 sx={{
                   width: 42,
@@ -234,11 +217,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                   {t("schedules.exceptions.title")}
                 </Typography>
 
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  noWrap
-                >
+                <Typography variant="body2" color="text.secondary" noWrap>
                   {schedule.name} — {schedule.serviceCode}
                 </Typography>
               </Box>
@@ -251,7 +230,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
               bgcolor: "background.default",
             }}
           >
-            <Stack spacing={3} sx={{pt: 3}}>
+            <Stack spacing={3} sx={{ pt: 3 }}>
               <Paper
                 component="form"
                 noValidate
@@ -266,17 +245,11 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
               >
                 <Stack spacing={2.5}>
                   <Box>
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ fontWeight: 900 }}
-                    >
+                    <Typography variant="subtitle1" sx={{ fontWeight: 900 }}>
                       {t("schedules.exceptions.addTitle")}
                     </Typography>
 
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                    >
+                    <Typography variant="body2" color="text.secondary">
                       {t("schedules.exceptions.addDescription")}
                     </Typography>
                   </Box>
@@ -302,9 +275,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                           required
                           label={t("schedules.exceptions.form.date")}
                           error={Boolean(errors.exceptionDate)}
-                          helperText={getErrorMessage(
-                            errors.exceptionDate?.message,
-                          )}
+                          helperText={getErrorMessage(errors.exceptionDate?.message)}
                           slotProps={{
                             inputLabel: {
                               shrink: true,
@@ -324,13 +295,9 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                           required
                           label={t("schedules.exceptions.form.type")}
                           value={field.value}
-                          onChange={(event) =>
-                            field.onChange(Number(event.target.value))
-                          }
+                          onChange={(event) => field.onChange(Number(event.target.value))}
                           error={Boolean(errors.exceptionType)}
-                          helperText={getErrorMessage(
-                            errors.exceptionType?.message,
-                          )}
+                          helperText={getErrorMessage(errors.exceptionType?.message)}
                         >
                           <MenuItem value={1}>
                             <Stack
@@ -343,9 +310,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                                 fontSize="small"
                               />
 
-                              <span>
-                                {t("schedules.exceptions.types.1")}
-                              </span>
+                              <span>{t("schedules.exceptions.types.1")}</span>
                             </Stack>
                           </MenuItem>
 
@@ -355,14 +320,9 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                               spacing={1}
                               sx={{ alignItems: "center" }}
                             >
-                              <BlockRoundedIcon
-                                color="error"
-                                fontSize="small"
-                              />
+                              <BlockRoundedIcon color="error" fontSize="small" />
 
-                              <span>
-                                {t("schedules.exceptions.types.2")}
-                              </span>
+                              <span>{t("schedules.exceptions.types.2")}</span>
                             </Stack>
                           </MenuItem>
                         </TextField>
@@ -380,9 +340,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                           minRows={3}
                           maxRows={6}
                           label={t("schedules.exceptions.form.note")}
-                          placeholder={t(
-                            "schedules.exceptions.form.notePlaceholder",
-                          )}
+                          placeholder={t("schedules.exceptions.form.notePlaceholder")}
                           error={Boolean(errors.note)}
                           helperText={
                             getErrorMessage(errors.note?.message) ??
@@ -412,10 +370,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                       variant="contained"
                       startIcon={
                         createException.isPending ? (
-                          <CircularProgress
-                            size={18}
-                            color="inherit"
-                          />
+                          <CircularProgress size={18} color="inherit" />
                         ) : (
                           <AddRoundedIcon />
                         )
@@ -447,17 +402,11 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                   }}
                 >
                   <Box>
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ fontWeight: 900 }}
-                    >
+                    <Typography variant="subtitle1" sx={{ fontWeight: 900 }}>
                       {t("schedules.exceptions.listTitle")}
                     </Typography>
 
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                    >
+                    <Typography variant="body2" color="text.secondary">
                       {t("schedules.exceptions.listDescription")}
                     </Typography>
                   </Box>
@@ -552,10 +501,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                           {t("schedules.exceptions.empty")}
                         </Typography>
 
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                        >
+                        <Typography variant="body2" color="text.secondary">
                           {t("schedules.exceptions.emptyDescription")}
                         </Typography>
                       </Stack>
@@ -579,9 +525,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                         <Box
                           sx={{
                             height: 4,
-                            bgcolor: isAdded
-                              ? "success.main"
-                              : "error.main",
+                            bgcolor: isAdded ? "success.main" : "error.main",
                           }}
                         />
 
@@ -614,12 +558,8 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                                 flexShrink: 0,
                                 display: "grid",
                                 placeItems: "center",
-                                bgcolor: isAdded
-                                  ? "success.light"
-                                  : "error.light",
-                                color: isAdded
-                                  ? "success.dark"
-                                  : "error.dark",
+                                bgcolor: isAdded ? "success.light" : "error.light",
+                                color: isAdded ? "success.dark" : "error.dark",
                               }}
                             >
                               {isAdded ? (
@@ -649,9 +589,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                               >
                                 <Chip
                                   size="medium"
-                                  color={getExceptionColor(
-                                    exception.exceptionType,
-                                  )}
+                                  color={getExceptionColor(exception.exceptionType)}
                                   label={t(
                                     `schedules.exceptions.types.${exception.exceptionType}`,
                                   )}
@@ -662,9 +600,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                                   size="medium"
                                   variant="outlined"
                                   icon={<CalendarMonthRoundedIcon />}
-                                  label={formatDate(
-                                    exception.exceptionDate,
-                                  )}
+                                  label={formatDate(exception.exceptionDate)}
                                 />
                               </Stack>
 
@@ -692,9 +628,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                                   <Typography
                                     variant="body2"
                                     color={
-                                      exception.note
-                                        ? "text.primary"
-                                        : "text.secondary"
+                                      exception.note ? "text.primary" : "text.secondary"
                                     }
                                     sx={{
                                       whiteSpace: "pre-wrap",
@@ -702,10 +636,7 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                                       lineHeight: 1.7,
                                     }}
                                   >
-                                    {exception.note ||
-                                      t(
-                                        "schedules.exceptions.noNote",
-                                      )}
+                                    {exception.note || t("schedules.exceptions.noNote")}
                                   </Typography>
                                 </Stack>
                               </Box>
@@ -718,15 +649,11 @@ const ScheduleExceptions = ({ schedule }: ScheduleExceptionsProps) => {
                                   color: "text.secondary",
                                 }}
                               >
-                                <AccessTimeRoundedIcon
-                                  sx={{ fontSize: 16 }}
-                                />
+                                <AccessTimeRoundedIcon sx={{ fontSize: 16 }} />
 
                                 <Typography variant="caption">
-                                  {t(
-                                    "schedules.exceptions.createdAt",
-                                  )}
-                                  : {formatDateTime(exception.createdAt)}
+                                  {t("schedules.exceptions.createdAt")}:{" "}
+                                  {formatDateTime(exception.createdAt)}
                                 </Typography>
                               </Stack>
                             </Stack>

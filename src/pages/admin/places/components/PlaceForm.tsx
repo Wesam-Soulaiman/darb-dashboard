@@ -34,9 +34,7 @@ type PlaceFormProps = {
 
 const DEFAULT_CENTER: [number, number] = [33.5138, 36.2765];
 
-const resolveResponseData = <T,>(
-  response: T[] | { data: T[] } | undefined,
-): T[] => {
+const resolveResponseData = <T,>(response: T[] | { data: T[] } | undefined): T[] => {
   if (!response) return [];
 
   if (Array.isArray(response)) {
@@ -58,14 +56,10 @@ const PlaceForm = ({
   const countries = useCountries();
 
   const initialLat =
-    defaultValues?.center?.coordinates?.[1] ??
-    location?.lat ??
-    DEFAULT_CENTER[0];
+    defaultValues?.center?.coordinates?.[1] ?? location?.lat ?? DEFAULT_CENTER[0];
 
   const initialLon =
-    defaultValues?.center?.coordinates?.[0] ??
-    location?.lon ??
-    DEFAULT_CENTER[1];
+    defaultValues?.center?.coordinates?.[0] ?? location?.lon ?? DEFAULT_CENTER[1];
 
   const {
     control,
@@ -201,9 +195,7 @@ const PlaceForm = ({
                   helperText={getErrorMessage(errors.governateId?.message)}
                   disabled={governates.isLoading}
                 >
-                  <MenuItem value="">
-                    {t("places.form.selectGovernate")}
-                  </MenuItem>
+                  <MenuItem value="">{t("places.form.selectGovernate")}</MenuItem>
 
                   {governatesData.map((governate) => (
                     <MenuItem key={governate.id} value={governate.id}>
@@ -215,9 +207,7 @@ const PlaceForm = ({
             />
 
             <Stack spacing={1}>
-              <Typography sx={{ fontWeight: 800 }}>
-                {t("places.form.center")}
-              </Typography>
+              <Typography sx={{ fontWeight: 800 }}>{t("places.form.center")}</Typography>
 
               <TextField
                 fullWidth

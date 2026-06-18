@@ -15,8 +15,7 @@ export const routesQueryKeys = {
   all: ["routes"] as const,
 
   lists: () => [...routesQueryKeys.all, "list"] as const,
-  list: (params?: GetRoutesParams) =>
-    [...routesQueryKeys.lists(), params ?? {}] as const,
+  list: (params?: GetRoutesParams) => [...routesQueryKeys.lists(), params ?? {}] as const,
 
   details: () => [...routesQueryKeys.all, "details"] as const,
   detail: (id: string) => [...routesQueryKeys.details(), id] as const,
@@ -84,8 +83,7 @@ export const useUpdateRouteStops = (id: string) => {
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (payload: UpdateRouteStopsPayload) =>
-      routesApi.updateStops(id, payload),
+    mutationFn: (payload: UpdateRouteStopsPayload) => routesApi.updateStops(id, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: routesQueryKeys.all,
@@ -98,9 +96,7 @@ export const useUpdateRouteStops = (id: string) => {
       toast.success(t("routes.stops.toast.updateSuccess"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("routes.stops.toast.updateError")),
-      );
+      toast.error(getApiErrorMessage(error, t("routes.stops.toast.updateError")));
     },
   });
 };

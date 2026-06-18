@@ -26,18 +26,12 @@ export const rolesApi = {
   },
 
   update: async (id: number, payload: UpdateRolePayload) => {
-    const response = await apiClient.patch<Role>(
-      `${ROLES_ENDPOINT}/${id}`,
-      payload,
-    );
+    const response = await apiClient.patch<Role>(`${ROLES_ENDPOINT}/${id}`, payload);
 
     return response.data;
   },
 
-  assignPermissions: async (
-    id: number,
-    payload: UpdateRolePermissionsPayload,
-  ) => {
+  assignPermissions: async (id: number, payload: UpdateRolePermissionsPayload) => {
     const response = await apiClient.post<Role>(
       `${ROLES_ENDPOINT}/${id}/permissions`,
       payload,
@@ -46,16 +40,10 @@ export const rolesApi = {
     return response.data;
   },
 
-  removePermissions: async (
-    id: number,
-    payload: UpdateRolePermissionsPayload,
-  ) => {
-    const response = await apiClient.delete<Role>(
-      `${ROLES_ENDPOINT}/${id}/permissions`,
-      {
-        data: payload,
-      },
-    );
+  removePermissions: async (id: number, payload: UpdateRolePermissionsPayload) => {
+    const response = await apiClient.delete<Role>(`${ROLES_ENDPOINT}/${id}/permissions`, {
+      data: payload,
+    });
 
     return response.data;
   },

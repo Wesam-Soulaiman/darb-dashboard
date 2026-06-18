@@ -6,7 +6,6 @@ import type { ChangePasswordPayload } from "../../types/auth.types";
 export function useChangePassword() {
   return useMutation({
     mutationKey: ["auth", "change-password"],
-    mutationFn: (payload: ChangePasswordPayload) =>
-      authApi.changePassword(payload),
+    mutationFn: (payload: ChangePasswordPayload) => authApi.changePassword(payload),
   });
 }

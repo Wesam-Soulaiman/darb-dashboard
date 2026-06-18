@@ -1,7 +1,4 @@
-import {
-  IconButton,
-  Tooltip,
-} from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
 import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -12,9 +9,7 @@ type ManageTripOperationsProps = {
   trip: Trip;
 };
 
-const ManageTripOperations = ({
-  trip,
-}: ManageTripOperationsProps) => {
+const ManageTripOperations = ({ trip }: ManageTripOperationsProps) => {
   const { t } = useTranslation();
 
   return (

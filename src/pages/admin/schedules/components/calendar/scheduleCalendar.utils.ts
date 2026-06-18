@@ -153,9 +153,7 @@ export const scheduleToDraft = (schedule: Schedule): ScheduleDraft => {
 };
 
 export const getActiveDayIndexes = (schedule: ScheduleDraft) => {
-  return DAYS.filter((day) => schedule[day.key]).map(
-    (day) => day.fullCalendarIndex,
-  );
+  return DAYS.filter((day) => schedule[day.key]).map((day) => day.fullCalendarIndex);
 };
 
 export const getActiveDaysCount = (schedule: ScheduleDraft) => {

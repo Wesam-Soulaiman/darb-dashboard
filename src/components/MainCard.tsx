@@ -133,9 +133,7 @@ export default function MainCard({
                 pb: 2.5,
               },
             },
-            ...(Array.isArray(contentProps?.sx)
-              ? contentProps.sx
-              : [contentProps?.sx]),
+            ...(Array.isArray(contentProps?.sx) ? contentProps.sx : [contentProps?.sx]),
           ]}
         >
           {children}

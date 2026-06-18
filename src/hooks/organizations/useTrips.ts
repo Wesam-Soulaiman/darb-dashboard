@@ -1,8 +1,4 @@
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
@@ -20,46 +16,25 @@ import type {
 export const tripsQueryKeys = {
   all: ["trips"] as const,
 
-  org: (orgId: number) =>
-    [...tripsQueryKeys.all, "organization", orgId] as const,
+  org: (orgId: number) => [...tripsQueryKeys.all, "organization", orgId] as const,
 
-  lists: (orgId: number) =>
-    [...tripsQueryKeys.org(orgId), "list"] as const,
+  lists: (orgId: number) => [...tripsQueryKeys.org(orgId), "list"] as const,
 
   list: (orgId: number, params?: GetTripsParams) =>
-    [
-      ...tripsQueryKeys.lists(orgId),
-      params ?? {},
-    ] as const,
+    [...tripsQueryKeys.lists(orgId), params ?? {}] as const,
 
-  details: (orgId: number) =>
-    [...tripsQueryKeys.org(orgId), "details"] as const,
+  details: (orgId: number) => [...tripsQueryKeys.org(orgId), "details"] as const,
 
   detail: (orgId: number, tripId: number) =>
-    [
-      ...tripsQueryKeys.details(orgId),
-      tripId,
-    ] as const,
+    [...tripsQueryKeys.details(orgId), tripId] as const,
 
-  preview: (
-    orgId: number,
-    tripId: number,
-    date: string,
-  ) =>
-    [
-      ...tripsQueryKeys.detail(orgId, tripId),
-      "preview",
-      date,
-    ] as const,
+  preview: (orgId: number, tripId: number, date: string) =>
+    [...tripsQueryKeys.detail(orgId, tripId), "preview", date] as const,
 };
 
-const isValidId = (value: number) =>
-  Number.isFinite(value) && value > 0;
+const isValidId = (value: number) => Number.isFinite(value) && value > 0;
 
-export const useTrips = (
-  orgId: number,
-  params?: GetTripsParams,
-) => {
+export const useTrips = (orgId: number, params?: GetTripsParams) => {
   return useQuery({
     queryKey: tripsQueryKeys.list(orgId, params),
     queryFn: () => tripsApi.getAll(orgId, params),
@@ -67,22 +42,11 @@ export const useTrips = (
   });
 };
 
-export const useTrip = (
-  orgId: number,
-  tripId?: number,
-  enabled = true,
-) => {
+export const useTrip = (orgId: number, tripId?: number, enabled = true) => {
   return useQuery({
-    queryKey: tripsQueryKeys.detail(
-      orgId,
-      tripId as number,
-    ),
-    queryFn: () =>
-      tripsApi.getById(orgId, tripId as number),
-    enabled:
-      enabled &&
-      isValidId(orgId) &&
-      isValidId(Number(tripId)),
+    queryKey: tripsQueryKeys.detail(orgId, tripId as number),
+    queryFn: () => tripsApi.getById(orgId, tripId as number),
+    enabled: enabled && isValidId(orgId) && isValidId(Number(tripId)),
   });
 };
 
@@ -91,8 +55,7 @@ export const useCreateTrip = (orgId: number) => {
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (payload: CreateTripPayload) =>
-      tripsApi.create(orgId, payload),
+    mutationFn: (payload: CreateTripPayload) => tripsApi.create(orgId, payload),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -103,26 +66,17 @@ export const useCreateTrip = (orgId: number) => {
     },
 
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(
-          error,
-          t("trips.toast.createError"),
-        ),
-      );
+      toast.error(getApiErrorMessage(error, t("trips.toast.createError")));
     },
   });
 };
 
-export const useUpdateTrip = (
-  orgId: number,
-  tripId: number,
-) => {
+export const useUpdateTrip = (orgId: number, tripId: number) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (payload: UpdateTripPayload) =>
-      tripsApi.update(orgId, tripId, payload),
+    mutationFn: (payload: UpdateTripPayload) => tripsApi.update(orgId, tripId, payload),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -137,12 +91,7 @@ export const useUpdateTrip = (
     },
 
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(
-          error,
-          t("trips.toast.updateError"),
-        ),
-      );
+      toast.error(getApiErrorMessage(error, t("trips.toast.updateError")));
     },
   });
 };
@@ -152,8 +101,7 @@ export const useDeleteTrip = (orgId: number) => {
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (tripId: number) =>
-      tripsApi.delete(orgId, tripId),
+    mutationFn: (tripId: number) => tripsApi.delete(orgId, tripId),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -164,32 +112,18 @@ export const useDeleteTrip = (orgId: number) => {
     },
 
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(
-          error,
-          t("trips.toast.deleteError"),
-        ),
-      );
+      toast.error(getApiErrorMessage(error, t("trips.toast.deleteError")));
     },
   });
 };
 
-export const useReplaceTripStopTimes = (
-  orgId: number,
-  tripId: number,
-) => {
+export const useReplaceTripStopTimes = (orgId: number, tripId: number) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (
-      payload: ReplaceTripStopTimesPayload,
-    ) =>
-      tripsApi.replaceStopTimes(
-        orgId,
-        tripId,
-        payload,
-      ),
+    mutationFn: (payload: ReplaceTripStopTimesPayload) =>
+      tripsApi.replaceStopTimes(orgId, tripId, payload),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -200,38 +134,22 @@ export const useReplaceTripStopTimes = (
         queryKey: tripsQueryKeys.detail(orgId, tripId),
       });
 
-      toast.success(
-        t("trips.stopTimes.toast.updateSuccess"),
-      );
+      toast.success(t("trips.stopTimes.toast.updateSuccess"));
     },
 
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(
-          error,
-          t("trips.stopTimes.toast.updateError"),
-        ),
-      );
+      toast.error(getApiErrorMessage(error, t("trips.stopTimes.toast.updateError")));
     },
   });
 };
 
-export const useReplaceTripFrequencies = (
-  orgId: number,
-  tripId: number,
-) => {
+export const useReplaceTripFrequencies = (orgId: number, tripId: number) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (
-      payload: ReplaceTripFrequenciesPayload,
-    ) =>
-      tripsApi.replaceFrequencies(
-        orgId,
-        tripId,
-        payload,
-      ),
+    mutationFn: (payload: ReplaceTripFrequenciesPayload) =>
+      tripsApi.replaceFrequencies(orgId, tripId, payload),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -242,18 +160,11 @@ export const useReplaceTripFrequencies = (
         queryKey: tripsQueryKeys.detail(orgId, tripId),
       });
 
-      toast.success(
-        t("trips.frequencies.toast.updateSuccess"),
-      );
+      toast.success(t("trips.frequencies.toast.updateSuccess"));
     },
 
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(
-          error,
-          t("trips.frequencies.toast.updateError"),
-        ),
-      );
+      toast.error(getApiErrorMessage(error, t("trips.frequencies.toast.updateError")));
     },
   });
 };
@@ -265,19 +176,10 @@ export const useTripPreviewTimes = (
   enabled = true,
 ) => {
   return useQuery({
-    queryKey: tripsQueryKeys.preview(
-      orgId,
-      tripId,
-      date,
-    ),
+    queryKey: tripsQueryKeys.preview(orgId, tripId, date),
 
-    queryFn: () =>
-      tripsApi.previewTimes(orgId, tripId, date),
+    queryFn: () => tripsApi.previewTimes(orgId, tripId, date),
 
-    enabled:
-      enabled &&
-      isValidId(orgId) &&
-      isValidId(tripId) &&
-      Boolean(date.trim()),
+    enabled: enabled && isValidId(orgId) && isValidId(tripId) && Boolean(date.trim()),
   });
 };

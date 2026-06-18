@@ -29,10 +29,7 @@ const UpdateOrganization = ({ organization }: UpdateOrganizationProps) => {
   };
 
   return (
-    <UpdatePopupAction
-      title={t("organizations.editTitle")}
-      tooltip={t("common.edit")}
-    >
+    <UpdatePopupAction title={t("organizations.editTitle")} tooltip={t("common.edit")}>
       {({ handleClose }) => (
         <OrganizationForm
           mode="update"

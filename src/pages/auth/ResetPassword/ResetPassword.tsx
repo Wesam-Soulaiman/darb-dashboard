@@ -195,10 +195,7 @@ export default function ResetPassword() {
       ) : null}
 
       {step === "password" ? (
-        <NewPasswordStep
-          onBack={() => setStep("otp")}
-          onSubmit={handleSaveNewPassword}
-        />
+        <NewPasswordStep onBack={() => setStep("otp")} onSubmit={handleSaveNewPassword} />
       ) : null}
 
       {step === "success" ? (
@@ -218,10 +215,7 @@ export default function ResetPassword() {
               placeItems: "center",
               color: theme.palette.success.contrastText,
               backgroundColor: theme.palette.success.main,
-              boxShadow: `0 20px 45px ${alpha(
-                theme.palette.success.main,
-                0.25,
-              )}`,
+              boxShadow: `0 20px 45px ${alpha(theme.palette.success.main, 0.25)}`,
             })}
           >
             <CheckCircleRoundedIcon fontSize="large" />

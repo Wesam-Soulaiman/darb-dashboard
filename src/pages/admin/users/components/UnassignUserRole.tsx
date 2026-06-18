@@ -23,10 +23,7 @@ type UnassignUserRoleProps = {
   roles: UserRoleSummary[];
 };
 
-const UnassignUserRole = ({
-  userId,
-  roles,
-}: UnassignUserRoleProps) => {
+const UnassignUserRole = ({ userId, roles }: UnassignUserRoleProps) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [selectedRoleId, setSelectedRoleId] = useState<number | "">("");
@@ -80,15 +77,8 @@ const UnassignUserRole = ({
         </span>
       </Tooltip>
 
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        maxWidth="xs"
-        fullWidth
-      >
-        <DialogTitle>
-          {t("users.organizationUsers.removeRole")}
-        </DialogTitle>
+      <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
+        <DialogTitle>{t("users.organizationUsers.removeRole")}</DialogTitle>
 
         <DialogContent dividers>
           <Stack spacing={2}>
@@ -102,9 +92,7 @@ const UnassignUserRole = ({
               required
               label={t("users.organizationUsers.roleName")}
               value={selectedRoleId}
-              onChange={(event) =>
-                setSelectedRoleId(Number(event.target.value))
-              }
+              onChange={(event) => setSelectedRoleId(Number(event.target.value))}
             >
               {roles.map((role) => (
                 <MenuItem key={role.id} value={role.id}>
@@ -124,10 +112,7 @@ const UnassignUserRole = ({
         </DialogContent>
 
         <DialogActions>
-          <Button
-            onClick={handleClose}
-            disabled={unassignRole.isPending}
-          >
+          <Button onClick={handleClose} disabled={unassignRole.isPending}>
             {t("common.cancel")}
           </Button>
 

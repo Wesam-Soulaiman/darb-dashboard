@@ -94,10 +94,7 @@ const ChangePasswordPage = () => {
                   {t("auth.changePassword.title")}
                 </Typography>
 
-                <Typography
-                  color="text.secondary"
-                  sx={{ textAlign: "center" }}
-                >
+                <Typography color="text.secondary" sx={{ textAlign: "center" }}>
                   {t("auth.changePassword.subtitle")}
                 </Typography>
               </Stack>
@@ -119,9 +116,7 @@ const ChangePasswordPage = () => {
                         type="password"
                         label={t("auth.changePassword.currentPassword")}
                         error={Boolean(errors.currentPassword)}
-                        helperText={getErrorMessage(
-                          errors.currentPassword?.message,
-                        )}
+                        helperText={getErrorMessage(errors.currentPassword?.message)}
                       />
                     )}
                   />
@@ -153,9 +148,7 @@ const ChangePasswordPage = () => {
                         type="password"
                         label={t("auth.changePassword.confirmPassword")}
                         error={Boolean(errors.confirmPassword)}
-                        helperText={getErrorMessage(
-                          errors.confirmPassword?.message,
-                        )}
+                        helperText={getErrorMessage(errors.confirmPassword?.message)}
                       />
                     )}
                   />

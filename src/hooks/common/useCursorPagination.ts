@@ -20,9 +20,9 @@ export const useCursorPagination = ({
 }: UseCursorPaginationArgs = {}) => {
   const [cursor, setCursor] = useState<string | undefined>(undefined);
 
-  const [cursorHistory, setCursorHistory] = useState<Array<string | undefined>>(
-    [undefined],
-  );
+  const [cursorHistory, setCursorHistory] = useState<Array<string | undefined>>([
+    undefined,
+  ]);
 
   const [pagination, setPagination] = useState<MRT_PaginationState>({
     pageIndex: 0,
@@ -45,18 +45,13 @@ export const useCursorPagination = ({
   );
 
   const getPaginationProps = useCallback(
-    ({
-      dataLength,
-      hasNextPage = false,
-      nextCursor,
-    }: GetPaginationPropsArgs) => {
+    ({ dataLength, hasNextPage = false, nextCursor }: GetPaginationPropsArgs) => {
       const rowCount = hasNextPage
         ? (pagination.pageIndex + 2) * pagination.pageSize
         : pagination.pageIndex * pagination.pageSize + dataLength;
 
       const onPaginationChange = (updater: PaginationUpdater) => {
-        const next =
-          typeof updater === "function" ? updater(pagination) : updater;
+        const next = typeof updater === "function" ? updater(pagination) : updater;
 
         const pageSizeChanged = next.pageSize !== pagination.pageSize;
 

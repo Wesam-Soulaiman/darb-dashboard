@@ -8,7 +8,7 @@ import {
   IconButton,
   Tooltip,
 } from "@mui/material";
-import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import type { IconButtonProps } from "@mui/material";
 
 import PopupButton from "../PopupButton";

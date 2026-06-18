@@ -69,9 +69,9 @@ const ManageOrganizationRoutes = ({
   const removeRoute = useRemoveOrganizationRoute(organization.id);
 
   const [selectedRoute, setSelectedRoute] = useState<TransitRoute | null>(null);
-  const [organizationRoutes, setOrganizationRoutes] = useState<
-    OrganizationRoute[]
-  >(organization.orgRoutes ?? []);
+  const [organizationRoutes, setOrganizationRoutes] = useState<OrganizationRoute[]>(
+    organization.orgRoutes ?? [],
+  );
 
   useEffect(() => {
     setOrganizationRoutes(organization.orgRoutes ?? []);
@@ -88,8 +88,7 @@ const ManageOrganizationRoutes = ({
     return allRoutes.filter((route) => !assignedRouteIds.has(route.id));
   }, [allRoutes, assignedRouteIds]);
 
-  const loading =
-    routes.isLoading || assignRoute.isPending || removeRoute.isPending;
+  const loading = routes.isLoading || assignRoute.isPending || removeRoute.isPending;
 
   const syncRoutes = (updatedRoutes: OrganizationRoute[]) => {
     setOrganizationRoutes(updatedRoutes);
@@ -128,17 +127,10 @@ const ManageOrganizationRoutes = ({
       ) : null}
 
       {routes.isError ? (
-        <LoadingDataError
-          refetch={routes.refetch}
-          loading={routes.isRefetching}
-        />
+        <LoadingDataError refetch={routes.refetch} loading={routes.isRefetching} />
       ) : (
         <>
-          <Stack
-            direction={{ xs: "column" }}
-            spacing={1}
-            sx={{ alignItems: "stretch" }}
-          >
+          <Stack direction={{ xs: "column" }} spacing={1} sx={{ alignItems: "stretch" }}>
             <Autocomplete
               fullWidth
               options={availableRoutes}

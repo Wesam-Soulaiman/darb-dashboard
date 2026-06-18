@@ -116,10 +116,7 @@ export function saveAuthSession({
   setEncryptedItem(AUTH_USER_KEY, JSON.stringify(user));
 }
 
-export function updateAuthTokens(
-  accessToken: string,
-  refreshToken: string,
-): void {
+export function updateAuthTokens(accessToken: string, refreshToken: string): void {
   setEncryptedItem(ACCESS_TOKEN_KEY, accessToken);
   setEncryptedItem(REFRESH_TOKEN_KEY, refreshToken);
 }

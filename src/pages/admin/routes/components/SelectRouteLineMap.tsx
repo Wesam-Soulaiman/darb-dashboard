@@ -14,21 +14,14 @@ import MapRoundedIcon from "@mui/icons-material/MapRounded";
 import DeleteSweepRoundedIcon from "@mui/icons-material/DeleteSweepRounded";
 import UndoRoundedIcon from "@mui/icons-material/UndoRounded";
 import L from "leaflet";
-import {
-  MapContainer,
-  Marker,
-  Polyline,
-  TileLayer,
-  useMapEvents,
-} from "react-leaflet";
+import { MapContainer, Marker, Polyline, TileLayer, useMapEvents } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 
 import "leaflet/dist/leaflet.css";
 
 const defaultIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
@@ -51,11 +44,7 @@ type SelectRouteLineMapProps = {
 
 const DEFAULT_CENTER: MapPoint = [33.5138, 36.2765];
 
-const LineClickHandler = ({
-  onAddPoint,
-}: {
-  onAddPoint: (point: MapPoint) => void;
-}) => {
+const LineClickHandler = ({ onAddPoint }: { onAddPoint: (point: MapPoint) => void }) => {
   useMapEvents({
     click(event) {
       onAddPoint([event.latlng.lat, event.latlng.lng]);
@@ -65,10 +54,7 @@ const LineClickHandler = ({
   return null;
 };
 
-const SelectRouteLineMap = ({
-  points,
-  onSelectLine,
-}: SelectRouteLineMapProps) => {
+const SelectRouteLineMap = ({ points, onSelectLine }: SelectRouteLineMapProps) => {
   const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
@@ -126,15 +112,10 @@ const SelectRouteLineMap = ({
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            {draftPoints.length > 1 && (
-              <Polyline positions={draftPoints} />
-            )}
+            {draftPoints.length > 1 && <Polyline positions={draftPoints} />}
 
             {draftPoints.map((point, index) => (
-              <Marker
-                key={`${point[0]}-${point[1]}-${index}`}
-                position={point}
-              />
+              <Marker key={`${point[0]}-${point[1]}-${index}`} position={point} />
             ))}
 
             <LineClickHandler
@@ -175,9 +156,7 @@ const SelectRouteLineMap = ({
             </Stack>
 
             <Stack direction="row" spacing={1}>
-              <Button onClick={handleClose}>
-                {t("common.cancel")}
-              </Button>
+              <Button onClick={handleClose}>{t("common.cancel")}</Button>
 
               <Button
                 variant="contained"

@@ -18,10 +18,7 @@ import AltRouteRoundedIcon from "@mui/icons-material/AltRouteRounded";
 import { useTranslation } from "react-i18next";
 import LoadingDataError from "../../../../components/LoadingDataError";
 import { useStops } from "../../../../hooks/locations/useStops";
-import {
-  useRoute,
-  useUpdateRouteStops,
-} from "../../../../hooks/locations/useRoutes";
+import { useRoute, useUpdateRouteStops } from "../../../../hooks/locations/useRoutes";
 import type { Stop } from "../../../../types/stop.types";
 import type { TransitRoute } from "../../../../types/route.types";
 
@@ -38,9 +35,7 @@ const getStopLabel = (stop: Stop) => {
   return stop.name || stop.id;
 };
 
-const getInitialStopsFromRoute = (
-  routeDetails?: TransitRoute,
-): SelectedRouteStop[] => {
+const getInitialStopsFromRoute = (routeDetails?: TransitRoute): SelectedRouteStop[] => {
   return [...(routeDetails?.routeNodes ?? [])]
     .sort((a, b) => a.ordering - b.ordering)
     .map((routeNode) => ({
@@ -111,10 +106,7 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
         return current.filter((item) => item.stopId !== stopId);
       }
 
-      const maxOrdering = current.reduce(
-        (max, item) => Math.max(max, item.ordering),
-        0,
-      );
+      const maxOrdering = current.reduce((max, item) => Math.max(max, item.ordering), 0);
 
       return [
         ...current,
@@ -169,8 +161,7 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
     setOpen(false);
   };
 
-  const loading =
-    stops.isLoading || routeDetails.isLoading || updateRouteStops.isPending;
+  const loading = stops.isLoading || routeDetails.isLoading || updateRouteStops.isPending;
 
   const hasError = stops.isError || routeDetails.isError;
 
@@ -274,11 +265,7 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
                             {getStopLabel(stop)}
                           </Typography>
 
-                          <Typography
-                            noWrap
-                            variant="caption"
-                            color="text.secondary"
-                          >
+                          <Typography noWrap variant="caption" color="text.secondary">
                             {stop.id}
                           </Typography>
                         </Box>
@@ -323,11 +310,7 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
             {t("common.cancel")}
           </Button>
 
-          <Button
-            variant="contained"
-            onClick={handleSave}
-            disabled={loading || hasError}
-          >
+          <Button variant="contained" onClick={handleSave} disabled={loading || hasError}>
             {updateRouteStops.isPending ? t("common.saving") : t("common.save")}
           </Button>
         </DialogActions>

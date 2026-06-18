@@ -21,10 +21,7 @@ type UsersCardOptions = {
   organizations?: Organization[];
 };
 
-const getInitials = (
-  firstName?: string,
-  lastName?: string,
-) => {
+const getInitials = (firstName?: string, lastName?: string) => {
   const first = firstName?.trim()?.[0] ?? "";
   const last = lastName?.trim()?.[0] ?? "";
 
@@ -47,10 +44,7 @@ export const getUsersCard = ({
   organizations = [],
 }: UsersCardOptions) => {
   const organizationNameById = new Map(
-    organizations.map((organization) => [
-      organization.id,
-      organization.name,
-    ]),
+    organizations.map((organization) => [organization.id, organization.name]),
   );
 
   return (user: UserListItem) => (
@@ -64,11 +58,7 @@ export const getUsersCard = ({
     >
       <CardContent>
         <Stack spacing={2}>
-          <Stack
-            direction="row"
-            spacing={1.5}
-            sx={{ alignItems: "center" }}
-          >
+          <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
             <ViewUserDetails
               userId={user.id}
               renderTrigger={({ open }) => (
@@ -93,11 +83,7 @@ export const getUsersCard = ({
                 {user.firstName} {user.lastName}
               </Typography>
 
-              <Typography
-                noWrap
-                variant="body2"
-                color="text.secondary"
-              >
+              <Typography noWrap variant="body2" color="text.secondary">
                 {user.email}
               </Typography>
 
@@ -110,9 +96,7 @@ export const getUsersCard = ({
               size="small"
               color={user.isActive ? "success" : "default"}
               label={
-                user.isActive
-                  ? t("users.details.active")
-                  : t("users.details.inactive")
+                user.isActive ? t("users.details.active") : t("users.details.inactive")
               }
             />
           </Stack>
@@ -127,8 +111,8 @@ export const getUsersCard = ({
 
               <Typography sx={{ fontWeight: 700 }}>
                 {user.organizationId
-                  ? organizationNameById.get(user.organizationId) ??
-                    `#${user.organizationId}`
+                  ? (organizationNameById.get(user.organizationId) ??
+                    `#${user.organizationId}`)
                   : t("users.form.noOrganization")}
               </Typography>
             </Stack>
@@ -139,19 +123,10 @@ export const getUsersCard = ({
               {t("users.organizationUsers.roleName")}
             </Typography>
 
-            <Stack
-              direction="row"
-              spacing={0.75}
-              sx={{ flexWrap: "wrap", gap: 0.75 }}
-            >
+            <Stack direction="row" spacing={0.75} sx={{ flexWrap: "wrap", gap: 0.75 }}>
               {user.roles.length ? (
                 user.roles.map((role) => (
-                  <Chip
-                    key={role.id}
-                    label={role.name}
-                    size="small"
-                    variant="outlined"
-                  />
+                  <Chip key={role.id} label={role.name} size="small" variant="outlined" />
                 ))
               ) : (
                 <Typography variant="body2" color="text.secondary">
@@ -221,10 +196,7 @@ export const getUsersCard = ({
               #{user.id}
             </Typography>
 
-            <UserActions
-              user={user}
-              isSuperAdmin={isSuperAdmin}
-            />
+            <UserActions user={user} isSuperAdmin={isSuperAdmin} />
           </Stack>
         </Stack>
       </CardContent>

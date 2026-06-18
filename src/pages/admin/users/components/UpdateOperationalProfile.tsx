@@ -1,10 +1,4 @@
-import {
-  Tooltip,
-  IconButton,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
+import { Tooltip, IconButton, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded";
 import { useTranslation } from "react-i18next";
 
@@ -18,13 +12,10 @@ type UpdateOperationalProfileProps = {
   user: UserListItem;
 };
 
-const UpdateOperationalProfile = ({
-  user,
-}: UpdateOperationalProfileProps) => {
+const UpdateOperationalProfile = ({ user }: UpdateOperationalProfileProps) => {
   const { t } = useTranslation();
 
-  const updateProfile =
-    useUpdateOperationalProfile(user.id);
+  const updateProfile = useUpdateOperationalProfile(user.id);
 
   const handleSubmit = async (
     values: OperationalProfileFormValues,
@@ -33,10 +24,8 @@ const UpdateOperationalProfile = ({
     await updateProfile.mutateAsync({
       hireDate: values.hireDate || undefined,
       status: values.status,
-      licenseNumber:
-        values.licenseNumber || undefined,
-      licenseExpiry:
-        values.licenseExpiry || undefined,
+      licenseNumber: values.licenseNumber || undefined,
+      licenseExpiry: values.licenseExpiry || undefined,
     });
 
     handleClose();
@@ -46,24 +35,22 @@ const UpdateOperationalProfile = ({
     <PopupButton
       ButtonComponentRender={({ handleOpen }) => (
         <Tooltip title={t("users.organizationUsers.profile")}>
-            <span>
-              <IconButton
-                size="small"
-                color="info"
-                onClick={handleOpen}
-                disabled={updateProfile.isPending}
-                aria-label={t("users.organizationUsers.profile")}
-              >
-                <BadgeRoundedIcon fontSize="small" />
-              </IconButton>
-            </span>
-          </Tooltip>
+          <span>
+            <IconButton
+              size="small"
+              color="info"
+              onClick={handleOpen}
+              disabled={updateProfile.isPending}
+              aria-label={t("users.organizationUsers.profile")}
+            >
+              <BadgeRoundedIcon fontSize="small" />
+            </IconButton>
+          </span>
+        </Tooltip>
       )}
       DialogRender={({ props, handleClose }) => (
         <Dialog {...props} maxWidth="sm" fullWidth>
-          <DialogTitle>
-            {t("users.organizationUsers.profile")}
-          </DialogTitle>
+          <DialogTitle>{t("users.organizationUsers.profile")}</DialogTitle>
 
           <DialogContent dividers>
             <OperationalProfileForm
@@ -75,9 +62,7 @@ const UpdateOperationalProfile = ({
               }}
               loading={updateProfile.isPending}
               submitLabel={t("common.save")}
-              onSubmit={(values) =>
-                handleSubmit(values, handleClose)
-              }
+              onSubmit={(values) => handleSubmit(values, handleClose)}
             />
           </DialogContent>
         </Dialog>

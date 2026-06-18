@@ -13,10 +13,7 @@ import { useTranslation } from "react-i18next";
 import type { MRT_ColumnFiltersState } from "material-react-table";
 
 import Table from "../../../components/Table";
-import {
-  getPlacesTableColumns,
-  type PlaceTableRow,
-} from "../../../tables-def/places";
+import { getPlacesTableColumns, type PlaceTableRow } from "../../../tables-def/places";
 import { getPlacesCard } from "../../../card-def/places";
 import { usePlaces } from "../../../hooks/locations/usePlaces";
 import { useCursorPagination } from "../../../hooks/common/useCursorPagination";
@@ -28,12 +25,9 @@ import type { Country } from "../../../types/country.types";
 import type { Governate } from "../../../types/governate.types";
 import PlacesMapDialog from "./components/PlacesMapDialog";
 
-
 const DEFAULT_PLACES_LIMIT = 20;
 
-const resolveResponseData = <T,>(
-  response: T[] | { data: T[] } | undefined,
-): T[] => {
+const resolveResponseData = <T,>(response: T[] | { data: T[] } | undefined): T[] => {
   if (!response) return [];
 
   if (Array.isArray(response)) {
@@ -43,10 +37,7 @@ const resolveResponseData = <T,>(
   return response.data;
 };
 
-const getFilterValue = (
-  filters: MRT_ColumnFiltersState,
-  id: string,
-): string => {
+const getFilterValue = (filters: MRT_ColumnFiltersState, id: string): string => {
   const value = filters.find((filter) => filter.id === id)?.value;
 
   if (typeof value === "string") {
@@ -64,8 +55,7 @@ const PlacesPage = () => {
   const { t } = useTranslation();
 
   const [search, setSearch] = useState("");
-  const [columnFilters, setColumnFilters] =
-    useState<MRT_ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([]);
 
   const cursorPagination = useCursorPagination({
     initialPageSize: DEFAULT_PLACES_LIMIT,
@@ -78,9 +68,7 @@ const PlacesPage = () => {
   const selectedCountryIdValue = getFilterValue(columnFilters, "countryId");
   const selectedGovernateIdValue = getFilterValue(columnFilters, "governateId");
 
-  const countryId = selectedCountryIdValue
-    ? Number(selectedCountryIdValue)
-    : undefined;
+  const countryId = selectedCountryIdValue ? Number(selectedCountryIdValue) : undefined;
 
   const governateId = selectedGovernateIdValue
     ? Number(selectedGovernateIdValue)
@@ -168,29 +156,29 @@ const PlacesPage = () => {
     cursorPagination.reset();
   };
 
-    const updateMobileFilter = (id: "countryId" | "governateId", value: string) => {
-  setColumnFilters((current) => {
-    const withoutCurrent = current.filter((filter) => filter.id !== id);
+  const updateMobileFilter = (id: "countryId" | "governateId", value: string) => {
+    setColumnFilters((current) => {
+      const withoutCurrent = current.filter((filter) => filter.id !== id);
 
-    let next = value
-      ? [
-          ...withoutCurrent,
-          {
-            id,
-            value,
-          },
-        ]
-      : withoutCurrent;
+      let next = value
+        ? [
+            ...withoutCurrent,
+            {
+              id,
+              value,
+            },
+          ]
+        : withoutCurrent;
 
-    if (id === "countryId") {
-      next = next.filter((filter) => filter.id !== "governateId");
-    }
+      if (id === "countryId") {
+        next = next.filter((filter) => filter.id !== "governateId");
+      }
 
-    return next;
-  });
+      return next;
+    });
 
-  cursorPagination.reset();
-};
+    cursorPagination.reset();
+  };
   return (
     <Stack spacing={3}>
       <Stack
@@ -222,40 +210,38 @@ const PlacesPage = () => {
               {t("places.title")}
             </Typography>
 
-            <Typography color="text.secondary">
-              {t("places.subtitle")}
-            </Typography>
+            <Typography color="text.secondary">{t("places.subtitle")}</Typography>
           </Box>
         </Stack>
 
         <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={1.5}
-            sx={{
-                alignItems: { xs: "stretch", sm: "center" },
+          direction={{ xs: "column", sm: "row" }}
+          spacing={1.5}
+          sx={{
+            alignItems: { xs: "stretch", sm: "center" },
+          }}
+        >
+          <PlacesMapDialog
+            places={tableData}
+            loading={places.isLoading || places.isFetching}
+            pageIndex={tablePagination.pagination.pageIndex}
+            hasNextPage={Boolean(places.data?.meta.hasNextPage)}
+            hasPreviousPage={tablePagination.pagination.pageIndex > 0}
+            onNextPage={() => {
+              tablePagination.onPaginationChange((current) => ({
+                ...current,
+                pageIndex: current.pageIndex + 1,
+              }));
             }}
-            >
-            <PlacesMapDialog
-                places={tableData}
-                loading={places.isLoading || places.isFetching}
-                pageIndex={tablePagination.pagination.pageIndex}
-                hasNextPage={Boolean(places.data?.meta.hasNextPage)}
-                hasPreviousPage={tablePagination.pagination.pageIndex > 0}
-                onNextPage={() => {
-                    tablePagination.onPaginationChange((current) => ({
-                    ...current,
-                    pageIndex: current.pageIndex + 1,
-                    }));
-                }}
-                onPreviousPage={() => {
-                    tablePagination.onPaginationChange((current) => ({
-                    ...current,
-                    pageIndex: Math.max(0, current.pageIndex - 1),
-                    }));
-                }}
-                />
+            onPreviousPage={() => {
+              tablePagination.onPaginationChange((current) => ({
+                ...current,
+                pageIndex: Math.max(0, current.pageIndex - 1),
+              }));
+            }}
+          />
 
-            <CreatePlace />
+          <CreatePlace />
         </Stack>
       </Stack>
 
@@ -286,54 +272,54 @@ const PlacesPage = () => {
             mobilePageSize={cursorPagination.pagination.pageSize}
             renderMobileCard={renderPlaceCard}
             renderMobileFilters={
-                <Stack spacing={1.5}>
-                    <TextField
-                    select
-                    fullWidth
-                    size="small"
-                    label={t("places.filters.country")}
-                    value={selectedCountryIdValue}
-                    onChange={(event) => {
-                        updateMobileFilter("countryId", event.target.value);
-                    }}
-                    disabled={countries.isLoading}
-                    >
-                    <MenuItem value="">{t("places.filters.allCountries")}</MenuItem>
+              <Stack spacing={1.5}>
+                <TextField
+                  select
+                  fullWidth
+                  size="small"
+                  label={t("places.filters.country")}
+                  value={selectedCountryIdValue}
+                  onChange={(event) => {
+                    updateMobileFilter("countryId", event.target.value);
+                  }}
+                  disabled={countries.isLoading}
+                >
+                  <MenuItem value="">{t("places.filters.allCountries")}</MenuItem>
 
-                    {countriesData.map((country) => (
-                        <MenuItem key={country.id} value={String(country.id)}>
-                        {country.name}
-                        </MenuItem>
-                    ))}
-                    </TextField>
+                  {countriesData.map((country) => (
+                    <MenuItem key={country.id} value={String(country.id)}>
+                      {country.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
 
-                    <TextField
-                    select
-                    fullWidth
-                    size="small"
-                    label={t("places.filters.governate")}
-                    value={selectedGovernateIdValue}
-                    onChange={(event) => {
-                        updateMobileFilter("governateId", event.target.value);
-                    }}
-                    disabled={governates.isLoading}
-                    >
-                    <MenuItem value="">{t("places.filters.allGovernates")}</MenuItem>
+                <TextField
+                  select
+                  fullWidth
+                  size="small"
+                  label={t("places.filters.governate")}
+                  value={selectedGovernateIdValue}
+                  onChange={(event) => {
+                    updateMobileFilter("governateId", event.target.value);
+                  }}
+                  disabled={governates.isLoading}
+                >
+                  <MenuItem value="">{t("places.filters.allGovernates")}</MenuItem>
 
-                    {governatesData.map((governate) => (
-                        <MenuItem key={governate.id} value={String(governate.id)}>
-                        {governate.name}
-                        </MenuItem>
-                    ))}
-                    </TextField>
-                </Stack>
+                  {governatesData.map((governate) => (
+                    <MenuItem key={governate.id} value={String(governate.id)}>
+                      {governate.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Stack>
             }
             state={{
               isLoading:
-              places.isLoading ||
-              places.isFetching ||
-              countries.isLoading ||
-              governates.isLoading,
+                places.isLoading ||
+                places.isFetching ||
+                countries.isLoading ||
+                governates.isLoading,
               showAlertBanner: places.isError,
               pagination: tablePagination.pagination,
               globalFilter: search,

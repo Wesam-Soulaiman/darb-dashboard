@@ -12,8 +12,7 @@ export const useChangeMyPassword = () => {
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (payload: ChangeMyPasswordPayload) =>
-      authApi.changeMyPassword(payload),
+    mutationFn: (payload: ChangeMyPasswordPayload) => authApi.changeMyPassword(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: usersQueryKeys.me(),
@@ -22,9 +21,7 @@ export const useChangeMyPassword = () => {
       toast.success(t("auth.changePassword.toast.success"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("auth.changePassword.toast.error")),
-      );
+      toast.error(getApiErrorMessage(error, t("auth.changePassword.toast.error")));
     },
   });
 };

@@ -41,9 +41,7 @@ export const getPlacesTableColumns = ({
       size: 80,
       enableColumnFilter: false,
       enableGlobalFilter: false,
-      Cell: ({ row }) => (
-        <Typography component="span">{row.original.id}</Typography>
-      ),
+      Cell: ({ row }) => <Typography component="span">{row.original.id}</Typography>,
     },
     {
       accessorKey: "name",
@@ -67,15 +65,9 @@ export const getPlacesTableColumns = ({
       enableColumnFilter: true,
       enableSorting: false,
       Cell: ({ row }) => {
-        const country = countries.find(
-          (item) => item.id === row.original.countryId,
-        );
+        const country = countries.find((item) => item.id === row.original.countryId);
 
-        return (
-          <Typography component="span">
-            {country?.name ?? "-"}
-          </Typography>
-        );
+        return <Typography component="span">{country?.name ?? "-"}</Typography>;
       },
     },
     {
@@ -89,9 +81,7 @@ export const getPlacesTableColumns = ({
       enableColumnFilter: true,
       enableSorting: false,
       Cell: ({ row }) => {
-        const governate = governates.find(
-          (item) => item.id === row.original.governateId,
-        );
+        const governate = governates.find((item) => item.id === row.original.governateId);
 
         return (
           <Typography component="span">

@@ -63,9 +63,7 @@ const AssignUserRoleForm = ({
     <Card variant="outlined" sx={{ borderColor: "divider", boxShadow: "none" }}>
       <CardContent>
         {availableRoles.length === 0 ? (
-          <Alert severity="info">
-            {t("users.organizationUsers.allRolesAssigned")}
-          </Alert>
+          <Alert severity="info">{t("users.organizationUsers.allRolesAssigned")}</Alert>
         ) : (
           <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2.5}>

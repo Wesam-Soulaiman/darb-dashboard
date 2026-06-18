@@ -59,9 +59,7 @@ const hexAlphaToRgb = (value?: string | null): RGBColor => {
     r: Number.parseInt(color.slice(1, 3), 16),
     g: Number.parseInt(color.slice(3, 5), 16),
     b: Number.parseInt(color.slice(5, 7), 16),
-    a: Number(
-      (Number.parseInt(color.slice(7, 9), 16) / 255).toFixed(2),
-    ),
+    a: Number((Number.parseInt(color.slice(7, 9), 16) / 255).toFixed(2)),
   };
 };
 
@@ -96,9 +94,7 @@ const ColorPickerField = ({
   name,
 }: ColorPickerFieldProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const [internalColor, setInternalColor] = useState(() =>
-    normalizeHexAlphaColor(value),
-  );
+  const [internalColor, setInternalColor] = useState(() => normalizeHexAlphaColor(value));
 
   const open = Boolean(anchorEl);
 
@@ -157,8 +153,7 @@ const ColorPickerField = ({
                     bgcolor: internalColor,
                     border: "2px solid",
                     borderColor: "background.paper",
-                    boxShadow: (theme) =>
-                      `0 0 0 1px ${theme.palette.divider}`,
+                    boxShadow: (theme) => `0 0 0 1px ${theme.palette.divider}`,
                   }}
                 />
               </InputAdornment>
@@ -232,9 +227,7 @@ const ColorPickerField = ({
               />
 
               <Box>
-                <Typography sx={{ fontWeight: 900, lineHeight: 1.2 }}>
-                  {label}
-                </Typography>
+                <Typography sx={{ fontWeight: 900, lineHeight: 1.2 }}>{label}</Typography>
 
                 <Typography variant="caption" color="text.secondary">
                   {baseColor} · Alpha {alphaPercent}%

@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardContent,
-  Chip,
-  Divider,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, Chip, Divider, Stack, Typography } from "@mui/material";
 import type { TFunction } from "i18next";
 
 import type { Role } from "../types/role.types";
@@ -74,26 +67,24 @@ export const getRolesCard = ({ t }: RolesCardProps) => {
               justifyContent: "space-between",
             }}
           >
-          <Stack spacing={0.75}>
-            <Typography variant="caption" color="text.secondary">
-              {t("roles.table.description")}
-            </Typography>
+            <Stack spacing={0.75}>
+              <Typography variant="caption" color="text.secondary">
+                {t("roles.table.description")}
+              </Typography>
 
-            <Typography variant="body2">
-              {role.description || "-"}
-            </Typography>
-          </Stack>
+              <Typography variant="body2">{role.description || "-"}</Typography>
+            </Stack>
 
-          <Stack spacing={0.75}>
-            <Typography variant="caption" color="text.secondary">
-              {t("roles.table.createdAt")}
-            </Typography>
+            <Stack spacing={0.75}>
+              <Typography variant="caption" color="text.secondary">
+                {t("roles.table.createdAt")}
+              </Typography>
 
-            <Typography variant="body2">
-              {role.createdAt
-                ? new Date(role.createdAt).toLocaleDateString("ar-SY")
-                : "-"}
-            </Typography>
+              <Typography variant="body2">
+                {role.createdAt
+                  ? new Date(role.createdAt).toLocaleDateString("ar-SY")
+                  : "-"}
+              </Typography>
             </Stack>
           </Stack>
 

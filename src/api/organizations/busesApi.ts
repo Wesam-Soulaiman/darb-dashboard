@@ -7,8 +7,7 @@ import type {
   UpdateBusPayload,
 } from "../../types/bus.types";
 
-const getOrganizationBusesEndpoint = (orgId: number) =>
-  `/organizations/${orgId}/buses`;
+const getOrganizationBusesEndpoint = (orgId: number) => `/organizations/${orgId}/buses`;
 
 export const busesApi = {
   getAll: async (orgId: number, params?: GetBusesParams) => {
@@ -49,8 +48,6 @@ export const busesApi = {
   },
 
   delete: async (orgId: number, id: number) => {
-    await apiClient.delete<void>(
-      `${getOrganizationBusesEndpoint(orgId)}/${id}`,
-    );
+    await apiClient.delete<void>(`${getOrganizationBusesEndpoint(orgId)}/${id}`);
   },
 };

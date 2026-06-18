@@ -27,9 +27,5 @@ export default function RTLProvider({ children }: RTLProviderProps) {
   const { i18n } = useTranslation();
   const isRtl = isArabicLanguage(i18n.resolvedLanguage || i18n.language);
 
-  return (
-    <CacheProvider value={isRtl ? rtlCache : ltrCache}>
-      {children}
-    </CacheProvider>
-  );
+  return <CacheProvider value={isRtl ? rtlCache : ltrCache}>{children}</CacheProvider>;
 }

@@ -44,13 +44,9 @@ type UpdateOrganizationFormProps = {
   onSubmit: (values: UpdateOrganizationFormValues) => Promise<void> | void;
 };
 
-type OrganizationFormProps =
-  | CreateOrganizationFormProps
-  | UpdateOrganizationFormProps;
+type OrganizationFormProps = CreateOrganizationFormProps | UpdateOrganizationFormProps;
 
-type OrganizationFormValues =
-  | CreateOrganizationFormValues
-  | UpdateOrganizationFormValues;
+type OrganizationFormValues = CreateOrganizationFormValues | UpdateOrganizationFormValues;
 
 const OrganizationForm = ({
   mode,
@@ -60,8 +56,7 @@ const OrganizationForm = ({
 }: OrganizationFormProps) => {
   const { t } = useTranslation();
 
-  const schema =
-    mode === "create" ? createOrganizationSchema : updateOrganizationSchema;
+  const schema = mode === "create" ? createOrganizationSchema : updateOrganizationSchema;
 
   const {
     control,
@@ -141,11 +136,7 @@ const OrganizationForm = ({
               }}
             >
               <Stack spacing={1.5} sx={{ width: { xs: "100%", md: 300 } }}>
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  sx={{ alignItems: "center" }}
-                >
+                <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
                   <ImageRoundedIcon color="primary" />
 
                   <Typography variant="subtitle1" sx={{ fontWeight: 800 }}>
@@ -283,8 +274,7 @@ const OrganizationForm = ({
                       label={t("organizations.form.codeName")}
                       error={Boolean(errors.codeName)}
                       helperText={
-                        codeNameErrorMessage ||
-                        t("organizations.form.codeNameHint")
+                        codeNameErrorMessage || t("organizations.form.codeNameHint")
                       }
                     />
                   )}
@@ -301,9 +291,7 @@ const OrganizationForm = ({
                     type="submit"
                     variant="contained"
                     startIcon={<SaveRoundedIcon />}
-                    disabled={
-                      !isValid || loading || (mode === "update" && !isDirty)
-                    }
+                    disabled={!isValid || loading || (mode === "update" && !isDirty)}
                   >
                     {loading ? t("common.saving") : submitLabel}
                   </Button>

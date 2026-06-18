@@ -11,10 +11,7 @@ const CreateStop = () => {
   const { t } = useTranslation();
   const createStop = useCreateStop();
 
-  const handleSubmit = async (
-    values: StopFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: StopFormValues, handleClose: () => void) => {
     await createStop.mutateAsync({
       name: values.name,
       placeId: values.placeId,

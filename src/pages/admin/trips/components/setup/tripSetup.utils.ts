@@ -28,10 +28,7 @@ export const gtfsTimeToSeconds = (value: string) => {
     return 0;
   }
 
-  const [hours, minutes, seconds] = value
-    .trim()
-    .split(":")
-    .map(Number);
+  const [hours, minutes, seconds] = value.trim().split(":").map(Number);
 
   return hours * 3600 + minutes * 60 + seconds;
 };
@@ -49,11 +46,7 @@ export const secondsToGtfsTime = (totalSeconds: number) => {
   )}:${String(seconds).padStart(2, "0")}`;
 };
 
-const normalizePositiveNumber = (
-  value: number,
-  fallback: number,
-  allowZero = true,
-) => {
+const normalizePositiveNumber = (value: number, fallback: number, allowZero = true) => {
   const parsedValue = Number(value);
 
   if (!Number.isFinite(parsedValue)) {
@@ -67,17 +60,12 @@ const normalizePositiveNumber = (
   return Math.max(1, parsedValue);
 };
 
-const getDurationMinutes = (
-  startTime: string,
-  endTime: string,
-  fallback: number,
-) => {
+const getDurationMinutes = (startTime: string, endTime: string, fallback: number) => {
   if (!isValidGtfsTime(startTime) || !isValidGtfsTime(endTime)) {
     return fallback;
   }
 
-  const difference =
-    (gtfsTimeToSeconds(endTime) - gtfsTimeToSeconds(startTime)) / 60;
+  const difference = (gtfsTimeToSeconds(endTime) - gtfsTimeToSeconds(startTime)) / 60;
 
   if (!Number.isFinite(difference) || difference < 0) {
     return fallback;
@@ -91,16 +79,11 @@ const getRouteNodeName = (routeNode: RouteNode) => {
 };
 
 export const createFrequencyWindowId = () => {
-  if (
-    typeof crypto !== "undefined" &&
-    typeof crypto.randomUUID === "function"
-  ) {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
     return crypto.randomUUID();
   }
 
-  return `frequency-${Date.now()}-${Math.random()
-    .toString(36)
-    .slice(2, 10)}`;
+  return `frequency-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 };
 
 export const buildTripSetupStops = (
@@ -173,10 +156,8 @@ export const buildTripSetupStops = (
       departureTime,
       travelMinutesFromPrevious,
       dwellMinutes,
-      pickupType: (existingStop?.pickupType ??
-        0) as GtfsPickupDropOffType,
-      dropOffType: (existingStop?.dropOffType ??
-        0) as GtfsPickupDropOffType,
+      pickupType: (existingStop?.pickupType ?? 0) as GtfsPickupDropOffType,
+      dropOffType: (existingStop?.dropOffType ?? 0) as GtfsPickupDropOffType,
       timepoint: (existingStop?.timepoint ?? 1) as GtfsTimepoint,
     };
   });
@@ -198,15 +179,9 @@ export const regenerateTripStopTimes = (
     const travelMinutes =
       index === 0
         ? 0
-        : normalizePositiveNumber(
-            stop.travelMinutesFromPrevious,
-            defaultTravelMinutes,
-          );
+        : normalizePositiveNumber(stop.travelMinutesFromPrevious, defaultTravelMinutes);
 
-    const dwellMinutes = normalizePositiveNumber(
-      stop.dwellMinutes,
-      defaultDwellMinutes,
-    );
+    const dwellMinutes = normalizePositiveNumber(stop.dwellMinutes, defaultDwellMinutes);
 
     const arrivalSeconds =
       index === 0
@@ -243,9 +218,7 @@ export const regenerateTripStopTimesFromIndex = (
 
     const previousStop = stops[index - 1];
 
-    const previousDeparture = gtfsTimeToSeconds(
-      previousStop.departureTime,
-    );
+    const previousDeparture = gtfsTimeToSeconds(previousStop.departureTime);
 
     const travelMinutes = normalizePositiveNumber(
       stop.travelMinutesFromPrevious,
@@ -316,14 +289,13 @@ export const mapStopsToPayload = (
   };
 };
 
-export const createDefaultFrequencyWindow =
-  (): TripSetupFrequencyWindow => ({
-    clientId: createFrequencyWindowId(),
-    startTime: "06:00:00",
-    endTime: "09:00:00",
-    headwayMinutes: 10,
-    exactTimes: true,
-  });
+export const createDefaultFrequencyWindow = (): TripSetupFrequencyWindow => ({
+  clientId: createFrequencyWindowId(),
+  startTime: "06:00:00",
+  endTime: "09:00:00",
+  headwayMinutes: 10,
+  exactTimes: true,
+});
 
 export const buildFrequencyWindows = (
   frequencies: TripFrequency[],
@@ -332,10 +304,7 @@ export const buildFrequencyWindows = (
     clientId: createFrequencyWindowId(),
     startTime: frequency.startTime,
     endTime: frequency.endTime,
-    headwayMinutes: Math.max(
-      1,
-      Math.round(frequency.headwaySecs / 60),
-    ),
+    headwayMinutes: Math.max(1, Math.round(frequency.headwaySecs / 60)),
     exactTimes: Boolean(frequency.exactTimes),
   }));
 };
@@ -354,20 +323,16 @@ export const mapFrequencyWindowsToPayload = (
     frequencies: windows.map((window) => ({
       startTime: window.startTime.trim(),
       endTime: window.endTime.trim(),
-      headwaySecs:
-        normalizePositiveNumber(window.headwayMinutes, 1, false) * 60,
+      headwaySecs: normalizePositiveNumber(window.headwayMinutes, 1, false) * 60,
       exactTimes: window.exactTimes,
     })),
   };
 };
 
-const hasOverlappingFrequencyWindows = (
-  windows: TripSetupFrequencyWindow[],
-) => {
+const hasOverlappingFrequencyWindows = (windows: TripSetupFrequencyWindow[]) => {
   const sortedWindows = [...windows].sort(
     (first, second) =>
-      gtfsTimeToSeconds(first.startTime) -
-      gtfsTimeToSeconds(second.startTime),
+      gtfsTimeToSeconds(first.startTime) - gtfsTimeToSeconds(second.startTime),
   );
 
   return sortedWindows.some((window, index) => {
@@ -377,10 +342,7 @@ const hasOverlappingFrequencyWindows = (
       return false;
     }
 
-    return (
-      gtfsTimeToSeconds(window.endTime) >
-      gtfsTimeToSeconds(nextWindow.startTime)
-    );
+    return gtfsTimeToSeconds(window.endTime) > gtfsTimeToSeconds(nextWindow.startTime);
   });
 };
 
@@ -399,17 +361,11 @@ export const validateTripSetup = (
   }
 
   const hasInvalidStopTimes = enabledStops.some((stop) => {
-    if (
-      !isValidGtfsTime(stop.arrivalTime) ||
-      !isValidGtfsTime(stop.departureTime)
-    ) {
+    if (!isValidGtfsTime(stop.arrivalTime) || !isValidGtfsTime(stop.departureTime)) {
       return true;
     }
 
-    return (
-      gtfsTimeToSeconds(stop.departureTime) <
-      gtfsTimeToSeconds(stop.arrivalTime)
-    );
+    return gtfsTimeToSeconds(stop.departureTime) < gtfsTimeToSeconds(stop.arrivalTime);
   });
 
   if (hasInvalidStopTimes) {
@@ -427,8 +383,7 @@ export const validateTripSetup = (
     }
 
     return (
-      gtfsTimeToSeconds(nextStop.arrivalTime) <
-      gtfsTimeToSeconds(stop.departureTime)
+      gtfsTimeToSeconds(nextStop.arrivalTime) < gtfsTimeToSeconds(stop.departureTime)
     );
   });
 
@@ -453,17 +408,11 @@ export const validateTripSetup = (
   }
 
   const hasInvalidFrequency = windows.some((window) => {
-    if (
-      !isValidGtfsTime(window.startTime) ||
-      !isValidGtfsTime(window.endTime)
-    ) {
+    if (!isValidGtfsTime(window.startTime) || !isValidGtfsTime(window.endTime)) {
       return true;
     }
 
-    if (
-      gtfsTimeToSeconds(window.endTime) <=
-      gtfsTimeToSeconds(window.startTime)
-    ) {
+    if (gtfsTimeToSeconds(window.endTime) <= gtfsTimeToSeconds(window.startTime)) {
       return true;
     }
 
@@ -493,8 +442,6 @@ export const cloneTripSetupStops = (stops: TripSetupStop[]) => {
   return stops.map((stop) => ({ ...stop }));
 };
 
-export const cloneFrequencyWindows = (
-  windows: TripSetupFrequencyWindow[],
-) => {
+export const cloneFrequencyWindows = (windows: TripSetupFrequencyWindow[]) => {
   return windows.map((window) => ({ ...window }));
 };

@@ -16,10 +16,7 @@ import EventAvailableRoundedIcon from "@mui/icons-material/EventAvailableRounded
 import { useTranslation } from "react-i18next";
 
 import type { ScheduleExceptionType } from "../../../../../types/schedule.types";
-import type {
-  ExceptionDraft,
-  UpdateExceptionDraft,
-} from "./scheduleCalendar.types";
+import type { ExceptionDraft, UpdateExceptionDraft } from "./scheduleCalendar.types";
 
 type ScheduleExceptionDialogProps = {
   open: boolean;
@@ -165,9 +162,7 @@ const ScheduleExceptionDialog = ({
               disabled={loading}
               sx={{ borderRadius: 2, minWidth: 150 }}
             >
-              {loading
-                ? t("common.saving")
-                : t("schedules.exceptions.actions.add")}
+              {loading ? t("common.saving") : t("schedules.exceptions.actions.add")}
             </Button>
           </Stack>
         </Stack>

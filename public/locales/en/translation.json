@@ -202,7 +202,8 @@
       "stops": "Stops",
       "routes": "Routes",
       "trips": "Trips",
-      "schedules": "Schedules"
+      "schedules": "Schedules",
+      "runs": "Daily Operations"
     },
     "dashboard": "Dashboard",
     "home": "Home",
@@ -254,6 +255,102 @@
     "min2Stops": "Add at least two stops",
     "uniqueStopSequence": "Stop sequence must be unique",
     "endTimeAfterStartTime": "End time must be after start time"
+  },
+  "runs": {
+    "title": "Daily Operations",
+    "subtitle": "Create and manage actual operational departures for each route",
+    "noOrganizationTitle": "No organization selected",
+    "noOrganizationMessage": "A valid organization is required to view and manage daily operations.",
+    "routesLoadError": "Could not load the routes assigned to this organization.",
+    "loadError": "Could not load the runs for the selected date.",
+    "optionsLoadError": "Some driver or bus data could not be loaded. Assignment options may be incomplete.",
+    "actions": {
+      "today": "Back to today",
+      "backToOrganization": "Back to organization",
+      "manageRuns": "Manage Daily Operations",
+      "createForRoute": "Create route operations",
+      "creatingForRoute": "Creating operations...",
+      "editAssignment": "Edit assignment",
+      "confirm": "Confirm operation",
+      "confirming": "Confirming...",
+      "track": "Live tracking"
+    },
+    "filters": {
+      "date": "Operating date",
+      "showFinished": "Show completed and cancelled runs"
+    },
+    "status": {
+      "draft": "Draft",
+      "confirmed": "Confirmed",
+      "in_progress": "In progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "stats": {
+      "title": "Daily statistics",
+      "total": "Total",
+      "draft": "Draft",
+      "confirmed": "Confirmed",
+      "inProgress": "In progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "loadError": "Could not load run statistics."
+    },
+    "route": {
+      "description": "Operational departures for this route",
+      "runCount_one": "{{count}} run",
+      "runCount_other": "{{count}} runs"
+    },
+    "card": {
+      "headsign": "Trip headsign",
+      "driver": "Driver",
+      "bus": "Bus",
+      "unassignedDriver": "No driver assigned",
+      "unassignedBus": "No bus assigned",
+      "assignmentMissing": "A driver and bus must be assigned before confirming this run.",
+      "waitingForStart": "This run is confirmed and ready. Waiting for the driver or bus device to start it."
+    },
+    "assignment": {
+      "title": "Assign driver and bus",
+      "description": "Update the assignment for the {{time}} departure heading to {{headsign}}.",
+      "currentDriver": "Current driver",
+      "currentBus": "Current bus",
+      "driver": "Driver",
+      "bus": "Bus",
+      "selectDriver": "Select a driver",
+      "selectBus": "Select a bus",
+      "driverHint": "Select the driver responsible for this run.",
+      "busHint": "Select the bus that will operate this run.",
+      "optionsUnavailable": "At least one driver and one bus are required to complete the assignment.",
+      "save": "Save assignment"
+    },
+    "confirm": {
+      "missingAssignment": "The run cannot be confirmed until both a driver and bus are assigned."
+    },
+    "delete": {
+      "title": "Delete run",
+      "message": "Are you sure you want to delete the {{time}} run heading to “{{headsign}}”? Only draft runs can be deleted.",
+      "tooltip": "Delete run"
+    },
+    "empty": {
+      "title": "No runs for this route",
+      "description": "Use the create route operations button to generate departures for the selected date.",
+      "noRoutesTitle": "No routes available",
+      "noRoutesDescription": "At least one route must be assigned to this organization before creating daily operations."
+    },
+    "tracking": {
+      "comingSoon": "Live tracking will be enabled after location and Socket support are implemented."
+    },
+    "toast": {
+      "createSuccess": "Route operations were created successfully",
+      "createError": "Could not create route operations",
+      "updateSuccess": "Run assignment updated successfully",
+      "updateError": "Could not update the run assignment",
+      "confirmSuccess": "Run confirmed successfully",
+      "confirmError": "Could not confirm the run",
+      "deleteSuccess": "Draft run deleted successfully",
+      "deleteError": "Could not delete the run"
+    }
   },
   "trips": {
     "title": "Trips",

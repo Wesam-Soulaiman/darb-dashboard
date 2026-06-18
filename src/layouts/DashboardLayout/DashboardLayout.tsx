@@ -36,9 +36,7 @@ export default function DashboardLayout({
   const matchDownLg = useMediaQuery(theme.breakpoints.down("lg"));
 
   const desktopOpen = useSidebarStore((state) => state.desktopOpen);
-  const toggleDesktopSidebar = useSidebarStore(
-    (state) => state.toggleDesktopSidebar,
-  );
+  const toggleDesktopSidebar = useSidebarStore((state) => state.toggleDesktopSidebar);
   const openMobileSidebar = useSidebarStore((state) => state.openMobileSidebar);
 
   const handleMenuClick = () => {

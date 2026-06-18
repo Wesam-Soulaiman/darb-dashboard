@@ -11,9 +11,7 @@ export const countriesApi = {
   },
 
   getCountry: async (id: number) => {
-    const { data } = await apiClient.get<Country>(
-      `${COUNTRIES_ENDPOINT}/${id}`,
-    );
+    const { data } = await apiClient.get<Country>(`${COUNTRIES_ENDPOINT}/${id}`);
 
     return data;
   },

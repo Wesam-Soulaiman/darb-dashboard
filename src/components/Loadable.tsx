@@ -22,11 +22,7 @@ function LoadingFallback() {
           placeItems: "center",
         }}
       >
-        <CircularProgress
-          size={76}
-          thickness={3}
-          sx={{ position: "absolute" }}
-        />
+        <CircularProgress size={76} thickness={3} sx={{ position: "absolute" }} />
 
         <DirectionsBusRoundedIcon color="primary" fontSize="large" />
       </Box>

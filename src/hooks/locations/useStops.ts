@@ -14,8 +14,7 @@ export const stopsQueryKeys = {
   all: ["stops"] as const,
 
   lists: () => [...stopsQueryKeys.all, "list"] as const,
-  list: (params?: GetStopsParams) =>
-    [...stopsQueryKeys.lists(), params ?? {}] as const,
+  list: (params?: GetStopsParams) => [...stopsQueryKeys.lists(), params ?? {}] as const,
 
   details: () => [...stopsQueryKeys.all, "details"] as const,
   detail: (id: string) => [...stopsQueryKeys.details(), id] as const,

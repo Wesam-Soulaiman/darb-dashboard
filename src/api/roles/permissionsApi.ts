@@ -5,8 +5,7 @@ const PERMISSIONS_ENDPOINT = "/permissions";
 
 export const permissionsApi = {
   getAll: async () => {
-    const response =
-      await apiClient.get<PermissionsResponse>(PERMISSIONS_ENDPOINT);
+    const response = await apiClient.get<PermissionsResponse>(PERMISSIONS_ENDPOINT);
 
     return response.data.data;
   },

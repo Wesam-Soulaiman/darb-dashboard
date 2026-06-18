@@ -21,9 +21,7 @@ export default function Sidebar({ items = [] }: SidebarProps) {
 
   const desktopOpen = useSidebarStore((state) => state.desktopOpen);
   const mobileOpen = useSidebarStore((state) => state.mobileOpen);
-  const closeMobileSidebar = useSidebarStore(
-    (state) => state.closeMobileSidebar,
-  );
+  const closeMobileSidebar = useSidebarStore((state) => state.closeMobileSidebar);
 
   const matchDownLg = useMediaQuery(theme.breakpoints.down("lg"));
 
@@ -31,7 +29,7 @@ export default function Sidebar({ items = [] }: SidebarProps) {
   const isRtl = language.startsWith("ar");
   const drawerAnchor = isRtl ? "right" : "left";
   const direction = i18n.language === "ar" ? "rtl" : "ltr";
-  
+
   useEffect(() => {
     closeMobileSidebar();
   }, [location.pathname, closeMobileSidebar]);
@@ -86,14 +84,14 @@ export default function Sidebar({ items = [] }: SidebarProps) {
         disableSwipeToOpen
         ModalProps={{
           keepMounted: false,
-          container: getFullscreenContainer
+          container: getFullscreenContainer,
         }}
         slotProps={{
           paper: {
             sx: (theme) => ({
-                  boxSizing: "border-box",
-                borderRadius:0,
-                width: drawerWidth,
+              boxSizing: "border-box",
+              borderRadius: 0,
+              width: drawerWidth,
               backgroundImage: "none",
               backgroundColor: theme.palette.custom.sidebar,
               overflowX: "hidden",

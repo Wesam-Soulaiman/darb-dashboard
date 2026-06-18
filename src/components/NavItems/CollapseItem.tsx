@@ -23,10 +23,7 @@ type CollapseItemProps = {
   forceOpen?: boolean;
 };
 
-export default function CollapseItem({
-  item,
-  forceOpen = false,
-}: CollapseItemProps) {
+export default function CollapseItem({ item, forceOpen = false }: CollapseItemProps) {
   const { t } = useTranslation();
   const theme = useTheme();
 
@@ -40,7 +37,10 @@ export default function CollapseItem({
   if (!isOpen) {
     return (
       <Box>
-        <Tooltip title={t(`sidebar.${item.title}`)} placement={theme.direction === "rtl" ? "left" : "right"}>
+        <Tooltip
+          title={t(`sidebar.${item.title}`)}
+          placement={theme.direction === "rtl" ? "left" : "right"}
+        >
           <ListItemButton
             sx={(theme) => ({
               minHeight: 46,

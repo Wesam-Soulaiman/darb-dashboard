@@ -40,9 +40,7 @@ const OrganizationProfilePage = () => {
   const params = useParams();
 
   const organizationId = Number(params.id);
-  const safeOrganizationId = Number.isFinite(organizationId)
-    ? organizationId
-    : 0;
+  const safeOrganizationId = Number.isFinite(organizationId) ? organizationId : 0;
 
   const organization = useOrganization(safeOrganizationId);
   const [orgRoutes, setOrgRoutes] = useState<OrganizationRoute[]>([]);
@@ -307,12 +305,12 @@ const OrganizationProfilePage = () => {
                 </Box>
 
                 <ManageOrganizationRoutes
-                    variant="embedded"
-                    organization={{
-                        ...currentOrganization,
-                        orgRoutes,
-                    }}
-                    onRoutesChange={setOrgRoutes}
+                  variant="embedded"
+                  organization={{
+                    ...currentOrganization,
+                    orgRoutes,
+                  }}
+                  onRoutesChange={setOrgRoutes}
                 />
               </Stack>
             </CardContent>

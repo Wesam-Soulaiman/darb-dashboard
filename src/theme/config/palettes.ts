@@ -189,9 +189,7 @@ export const palettes: Record<PaletteKey, PaletteFactory> = {
       cardBorder: isDark ? "rgba(255,255,255,0.08)" : "rgba(15,23,42,0.08)",
       hover: isDark ? "rgba(110,220,148,0.10)" : "rgba(76,175,125,0.08)",
       selected: isDark ? "rgba(110,220,148,0.18)" : "rgba(76,175,125,0.12)",
-      shadow: isDark
-        ? "0 18px 45px rgba(0,0,0,0.35)"
-        : "0 16px 40px rgba(15,23,42,0.08)",
+      shadow: isDark ? "0 18px 45px rgba(0,0,0,0.35)" : "0 16px 40px rgba(15,23,42,0.08)",
     },
   }),
 

@@ -57,12 +57,9 @@ const ManageRolePermissions = ({ role }: ManageRolePermissionsProps) => {
     return (permissions.data ?? []).filter((permission) => {
       const translatedLabel = getPermissionLabel(permission, t).toLowerCase();
 
-      const rawLabel =
-        `${permission.action} ${permission.resourceType}`.toLowerCase();
+      const rawLabel = `${permission.action} ${permission.resourceType}`.toLowerCase();
 
-      return (
-        translatedLabel.includes(searchValue) || rawLabel.includes(searchValue)
-      );
+      return translatedLabel.includes(searchValue) || rawLabel.includes(searchValue);
     });
   }, [permissions.data, search, t]);
 
@@ -77,13 +74,9 @@ const ManageRolePermissions = ({ role }: ManageRolePermissionsProps) => {
   };
 
   const handleSave = async (handleClose: () => void) => {
-    const idsToAssign = selectedIds.filter(
-      (id) => !initialSelectedIds.includes(id),
-    );
+    const idsToAssign = selectedIds.filter((id) => !initialSelectedIds.includes(id));
 
-    const idsToRemove = initialSelectedIds.filter(
-      (id) => !selectedIds.includes(id),
-    );
+    const idsToRemove = initialSelectedIds.filter((id) => !selectedIds.includes(id));
 
     if (idsToAssign.length > 0) {
       await assignPermissions.mutateAsync({
@@ -101,9 +94,7 @@ const ManageRolePermissions = ({ role }: ManageRolePermissionsProps) => {
   };
 
   const loading =
-    permissions.isLoading ||
-    assignPermissions.isPending ||
-    removePermissions.isPending;
+    permissions.isLoading || assignPermissions.isPending || removePermissions.isPending;
 
   return (
     <PopupButton
@@ -183,9 +174,7 @@ const ManageRolePermissions = ({ role }: ManageRolePermissionsProps) => {
                   ))}
                 </Stack>
               ) : (
-                <Typography color="text.secondary">
-                  {t("permissions.empty")}
-                </Typography>
+                <Typography color="text.secondary">{t("permissions.empty")}</Typography>
               )}
             </Stack>
           </DialogContent>

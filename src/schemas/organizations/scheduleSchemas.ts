@@ -19,15 +19,9 @@ const hexColorSchema = z
 
 export const scheduleSchema = z
   .object({
-    name: z
-      .string()
-      .min(1, "validation.required")
-      .max(100, "validation.max100"),
+    name: z.string().min(1, "validation.required").max(100, "validation.max100"),
 
-    serviceCode: z
-      .string()
-      .min(1, "validation.required")
-      .max(64, "validation.max64"),
+    serviceCode: z.string().min(1, "validation.required").max(64, "validation.max64"),
 
     monday: z.boolean(),
     tuesday: z.boolean(),
@@ -78,11 +72,9 @@ export const scheduleSchema = z
 export const scheduleExceptionSchema = z.object({
   exceptionDate: dateStringSchema,
 
-  exceptionType: z.coerce
-    .number()
-    .refine((value) => value === 1 || value === 2, {
-      message: "validation.required",
-    }),
+  exceptionType: z.coerce.number().refine((value) => value === 1 || value === 2, {
+    message: "validation.required",
+  }),
 
   note: z
     .string()
@@ -97,9 +89,5 @@ export const scheduleExceptionSchema = z.object({
 export type ScheduleFormInputValues = z.input<typeof scheduleSchema>;
 export type ScheduleFormValues = z.output<typeof scheduleSchema>;
 
-export type ScheduleExceptionFormInputValues = z.input<
-  typeof scheduleExceptionSchema
->;
-export type ScheduleExceptionFormValues = z.output<
-  typeof scheduleExceptionSchema
->;
+export type ScheduleExceptionFormInputValues = z.input<typeof scheduleExceptionSchema>;
+export type ScheduleExceptionFormValues = z.output<typeof scheduleExceptionSchema>;

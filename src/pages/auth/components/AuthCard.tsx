@@ -9,12 +9,7 @@ type AuthCardProps = {
   footer?: ReactNode;
 };
 
-export default function AuthCard({
-  title,
-  subtitle,
-  children,
-  footer,
-}: AuthCardProps) {
+export default function AuthCard({ title, subtitle, children, footer }: AuthCardProps) {
   return (
     <Paper
       elevation={0}
@@ -41,10 +36,10 @@ export default function AuthCard({
           <Stack
             spacing={1.25}
             sx={{
-                alignItems: "center",
-                textAlign: "center",
+              alignItems: "center",
+              textAlign: "center",
             }}
-            >
+          >
             <Box
               sx={(theme) => ({
                 width: 58,
@@ -74,11 +69,7 @@ export default function AuthCard({
             </Typography>
 
             {subtitle ? (
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{ maxWidth: 360 }}
-              >
+              <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 360 }}>
                 {subtitle}
               </Typography>
             ) : null}

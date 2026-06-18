@@ -20,18 +20,13 @@ export const routesApi = {
   },
 
   getById: async (id: string) => {
-    const response = await apiClient.get<TransitRoute>(
-      `${ROUTES_ENDPOINT}/${id}`,
-    );
+    const response = await apiClient.get<TransitRoute>(`${ROUTES_ENDPOINT}/${id}`);
 
     return response.data;
   },
 
   create: async (payload: CreateRoutePayload) => {
-    const response = await apiClient.post<TransitRoute>(
-      ROUTES_ENDPOINT,
-      payload,
-    );
+    const response = await apiClient.post<TransitRoute>(ROUTES_ENDPOINT, payload);
 
     return response.data;
   },
@@ -55,9 +50,7 @@ export const routesApi = {
   },
 
   delete: async (id: string) => {
-    const response = await apiClient.delete<TransitRoute>(
-      `${ROUTES_ENDPOINT}/${id}`,
-    );
+    const response = await apiClient.delete<TransitRoute>(`${ROUTES_ENDPOINT}/${id}`);
 
     return response.data;
   },

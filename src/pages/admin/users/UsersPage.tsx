@@ -9,11 +9,7 @@ const UsersPage = () => {
     return <SuperAdminUsersPage />;
   }
 
-  return (
-    <CompanyUsersPage
-      organizationId={user?.organizationId ?? null}
-    />
-  );
+  return <CompanyUsersPage organizationId={user?.organizationId ?? null} />;
 };
 
 export default UsersPage;

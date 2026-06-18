@@ -14,8 +14,7 @@ export const placesQueryKeys = {
   all: ["places"] as const,
 
   lists: () => [...placesQueryKeys.all, "list"] as const,
-  list: (params?: GetPlacesParams) =>
-    [...placesQueryKeys.lists(), params ?? {}] as const,
+  list: (params?: GetPlacesParams) => [...placesQueryKeys.lists(), params ?? {}] as const,
 
   details: () => [...placesQueryKeys.all, "details"] as const,
   detail: (id: number) => [...placesQueryKeys.details(), id] as const,

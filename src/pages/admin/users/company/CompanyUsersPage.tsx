@@ -1,11 +1,5 @@
 import { useMemo, useState } from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 import type { MRT_ColumnFiltersState } from "material-react-table";
 import { useTranslation } from "react-i18next";
@@ -30,44 +24,31 @@ const getStringFilter = (
   filters: MRT_ColumnFiltersState,
   id: string,
 ): string | undefined => {
-  const value = filters.find(
-    (filter) => filter.id === id,
-  )?.value;
+  const value = filters.find((filter) => filter.id === id)?.value;
 
-  if (
-    typeof value !== "string" ||
-    !value.trim()
-  ) {
+  if (typeof value !== "string" || !value.trim()) {
     return undefined;
   }
 
   return value.trim();
 };
 
-const CompanyUsersPage = ({
-  organizationId,
-}: CompanyUsersPageProps) => {
+const CompanyUsersPage = ({ organizationId }: CompanyUsersPageProps) => {
   const { t } = useTranslation();
 
-  const [globalFilter, setGlobalFilter] =
-    useState("");
+  const [globalFilter, setGlobalFilter] = useState("");
 
-  const [columnFilters, setColumnFilters] =
-    useState<MRT_ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([]);
 
   const pagePagination = usePagePagination({
     initialPageSize: 20,
   });
 
-  const status = getStringFilter(
-    columnFilters,
-    "status",
-  ) as OperationalProfileStatus | undefined;
+  const status = getStringFilter(columnFilters, "status") as
+    | OperationalProfileStatus
+    | undefined;
 
-  const roleName = getStringFilter(
-    columnFilters,
-    "roleName",
-  );
+  const roleName = getStringFilter(columnFilters, "roleName");
 
   const users = useUsers({
     page: pagePagination.page,
@@ -104,23 +85,15 @@ const CompanyUsersPage = ({
         onFiltersChange={pagePagination.reset}
       />
     ),
-    [
-      columnFilters,
-      pagePagination.reset,
-    ],
+    [columnFilters, pagePagination.reset],
   );
 
   if (!organizationId) {
     return (
       <Card variant="outlined">
         <CardContent>
-          <Typography
-            variant="h6"
-            sx={{ fontWeight: 900 }}
-          >
-            {t(
-              "users.organizationUsers.noOrganization",
-            )}
+          <Typography variant="h6" sx={{ fontWeight: 900 }}>
+            {t("users.organizationUsers.noOrganization")}
           </Typography>
         </CardContent>
       </Card>
@@ -143,11 +116,7 @@ const CompanyUsersPage = ({
           },
         }}
       >
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ alignItems: "center" }}
-        >
+        <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
           <Box
             sx={{
               width: 52,
@@ -164,27 +133,17 @@ const CompanyUsersPage = ({
           </Box>
 
           <Box>
-            <Typography
-              variant="h4"
-              sx={{ fontWeight: 900 }}
-            >
-              {t(
-                "users.organizationUsers.title",
-              )}
+            <Typography variant="h4" sx={{ fontWeight: 900 }}>
+              {t("users.organizationUsers.title")}
             </Typography>
 
             <Typography color="text.secondary">
-              {t(
-                "users.organizationUsers.subtitle",
-              )}
+              {t("users.organizationUsers.subtitle")}
             </Typography>
           </Box>
         </Stack>
 
-        <CreateUser
-          mode="company-admin"
-          organizationId={organizationId}
-        />
+        <CreateUser mode="company-admin" organizationId={organizationId} />
       </Stack>
 
       <Card
@@ -194,9 +153,7 @@ const CompanyUsersPage = ({
           boxShadow: "none",
         }}
       >
-        <CardContent
-          sx={{ p: { xs: 1.5, md: 2 } }}
-        >
+        <CardContent sx={{ p: { xs: 1.5, md: 2 } }}>
           <Table<UserListItem>
             columns={columns}
             data={users.data?.data ?? []}
@@ -213,12 +170,8 @@ const CompanyUsersPage = ({
             ]}
             enablePagination
             manualPagination
-            rowCount={
-              users.data?.meta.total ?? 0
-            }
-            onPaginationChange={
-              pagePagination.onPaginationChange
-            }
+            rowCount={users.data?.meta.total ?? 0}
+            onPaginationChange={pagePagination.onPaginationChange}
             enableGlobalFilter
             manualFiltering
             onGlobalFilterChange={(value) => {
@@ -228,48 +181,27 @@ const CompanyUsersPage = ({
             enableColumnFilters
             onColumnFiltersChange={(updater) => {
               setColumnFilters((current) =>
-                typeof updater === "function"
-                  ? updater(current)
-                  : updater,
+                typeof updater === "function" ? updater(current) : updater,
               );
 
               pagePagination.reset();
             }}
-            mobileSearchFields={[
-              "firstName",
-              "lastName",
-              "phone",
-              "email",
-            ]}
-            mobilePageSize={
-              pagePagination.pagination.pageSize
-            }
+            mobileSearchFields={["firstName", "lastName", "phone", "email"]}
+            mobilePageSize={pagePagination.pagination.pageSize}
             renderMobileCard={renderCard}
-            renderMobileFilters={
-              mobileFilters
-            }
+            renderMobileFilters={mobileFilters}
             state={{
-              isLoading:
-                users.isLoading ||
-                users.isFetching,
-              showAlertBanner:
-                users.isError,
-              pagination:
-                pagePagination.pagination,
+              isLoading: users.isLoading || users.isFetching,
+              showAlertBanner: users.isError,
+              pagination: pagePagination.pagination,
               globalFilter,
               columnFilters,
             }}
             isError={users.isError}
             refetch={users.refetch}
-            isRefetching={
-              users.isRefetching
-            }
+            isRefetching={users.isRefetching}
             muiPaginationProps={{
-              rowsPerPageOptions: [
-                10,
-                20,
-                50,
-              ],
+              rowsPerPageOptions: [10, 20, 50],
               showFirstButton: true,
               showLastButton: true,
             }}

@@ -70,12 +70,8 @@ export default function AppSettings() {
               <MenuItem value="electric">
                 {t("settings.theme.palettes.electric")}
               </MenuItem>
-              <MenuItem value="solar">
-                {t("settings.theme.palettes.solar")}
-              </MenuItem>
-              <MenuItem value="classic">
-                {t("settings.theme.palettes.classic")}
-              </MenuItem>
+              <MenuItem value="solar">{t("settings.theme.palettes.solar")}</MenuItem>
+              <MenuItem value="classic">{t("settings.theme.palettes.classic")}</MenuItem>
             </Select>
           </FormControl>
 

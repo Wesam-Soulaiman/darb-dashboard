@@ -7,19 +7,12 @@ import {
   DialogContent,
   Stack,
   Typography,
-  Box
+  Box,
 } from "@mui/material";
 import MapRoundedIcon from "@mui/icons-material/MapRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import L from "leaflet";
-import {
-  MapContainer,
-  Marker,
-  Polyline,
-  Popup,
-  TileLayer,
-  useMap,
-} from "react-leaflet";
+import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 
 import "leaflet/dist/leaflet.css";
@@ -110,9 +103,7 @@ const getRoutePoints = (orgRoute: OrganizationRoute): RouteLineItem | null => {
     id: route.id,
     name: route.name,
     mode: route.mode,
-    price: route.price
-      ? `${route.price.amount} ${route.price.currency}`
-      : undefined,
+    price: route.price ? `${route.price.amount} ${route.price.currency}` : undefined,
     points,
   };
 };
@@ -201,9 +192,7 @@ const OrganizationRoutesMap = ({
                       <Popup>
                         <Stack spacing={1.25} sx={{ minWidth: 220 }}>
                           <Stack spacing={0.25}>
-                            <Typography sx={{ fontWeight: 900 }}>
-                              {route.name}
-                            </Typography>
+                            <Typography sx={{ fontWeight: 900 }}>{route.name}</Typography>
 
                             {route.mode ? (
                               <Typography variant="body2" color="text.secondary">
@@ -281,10 +270,7 @@ const OrganizationRoutesMap = ({
         </DialogContent>
 
         <DialogActions>
-          <Button
-            startIcon={<CloseRoundedIcon />}
-            onClick={() => setOpen(false)}
-          >
+          <Button startIcon={<CloseRoundedIcon />} onClick={() => setOpen(false)}>
             {t("common.close")}
           </Button>
         </DialogActions>

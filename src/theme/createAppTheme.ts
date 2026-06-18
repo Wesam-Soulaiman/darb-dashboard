@@ -59,8 +59,7 @@ export const createAppTheme = ({
       ...typographyOverrides,
       fontFamily: isRtl ? fontFamilies[fontKey].ar : fontFamilies[fontKey].en,
       allVariants: {
-        letterSpacing:
-          fontKey === "orbitronAmiri" && !isRtl ? "0.04em" : "normal",
+        letterSpacing: fontKey === "orbitronAmiri" && !isRtl ? "0.04em" : "normal",
       },
     },
 

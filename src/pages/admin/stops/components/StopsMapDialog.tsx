@@ -15,13 +15,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded";
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
 import L from "leaflet";
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMap,
-} from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 
 import "leaflet/dist/leaflet.css";
@@ -33,8 +27,7 @@ import DeleteStop from "./DeleteStop";
 
 const defaultIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
@@ -94,9 +87,7 @@ const FitStopsBounds = ({ points }: { points: StopMapPoint[] }) => {
       return;
     }
 
-    const bounds = L.latLngBounds(
-      points.map((point) => [point.lat, point.lon]),
-    );
+    const bounds = L.latLngBounds(points.map((point) => [point.lat, point.lon]));
 
     map.fitBounds(bounds, {
       padding: [48, 48],
@@ -266,11 +257,7 @@ const StopsMapDialog = ({
               disabled={!hasPreviousPage || loading}
               onClick={onPreviousPage}
             >
-              {isRtl ? (
-                <NavigateNextRoundedIcon />
-              ) : (
-                <NavigateBeforeRoundedIcon />
-              )}
+              {isRtl ? <NavigateNextRoundedIcon /> : <NavigateBeforeRoundedIcon />}
             </IconButton>
 
             <Typography
@@ -289,20 +276,13 @@ const StopsMapDialog = ({
               disabled={!hasNextPage || loading}
               onClick={onNextPage}
             >
-              {isRtl ? (
-                <NavigateBeforeRoundedIcon />
-              ) : (
-                <NavigateNextRoundedIcon />
-              )}
+              {isRtl ? <NavigateBeforeRoundedIcon /> : <NavigateNextRoundedIcon />}
             </IconButton>
           </Box>
         </DialogContent>
 
         <DialogActions>
-          <Button
-            startIcon={<CloseRoundedIcon />}
-            onClick={() => setOpen(false)}
-          >
+          <Button startIcon={<CloseRoundedIcon />} onClick={() => setOpen(false)}>
             {t("common.close")}
           </Button>
         </DialogActions>

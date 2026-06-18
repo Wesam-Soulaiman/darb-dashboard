@@ -31,10 +31,7 @@ export const stopsApi = {
   },
 
   update: async (id: string, payload: UpdateStopPayload) => {
-    const response = await apiClient.patch<Stop>(
-      `${STOPS_ENDPOINT}/${id}`,
-      payload,
-    );
+    const response = await apiClient.patch<Stop>(`${STOPS_ENDPOINT}/${id}`, payload);
 
     return response.data;
   },

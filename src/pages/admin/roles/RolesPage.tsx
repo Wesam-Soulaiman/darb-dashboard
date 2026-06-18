@@ -35,14 +35,7 @@ const RolesPage = () => {
   );
 
   const exportFields = useMemo<Array<keyof Role & string>>(
-    () => [
-      "id",
-      "name",
-      "description",
-      "organizationId",
-      "createdAt",
-      "updatedAt",
-    ],
+    () => ["id", "name", "description", "organizationId", "createdAt", "updatedAt"],
     [],
   );
 
@@ -77,9 +70,7 @@ const RolesPage = () => {
               {t("roles.title")}
             </Typography>
 
-            <Typography color="text.secondary">
-              {t("roles.subtitle")}
-            </Typography>
+            <Typography color="text.secondary">{t("roles.subtitle")}</Typography>
           </Box>
         </Stack>
 

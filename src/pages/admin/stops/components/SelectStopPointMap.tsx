@@ -12,13 +12,7 @@ import type { TransitionProps } from "@mui/material/transitions";
 import MapRoundedIcon from "@mui/icons-material/MapRounded";
 import MyLocationRoundedIcon from "@mui/icons-material/MyLocationRounded";
 import L from "leaflet";
-import {
-  MapContainer,
-  Marker,
-  TileLayer,
-  useMap,
-  useMapEvents,
-} from "react-leaflet";
+import { MapContainer, Marker, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 
 import "leaflet/dist/leaflet.css";
@@ -26,8 +20,7 @@ import { useMyLocationContext } from "../../../../contexts/MyLocationContext";
 
 const defaultIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
@@ -72,10 +65,7 @@ type SelectStopPointMapProps = {
   onSelectPoint?: (point: MapPoint) => void;
 };
 
-const SelectStopPointMap = ({
-  point,
-  onSelectPoint,
-}: SelectStopPointMapProps) => {
+const SelectStopPointMap = ({ point, onSelectPoint }: SelectStopPointMapProps) => {
   const { t } = useTranslation();
   const { location, requestLocation, isLoading } = useMyLocationContext();
 
@@ -104,7 +94,12 @@ const SelectStopPointMap = ({
         </IconButton>
       </Tooltip>
 
-      <Dialog fullScreen open={open} onClose={() => setOpen(false)} slots={{ transition: Transition }}>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={() => setOpen(false)}
+        slots={{ transition: Transition }}
+      >
         <DialogContent sx={{ p: 0 }}>
           <MapContainer
             center={position}

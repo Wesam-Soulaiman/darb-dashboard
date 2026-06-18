@@ -27,10 +27,7 @@ import CreateBus from "./components/CreateBus";
 
 const DEFAULT_BUSES_LIMIT = 20;
 
-const getFilterValue = (
-  filters: MRT_ColumnFiltersState,
-  id: string,
-): string => {
+const getFilterValue = (filters: MRT_ColumnFiltersState, id: string): string => {
   const value = filters.find((filter) => filter.id === id)?.value;
 
   if (typeof value === "string") return value;
@@ -47,14 +44,12 @@ const BusesPage = () => {
   const routeOrgId = Number(params.orgId);
   const userOrgId = Number(user?.organizationId);
 
-  const orgId =
-    Number.isFinite(routeOrgId) && routeOrgId > 0 ? routeOrgId : userOrgId;
+  const orgId = Number.isFinite(routeOrgId) && routeOrgId > 0 ? routeOrgId : userOrgId;
 
   const hasValidOrgId = Number.isFinite(orgId) && orgId > 0;
 
   const [search, setSearch] = useState("");
-  const [columnFilters, setColumnFilters] =
-    useState<MRT_ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([]);
 
   const pagePagination = usePagePagination({
     initialPageSize: DEFAULT_BUSES_LIMIT,
@@ -126,9 +121,7 @@ const BusesPage = () => {
     handleColumnFiltersChange((current) => {
       const withoutCurrentFilter = current.filter((filter) => filter.id !== id);
 
-      return value
-        ? [...withoutCurrentFilter, { id, value }]
-        : withoutCurrentFilter;
+      return value ? [...withoutCurrentFilter, { id, value }] : withoutCurrentFilter;
     });
   };
 
@@ -145,9 +138,7 @@ const BusesPage = () => {
           {t("buses.noOrganizationTitle")}
         </Typography>
 
-        <Typography color="text.secondary">
-          {t("buses.noOrganizationMessage")}
-        </Typography>
+        <Typography color="text.secondary">{t("buses.noOrganizationMessage")}</Typography>
 
         {isSuperAdmin && (
           <Button
@@ -195,9 +186,7 @@ const BusesPage = () => {
               {t("buses.title")}
             </Typography>
 
-            <Typography color="text.secondary">
-              {t("buses.subtitle")}
-            </Typography>
+            <Typography color="text.secondary">{t("buses.subtitle")}</Typography>
           </Box>
         </Stack>
 
@@ -247,16 +236,9 @@ const BusesPage = () => {
             enableGlobalFilter
             enableColumnFilters
             manualFiltering
-            onGlobalFilterChange={(value) =>
-              handleSearchChange(String(value ?? ""))
-            }
+            onGlobalFilterChange={(value) => handleSearchChange(String(value ?? ""))}
             onColumnFiltersChange={handleColumnFiltersChange}
-            mobileSearchFields={[
-              "plateNumber",
-              "busCode",
-              "manufacturer",
-              "model",
-            ]}
+            mobileSearchFields={["plateNumber", "busCode", "manufacturer", "model"]}
             mobilePageSize={pagePagination.pagination.pageSize}
             renderMobileCard={renderBusCard}
             renderMobileFilters={
@@ -266,18 +248,12 @@ const BusesPage = () => {
                   size="small"
                   label={t("buses.form.status")}
                   value={statusValue}
-                  onChange={(event) =>
-                    setMobileFilter("status", event.target.value)
-                  }
+                  onChange={(event) => setMobileFilter("status", event.target.value)}
                   fullWidth
                 >
                   <MenuItem value="">{t("common.all")}</MenuItem>
-                  <MenuItem value="AVAILABLE">
-                    {t("buses.statuses.AVAILABLE")}
-                  </MenuItem>
-                  <MenuItem value="IN_SERVICE">
-                    {t("buses.statuses.IN_SERVICE")}
-                  </MenuItem>
+                  <MenuItem value="AVAILABLE">{t("buses.statuses.AVAILABLE")}</MenuItem>
+                  <MenuItem value="IN_SERVICE">{t("buses.statuses.IN_SERVICE")}</MenuItem>
                   <MenuItem value="MAINTENANCE">
                     {t("buses.statuses.MAINTENANCE")}
                   </MenuItem>
@@ -291,21 +267,13 @@ const BusesPage = () => {
                   size="small"
                   label={t("buses.form.type")}
                   value={typeValue}
-                  onChange={(event) =>
-                    setMobileFilter("type", event.target.value)
-                  }
+                  onChange={(event) => setMobileFilter("type", event.target.value)}
                   fullWidth
                 >
                   <MenuItem value="">{t("common.all")}</MenuItem>
-                  <MenuItem value="STANDARD">
-                    {t("buses.types.STANDARD")}
-                  </MenuItem>
-                  <MenuItem value="MINIBUS">
-                    {t("buses.types.MINIBUS")}
-                  </MenuItem>
-                  <MenuItem value="ARTICULATED">
-                    {t("buses.types.ARTICULATED")}
-                  </MenuItem>
+                  <MenuItem value="STANDARD">{t("buses.types.STANDARD")}</MenuItem>
+                  <MenuItem value="MINIBUS">{t("buses.types.MINIBUS")}</MenuItem>
+                  <MenuItem value="ARTICULATED">{t("buses.types.ARTICULATED")}</MenuItem>
                 </TextField>
 
                 <Button

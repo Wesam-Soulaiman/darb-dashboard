@@ -7,10 +7,7 @@ export const getPermissionActionLabel = (action: string, t: TFunction) => {
   });
 };
 
-export const getPermissionResourceLabel = (
-  resourceType: string,
-  t: TFunction,
-) => {
+export const getPermissionResourceLabel = (resourceType: string, t: TFunction) => {
   return t(`permissions.resources.${resourceType}`, {
     defaultValue: resourceType,
   });

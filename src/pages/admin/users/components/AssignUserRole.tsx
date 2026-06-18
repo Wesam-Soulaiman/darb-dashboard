@@ -1,10 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Tooltip,
-} from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, IconButton, Tooltip } from "@mui/material";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import { useTranslation } from "react-i18next";
 
@@ -19,10 +13,7 @@ type AssignUserRoleProps = {
   assignedRoles: UserRoleSummary[];
 };
 
-const AssignUserRole = ({
-  userId,
-  assignedRoles,
-}: AssignUserRoleProps) => {
+const AssignUserRole = ({ userId, assignedRoles }: AssignUserRoleProps) => {
   const { t } = useTranslation();
   const assignRole = useAssignUserRole(userId);
 
@@ -56,9 +47,7 @@ const AssignUserRole = ({
       )}
       DialogRender={({ props, handleClose }) => (
         <Dialog {...props} maxWidth="xs" fullWidth>
-          <DialogTitle>
-            {t("users.organizationUsers.addRole")}
-          </DialogTitle>
+          <DialogTitle>{t("users.organizationUsers.addRole")}</DialogTitle>
 
           <DialogContent dividers>
             <AssignUserRoleForm

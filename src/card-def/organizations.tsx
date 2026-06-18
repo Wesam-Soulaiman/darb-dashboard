@@ -33,75 +33,73 @@ export const getOrganizationCardDef = ({ t }: GetOrganizationCardDefArgs) => {
     >
       <CardContent>
         <Stack spacing={2}>
-          
+          <Stack
+            direction="row"
+            spacing={1.5}
+            sx={{
+              alignItems: "center",
+              minWidth: 0,
+            }}
+          >
+            <Tooltip title={t("common.details")}>
+              <IconButton
+                component={RouterLink}
+                to={`/admin/dashboard/organizations/${organization.id}`}
+                sx={{ p: 0 }}
+              >
+                <Avatar
+                  sx={{
+                    width: 42,
+                    height: 42,
+                    bgcolor: "primary.main",
+                    color: "primary.contrastText",
+                  }}
+                />
+              </IconButton>
+            </Tooltip>
+
+            <Box sx={{ minWidth: 0 }}>
+              <Typography
+                noWrap
+                sx={{
+                  fontWeight: 800,
+                  lineHeight: 1.4,
+                }}
+              >
+                {organization.name}
+              </Typography>
+
+              <Typography variant="body2" color="text.secondary" noWrap>
+                #{organization.id}
+              </Typography>
+            </Box>
+          </Stack>
+
+          <Divider />
+
+          <Stack spacing={0.75}>
             <Stack
               direction="row"
               spacing={1.5}
               sx={{
                 alignItems: "center",
-                minWidth: 0,
+                justifyContent: "space-between",
               }}
             >
-              <Tooltip title={t("common.details")}>
-                <IconButton
-                  component={RouterLink}
-                  to={`/admin/dashboard/organizations/${organization.id}`}
-                  sx={{ p: 0 }}
-                >
-                  <Avatar
-                    sx={{
-                      width: 42,
-                      height: 42,
-                      bgcolor: "primary.main",
-                      color: "primary.contrastText",
-                    }}
-                  />
-                </IconButton>
-              </Tooltip>
-
-              <Box sx={{ minWidth: 0 }}>
-                <Typography
-                  noWrap
-                  sx={{
-                    fontWeight: 800,
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {organization.name}
+              <Stack spacing={0.75}>
+                <Typography variant="caption" color="text.secondary">
+                  {t("organizations.table.createdAt")}
                 </Typography>
 
-                <Typography variant="body2" color="text.secondary" noWrap>
-                  #{organization.id}
+                <Typography variant="body2">
+                  {organization.createdAt
+                    ? new Date(organization.createdAt).toLocaleDateString("ar-SY")
+                    : "-"}
                 </Typography>
-              </Box>
+              </Stack>
+              <Chip label={organization.codeName} size="small" variant="outlined" />
             </Stack>
-
-          <Divider />
-
-          <Stack spacing={0.75}>
-              <Stack
-                    direction="row"
-                    spacing={1.5}
-                    sx={{
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    }}
-                  >
-                <Stack spacing={0.75}>
-              
-                    <Typography variant="caption" color="text.secondary">
-                    {t("organizations.table.createdAt")}
-                    </Typography>
-
-                    <Typography variant="body2">
-                    {organization.createdAt
-                        ? new Date(organization.createdAt).toLocaleDateString("ar-SY")
-                        : "-"}
-                    </Typography>
-                    </Stack>
-                    <Chip label={organization.codeName} size="small" variant="outlined" />
-                </Stack>
-            </Stack>
+          </Stack>
 
           <Stack
             direction="row"

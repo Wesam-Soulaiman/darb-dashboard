@@ -18,9 +18,7 @@ const DEFAULT_LINE: RouteFormInputValues["line"] = {
   coordinates: [],
 };
 
-const normalizeRouteLine = (
-  line?: RouteLine | null,
-): RouteFormInputValues["line"] => {
+const normalizeRouteLine = (line?: RouteLine | null): RouteFormInputValues["line"] => {
   if (
     line?.type === "LineString" &&
     Array.isArray(line.coordinates) &&
@@ -46,10 +44,7 @@ const UpdateRoute = ({ route }: UpdateRouteProps) => {
   const { t } = useTranslation();
   const updateRoute = useUpdateRoute(route.id);
 
-  const handleSubmit = async (
-    values: RouteFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: RouteFormValues, handleClose: () => void) => {
     await updateRoute.mutateAsync({
       name: values.name,
       originPlaceId: values.originPlaceId,

@@ -20,8 +20,6 @@ export const changePasswordSchema = z
     message: "validation.passwordSameAsCurrent",
   });
 
-export type ChangePasswordFormInputValues = z.input<
-  typeof changePasswordSchema
->;
+export type ChangePasswordFormInputValues = z.input<typeof changePasswordSchema>;
 
 export type ChangePasswordFormValues = z.output<typeof changePasswordSchema>;

@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardContent,
-  Chip,
-  Divider,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, Chip, Divider, Stack, Typography } from "@mui/material";
 import type { TFunction } from "i18next";
 
 import type { Place } from "../types/place.types";

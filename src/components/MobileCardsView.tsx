@@ -54,7 +54,7 @@ const MobileCardsView = <T,>({
 
   const search = enableSearch
     ? manualFiltering
-      ? globalFilter ?? ""
+      ? (globalFilter ?? "")
       : localSearch
     : "";
 

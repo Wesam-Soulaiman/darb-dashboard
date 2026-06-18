@@ -24,12 +24,7 @@ type OtpStepProps = {
   onSubmit: (otp: string) => Promise<void>;
 };
 
-export default function OtpStep({
-  phone,
-  onBack,
-  onResend,
-  onSubmit,
-}: OtpStepProps) {
+export default function OtpStep({ phone, onBack, onResend, onSubmit }: OtpStepProps) {
   const { t } = useTranslation();
 
   const {
@@ -75,9 +70,7 @@ export default function OtpStep({
                 minHeight: 20,
               }}
             >
-              {errors.otp?.message
-                ? t(errors.otp.message)
-                : t("auth.reset.otpHint")}
+              {errors.otp?.message ? t(errors.otp.message) : t("auth.reset.otpHint")}
             </FormHelperText>
           </Stack>
         )}

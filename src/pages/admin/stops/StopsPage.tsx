@@ -30,10 +30,7 @@ import StopsMapDialog from "./components/StopsMapDialog";
 const DEFAULT_STOPS_LIMIT = 20;
 const DEFAULT_WITHIN_RADIUS = 1000;
 
-const getFilterValue = (
-  filters: MRT_ColumnFiltersState,
-  id: string,
-): string => {
+const getFilterValue = (filters: MRT_ColumnFiltersState, id: string): string => {
   const value = filters.find((filter) => filter.id === id)?.value;
 
   if (typeof value === "string") return value;
@@ -52,13 +49,11 @@ const StopsPage = () => {
   } = useMyLocationContext();
 
   const [search, setSearch] = useState("");
-  const [columnFilters, setColumnFilters] =
-    useState<MRT_ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([]);
 
   const [within, setWithin] = useState<string | undefined>(undefined);
   const [withinRadius, setWithinRadius] = useState(DEFAULT_WITHIN_RADIUS);
-  const [waitingForLocationSearch, setWaitingForLocationSearch] =
-    useState(false);
+  const [waitingForLocationSearch, setWaitingForLocationSearch] = useState(false);
 
   const cursorPagination = useCursorPagination({
     initialPageSize: DEFAULT_STOPS_LIMIT,
@@ -74,9 +69,7 @@ const StopsPage = () => {
 
   const selectedPlaceIdValue = getFilterValue(columnFilters, "placeId");
 
-  const placeId = selectedPlaceIdValue
-    ? Number(selectedPlaceIdValue)
-    : undefined;
+  const placeId = selectedPlaceIdValue ? Number(selectedPlaceIdValue) : undefined;
 
   const stops = useStops({
     cursor: cursorPagination.cursor,
@@ -226,42 +219,40 @@ const StopsPage = () => {
               {t("stops.title")}
             </Typography>
 
-            <Typography color="text.secondary">
-              {t("stops.subtitle")}
-            </Typography>
+            <Typography color="text.secondary">{t("stops.subtitle")}</Typography>
           </Box>
         </Stack>
 
         <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={1.5}
-            sx={{
-                alignItems: { xs: "stretch", sm: "center" },
+          direction={{ xs: "column", sm: "row" }}
+          spacing={1.5}
+          sx={{
+            alignItems: { xs: "stretch", sm: "center" },
+          }}
+        >
+          <StopsMapDialog
+            stops={stops.data?.data ?? []}
+            places={placesData}
+            loading={stops.isLoading || stops.isFetching}
+            pageIndex={tablePagination.pagination.pageIndex}
+            hasNextPage={Boolean(stops.data?.meta.hasNextPage)}
+            hasPreviousPage={tablePagination.pagination.pageIndex > 0}
+            onNextPage={() => {
+              tablePagination.onPaginationChange((current) => ({
+                ...current,
+                pageIndex: current.pageIndex + 1,
+              }));
             }}
-            >
-            <StopsMapDialog
-                stops={stops.data?.data ?? []}
-                places={placesData}
-                loading={stops.isLoading || stops.isFetching}
-                pageIndex={tablePagination.pagination.pageIndex}
-                hasNextPage={Boolean(stops.data?.meta.hasNextPage)}
-                hasPreviousPage={tablePagination.pagination.pageIndex > 0}
-                onNextPage={() => {
-                tablePagination.onPaginationChange((current) => ({
-                    ...current,
-                    pageIndex: current.pageIndex + 1,
-                }));
-                }}
-                onPreviousPage={() => {
-                tablePagination.onPaginationChange((current) => ({
-                    ...current,
-                    pageIndex: Math.max(0, current.pageIndex - 1),
-                }));
-                }}
-            />
+            onPreviousPage={() => {
+              tablePagination.onPaginationChange((current) => ({
+                ...current,
+                pageIndex: Math.max(0, current.pageIndex - 1),
+              }));
+            }}
+          />
 
-            <CreateStop />
-            </Stack>
+          <CreateStop />
+        </Stack>
       </Stack>
 
       <Card
@@ -376,9 +367,7 @@ const StopsPage = () => {
                     size="small"
                     label={t("stops.filters.radius")}
                     value={withinRadius}
-                    onChange={(event) =>
-                      handleRadiusChange(event.target.value)
-                    }
+                    onChange={(event) => handleRadiusChange(event.target.value)}
                     slotProps={{
                       htmlInput: {
                         min: 100,

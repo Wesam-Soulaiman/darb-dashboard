@@ -146,9 +146,7 @@ const CreateUserForm = ({
                     error={Boolean(errors.organizationId)}
                     helperText={getErrorMessage(errors.organizationId?.message)}
                   >
-                    <MenuItem value="">
-                      {t("users.form.noOrganization")}
-                    </MenuItem>
+                    <MenuItem value="">{t("users.form.noOrganization")}</MenuItem>
 
                     {organizationsList.map((organization) => (
                       <MenuItem key={organization.id} value={organization.id}>

@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, Stack, Typography } from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
 import { useMemo } from "react";
@@ -73,9 +66,7 @@ const OrganizationsPage = () => {
               {t("organizations.title")}
             </Typography>
 
-            <Typography color="text.secondary">
-              {t("organizations.subtitle")}
-            </Typography>
+            <Typography color="text.secondary">{t("organizations.subtitle")}</Typography>
           </Box>
         </Stack>
 

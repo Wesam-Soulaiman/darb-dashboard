@@ -12,10 +12,7 @@ const CreateRole = () => {
   const { t } = useTranslation();
   const createRole = useCreateRole();
 
-  const handleSubmit = async (
-    values: RoleFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: RoleFormValues, handleClose: () => void) => {
     await createRole.mutateAsync({
       name: values.name,
       description: values.description,

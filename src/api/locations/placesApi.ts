@@ -31,10 +31,7 @@ export const placesApi = {
   },
 
   update: async (id: number, payload: UpdatePlacePayload) => {
-    const response = await apiClient.patch<Place>(
-      `${PLACES_ENDPOINT}/${id}`,
-      payload,
-    );
+    const response = await apiClient.patch<Place>(`${PLACES_ENDPOINT}/${id}`, payload);
 
     return response.data;
   },

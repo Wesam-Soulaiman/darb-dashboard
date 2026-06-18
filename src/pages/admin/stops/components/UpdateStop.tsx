@@ -42,10 +42,7 @@ const UpdateStop = ({ stop }: UpdateStopProps) => {
   const { t } = useTranslation();
   const updateStop = useUpdateStop(stop.id);
 
-  const handleSubmit = async (
-    values: StopFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: StopFormValues, handleClose: () => void) => {
     await updateStop.mutateAsync({
       name: values.name,
       placeId: values.placeId,

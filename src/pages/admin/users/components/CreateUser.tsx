@@ -18,18 +18,13 @@ const CreateUser = ({ mode, organizationId = null }: CreateUserProps) => {
 
   const isSuperAdminMode = mode === "super-admin";
 
-  const handleSubmit = async (
-    values: CreateUserFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: CreateUserFormValues, handleClose: () => void) => {
     await createUser.mutateAsync({
       phone: values.phone,
       firstName: values.firstName,
       lastName: values.lastName,
       email: values.email,
-      organizationId: isSuperAdminMode
-        ? values.organizationId
-        : organizationId,
+      organizationId: isSuperAdminMode ? values.organizationId : organizationId,
       isActive: values.isActive,
       hireDate: values.hireDate,
       licenseNumber: values.licenseNumber || undefined,

@@ -36,17 +36,15 @@ const ChangeMyPasswordForm = ({
     control,
     handleSubmit,
     formState: { errors, isValid, isDirty },
-  } = useForm<ChangePasswordFormInputValues, unknown, ChangePasswordFormValues>(
-    {
-      resolver: zodResolver(changePasswordSchema),
-      mode: "onChange",
-      defaultValues: {
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: "",
-      },
+  } = useForm<ChangePasswordFormInputValues, unknown, ChangePasswordFormValues>({
+    resolver: zodResolver(changePasswordSchema),
+    mode: "onChange",
+    defaultValues: {
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
     },
-  );
+  });
 
   const getErrorMessage = (message: unknown) =>
     typeof message === "string" ? t(message) : undefined;
@@ -80,9 +78,7 @@ const ChangeMyPasswordForm = ({
                     type="password"
                     label={t("auth.changePassword.currentPassword")}
                     error={Boolean(errors.currentPassword)}
-                    helperText={getErrorMessage(
-                      errors.currentPassword?.message,
-                    )}
+                    helperText={getErrorMessage(errors.currentPassword?.message)}
                   />
                 )}
               />
@@ -114,9 +110,7 @@ const ChangeMyPasswordForm = ({
                     type="password"
                     label={t("auth.changePassword.confirmPassword")}
                     error={Boolean(errors.confirmPassword)}
-                    helperText={getErrorMessage(
-                      errors.confirmPassword?.message,
-                    )}
+                    helperText={getErrorMessage(errors.confirmPassword?.message)}
                   />
                 )}
               />

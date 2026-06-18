@@ -4,11 +4,7 @@ export type GeoJsonPoint = {
 };
 
 export const encodeBase64Url = (value: string) => {
-  return window
-    .btoa(value)
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/g, "");
+  return window.btoa(value).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
 };
 
 export const encodeGeoJsonPoint = (lat: number, lon: number) => {

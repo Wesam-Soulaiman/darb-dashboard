@@ -232,9 +232,7 @@ const BusForm = ({
                   required
                   label={t("buses.form.registrationExpiry")}
                   error={Boolean(errors.registrationExpiry)}
-                  helperText={getErrorMessage(
-                    errors.registrationExpiry?.message,
-                  )}
+                  helperText={getErrorMessage(errors.registrationExpiry?.message)}
                   slotProps={{
                     inputLabel: {
                       shrink: true,
@@ -256,9 +254,7 @@ const BusForm = ({
                       fullWidth
                       label={t("buses.form.lastMaintenanceDate")}
                       error={Boolean(errors.lastMaintenanceDate)}
-                      helperText={getErrorMessage(
-                        errors.lastMaintenanceDate?.message,
-                      )}
+                      helperText={getErrorMessage(errors.lastMaintenanceDate?.message)}
                       slotProps={{
                         inputLabel: {
                           shrink: true,
@@ -278,9 +274,7 @@ const BusForm = ({
                       fullWidth
                       label={t("buses.form.nextMaintenanceDate")}
                       error={Boolean(errors.nextMaintenanceDate)}
-                      helperText={getErrorMessage(
-                        errors.nextMaintenanceDate?.message,
-                      )}
+                      helperText={getErrorMessage(errors.nextMaintenanceDate?.message)}
                       slotProps={{
                         inputLabel: {
                           shrink: true,

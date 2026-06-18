@@ -6,9 +6,7 @@ import { useTranslation } from "react-i18next";
 
 export default function FullscreenButton() {
   const { t } = useTranslation();
-  const [isFullscreen, setIsFullscreen] = useState(
-    Boolean(document.fullscreenElement),
-  );
+  const [isFullscreen, setIsFullscreen] = useState(Boolean(document.fullscreenElement));
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -38,11 +36,7 @@ export default function FullscreenButton() {
   return (
     <Tooltip title={t("layout.fullscreen")}>
       <IconButton color="default" onClick={toggleFullscreen}>
-        {isFullscreen ? (
-          <FullscreenExitRoundedIcon />
-        ) : (
-          <FullscreenRoundedIcon />
-        )}
+        {isFullscreen ? <FullscreenExitRoundedIcon /> : <FullscreenRoundedIcon />}
       </IconButton>
     </Tooltip>
   );

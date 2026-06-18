@@ -6,7 +6,7 @@ import { adminRoutes } from "./adminRoutes";
 export const routes = [
   authRoutes,
   adminRoutes,
-//   ...errorsRoutes,
+  //   ...errorsRoutes,
 ];
 
 export const router = createBrowserRouter(routes);

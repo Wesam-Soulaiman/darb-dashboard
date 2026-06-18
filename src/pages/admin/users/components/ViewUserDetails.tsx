@@ -82,11 +82,7 @@ const DetailItem = ({ icon, label, value }: DetailItemProps) => {
       </Box>
 
       <Box sx={{ minWidth: 0 }}>
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          sx={{ display: "block" }}
-        >
+        <Typography variant="caption" color="text.secondary" sx={{ display: "block" }}>
           {label}
         </Typography>
 
@@ -105,10 +101,7 @@ const DetailItem = ({ icon, label, value }: DetailItemProps) => {
   );
 };
 
-const ViewUserDetails = ({
-  userId,
-  renderTrigger,
-}: ViewUserDetailsProps) => {
+const ViewUserDetails = ({ userId, renderTrigger }: ViewUserDetailsProps) => {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
 
@@ -132,9 +125,7 @@ const ViewUserDetails = ({
     }).format(date);
   };
 
-  const fullName = user.data
-    ? `${user.data.firstName} ${user.data.lastName}`.trim()
-    : "";
+  const fullName = user.data ? `${user.data.firstName} ${user.data.lastName}`.trim() : "";
 
   const uniquePermissions = useMemo(() => {
     if (!user.data) return [];
@@ -144,8 +135,7 @@ const ViewUserDetails = ({
         ...user.data.permissions,
         ...user.data.roles.flatMap((role) =>
           role.permissions.map(
-            (permission) =>
-              `${permission.action}:${permission.resourceType}`,
+            (permission) => `${permission.action}:${permission.resourceType}`,
           ),
         ),
       ]),
@@ -203,10 +193,7 @@ const ViewUserDetails = ({
           </Typography>
 
           <Tooltip title={t("common.close")}>
-            <IconButton
-              onClick={handleClose}
-              aria-label={t("common.close")}
-            >
+            <IconButton onClick={handleClose} aria-label={t("common.close")}>
               <CloseRoundedIcon />
             </IconButton>
           </Tooltip>
@@ -224,9 +211,7 @@ const ViewUserDetails = ({
             >
               <CircularProgress size={38} />
 
-              <Typography color="text.secondary">
-                {t("common.loading")}
-              </Typography>
+              <Typography color="text.secondary">{t("common.loading")}</Typography>
             </Stack>
           ) : user.isError ? (
             <Stack
@@ -236,9 +221,7 @@ const ViewUserDetails = ({
                 justifyContent: "center",
               }}
             >
-              <Alert severity="error">
-                {t("users.details.loadError")}
-              </Alert>
+              <Alert severity="error">{t("users.details.loadError")}</Alert>
 
               <Button
                 variant="outlined"
@@ -247,15 +230,11 @@ const ViewUserDetails = ({
                 disabled={user.isRefetching}
                 sx={{ alignSelf: "center" }}
               >
-                {user.isRefetching
-                  ? t("common.loading")
-                  : t("common.retry")}
+                {user.isRefetching ? t("common.loading") : t("common.retry")}
               </Button>
             </Stack>
           ) : !user.data ? (
-            <Alert severity="warning">
-              {t("users.details.notFound")}
-            </Alert>
+            <Alert severity="warning">{t("users.details.notFound")}</Alert>
           ) : (
             <Stack spacing={3}>
               <Paper
@@ -286,10 +265,7 @@ const ViewUserDetails = ({
                       fontWeight: 900,
                     }}
                   >
-                    {getInitials(
-                      user.data.firstName,
-                      user.data.lastName,
-                    )}
+                    {getInitials(user.data.firstName, user.data.lastName)}
                   </Avatar>
 
                   <Box sx={{ flex: 1, minWidth: 0 }}>
@@ -303,11 +279,7 @@ const ViewUserDetails = ({
                       {fullName || "-"}
                     </Typography>
 
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{ mt: 0.5 }}
-                    >
+                    <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
                       {t("users.details.userId", {
                         id: user.data.id,
                       })}
@@ -330,11 +302,7 @@ const ViewUserDetails = ({
                           <BlockRoundedIcon />
                         )
                       }
-                      color={
-                        user.data.isActive
-                          ? "success"
-                          : "default"
-                      }
+                      color={user.data.isActive ? "success" : "default"}
                       label={
                         user.data.isActive
                           ? t("users.details.active")
@@ -364,10 +332,7 @@ const ViewUserDetails = ({
               </Paper>
 
               <Box>
-                <Typography
-                  variant="subtitle1"
-                  sx={{ fontWeight: 900, mb: 1.5 }}
-                >
+                <Typography variant="subtitle1" sx={{ fontWeight: 900, mb: 1.5 }}>
                   {t("users.details.accountInformation")}
                 </Typography>
 
@@ -438,26 +403,15 @@ const ViewUserDetails = ({
                     justifyContent: "space-between",
                   }}
                 >
-                  <Stack
-                    direction="row"
-                    spacing={1}
-                    sx={{ alignItems: "center" }}
-                  >
+                  <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
                     <BadgeRoundedIcon color="action" />
 
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ fontWeight: 900 }}
-                    >
+                    <Typography variant="subtitle1" sx={{ fontWeight: 900 }}>
                       {t("users.details.roles")}
                     </Typography>
                   </Stack>
 
-                  <Chip
-                    size="small"
-                    label={user.data.roles.length}
-                    variant="outlined"
-                  />
+                  <Chip size="small" label={user.data.roles.length} variant="outlined" />
                 </Stack>
 
                 {user.data.roles.length ? (
@@ -518,10 +472,7 @@ const ViewUserDetails = ({
 
                           <Divider />
 
-                          <Typography
-                            variant="caption"
-                            color="text.secondary"
-                          >
+                          <Typography variant="caption" color="text.secondary">
                             {t("users.details.rolePermissions")}
                           </Typography>
 
@@ -543,10 +494,7 @@ const ViewUserDetails = ({
                               ))}
                             </Stack>
                           ) : (
-                            <Typography
-                              variant="body2"
-                              color="text.secondary"
-                            >
+                            <Typography variant="body2" color="text.secondary">
                               {t("users.details.noPermissions")}
                             </Typography>
                           )}
@@ -555,9 +503,7 @@ const ViewUserDetails = ({
                     ))}
                   </Stack>
                 ) : (
-                  <Alert severity="info">
-                    {t("users.details.noRoles")}
-                  </Alert>
+                  <Alert severity="info">{t("users.details.noRoles")}</Alert>
                 )}
               </Stack>
 
@@ -572,17 +518,10 @@ const ViewUserDetails = ({
                     justifyContent: "space-between",
                   }}
                 >
-                  <Stack
-                    direction="row"
-                    spacing={1}
-                    sx={{ alignItems: "center" }}
-                  >
+                  <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
                     <SecurityRoundedIcon color="action" />
 
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ fontWeight: 900 }}
-                    >
+                    <Typography variant="subtitle1" sx={{ fontWeight: 900 }}>
                       {t("users.details.permissions")}
                     </Typography>
                   </Stack>
@@ -612,9 +551,7 @@ const ViewUserDetails = ({
                     ))}
                   </Stack>
                 ) : (
-                  <Alert severity="info">
-                    {t("users.details.noPermissions")}
-                  </Alert>
+                  <Alert severity="info">{t("users.details.noPermissions")}</Alert>
                 )}
               </Stack>
             </Stack>
@@ -622,9 +559,7 @@ const ViewUserDetails = ({
         </DialogContent>
 
         <DialogActions sx={{ px: 3, py: 2 }}>
-          <Button onClick={handleClose}>
-            {t("common.close")}
-          </Button>
+          <Button onClick={handleClose}>{t("common.close")}</Button>
         </DialogActions>
       </Dialog>
     </>

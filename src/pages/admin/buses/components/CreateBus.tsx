@@ -15,22 +15,19 @@ const CreateBus = ({ orgId }: CreateBusProps) => {
   const { t } = useTranslation();
   const createBus = useCreateBus(orgId);
 
-  const handleSubmit = async (
-    values: CreateBusFormValues,
-    handleClose: () => void,
-    ) => {
+  const handleSubmit = async (values: CreateBusFormValues, handleClose: () => void) => {
     await createBus.mutateAsync({
-        plateNumber: values.plateNumber,
-        type: values.type,
-        capacity: values.capacity,
-        manufacturer: values.manufacturer,
-        model: values.model,
-        year: values.year,
-        registrationExpiry: values.registrationExpiry,
+      plateNumber: values.plateNumber,
+      type: values.type,
+      capacity: values.capacity,
+      manufacturer: values.manufacturer,
+      model: values.model,
+      year: values.year,
+      registrationExpiry: values.registrationExpiry,
     });
 
     handleClose();
-    };
+  };
 
   return (
     <PopupButton

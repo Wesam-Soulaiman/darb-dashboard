@@ -18,22 +18,13 @@ export const busStatusSchema = z.enum([
 ]);
 
 export const createBusSchema = z.object({
-  plateNumber: z
-    .string()
-    .min(1, "validation.required")
-    .max(50, "validation.max50"),
+  plateNumber: z.string().min(1, "validation.required").max(50, "validation.max50"),
 
   type: busTypeSchema,
 
-  capacity: z.coerce
-    .number()
-    .int("validation.integer")
-    .min(1, "validation.min1"),
+  capacity: z.coerce.number().int("validation.integer").min(1, "validation.min1"),
 
-  manufacturer: z
-    .string()
-    .min(1, "validation.required")
-    .max(100, "validation.max100"),
+  manufacturer: z.string().min(1, "validation.required").max(100, "validation.max100"),
 
   model: z.string().min(1, "validation.required").max(100, "validation.max100"),
 

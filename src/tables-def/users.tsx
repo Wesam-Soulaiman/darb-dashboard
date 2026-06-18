@@ -1,19 +1,9 @@
-import {
-  Avatar,
-  Box,
-  Chip,
-  IconButton,
-  Stack,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Chip, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import type { TFunction } from "i18next";
 import type { MRT_ColumnDef } from "material-react-table";
 
 import type { Organization } from "../types/organization.types";
-import type {
-  UserListItem,
-} from "../types/user.types";
+import type { UserListItem } from "../types/user.types";
 import ViewUserDetails from "../pages/admin/users/components/ViewUserDetails";
 import UserActions from "../pages/admin/users/components/UserActions";
 
@@ -23,10 +13,7 @@ interface UsersTableColumnsProps {
   organizations: Organization[];
 }
 
-const getInitials = (
-  firstName?: string,
-  lastName?: string,
-) => {
+const getInitials = (firstName?: string, lastName?: string) => {
   const first = firstName?.trim()?.[0] ?? "";
   const last = lastName?.trim()?.[0] ?? "";
 
@@ -51,10 +38,7 @@ export const getUsersTableColumns = ({
   organizations,
 }: UsersTableColumnsProps): MRT_ColumnDef<UserListItem>[] => {
   const organizationNameById = new Map(
-    organizations.map((organization) => [
-      organization.id,
-      organization.name,
-    ]),
+    organizations.map((organization) => [organization.id, organization.name]),
   );
 
   const columns: MRT_ColumnDef<UserListItem>[] = [
@@ -89,10 +73,7 @@ export const getUsersTableColumns = ({
                       fontWeight: 900,
                     }}
                   >
-                    {getInitials(
-                      row.original.firstName,
-                      row.original.lastName,
-                    )}
+                    {getInitials(row.original.firstName, row.original.lastName)}
                   </Avatar>
                 </IconButton>
               )}
@@ -107,11 +88,7 @@ export const getUsersTableColumns = ({
       size: 80,
       enableGlobalFilter: false,
       enableColumnFilter: false,
-      Cell: ({ row }) => (
-        <Typography component="span">
-          {row.original.id}
-        </Typography>
-      ),
+      Cell: ({ row }) => <Typography component="span">{row.original.id}</Typography>,
     },
     {
       id: "name",
@@ -130,11 +107,7 @@ export const getUsersTableColumns = ({
             {row.original.firstName} {row.original.lastName}
           </Typography>
 
-          <Typography
-            noWrap
-            variant="body2"
-            color="text.secondary"
-          >
+          <Typography noWrap variant="body2" color="text.secondary">
             {row.original.email}
           </Typography>
         </Box>
@@ -145,11 +118,7 @@ export const getUsersTableColumns = ({
       header: t("users.form.phone"),
       enableGlobalFilter: true,
       enableColumnFilter: false,
-      Cell: ({ row }) => (
-        <Typography component="span">
-          {row.original.phone}
-        </Typography>
-      ),
+      Cell: ({ row }) => <Typography component="span">{row.original.phone}</Typography>,
     },
   ];
 
@@ -181,10 +150,7 @@ export const getUsersTableColumns = ({
           <Chip
             size="small"
             variant="outlined"
-            label={
-              organizationNameById.get(organizationId) ??
-              `#${organizationId}`
-            }
+            label={organizationNameById.get(organizationId) ?? `#${organizationId}`}
           />
         );
       },
@@ -194,31 +160,18 @@ export const getUsersTableColumns = ({
   columns.push(
     {
       id: "roleName",
-      accessorFn: (row) =>
-        row.roles.map((role) => role.name).join(", "),
+      accessorFn: (row) => row.roles.map((role) => role.name).join(", "),
       header: t("users.organizationUsers.roleName"),
       filterVariant: "text",
       enableGlobalFilter: false,
       Cell: ({ row }) => (
-        <Stack
-          direction="row"
-          spacing={0.75}
-          sx={{ flexWrap: "wrap" }}
-        >
+        <Stack direction="row" spacing={0.75} sx={{ flexWrap: "wrap" }}>
           {row.original.roles.length ? (
             row.original.roles.map((role) => (
-              <Chip
-                key={role.id}
-                label={role.name}
-                size="small"
-                variant="outlined"
-              />
+              <Chip key={role.id} label={role.name} size="small" variant="outlined" />
             ))
           ) : (
-            <Typography
-              variant="body2"
-              color="text.secondary"
-            >
+            <Typography variant="body2" color="text.secondary">
               -
             </Typography>
           )}
@@ -320,9 +273,7 @@ export const getUsersTableColumns = ({
       enableGlobalFilter: false,
       enableColumnFilter: false,
       Cell: ({ row }) => (
-        <Typography component="span">
-          {formatDate(row.original.createdAt)}
-        </Typography>
+        <Typography component="span">{formatDate(row.original.createdAt)}</Typography>
       ),
     },
     {
@@ -333,12 +284,7 @@ export const getUsersTableColumns = ({
       enableSorting: false,
       enableColumnFilter: false,
       enableColumnActions: false,
-      Cell: ({ row }) => (
-        <UserActions
-          user={row.original}
-          isSuperAdmin={isSuperAdmin}
-        />
-      ),
+      Cell: ({ row }) => <UserActions user={row.original} isSuperAdmin={isSuperAdmin} />,
     },
   );
 

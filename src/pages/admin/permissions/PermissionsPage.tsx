@@ -58,9 +58,7 @@ const PermissionsPage = () => {
             {t("permissions.title")}
           </Typography>
 
-          <Typography color="text.secondary">
-            {t("permissions.subtitle")}
-          </Typography>
+          <Typography color="text.secondary">{t("permissions.subtitle")}</Typography>
         </Box>
       </Stack>
 

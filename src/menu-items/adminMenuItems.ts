@@ -14,6 +14,7 @@ import PlaceRoundedIcon from "@mui/icons-material/PlaceRounded";
 import SignpostRoundedIcon from "@mui/icons-material/SignpostRounded";
 import EventAvailableRoundedIcon from "@mui/icons-material/EventAvailableRounded";
 import TimelineRoundedIcon from "@mui/icons-material/TimelineRounded";
+import DepartureBoardRoundedIcon from "@mui/icons-material/DepartureBoardRounded";
 import type { AppMenuItem } from "./menu.types";
 
 export const adminMenuItems: AppMenuItem[] = [
@@ -127,6 +128,14 @@ export const adminMenuItems: AppMenuItem[] = [
         icon: TimelineRoundedIcon,
         type: "item",
         permission: "read:trip",
+      },
+      {
+        id: "runs",
+        title: "menu.runs",
+        path: "/admin/dashboard/runs",
+        icon: DepartureBoardRoundedIcon,
+        type: "item",
+        permission: "read:schedule_run",
       },
       {
         id: "drivers",

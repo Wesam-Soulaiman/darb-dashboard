@@ -30,8 +30,7 @@ export default function MyProfile() {
   }
 
   const fullName = `${me.data.firstName} ${me.data.lastName}`.trim();
-  const initials =
-    `${me.data.firstName?.[0] ?? ""}${me.data.lastName?.[0] ?? ""}` || "U";
+  const initials = `${me.data.firstName?.[0] ?? ""}${me.data.lastName?.[0] ?? ""}` || "U";
 
   return (
     <Stack spacing={3}>
@@ -59,10 +58,7 @@ export default function MyProfile() {
         </Box>
       </Stack>
 
-      <Card
-        variant="outlined"
-        sx={{ borderColor: "divider", boxShadow: "none" }}
-      >
+      <Card variant="outlined" sx={{ borderColor: "divider", boxShadow: "none" }}>
         <CardContent>
           <Stack spacing={2.5}>
             <Stack
@@ -133,9 +129,7 @@ export default function MyProfile() {
             </Stack>
 
             <Stack spacing={1}>
-              <Typography sx={{ fontWeight: 800 }}>
-                {t("users.details.roles")}
-              </Typography>
+              <Typography sx={{ fontWeight: 800 }}>{t("users.details.roles")}</Typography>
 
               {me.data.roles.length ? (
                 <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap" }}>

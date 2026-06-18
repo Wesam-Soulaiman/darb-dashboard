@@ -19,10 +19,7 @@ const UpdateSchedule = ({ schedule }: UpdateScheduleProps) => {
   const { t } = useTranslation();
   const updateSchedule = useUpdateSchedule(schedule.organizationId, schedule.id);
 
-  const handleSubmit = async (
-    values: ScheduleFormValues,
-    handleClose: () => void,
-  ) => {
+  const handleSubmit = async (values: ScheduleFormValues, handleClose: () => void) => {
     await updateSchedule.mutateAsync(values);
     handleClose();
   };

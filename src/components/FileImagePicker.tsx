@@ -85,11 +85,7 @@ const FileImagePicker = ({
           {title || "File Upload"}
         </Typography>
 
-        <Typography
-          component="p"
-          color="text.secondary"
-          sx={{ textAlign: "center" }}
-        >
+        <Typography component="p" color="text.secondary" sx={{ textAlign: "center" }}>
           {description || t("imagePicker.pickFile")}
         </Typography>
 

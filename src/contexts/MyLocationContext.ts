@@ -5,10 +5,7 @@ export type MyLocation = {
   lon: number;
 };
 
-export type MyLocationPermissionState =
-  | PermissionState
-  | "unsupported"
-  | "unknown";
+export type MyLocationPermissionState = PermissionState | "unsupported" | "unknown";
 
 export type MyLocationContextValue = {
   location: MyLocation | null;
@@ -20,17 +17,13 @@ export type MyLocationContextValue = {
   clearLocationError: () => void;
 };
 
-export const MyLocationContext = createContext<MyLocationContextValue | null>(
-  null,
-);
+export const MyLocationContext = createContext<MyLocationContextValue | null>(null);
 
 export const useMyLocationContext = () => {
   const context = useContext(MyLocationContext);
 
   if (!context) {
-    throw new Error(
-      "useMyLocationContext must be used within MyLocationProvider",
-    );
+    throw new Error("useMyLocationContext must be used within MyLocationProvider");
   }
 
   return context;

@@ -11,14 +11,9 @@ type UserActionsProps = {
   isSuperAdmin: boolean;
 };
 
-const UserActions = ({
-  user,
-  isSuperAdmin,
-}: UserActionsProps) => {
+const UserActions = ({ user, isSuperAdmin }: UserActionsProps) => {
   const canManageOperationalProfile =
-    !isSuperAdmin &&
-    Boolean(user.organizationId) &&
-    Boolean(user.profile);
+    !isSuperAdmin && Boolean(user.organizationId) && Boolean(user.profile);
 
   return (
     <Stack
@@ -29,19 +24,11 @@ const UserActions = ({
         flexWrap: "nowrap",
       }}
     >
-      <AssignUserRole
-        userId={user.id}
-        assignedRoles={user.roles}
-      />
+      <AssignUserRole userId={user.id} assignedRoles={user.roles} />
 
-      <UnassignUserRole
-        userId={user.id}
-        roles={user.roles}
-      />
+      <UnassignUserRole userId={user.id} roles={user.roles} />
 
-      {canManageOperationalProfile && (
-        <UpdateOperationalProfile user={user} />
-      )}
+      {canManageOperationalProfile && <UpdateOperationalProfile user={user} />}
 
       <DeleteUser user={user} />
     </Stack>

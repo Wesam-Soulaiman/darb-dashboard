@@ -1,9 +1,5 @@
 import { create } from "zustand";
-import {
-  createJSONStorage,
-  persist,
-  type StateStorage,
-} from "zustand/middleware";
+import { createJSONStorage, persist, type StateStorage } from "zustand/middleware";
 
 import type { FontKey } from "../theme/config/fonts";
 import type { PaletteKey } from "../theme/config/palettes";

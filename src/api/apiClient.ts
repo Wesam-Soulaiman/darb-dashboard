@@ -13,8 +13,7 @@ import {
   updateAuthTokens,
 } from "../core/auth/authStorage";
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
 
 const LOGIN_PATH = "/auth/login";
 const REFRESH_ENDPOINT = "/auth/refresh";
@@ -113,10 +112,8 @@ async function refreshAccessToken(): Promise<string | null> {
   );
 
   const payload = response.data.data ?? response.data;
-  const nextAccessToken =
-    payload.accessToken ?? payload.access_token ?? payload.token;
-  const nextRefreshToken =
-    payload.refreshToken ?? payload.refresh_token ?? refreshToken;
+  const nextAccessToken = payload.accessToken ?? payload.access_token ?? payload.token;
+  const nextRefreshToken = payload.refreshToken ?? payload.refresh_token ?? refreshToken;
 
   if (!nextAccessToken || !nextRefreshToken) {
     return null;

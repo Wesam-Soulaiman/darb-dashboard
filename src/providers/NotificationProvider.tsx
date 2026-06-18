@@ -26,9 +26,7 @@ function createNotificationId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
-function mapPayloadToNotification(
-  payload: MessagePayload,
-): AppNotification | null {
+function mapPayloadToNotification(payload: MessagePayload): AppNotification | null {
   const title = payload.notification?.title || payload.data?.title;
   const body = payload.notification?.body || payload.data?.body;
   const image = payload.notification?.image || payload.data?.image;
@@ -47,9 +45,7 @@ function mapPayloadToNotification(
   };
 }
 
-export default function NotificationProvider({
-  children,
-}: NotificationProviderProps) {
+export default function NotificationProvider({ children }: NotificationProviderProps) {
   const [token, setToken] = useState<string | null>(null);
   const [permission, setPermission] =
     useState<NotificationPermissionState>(getPermissionState);
@@ -150,9 +146,7 @@ export default function NotificationProvider({
         const notification = mapPayloadToNotification(payload);
         if (!notification) return;
 
-        setNotifications((prev) =>
-          [notification, ...prev].slice(0, MAX_NOTIFICATIONS),
-        );
+        setNotifications((prev) => [notification, ...prev].slice(0, MAX_NOTIFICATIONS));
       });
     }
 
@@ -205,8 +199,6 @@ export default function NotificationProvider({
   );
 
   return (
-    <NotificationContext.Provider value={value}>
-      {children}
-    </NotificationContext.Provider>
+    <NotificationContext.Provider value={value}>{children}</NotificationContext.Provider>
   );
 }

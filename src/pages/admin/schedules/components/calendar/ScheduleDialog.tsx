@@ -18,10 +18,7 @@ import EventAvailableRoundedIcon from "@mui/icons-material/EventAvailableRounded
 import { useTranslation } from "react-i18next";
 
 import DeletePopupAction from "../../../../../components/actions/DeletePopupAction";
-import type {
-  Schedule,
-  ScheduleException,
-} from "../../../../../types/schedule.types";
+import type { Schedule, ScheduleException } from "../../../../../types/schedule.types";
 import type {
   ScheduleFormInputValues,
   ScheduleFormValues,
@@ -98,9 +95,7 @@ const ScheduleDialog = ({
         >
           <Box>
             <Typography variant="h6" sx={{ fontWeight: 900 }}>
-              {isCreateMode
-                ? t("schedules.createTitle")
-                : t("schedules.updateTitle")}
+              {isCreateMode ? t("schedules.createTitle") : t("schedules.updateTitle")}
             </Typography>
 
             <Typography variant="body2" color="text.secondary">
@@ -133,9 +128,7 @@ const ScheduleDialog = ({
             showCard={false}
             loading={saving}
             submitLabel={
-              isCreateMode
-                ? t("schedules.actions.create")
-                : t("schedules.actions.update")
+              isCreateMode ? t("schedules.actions.create") : t("schedules.actions.update")
             }
             defaultValues={defaultValues}
             onSubmit={onSubmit}
@@ -175,15 +168,9 @@ const ScheduleDialog = ({
                 </Stack>
 
                 {exceptionsLoading && (
-                  <Stack
-                    direction="row"
-                    spacing={1.5}
-                    sx={{ alignItems: "center" }}
-                  >
+                  <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
                     <CircularProgress size={20} />
-                    <Typography color="text.secondary">
-                      {t("common.loading")}
-                    </Typography>
+                    <Typography color="text.secondary">{t("common.loading")}</Typography>
                   </Stack>
                 )}
 
@@ -191,11 +178,7 @@ const ScheduleDialog = ({
                   <Alert
                     severity="error"
                     action={
-                      <Button
-                        color="inherit"
-                        size="small"
-                        onClick={onRetryExceptions}
-                      >
+                      <Button color="inherit" size="small" onClick={onRetryExceptions}>
                         {t("common.retry")}
                       </Button>
                     }
@@ -236,9 +219,7 @@ const ScheduleDialog = ({
                           p: 1.5,
                           borderRadius: 2,
                           border: "1px solid",
-                          borderColor: isAdded
-                            ? "success.light"
-                            : "error.light",
+                          borderColor: isAdded ? "success.light" : "error.light",
                         }}
                       >
                         <Stack
@@ -280,30 +261,22 @@ const ScheduleDialog = ({
 
                             <Typography
                               variant="body2"
-                              color={
-                                exception.note
-                                  ? "text.primary"
-                                  : "text.secondary"
-                              }
+                              color={exception.note ? "text.primary" : "text.secondary"}
                               sx={{
                                 whiteSpace: "pre-wrap",
                                 overflowWrap: "anywhere",
                               }}
                             >
-                              {exception.note ||
-                                t("schedules.exceptions.noNote")}
+                              {exception.note || t("schedules.exceptions.noNote")}
                             </Typography>
                           </Stack>
 
                           <DeletePopupAction<ScheduleException>
                             item={exception}
                             title={t("schedules.exceptions.delete.title")}
-                            description={t(
-                              "schedules.exceptions.delete.message",
-                              {
-                                date: formatDate(exception.exceptionDate),
-                              },
-                            )}
+                            description={t("schedules.exceptions.delete.message", {
+                              date: formatDate(exception.exceptionDate),
+                            })}
                             tooltip={t("schedules.exceptions.actions.delete")}
                             confirmLabel={t("common.delete")}
                             cancelLabel={t("common.cancel")}

@@ -6,21 +6,13 @@ import RequireAuth from "./routing/RequireAuth";
 import RequirePasswordChange from "./routing/RequirePasswordChange";
 import RedirectIfPasswordAlreadyChanged from "./routing/RedirectIfPasswordAlreadyChanged";
 
-const RootLayout = Loadable(
-  lazy(() => import("../layouts/RootLayout/RootLayout")),
-);
+const RootLayout = Loadable(lazy(() => import("../layouts/RootLayout/RootLayout")));
 
-const AdminLayout = Loadable(
-  lazy(() => import("../layouts/AdminLayout/AdminLayout")),
-);
+const AdminLayout = Loadable(lazy(() => import("../layouts/AdminLayout/AdminLayout")));
 
-const TripsPage = Loadable(
-  lazy(() => import("../pages/admin/trips/TripsPage")),
-);
+const TripsPage = Loadable(lazy(() => import("../pages/admin/trips/TripsPage")));
 
-const TripSetupPage = Loadable(
-  lazy(() => import("../pages/admin/trips/TripSetupPage")),
-);
+const TripSetupPage = Loadable(lazy(() => import("../pages/admin/trips/TripSetupPage")));
 
 const ChangePasswordPage = Loadable(
   lazy(() => import("../pages/auth/MustChangePassword/ChangePasswordPage")),
@@ -32,9 +24,7 @@ const ScheduleCalendarPage = Loadable(
 //   lazy(() => import("../pages/admin/Dashboard/Dashboard")),
 // );
 
-const MyProfile = Loadable(
-  lazy(() => import("../pages/admin/MyProfile/MyProfile")),
-);
+const MyProfile = Loadable(lazy(() => import("../pages/admin/MyProfile/MyProfile")));
 
 const OrganizationsPage = Loadable(
   lazy(() => import("../pages/admin/organizations/OrganizationsPage")),
@@ -48,37 +38,27 @@ const CreateOrganizationPage = Loadable(
   lazy(() => import("../pages/admin/organizations/CreateOrganizationPage")),
 );
 
-const RolesPage = Loadable(
-  lazy(() => import("../pages/admin/roles/RolesPage")),
-);
+const RolesPage = Loadable(lazy(() => import("../pages/admin/roles/RolesPage")));
 
 const PermissionsPage = Loadable(
   lazy(() => import("../pages/admin/permissions/PermissionsPage")),
 );
 
-const UsersPage = Loadable(
-  lazy(() => import("../pages/admin/users/UsersPage")),
-);
+const UsersPage = Loadable(lazy(() => import("../pages/admin/users/UsersPage")));
 
-const PlacesPage = Loadable(
-  lazy(() => import("../pages/admin/places/PlacesPage")),
-);
+const PlacesPage = Loadable(lazy(() => import("../pages/admin/places/PlacesPage")));
 
-const StopsPage = Loadable(
-  lazy(() => import("../pages/admin/stops/StopsPage")),
-);
+const StopsPage = Loadable(lazy(() => import("../pages/admin/stops/StopsPage")));
 
-const RoutesPage = Loadable(
-  lazy(() => import("../pages/admin/routes/RoutesPage")),
-);
+const RoutesPage = Loadable(lazy(() => import("../pages/admin/routes/RoutesPage")));
 
-const BusesPage = Loadable(
-  lazy(() => import("../pages/admin/buses/BusesPage")),
-);
+const BusesPage = Loadable(lazy(() => import("../pages/admin/buses/BusesPage")));
 
 const SchedulesPage = Loadable(
   lazy(() => import("../pages/admin/schedules/SchedulesPage")),
 );
+
+const RunsPage = Loadable(lazy(() => import("../pages/admin/runs/RunsPage")));
 
 export const adminRoutes: RouteObject = {
   path: "/",
@@ -151,6 +131,10 @@ export const adminRoutes: RouteObject = {
                       element: <TripsPage />,
                     },
                     {
+                      path: ":orgId/runs",
+                      element: <RunsPage />,
+                    },
+                    {
                       path: ":id",
                       element: <OrganizationProfilePage />,
                     },
@@ -165,12 +149,16 @@ export const adminRoutes: RouteObject = {
                   element: <SchedulesPage />,
                 },
                 {
-  path: "dashboard/trips/:tripId/setup",
-  element: <TripSetupPage />,
-},
+                  path: "dashboard/trips/:tripId/setup",
+                  element: <TripSetupPage />,
+                },
                 {
                   path: "dashboard/trips",
                   element: <TripsPage />,
+                },
+                {
+                  path: "dashboard/runs",
+                  element: <RunsPage />,
                 },
                 {
                   path: "dashboard/buses",

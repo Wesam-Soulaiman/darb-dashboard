@@ -40,14 +40,7 @@ type ScheduleFormProps = {
 const DEFAULT_SCHEDULE_COLOR = "#3A7CDFFF";
 
 const DAYS: Array<{
-  key:
-    | "monday"
-    | "tuesday"
-    | "wednesday"
-    | "thursday"
-    | "friday"
-    | "saturday"
-    | "sunday";
+  key: "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday";
   labelKey: string;
 }> = [
   { key: "monday", labelKey: "schedules.days.monday" },
@@ -230,7 +223,7 @@ const ScheduleForm = ({
               />
             )}
           />
-          
+
           <Controller
             name="startDate"
             control={control}
@@ -284,8 +277,7 @@ const ScheduleForm = ({
                 required
                 error={Boolean(errors.color)}
                 helperText={
-                  getErrorMessage(errors.color?.message) ??
-                  t("schedules.form.colorHint")
+                  getErrorMessage(errors.color?.message) ?? t("schedules.form.colorHint")
                 }
                 onChange={field.onChange}
                 onBlur={field.onBlur}
@@ -425,9 +417,7 @@ const ScheduleForm = ({
                 <SaveRoundedIcon />
               )
             }
-            disabled={
-              !isValid || loading || (disableSubmitWhenPristine && !isDirty)
-            }
+            disabled={!isValid || loading || (disableSubmitWhenPristine && !isDirty)}
             sx={{ borderRadius: 2, minWidth: 150 }}
           >
             {loading ? t("common.saving") : submitLabel}

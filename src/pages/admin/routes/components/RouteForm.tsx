@@ -133,9 +133,7 @@ const RouteForm = ({
                     helperText={getErrorMessage(errors.originPlaceId?.message)}
                     disabled={places.isLoading}
                   >
-                    <MenuItem value="">
-                      {t("routes.form.selectOriginPlace")}
-                    </MenuItem>
+                    <MenuItem value="">{t("routes.form.selectOriginPlace")}</MenuItem>
 
                     {placesData.map((place) => (
                       <MenuItem key={place.id} value={place.id}>
@@ -158,9 +156,7 @@ const RouteForm = ({
                     value={field.value ?? ""}
                     onChange={(event) => field.onChange(event.target.value)}
                     error={Boolean(errors.destinationPlaceId)}
-                    helperText={getErrorMessage(
-                      errors.destinationPlaceId?.message,
-                    )}
+                    helperText={getErrorMessage(errors.destinationPlaceId?.message)}
                     disabled={places.isLoading}
                   >
                     <MenuItem value="">
@@ -224,9 +220,7 @@ const RouteForm = ({
             </Stack>
 
             <Stack spacing={1}>
-              <Typography sx={{ fontWeight: 800 }}>
-                {t("routes.form.line")}
-              </Typography>
+              <Typography sx={{ fontWeight: 800 }}>{t("routes.form.line")}</Typography>
 
               <TextField
                 fullWidth

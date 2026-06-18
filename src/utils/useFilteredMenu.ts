@@ -22,11 +22,7 @@ function filterMenuItems(
   return items
     .map((item) => {
       if (item.children?.length) {
-        const children = filterMenuItems(
-          item.children,
-          permissions,
-          isSuperAdmin,
-        );
+        const children = filterMenuItems(item.children, permissions, isSuperAdmin);
 
         return {
           ...item,

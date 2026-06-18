@@ -36,8 +36,7 @@ export const useCreateOrganization = () => {
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (payload: CreateOrganizationPayload) =>
-      organizationsApi.create(payload),
+    mutationFn: (payload: CreateOrganizationPayload) => organizationsApi.create(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: organizationsQueryKeys.all,
@@ -46,9 +45,7 @@ export const useCreateOrganization = () => {
       toast.success(t("organizations.toast.createSuccess"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("organizations.toast.createError")),
-      );
+      toast.error(getApiErrorMessage(error, t("organizations.toast.createError")));
     },
   });
 };
@@ -72,9 +69,7 @@ export const useUpdateOrganization = (id: number) => {
       toast.success(t("organizations.toast.updateSuccess"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("organizations.toast.updateError")),
-      );
+      toast.error(getApiErrorMessage(error, t("organizations.toast.updateError")));
     },
   });
 };
@@ -93,9 +88,7 @@ export const useDeleteOrganization = () => {
       toast.success(t("organizations.toast.deleteSuccess"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("organizations.toast.deleteError")),
-      );
+      toast.error(getApiErrorMessage(error, t("organizations.toast.deleteError")));
     },
   });
 };
@@ -119,9 +112,7 @@ export const useAssignOrganizationRoute = (id: number) => {
       toast.success(t("organizations.routes.toast.assignSuccess"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("organizations.routes.toast.assignError")),
-      );
+      toast.error(getApiErrorMessage(error, t("organizations.routes.toast.assignError")));
     },
   });
 };
@@ -145,9 +136,7 @@ export const useRemoveOrganizationRoute = (id: number) => {
       toast.success(t("organizations.routes.toast.removeSuccess"));
     },
     onError: (error) => {
-      toast.error(
-        getApiErrorMessage(error, t("organizations.routes.toast.removeError")),
-      );
+      toast.error(getApiErrorMessage(error, t("organizations.routes.toast.removeError")));
     },
   });
 };

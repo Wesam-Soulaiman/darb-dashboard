@@ -11,9 +11,7 @@ type DeleteTripProps = {
 const DeleteTrip = ({ trip }: DeleteTripProps) => {
   const { t } = useTranslation();
 
-  const deleteTrip = useDeleteTrip(
-    trip.organizationId,
-  );
+  const deleteTrip = useDeleteTrip(trip.organizationId);
 
   return (
     <DeletePopupAction<Trip>
@@ -26,9 +24,7 @@ const DeleteTrip = ({ trip }: DeleteTripProps) => {
       confirmLabel={t("common.delete")}
       cancelLabel={t("common.cancel")}
       loading={deleteTrip.isPending}
-      onConfirm={(selectedTrip) =>
-        deleteTrip.mutateAsync(selectedTrip.id)
-      }
+      onConfirm={(selectedTrip) => deleteTrip.mutateAsync(selectedTrip.id)}
     />
   );
 };

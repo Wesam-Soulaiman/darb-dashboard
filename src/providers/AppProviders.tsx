@@ -26,10 +26,7 @@ export default function AppProviders({ children }: AppProvidersProps) {
   return (
     <ThemeProvider>
       <RTLProvider>
-        <LocalizationProvider
-          dateAdapter={AdapterDayjs}
-          adapterLocale={adapterLocale}
-        >
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={adapterLocale}>
           <ReactQueryProvider>
             <MyLocationProvider autoRequest={false}>
               <NotificationProvider>{children}</NotificationProvider>

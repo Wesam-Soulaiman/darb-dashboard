@@ -39,11 +39,7 @@ const OperationalProfileForm = ({
     handleSubmit,
     reset,
     formState: { errors, isValid, isDirty },
-  } = useForm<
-    OperationalProfileFormInputValues,
-    unknown,
-    OperationalProfileFormValues
-  >({
+  } = useForm<OperationalProfileFormInputValues, unknown, OperationalProfileFormValues>({
     resolver: zodResolver(operationalProfileSchema),
     mode: "onChange",
     defaultValues: {
@@ -92,12 +88,8 @@ const OperationalProfileForm = ({
                   helperText={getErrorMessage(errors.status?.message)}
                 >
                   <MenuItem value="ACTIVE">{t("users.status.ACTIVE")}</MenuItem>
-                  <MenuItem value="ON_LEAVE">
-                    {t("users.status.ON_LEAVE")}
-                  </MenuItem>
-                  <MenuItem value="TERMINATED">
-                    {t("users.status.TERMINATED")}
-                  </MenuItem>
+                  <MenuItem value="ON_LEAVE">{t("users.status.ON_LEAVE")}</MenuItem>
+                  <MenuItem value="TERMINATED">{t("users.status.TERMINATED")}</MenuItem>
                 </TextField>
               )}
             />
