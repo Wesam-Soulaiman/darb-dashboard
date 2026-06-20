@@ -1,9 +1,7 @@
 import { useUsers } from "../users/useUsers";
 import type { GetUsersParams } from "../../types/user.types";
 
-const DRIVER_ROLE_NAME = "driver";
-
-type GetDriversParams = Omit<GetUsersParams, "organizationId" | "roleName">;
+type GetDriversParams = Omit<GetUsersParams, "organizationId" | "roleName" | "isDriver">;
 
 export const useDrivers = (orgId: number, params?: GetDriversParams) => {
   const hasValidOrgId = Number.isFinite(orgId) && orgId > 0;
@@ -12,7 +10,7 @@ export const useDrivers = (orgId: number, params?: GetDriversParams) => {
     {
       ...params,
       organizationId: orgId,
-      roleName: DRIVER_ROLE_NAME,
+      isDriver: true,
     },
     hasValidOrgId,
   );

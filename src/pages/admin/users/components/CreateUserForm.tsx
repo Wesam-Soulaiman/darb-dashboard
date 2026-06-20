@@ -1,17 +1,24 @@
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Box,
   Button,
   Card,
   CardContent,
+  Collapse,
+  Divider,
+  FormControl,
   FormControlLabel,
+  FormHelperText,
   MenuItem,
   Stack,
   Switch,
   TextField,
+  Typography,
 } from "@mui/material";
 import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
-import { Controller, useForm } from "react-hook-form";
+import DriveEtaRoundedIcon from "@mui/icons-material/DriveEtaRounded";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -20,17 +27,18 @@ import {
   type CreateUserFormValues,
 } from "../../../../schemas/users/userSchemas";
 import { useOrganizations } from "../../../../hooks/organizations/useOrganizations";
-import type { Organization } from "../../../../types/organization.types";
 
 type CreateUserFormProps = {
-  showOrganizationField: boolean;
+  defaultValues?: Partial<CreateUserFormInputValues>;
+  showOrganizationField?: boolean;
   loading?: boolean;
   submitLabel: string;
   onSubmit: (values: CreateUserFormValues) => Promise<void> | void;
 };
 
 const CreateUserForm = ({
-  showOrganizationField,
+  defaultValues,
+  showOrganizationField = false,
   loading = false,
   submitLabel,
   onSubmit,
@@ -38,11 +46,11 @@ const CreateUserForm = ({
   const { t } = useTranslation();
   const organizations = useOrganizations();
 
-  const organizationsList: Organization[] = organizations.data ?? [];
-
   const {
     control,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { errors, isValid, isDirty },
   } = useForm<CreateUserFormInputValues, unknown, CreateUserFormValues>({
     resolver: zodResolver(createUserSchema),
@@ -52,19 +60,79 @@ const CreateUserForm = ({
       firstName: "",
       lastName: "",
       email: "",
-      organizationId: null,
+      organizationId: defaultValues?.organizationId ?? null,
       isActive: true,
+      isDriver: false,
       hireDate: "",
       licenseNumber: "",
       licenseExpiry: "",
+      ...defaultValues,
     },
   });
+
+  const selectedOrganizationId = useWatch({
+    control,
+    name: "organizationId",
+  });
+
+  const isDriver = Boolean(
+    useWatch({
+      control,
+      name: "isDriver",
+    }),
+  );
+
+  const hasOrganization =
+    selectedOrganizationId !== null &&
+    selectedOrganizationId !== undefined &&
+    selectedOrganizationId !== "";
+
+  useEffect(() => {
+    if (!hasOrganization && getValues("isDriver")) {
+      setValue("isDriver", false, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    }
+  }, [getValues, hasOrganization, setValue]);
+
+  useEffect(() => {
+    if (isDriver) {
+      return;
+    }
+
+    const currentLicenseNumber = getValues("licenseNumber");
+
+    const currentLicenseExpiry = getValues("licenseExpiry");
+
+    if (currentLicenseNumber) {
+      setValue("licenseNumber", "", {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    }
+
+    if (currentLicenseExpiry) {
+      setValue("licenseExpiry", "", {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    }
+  }, [getValues, isDriver, setValue]);
 
   const getErrorMessage = (message: unknown) =>
     typeof message === "string" ? t(message) : undefined;
 
+  const organizationList = organizations.data ?? [];
+
   return (
-    <Card variant="outlined" sx={{ borderColor: "divider", boxShadow: "none" }}>
+    <Card
+      variant="outlined"
+      sx={{
+        borderColor: "divider",
+        boxShadow: "none",
+      }}
+    >
       <CardContent>
         <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={2.5}>
@@ -83,7 +151,13 @@ const CreateUserForm = ({
               )}
             />
 
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+            <Stack
+              direction={{
+                xs: "column",
+                sm: "row",
+              }}
+              spacing={2}
+            >
               <Controller
                 name="firstName"
                 control={control}
@@ -142,21 +216,121 @@ const CreateUserForm = ({
                     label={t("users.form.organization")}
                     value={field.value ?? ""}
                     onChange={field.onChange}
-                    disabled={organizations.isLoading}
+                    disabled={organizations.isLoading || loading}
                     error={Boolean(errors.organizationId)}
                     helperText={getErrorMessage(errors.organizationId?.message)}
                   >
                     <MenuItem value="">{t("users.form.noOrganization")}</MenuItem>
 
-                    {organizationsList.map((organization) => (
+                    {organizationList.map((organization) => (
                       <MenuItem key={organization.id} value={organization.id}>
-                        {organization.name} #{organization.id}
+                        {organization.name}
                       </MenuItem>
                     ))}
                   </TextField>
                 )}
               />
             )}
+
+            <Controller
+              name="isActive"
+              control={control}
+              render={({ field }) => (
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={Boolean(field.value)}
+                      onChange={(_event, checked) => field.onChange(checked)}
+                      disabled={loading}
+                    />
+                  }
+                  label={t("users.form.isActive")}
+                />
+              )}
+            />
+
+            <Divider />
+
+            <Stack spacing={1}>
+              <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+                <DriveEtaRoundedIcon color="action" />
+
+                <Typography sx={{ fontWeight: 800 }}>
+                  {t("users.form.driverInformation")}
+                </Typography>
+              </Stack>
+
+              <Controller
+                name="isDriver"
+                control={control}
+                render={({ field }) => (
+                  <FormControl error={Boolean(errors.isDriver)}>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={Boolean(field.value)}
+                          onChange={(_event, checked) => field.onChange(checked)}
+                          disabled={loading || !hasOrganization}
+                        />
+                      }
+                      label={t("users.form.isDriver")}
+                    />
+
+                    <FormHelperText>
+                      {errors.isDriver?.message
+                        ? getErrorMessage(errors.isDriver.message)
+                        : hasOrganization
+                          ? t("users.form.isDriverHelper")
+                          : t("users.form.driverRequiresOrganization")}
+                    </FormHelperText>
+                  </FormControl>
+                )}
+              />
+
+              <Collapse in={isDriver}>
+                <Stack spacing={2} sx={{ pt: 1 }}>
+                  <Controller
+                    name="licenseNumber"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        value={field.value ?? ""}
+                        fullWidth
+                        required={isDriver}
+                        label={t("users.organizationUsers.licenseNumber")}
+                        error={Boolean(errors.licenseNumber)}
+                        helperText={getErrorMessage(errors.licenseNumber?.message)}
+                      />
+                    )}
+                  />
+
+                  <Controller
+                    name="licenseExpiry"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        value={field.value ?? ""}
+                        fullWidth
+                        required={isDriver}
+                        type="date"
+                        label={t("users.organizationUsers.licenseExpiry")}
+                        slotProps={{
+                          inputLabel: {
+                            shrink: true,
+                          },
+                        }}
+                        error={Boolean(errors.licenseExpiry)}
+                        helperText={getErrorMessage(errors.licenseExpiry?.message)}
+                      />
+                    )}
+                  />
+                </Stack>
+              </Collapse>
+            </Stack>
+
+            <Divider />
 
             <Controller
               name="hireDate"
@@ -179,59 +353,12 @@ const CreateUserForm = ({
               )}
             />
 
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-              <Controller
-                name="licenseNumber"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    label={t("users.organizationUsers.licenseNumber")}
-                    error={Boolean(errors.licenseNumber)}
-                    helperText={getErrorMessage(errors.licenseNumber?.message)}
-                  />
-                )}
-              />
-
-              <Controller
-                name="licenseExpiry"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    type="date"
-                    label={t("users.organizationUsers.licenseExpiry")}
-                    slotProps={{
-                      inputLabel: {
-                        shrink: true,
-                      },
-                    }}
-                    error={Boolean(errors.licenseExpiry)}
-                    helperText={getErrorMessage(errors.licenseExpiry?.message)}
-                  />
-                )}
-              />
-            </Stack>
-
-            <Controller
-              name="isActive"
-              control={control}
-              render={({ field }) => (
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={Boolean(field.value)}
-                      onChange={(_, checked) => field.onChange(checked)}
-                    />
-                  }
-                  label={t("users.form.isActive")}
-                />
-              )}
-            />
-
-            <Stack direction="row" sx={{ justifyContent: "flex-end" }}>
+            <Stack
+              direction="row"
+              sx={{
+                justifyContent: "flex-end",
+              }}
+            >
               <Button
                 type="submit"
                 variant="contained"

@@ -165,6 +165,7 @@ const CompanyUsersPage = ({ organizationId }: CompanyUsersPageProps) => {
               "lastName",
               "email",
               "isActive",
+              "isDriver",
               "createdAt",
               "updatedAt",
             ]}

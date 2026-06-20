@@ -60,6 +60,14 @@ const SchedulesPage = Loadable(
 
 const RunsPage = Loadable(lazy(() => import("../pages/admin/runs/RunsPage")));
 
+const RunsArchivePage = Loadable(
+  lazy(() => import("../pages/admin/runs/RunsArchivePage")),
+);
+
+const RunTrackingPage = Loadable(
+  lazy(() => import("../pages/admin/runs/RunTrackingPage")),
+);
+
 export const adminRoutes: RouteObject = {
   path: "/",
   element: <RootLayout />,
@@ -131,6 +139,14 @@ export const adminRoutes: RouteObject = {
                       element: <TripsPage />,
                     },
                     {
+                      path: ":orgId/runs/:runId/tracking",
+                      element: <RunTrackingPage />,
+                    },
+                    {
+                      path: ":orgId/runs/archive",
+                      element: <RunsArchivePage />,
+                    },
+                    {
                       path: ":orgId/runs",
                       element: <RunsPage />,
                     },
@@ -159,6 +175,14 @@ export const adminRoutes: RouteObject = {
                 {
                   path: "dashboard/runs",
                   element: <RunsPage />,
+                },
+                {
+                  path: "dashboard/runs/:runId/tracking",
+                  element: <RunTrackingPage />,
+                },
+                {
+                  path: "dashboard/runs/archive",
+                  element: <RunsArchivePage />,
                 },
                 {
                   path: "dashboard/buses",

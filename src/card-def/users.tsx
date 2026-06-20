@@ -99,6 +99,14 @@ export const getUsersCard = ({
                 user.isActive ? t("users.details.active") : t("users.details.inactive")
               }
             />
+            {user.isDriver && (
+              <Chip
+                size="small"
+                color="info"
+                label={t("users.details.driver")}
+                variant="outlined"
+              />
+            )}
           </Stack>
 
           <Divider />
@@ -171,14 +179,41 @@ export const getUsersCard = ({
                   </Typography>
                 </Box>
 
-                <Box sx={{ flex: 1 }}>
-                  <Typography variant="caption" color="text.secondary">
-                    {t("users.organizationUsers.licenseExpiry")}
-                  </Typography>
-                  <Typography variant="body2">
-                    {formatDate(user.profile.licenseExpiry)}
-                  </Typography>
-                </Box>
+                {user.isDriver && (
+                  <Stack
+                    direction={{
+                      xs: "column",
+                      sm: "row",
+                    }}
+                    spacing={2}
+                  >
+                    {/* <Box sx={{ flex: 1 }}>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+      >
+        {t(
+          "users.organizationUsers.licenseNumber",
+        )}
+      </Typography>
+
+      <Typography variant="body2">
+        {user.profile?.licenseNumber ??
+          "-"}
+      </Typography>
+    </Box> */}
+
+                    <Box sx={{ flex: 1 }}>
+                      <Typography variant="caption" color="text.secondary">
+                        {t("users.organizationUsers.licenseExpiry")}
+                      </Typography>
+
+                      <Typography variant="body2">
+                        {formatDate(user.profile?.licenseExpiry)}
+                      </Typography>
+                    </Box>
+                  </Stack>
+                )}
               </Stack>
             </>
           )}

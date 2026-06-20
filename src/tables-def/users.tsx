@@ -255,15 +255,58 @@ export const getUsersTableColumns = ({
         </Typography>
       ),
     },
+
+    {
+      id: "isDriver",
+      accessorFn: (row) => row.isDriver,
+      header: t("users.table.driver"),
+      enableGlobalFilter: false,
+      enableColumnFilter: false,
+      Cell: ({ row }) =>
+        row.original.isDriver ? (
+          <Chip
+            size="small"
+            color="info"
+            label={t("users.details.driver")}
+            variant="outlined"
+          />
+        ) : (
+          <Typography variant="body2" color="text.secondary">
+            -
+          </Typography>
+        ),
+    },
+    // {
+    //   id: "licenseNumber",
+    //   accessorFn: (row) => (row.isDriver ? (row.profile?.licenseNumber ?? "") : ""),
+    //   header: t("users.organizationUsers.licenseNumber"),
+    //   enableGlobalFilter: false,
+    //   enableColumnFilter: false,
+    //   Cell: ({ row }) => {
+    //     if (!row.original.isDriver) {
+    //       return (
+    //         <Typography variant="body2" color="text.secondary">
+    //           -
+    //         </Typography>
+    //       );
+    //     }
+
+    //     return (
+    //       <Typography component="span">
+    //         {row.original.profile?.licenseNumber ?? "-"}
+    //       </Typography>
+    //     );
+    //   },
+    // },
     {
       id: "licenseExpiry",
-      accessorFn: (row) => row.profile?.licenseExpiry ?? "",
+      accessorFn: (row) => (row.isDriver ? (row.profile?.licenseExpiry ?? "") : ""),
       header: t("users.organizationUsers.licenseExpiry"),
       enableGlobalFilter: false,
       enableColumnFilter: false,
       Cell: ({ row }) => (
         <Typography component="span">
-          {formatDate(row.original.profile?.licenseExpiry)}
+          {row.original.isDriver ? formatDate(row.original.profile?.licenseExpiry) : "-"}
         </Typography>
       ),
     },

@@ -1,5 +1,7 @@
 import { apiClient } from "../apiClient";
 
+import { localGtfsTimeToUtc, utcGtfsTimeToLocal } from "../../utils/gtfsTimeZone";
+
 import type {
   CreateTripPayload,
   GetTripsParams,
@@ -16,6 +18,54 @@ import type {
 
 const getTripsEndpoint = (orgId: number) => `/organizations/${orgId}/trips`;
 
+const mapStopTimeToLocal = (stopTime: TripStopTime): TripStopTime => ({
+  ...stopTime,
+
+  arrivalTime: utcGtfsTimeToLocal(stopTime.arrivalTime),
+
+  departureTime: utcGtfsTimeToLocal(stopTime.departureTime),
+});
+
+const mapFrequencyToLocal = (frequency: TripFrequency): TripFrequency => ({
+  ...frequency,
+
+  startTime: utcGtfsTimeToLocal(frequency.startTime),
+
+  endTime: utcGtfsTimeToLocal(frequency.endTime),
+});
+
+const mapTripDetailsToLocal = (trip: TripDetails): TripDetails => ({
+  ...trip,
+
+  stopTimes: trip.stopTimes.map(mapStopTimeToLocal),
+
+  frequencies: trip.frequencies.map(mapFrequencyToLocal),
+});
+
+const mapStopTimesPayloadToUtc = (
+  payload: ReplaceTripStopTimesPayload,
+): ReplaceTripStopTimesPayload => ({
+  stopTimes: payload.stopTimes.map((stopTime) => ({
+    ...stopTime,
+
+    arrivalTime: localGtfsTimeToUtc(stopTime.arrivalTime),
+
+    departureTime: localGtfsTimeToUtc(stopTime.departureTime),
+  })),
+});
+
+const mapFrequenciesPayloadToUtc = (
+  payload: ReplaceTripFrequenciesPayload,
+): ReplaceTripFrequenciesPayload => ({
+  frequencies: payload.frequencies.map((frequency) => ({
+    ...frequency,
+
+    startTime: localGtfsTimeToUtc(frequency.startTime),
+
+    endTime: localGtfsTimeToUtc(frequency.endTime),
+  })),
+});
+
 export const tripsApi = {
   getAll: async (orgId: number, params?: GetTripsParams) => {
     const response = await apiClient.get<TripsResponse>(getTripsEndpoint(orgId), {
@@ -30,7 +80,7 @@ export const tripsApi = {
       `${getTripsEndpoint(orgId)}/${tripId}`,
     );
 
-    return response.data;
+    return mapTripDetailsToLocal(response.data);
   },
 
   create: async (orgId: number, payload: CreateTripPayload) => {
@@ -57,12 +107,14 @@ export const tripsApi = {
     tripId: number,
     payload: ReplaceTripStopTimesPayload,
   ) => {
+    const utcPayload = mapStopTimesPayloadToUtc(payload);
+
     const response = await apiClient.put<TripStopTime[]>(
       `${getTripsEndpoint(orgId)}/${tripId}/stop-times`,
-      payload,
+      utcPayload,
     );
 
-    return response.data;
+    return response.data.map(mapStopTimeToLocal);
   },
 
   replaceFrequencies: async (
@@ -70,12 +122,14 @@ export const tripsApi = {
     tripId: number,
     payload: ReplaceTripFrequenciesPayload,
   ) => {
+    const utcPayload = mapFrequenciesPayloadToUtc(payload);
+
     const response = await apiClient.put<TripFrequency[]>(
       `${getTripsEndpoint(orgId)}/${tripId}/frequencies`,
-      payload,
+      utcPayload,
     );
 
-    return response.data;
+    return response.data.map(mapFrequencyToLocal);
   },
 
   previewTimes: async (orgId: number, tripId: number, date: string) => {
@@ -88,6 +142,12 @@ export const tripsApi = {
       },
     );
 
-    return response.data;
+    return {
+      ...response.data,
+
+      departures: response.data.departures.map((departure) =>
+        utcGtfsTimeToLocal(departure, date),
+      ),
+    };
   },
 };

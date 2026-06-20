@@ -271,6 +271,13 @@
     "routesLoadError": "تعذر تحميل الخطوط المتاحة للشركة.",
     "loadError": "تعذر تحميل انطلاقات التشغيل الخاصة بالتاريخ المحدد.",
     "optionsLoadError": "تعذر تحميل بعض بيانات السائقين أو الباصات. قد لا تكون خيارات التعيين مكتملة.",
+    "realtime": {
+      "connecting": "جارٍ الاتصال المباشر...",
+      "connected": "متصل مباشرة",
+      "disconnected": "غير متصل",
+      "error": "خطأ في الاتصال",
+      "connectionError": "تعذر الاتصال بخدمة التحديث المباشر."
+    },
     "actions": {
       "today": "العودة إلى اليوم",
       "backToOrganization": "العودة إلى الشركة",
@@ -280,7 +287,51 @@
       "editAssignment": "تعديل التعيين",
       "confirm": "تأكيد التشغيل",
       "confirming": "جارٍ التأكيد...",
-      "track": "متابعة مباشرة"
+      "track": "متابعة مباشرة",
+      "archive": "أرشيف الانطلاقات",
+      "cancelRun": "إلغاء التشغيل"
+    },
+    "today": {
+      "label": "تاريخ التشغيل الحالي"
+    },
+    "archive": {
+      "title": "أرشيف الانطلاقات",
+      "subtitle": "عرض وبحث وتصفية الانطلاقات التشغيلية السابقة",
+      "backToToday": "العودة إلى تشغيل اليوم",
+      "loadError": "تعذر تحميل أرشيف الانطلاقات.",
+      "resultCount_zero": "لا توجد نتائج",
+      "resultCount_one": "نتيجة واحدة",
+      "resultCount_two": "نتيجتان",
+      "resultCount_few": "{{count}} نتائج",
+      "resultCount_many": "{{count}} نتيجة",
+      "resultCount_other": "{{count}} نتيجة",
+      "filters": {
+        "title": "فلاتر الأرشيف",
+        "exactDate": "تاريخ محدد",
+        "dateRange": "مجال زمني",
+        "date": "التاريخ",
+        "fromDate": "من تاريخ",
+        "toDate": "إلى تاريخ",
+        "route": "الخط",
+        "allRoutes": "جميع الخطوط",
+        "trip": "قالب الرحلة",
+        "allTrips": "جميع قوالب الرحلات",
+        "schedule": "جدول التشغيل",
+        "allSchedules": "جميع جداول التشغيل",
+        "driver": "السائق",
+        "allDrivers": "جميع السائقين",
+        "bus": "الباص",
+        "allBuses": "جميع الباصات",
+        "status": "الحالة",
+        "allStatuses": "جميع الحالات",
+        "excludeFinished": "إخفاء الرحلات المكتملة والملغاة",
+        "apply": "تطبيق الفلاتر",
+        "reset": "إعادة التعيين"
+      },
+      "empty": {
+        "title": "لا توجد انطلاقات مطابقة",
+        "description": "لا توجد نتائج تطابق الفلاتر والفترة الزمنية المحددة."
+      }
     },
     "filters": {
       "date": "تاريخ التشغيل",
@@ -310,7 +361,9 @@
       "runCount_two": "انطلاقتان",
       "runCount_few": "{{count}} انطلاقات",
       "runCount_many": "{{count}} انطلاقة",
-      "runCount_other": "{{count}} انطلاقة"
+      "runCount_other": "{{count}} انطلاقة",
+      "expand": "اضغط لعرض انطلاقات الخط",
+      "collapse": "اضغط لإخفاء انطلاقات الخط"
     },
     "card": {
       "headsign": "وجهة الرحلة",
@@ -338,11 +391,6 @@
     "confirm": {
       "missingAssignment": "لا يمكن تأكيد التشغيل قبل تعيين السائق والباص."
     },
-    "delete": {
-      "title": "حذف انطلاقة التشغيل",
-      "message": "هل أنت متأكد من حذف انطلاقة {{time}} المتجهة إلى «{{headsign}}»؟ يسمح بحذف المسودات فقط.",
-      "tooltip": "حذف الانطلاقة"
-    },
     "empty": {
       "title": "لا توجد انطلاقات لهذا الخط",
       "description": "اضغط على زر إنشاء تشغيل الخط لتوليد الانطلاقات الخاصة بالتاريخ المحدد.",
@@ -350,7 +398,22 @@
       "noRoutesDescription": "يجب ربط خط واحد على الأقل بهذه الشركة قبل إنشاء التشغيل اليومي."
     },
     "tracking": {
-      "comingSoon": "سيتم تفعيل المتابعة المباشرة بعد تضمين الموقع والـ Socket."
+      "comingSoon": "سيتم تفعيل المتابعة المباشرة بعد تضمين الموقع والـ Socket.",
+      "title": "المتابعة المباشرة",
+      "backToRuns": "العودة إلى التشغيل اليومي",
+      "details": "تفاصيل المتابعة",
+      "invalidRun": "معرّف الرحلة أو الشركة غير صالح.",
+      "loadError": "تعذر تحميل بيانات الرحلة.",
+      "waitingForLocation": "تم الاتصال. بانتظار وصول أول تحديث للموقع من جهاز الباص.",
+      "busLocation": "موقع الباص الحالي",
+      "driver": "السائق",
+      "bus": "الباص",
+      "velocity": "السرعة المرسلة",
+      "velocityValue": "السرعة: {{value}}",
+      "lastUpdate": "آخر تحديث",
+      "currentStopSequence": "تسلسل الموقف الحالي",
+      "lastPassedStop": "آخر موقف تم تجاوزه",
+      "dropOffRequested": "تم تسجيل طلب نزول عند الموقف {{stopId}}."
     },
     "toast": {
       "createSuccess": "تم إنشاء تشغيل الخط لهذا اليوم بنجاح",
@@ -359,8 +422,22 @@
       "updateError": "تعذر تحديث تعيين التشغيل",
       "confirmSuccess": "تم تأكيد التشغيل بنجاح",
       "confirmError": "تعذر تأكيد التشغيل",
-      "deleteSuccess": "تم حذف مسودة التشغيل بنجاح",
-      "deleteError": "تعذر حذف التشغيل"
+      "cancelSuccess": "تم إلغاء التشغيل بنجاح",
+      "cancelError": "تعذر إلغاء التشغيل"
+    },
+    "cancel": {
+      "title": "إلغاء التشغيل",
+      "description": "سيتم إلغاء انطلاقة {{time}} المتجهة إلى «{{headsign}}».",
+      "warning": "سيتم تحويل حالة الانطلاقة إلى ملغاة. لا يمكن التراجع عن هذا الإجراء من لوحة التحكم.",
+      "reason": "سبب الإلغاء",
+      "reasonPlaceholder": "اكتب سبب إلغاء الانطلاقة...",
+      "reasonHint": "اكتب سبباً واضحاً من 3 إلى 500 حرف.",
+      "confirm": "تأكيد الإلغاء",
+      "cancelling": "جارٍ الإلغاء...",
+      "validation": {
+        "reasonRequired": "يجب أن يتكون سبب الإلغاء من 3 أحرف على الأقل.",
+        "reasonTooLong": "يجب ألا يتجاوز سبب الإلغاء 500 حرف."
+      }
     }
   },
   "trips": {
@@ -1233,7 +1310,8 @@
     "delete": {
       "title": "حذف المستخدم",
       "description": "هل أنت متأكد من حذف {{name}}؟",
-      "tooltip": "حذف المستخدم"
+      "tooltip": "حذف المستخدم",
+      "driver": "سائق"
     },
     "title": "المستخدمون",
     "subtitle": "إدارة مستخدمي النظام وربطهم بالشركات",
@@ -1256,7 +1334,11 @@
       "lastName": "الاسم الأخير",
       "email": "البريد الإلكتروني",
       "organization": "الشركة",
-      "noOrganization": "بدون شركة"
+      "noOrganization": "بدون شركة",
+      "isDriver": "مستخدم سائق",
+      "isDriverHelper": "يحدد أن هذا المستخدم سائق ويمكن تعيينه للرحلات",
+      "driverRequiresOrganization": "يجب اختيار شركة قبل تحديد المستخدم كسائق",
+      "driverInformation": "معلومات السائق"
     },
     "table": {
       "name": "الاسم",
@@ -1266,7 +1348,8 @@
       "type": "النوع",
       "roles": "الأدوار",
       "createdAt": "تاريخ الإنشاء",
-      "updatedAt": "آخر تحديث"
+      "updatedAt": "آخر تحديث",
+      "driver": "السائق"
     },
     "types": {
       "superAdmin": "مشرف عام",
@@ -1287,6 +1370,9 @@
       "roleUpdateError": "تعذر تحديث دور المستخدم",
       "roleRemoveSuccess": "تمت إزالة الدور من المستخدم بنجاح",
       "roleRemoveError": "تعذر إزالة الدور من المستخدم"
+    },
+    "validation": {
+      "driverRequiresOrganization": "لا يمكن إنشاء سائق دون ربطه بشركة"
     }
   },
   "table": {

@@ -44,7 +44,7 @@ export interface OperationalProfile {
 
 export type UserOperationalProfileSummary = Pick<
   OperationalProfile,
-  "employeeCode" | "hireDate" | "status" | "licenseExpiry"
+  "employeeCode" | "hireDate" | "status" | "licenseNumber" | "licenseExpiry"
 >;
 
 export interface UserListItem {
@@ -55,6 +55,7 @@ export interface UserListItem {
   email: string;
   organizationId: number | null;
   isActive: boolean;
+  isDriver: boolean;
   roles: UserRoleSummary[];
   profile: UserOperationalProfileSummary | null;
   createdAt: string;
@@ -68,11 +69,13 @@ export interface User {
   firstName: string;
   lastName: string;
   isSuperAdmin: boolean;
+  isDriver: boolean;
   isActive: boolean;
   mustChangePassword: boolean;
   roles: UserRole[];
   permissions: string[];
   organizationId: number | null;
+  profile?: OperationalProfile | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -86,6 +89,7 @@ export interface GetUsersParams {
   status?: OperationalProfileStatus;
   roleName?: string;
   organizationId?: number;
+  isDriver?: boolean;
 }
 
 export interface CreateUserPayload {
@@ -95,6 +99,7 @@ export interface CreateUserPayload {
   email: string;
   organizationId: number | null;
   isActive: boolean;
+  isDriver: boolean;
   hireDate: string;
   licenseNumber?: string;
   licenseExpiry?: string;
@@ -107,6 +112,7 @@ export interface CreatedUser {
   lastName: string;
   email: string;
   isActive: boolean;
+  isDriver: boolean;
   profile: OperationalProfile | null;
 }
 
@@ -116,6 +122,7 @@ export interface UpdateUserPayload {
   lastName?: string;
   email?: string;
   organizationId?: number | null;
+  isDriver: boolean;
 }
 
 export interface AssignUserRolePayload {

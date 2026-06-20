@@ -171,6 +171,7 @@ const SuperAdminUsersPage = () => {
               "email",
               "organizationId",
               "isActive",
+              "isDriver",
               "createdAt",
               "updatedAt",
             ]}

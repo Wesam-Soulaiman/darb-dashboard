@@ -273,7 +273,54 @@
       "editAssignment": "Edit assignment",
       "confirm": "Confirm operation",
       "confirming": "Confirming...",
-      "track": "Live tracking"
+      "track": "Live tracking",
+      "archive": "Runs archive",
+      "cancelRun": "Cancel run"
+    },
+    "realtime": {
+      "connecting": "Connecting live...",
+      "connected": "Live connected",
+      "disconnected": "Disconnected",
+      "error": "Connection error",
+      "connectionError": "Could not connect to the live update service."
+    },
+    "today": {
+      "label": "Current operating date"
+    },
+    "archive": {
+      "title": "Runs Archive",
+      "subtitle": "Browse, search and filter previous operational runs",
+      "backToToday": "Back to today's operations",
+      "loadError": "Could not load the runs archive.",
+      "resultCount_one": "{{count}} result",
+      "resultCount_other": "{{count}} results",
+      "filters": {
+        "title": "Archive filters",
+        "exactDate": "Exact date",
+        "dateRange": "Date range",
+        "date": "Date",
+        "fromDate": "From date",
+        "toDate": "To date",
+        "route": "Route",
+        "allRoutes": "All routes",
+        "trip": "Trip template",
+        "allTrips": "All trip templates",
+        "schedule": "Schedule",
+        "allSchedules": "All schedules",
+        "driver": "Driver",
+        "allDrivers": "All drivers",
+        "bus": "Bus",
+        "allBuses": "All buses",
+        "status": "Status",
+        "allStatuses": "All statuses",
+        "excludeFinished": "Hide completed and cancelled runs",
+        "apply": "Apply filters",
+        "reset": "Reset"
+      },
+      "empty": {
+        "title": "No matching runs",
+        "description": "No runs match the selected filters and date period."
+      }
     },
     "filters": {
       "date": "Operating date",
@@ -299,7 +346,9 @@
     "route": {
       "description": "Operational departures for this route",
       "runCount_one": "{{count}} run",
-      "runCount_other": "{{count}} runs"
+      "runCount_other": "{{count}} runs",
+      "expand": "Click to show route runs",
+      "collapse": "Click to hide route runs"
     },
     "card": {
       "headsign": "Trip headsign",
@@ -327,11 +376,6 @@
     "confirm": {
       "missingAssignment": "The run cannot be confirmed until both a driver and bus are assigned."
     },
-    "delete": {
-      "title": "Delete run",
-      "message": "Are you sure you want to delete the {{time}} run heading to “{{headsign}}”? Only draft runs can be deleted.",
-      "tooltip": "Delete run"
-    },
     "empty": {
       "title": "No runs for this route",
       "description": "Use the create route operations button to generate departures for the selected date.",
@@ -339,8 +383,24 @@
       "noRoutesDescription": "At least one route must be assigned to this organization before creating daily operations."
     },
     "tracking": {
-      "comingSoon": "Live tracking will be enabled after location and Socket support are implemented."
+      "comingSoon": "Live tracking will be enabled after location and Socket support are implemented.",
+      "title": "Live Tracking",
+      "backToRuns": "Back to daily operations",
+      "details": "Tracking details",
+      "invalidRun": "The run or organization identifier is invalid.",
+      "loadError": "Could not load the run.",
+      "waitingForLocation": "Connected. Waiting for the first location update from the bus device.",
+      "busLocation": "Current bus location",
+      "driver": "Driver",
+      "bus": "Bus",
+      "velocity": "Reported velocity",
+      "velocityValue": "Velocity: {{value}}",
+      "lastUpdate": "Last update",
+      "currentStopSequence": "Current stop sequence",
+      "lastPassedStop": "Last passed stop",
+      "dropOffRequested": "A drop-off was requested at stop {{stopId}}."
     },
+
     "toast": {
       "createSuccess": "Route operations were created successfully",
       "createError": "Could not create route operations",
@@ -348,8 +408,22 @@
       "updateError": "Could not update the run assignment",
       "confirmSuccess": "Run confirmed successfully",
       "confirmError": "Could not confirm the run",
-      "deleteSuccess": "Draft run deleted successfully",
-      "deleteError": "Could not delete the run"
+      "cancelSuccess": "Run cancelled successfully",
+      "cancelError": "Could not cancel the run"
+    },
+    "cancel": {
+      "title": "Cancel run",
+      "description": "The {{time}} run heading to “{{headsign}}” will be cancelled.",
+      "warning": "The run status will be changed to cancelled. This action cannot be reversed from the dashboard.",
+      "reason": "Cancellation reason",
+      "reasonPlaceholder": "Enter the reason for cancelling this run...",
+      "reasonHint": "Enter a clear reason between 3 and 500 characters.",
+      "confirm": "Confirm cancellation",
+      "cancelling": "Cancelling...",
+      "validation": {
+        "reasonRequired": "The cancellation reason must contain at least 3 characters.",
+        "reasonTooLong": "The cancellation reason must not exceed 500 characters."
+      }
     }
   },
   "trips": {
@@ -1155,7 +1229,8 @@
       "globalRole": "Global role",
       "rolePermissions": "Role permissions",
       "noRoles": "No roles are assigned to this user",
-      "noPermissions": "No permissions are available"
+      "noPermissions": "No permissions are available",
+      "driver": "Driver"
     },
     "delete": {
       "title": "Delete user",
@@ -1179,7 +1254,11 @@
       "lastName": "Last name",
       "email": "Email",
       "organization": "Organization",
-      "noOrganization": "No organization"
+      "noOrganization": "No organization",
+      "isDriver": "Driver user",
+      "isDriverHelper": "Marks this user as a driver who can be assigned to trips",
+      "driverRequiresOrganization": "Select an organization before marking the user as a driver",
+      "driverInformation": "Driver information"
     },
     "table": {
       "name": "Name",
@@ -1189,7 +1268,8 @@
       "type": "Type",
       "roles": "Roles",
       "createdAt": "Created at",
-      "updatedAt": "Last updated"
+      "updatedAt": "Last updated",
+      "driver": "Driver"
     },
     "types": {
       "superAdmin": "Super admin",
@@ -1210,6 +1290,9 @@
       "roleUpdateError": "Could not update user role",
       "roleRemoveSuccess": "Role removed from user successfully",
       "roleRemoveError": "Could not remove role from user"
+    },
+    "validation": {
+      "driverRequiresOrganization": "A driver must belong to an organization"
     }
   },
   "table": {

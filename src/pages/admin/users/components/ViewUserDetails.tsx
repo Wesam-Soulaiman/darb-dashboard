@@ -31,6 +31,7 @@ import LockResetRoundedIcon from "@mui/icons-material/LockResetRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import BlockRoundedIcon from "@mui/icons-material/BlockRounded";
 import AdminPanelSettingsRoundedIcon from "@mui/icons-material/AdminPanelSettingsRounded";
+import DriveEtaRoundedIcon from "@mui/icons-material/DriveEtaRounded";
 import { useTranslation } from "react-i18next";
 
 import { useUser } from "../../../../hooks/users/useUsers";
@@ -310,6 +311,15 @@ const ViewUserDetails = ({ userId, renderTrigger }: ViewUserDetailsProps) => {
                       }
                       variant="outlined"
                     />
+
+                    {user.data.isDriver && (
+                      <Chip
+                        icon={<DriveEtaRoundedIcon />}
+                        color="info"
+                        label={t("users.details.driver")}
+                        variant="outlined"
+                      />
+                    )}
 
                     {user.data.isSuperAdmin && (
                       <Chip
