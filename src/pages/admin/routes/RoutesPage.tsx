@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Stack, Typography } from "@mui/material";
 import AltRouteRoundedIcon from "@mui/icons-material/AltRouteRounded";
 import { useTranslation } from "react-i18next";
 import type { MRT_ColumnFiltersState } from "material-react-table";
@@ -13,6 +13,8 @@ import { useCursorPagination } from "../../../hooks/common/useCursorPagination";
 import type { Place } from "../../../types/place.types";
 import type { TransitMode, TransitRoute } from "../../../types/route.types";
 import CreateRoute from "./components/CreateRoute";
+import GpsFixedRoundedIcon from "@mui/icons-material/GpsFixedRounded";
+import { Link as RouterLink } from "react-router-dom";
 
 const DEFAULT_ROUTES_LIMIT = 20;
 
@@ -154,7 +156,34 @@ const RoutesPage = () => {
           </Box>
         </Stack>
 
-        <CreateRoute />
+        <Stack
+          direction={{
+            xs: "column",
+            sm: "row",
+          }}
+          spacing={1}
+          sx={{
+            alignItems: {
+              xs: "stretch",
+              sm: "center",
+            },
+          }}
+        >
+          <Button
+            component={RouterLink}
+            to="/admin/dashboard/routes/record"
+            variant="outlined"
+            startIcon={<GpsFixedRoundedIcon />}
+            sx={{
+              borderRadius: 2,
+              px: 2.5,
+            }}
+          >
+            {t("routes.recorder.open")}
+          </Button>
+
+          <CreateRoute />
+        </Stack>
       </Stack>
 
       <Card

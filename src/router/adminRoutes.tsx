@@ -68,6 +68,10 @@ const RunTrackingPage = Loadable(
   lazy(() => import("../pages/admin/runs/RunTrackingPage")),
 );
 
+const RouteRecorderPage = Loadable(
+  lazy(() => import("../pages/admin/routes/RouteRecorderPage")),
+);
+
 export const adminRoutes: RouteObject = {
   path: "/",
   element: <RootLayout />,
@@ -207,6 +211,10 @@ export const adminRoutes: RouteObject = {
                 {
                   path: "dashboard/stops",
                   element: <StopsPage />,
+                },
+                {
+                  path: "dashboard/routes/record",
+                  element: <RouteRecorderPage />,
                 },
                 {
                   path: "dashboard/routes",

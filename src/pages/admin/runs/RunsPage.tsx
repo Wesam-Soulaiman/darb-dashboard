@@ -50,12 +50,6 @@ const RunsPage = () => {
 
   const hasValidOrgId = Number.isFinite(orgId) && orgId > 0;
 
-  /*
-   * يجب استدعاء Hook الاتصال المباشر قبل أي return شرطي،
-   * حتى يبقى ترتيب Hooks ثابتًا.
-   */
-  const runsRealtime = useRunsRealtime(orgId, hasValidOrgId);
-
   const today = dayjs().format("YYYY-MM-DD");
 
   const [showFinished, setShowFinished] = useState(false);
@@ -65,6 +59,13 @@ const RunsPage = () => {
   const organization = useOrganization(hasValidOrgId ? orgId : Number.NaN);
 
   const dailyRuns = useDailyRuns(orgId, today, !showFinished, hasValidOrgId);
+
+  const realtimeRunIds = useMemo(
+    () => (dailyRuns.data ?? []).map((run) => run.id),
+    [dailyRuns.data],
+  );
+
+  const runsRealtime = useRunsRealtime(orgId, realtimeRunIds, hasValidOrgId);
 
   const buses = useBuses(orgId, {
     page: 1,

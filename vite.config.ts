@@ -52,6 +52,91 @@ export default defineConfig({
     }),
   ],
 
+  build: {
+    chunkSizeWarningLimit: 500,
+
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          const normalizedId = id.replace(/\\/g, "/");
+
+          if (!normalizedId.includes("/node_modules/")) {
+            return undefined;
+          }
+
+          if (normalizedId.includes("/node_modules/@mui/icons-material/")) {
+            return "mui-icons";
+          }
+
+          if (normalizedId.includes("/node_modules/@mui/x-")) {
+            return "mui-x";
+          }
+
+          if (
+            normalizedId.includes("/node_modules/@mui/material/") ||
+            normalizedId.includes("/node_modules/@mui/system/") ||
+            normalizedId.includes("/node_modules/@mui/utils/") ||
+            normalizedId.includes("/node_modules/@emotion/")
+          ) {
+            return "mui-core";
+          }
+
+          if (
+            normalizedId.includes("/node_modules/react/") ||
+            normalizedId.includes("/node_modules/react-dom/") ||
+            normalizedId.includes("/node_modules/react-router/") ||
+            normalizedId.includes("/node_modules/react-router-dom/")
+          ) {
+            return "react-vendor";
+          }
+
+          if (
+            normalizedId.includes("/node_modules/leaflet/") ||
+            normalizedId.includes("/node_modules/react-leaflet/")
+          ) {
+            return "map-vendor";
+          }
+
+          if (normalizedId.includes("/node_modules/@fullcalendar/")) {
+            return "calendar-vendor";
+          }
+
+          if (
+            normalizedId.includes("/node_modules/socket.io-client/") ||
+            normalizedId.includes("/node_modules/engine.io-client/")
+          ) {
+            return "socket-vendor";
+          }
+
+          if (normalizedId.includes("/node_modules/@tanstack/react-query/")) {
+            return "query-vendor";
+          }
+
+          if (
+            normalizedId.includes("/node_modules/react-hook-form/") ||
+            normalizedId.includes("/node_modules/@hookform/") ||
+            normalizedId.includes("/node_modules/zod/")
+          ) {
+            return "forms-vendor";
+          }
+
+          if (
+            normalizedId.includes("/node_modules/i18next/") ||
+            normalizedId.includes("/node_modules/react-i18next/")
+          ) {
+            return "i18n-vendor";
+          }
+
+          if (normalizedId.includes("/node_modules/dayjs/")) {
+            return "date-vendor";
+          }
+
+          return undefined;
+        },
+      },
+    },
+  },
+
   server: {
     host: "0.0.0.0",
     port: 5173,

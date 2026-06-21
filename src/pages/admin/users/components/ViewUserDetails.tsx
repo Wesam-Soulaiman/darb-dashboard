@@ -386,7 +386,56 @@ const ViewUserDetails = ({ userId, renderTrigger }: ViewUserDetailsProps) => {
                         ? t("profile.superAdmin")
                         : t("users.details.regularUser")
                     }
-                  />
+                        />
+                        {user.data.isDriver && (
+  <>
+    <Divider />
+
+    <Stack spacing={1.5}>
+      <Typography
+        variant="subtitle1"
+        sx={{ fontWeight: 900 }}
+      >
+        {t(
+          "users.form.driverInformation",
+        )}
+      </Typography>
+
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "1fr",
+            sm: "repeat(2, minmax(0, 1fr))",
+          },
+          gap: 2,
+        }}
+      >
+        <DetailItem
+          icon={<DriveEtaRoundedIcon />}
+          label={t(
+            "users.organizationUsers.licenseNumber",
+          )}
+          value={
+            user.data.profile
+              ?.licenseNumber ?? "-"
+          }
+        />
+
+        <DetailItem
+          icon={<CalendarMonthRoundedIcon />}
+          label={t(
+            "users.organizationUsers.licenseExpiry",
+          )}
+          value={formatDate(
+            user.data.profile
+              ?.licenseExpiry,
+          )}
+        />
+      </Box>
+    </Stack>
+  </>
+)}
 
                   <DetailItem
                     icon={<CalendarMonthRoundedIcon />}
