@@ -1,5 +1,7 @@
 import { useMemo } from "react";
-import { Button, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import DragIndicatorRoundedIcon from "@mui/icons-material/DragIndicatorRounded";
 import L from "leaflet";
 import { Marker, Polyline, Popup } from "react-leaflet";
 import { useTranslation } from "react-i18next";
@@ -29,8 +31,8 @@ const createEditablePointIcon = ({
     html: `
       <div
         style="
-          width: 30px;
-          height: 30px;
+          width: 32px;
+          height: 32px;
           border-radius: 999px;
           display: flex;
           align-items: center;
@@ -38,17 +40,18 @@ const createEditablePointIcon = ({
           background: ${backgroundColor};
           color: ${foregroundColor};
           border: 3px solid ${borderColor};
-          font-size: 11px;
+          font-size: 12px;
           font-weight: 900;
           cursor: grab;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+          user-select: none;
         "
       >
         ${label}
       </div>
     `,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
   });
 };
 
@@ -88,7 +91,7 @@ const EditableRouteLine = ({
 
   return (
     <>
-      {points.length >= 2 && (
+      {points.length >= minPoints && (
         <Polyline
           positions={points}
           pathOptions={{
@@ -109,7 +112,7 @@ const EditableRouteLine = ({
 
         return (
           <Marker
-            key={`route-point-${index}`}
+            key={`route-point-${index}-${point[0]}-${point[1]}`}
             position={point}
             icon={icon}
             draggable={!disabled}
@@ -123,33 +126,67 @@ const EditableRouteLine = ({
             }}
           >
             <Popup>
-              <Stack spacing={1}>
-                <Typography
-                  variant="body2"
+              <Stack spacing={1.25}>
+                <Stack
+                  direction="row"
+                  spacing={1}
                   sx={{
-                    fontWeight: 800,
+                    alignItems: "center",
                   }}
                 >
-                  {t("routes.lineEditor.pointTitle", {
-                    value: index + 1,
-                  })}
-                </Typography>
+                  <Box
+                    sx={{
+                      color: "primary.main",
+                      display: "flex",
+                    }}
+                  >
+                    <DragIndicatorRoundedIcon fontSize="small" />
+                  </Box>
 
-                <Typography variant="caption">
-                  {t("routes.lineEditor.dragPointHint")}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 800,
+                    }}
+                  >
+                    {t("routes.map.pointTitle", {
+                      value: index + 1,
+                    })}
+                  </Typography>
+                </Stack>
+
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: "text.secondary",
+                  }}
+                >
+                  {t("routes.map.dragPointHint")}
                 </Typography>
 
                 <Button
                   size="small"
                   color="error"
                   variant="outlined"
+                  startIcon={<DeleteRoundedIcon />}
                   disabled={disabled || points.length <= minPoints}
                   onClick={() => {
                     handleDeletePoint(index);
                   }}
                 >
-                  {t("routes.lineEditor.deletePoint")}
+                  {t("routes.map.deletePoint")}
                 </Button>
+
+                {points.length <= minPoints && (
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: "text.secondary",
+                    }}
+                  >
+                    {t("routes.map.minPointsHint")}
+                  </Typography>
+                )}
               </Stack>
             </Popup>
           </Marker>

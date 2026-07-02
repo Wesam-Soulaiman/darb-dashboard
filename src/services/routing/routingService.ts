@@ -1,3 +1,5 @@
+import { apiClient } from "../../api/apiClient";
+
 import type {
   GenerateRouteOnRoadsPayload,
   GenerateRouteOnRoadsResult,
@@ -6,20 +8,18 @@ import type {
   RoutingProvider,
 } from "../../types/routing.types";
 
-type OrsGeoJsonResponse = {
-  features?: Array<{
-    geometry?: {
-      type?: string;
-      coordinates?: GeoJsonCoordinate[];
-    };
-  }>;
-  error?: {
-    code?: number;
-    message?: string;
-  };
+type GeoJsonPoint = {
+  type: "Point";
+  coordinates: GeoJsonCoordinate;
 };
 
-const MAX_ORS_WAYPOINTS = 70;
+type GeoJsonLineString = {
+  type: "LineString";
+  coordinates: GeoJsonCoordinate[];
+  bbox?: number[];
+};
+
+const MAX_DIRECTIONS_WAYPOINTS = 70;
 
 const mapPointToGeoJsonCoordinate = ([
   latitude,
@@ -33,7 +33,7 @@ const geoJsonCoordinateToMapPoint = ([
 
 const limitWaypoints = (
   points: MapPoint[],
-  maxWaypoints = MAX_ORS_WAYPOINTS,
+  maxWaypoints = MAX_DIRECTIONS_WAYPOINTS,
 ): MapPoint[] => {
   if (points.length <= maxWaypoints) {
     return points;
@@ -52,87 +52,55 @@ const limitWaypoints = (
 const getRoutingProvider = (): RoutingProvider => {
   const provider = import.meta.env.VITE_ROUTING_PROVIDER;
 
-  if (provider === "backend") {
-    return "backend";
+  if (provider === "ors") {
+    return "ors";
   }
 
-  return "ors";
+  return "backend";
 };
 
-const generateRouteWithOpenRouteService = async ({
+const generateRouteWithBackend = async ({
   points,
 }: GenerateRouteOnRoadsPayload): Promise<GenerateRouteOnRoadsResult> => {
-  const apiKey = String(import.meta.env.VITE_ORS_API_KEY ?? "").trim();
-
-  const baseUrl = String(
-    import.meta.env.VITE_ORS_BASE_URL ?? "https://api.openrouteservice.org",
-  ).trim();
-
-  const profile = String(import.meta.env.VITE_ORS_PROFILE ?? "driving-car").trim();
-
-  if (!apiKey) {
-    throw new Error("Missing VITE_ORS_API_KEY.");
-  }
-
   if (points.length < 2) {
     throw new Error("At least two points are required.");
   }
 
   const waypoints = limitWaypoints(points);
 
-  const response = await fetch(`${baseUrl}/v2/directions/${profile}/geojson`, {
-    method: "POST",
-    headers: {
-      Authorization: apiKey,
-      "Content-Type": "application/json",
-      Accept: "application/json, application/geo+json",
-    },
-    body: JSON.stringify({
-      coordinates: waypoints.map(mapPointToGeoJsonCoordinate),
-      instructions: false,
-      elevation: false,
-    }),
-  });
+  const payload: GeoJsonPoint[] = waypoints.map((point) => ({
+    type: "Point",
+    coordinates: mapPointToGeoJsonCoordinate(point),
+  }));
 
-  const data = (await response.json()) as OrsGeoJsonResponse;
+  const response = await apiClient.post<GeoJsonLineString | null>("/directions", payload);
 
-  if (!response.ok) {
-    throw new Error(
-      data.error?.message || `Routing request failed with status ${response.status}.`,
-    );
-  }
+  const lineString = response.data;
 
-  const coordinates = data.features?.[0]?.geometry?.coordinates;
-
-  if (!coordinates || coordinates.length < 2) {
+  if (
+    !lineString ||
+    lineString.type !== "LineString" ||
+    !Array.isArray(lineString.coordinates) ||
+    lineString.coordinates.length < 2
+  ) {
     throw new Error("Routing provider did not return a valid route.");
   }
 
   return {
-    provider: "ors",
-    rawCoordinates: coordinates,
-    points: coordinates.map(geoJsonCoordinateToMapPoint),
+    provider: "backend",
+    rawCoordinates: lineString.coordinates,
+    points: lineString.coordinates.map(geoJsonCoordinateToMapPoint),
   };
 };
 
-const generateRouteWithBackend = async (
+const generateRouteWithOpenRouteService = async (
   payload: GenerateRouteOnRoadsPayload,
 ): Promise<GenerateRouteOnRoadsResult> => {
-  /*
-   * لاحقًا في production نغيّر هذا فقط.
-   * مثال مستقبلي:
-   *
-   * const response = await apiClient.post<GenerateRouteOnRoadsResult>(
-   *   "/routes/generate-line",
-   *   payload,
-   * );
-   *
-   * return response.data;
-   */
-
   void payload;
 
-  throw new Error("Backend routing provider is not implemented yet.");
+  throw new Error(
+    "Direct OpenRouteService routing is disabled. Use VITE_ROUTING_PROVIDER=backend.",
+  );
 };
 
 export const routingService = {
@@ -141,10 +109,10 @@ export const routingService = {
   ): Promise<GenerateRouteOnRoadsResult> => {
     const provider = getRoutingProvider();
 
-    if (provider === "backend") {
-      return generateRouteWithBackend(payload);
+    if (provider === "ors") {
+      return generateRouteWithOpenRouteService(payload);
     }
 
-    return generateRouteWithOpenRouteService(payload);
+    return generateRouteWithBackend(payload);
   },
 };
