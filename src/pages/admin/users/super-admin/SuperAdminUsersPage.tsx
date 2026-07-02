@@ -46,7 +46,8 @@ const getNumberFilter = (
 };
 
 const SuperAdminUsersPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language.startsWith("ar") ? "ar-SY" : "en-US";
 
   const [globalFilter, setGlobalFilter] = useState("");
 
@@ -79,20 +80,22 @@ const SuperAdminUsersPage = () => {
     () =>
       getUsersTableColumns({
         t,
+        locale,
         isSuperAdmin: true,
         organizations: organizations.data ?? [],
       }),
-    [t, organizations.data],
+    [locale, t, organizations.data],
   );
 
   const renderCard = useMemo(
     () =>
       getUsersCard({
         t,
+        locale,
         isSuperAdmin: true,
         organizations: organizations.data ?? [],
       }),
-    [t, organizations.data],
+    [locale, t, organizations.data],
   );
 
   const mobileFilters = useMemo(

@@ -2,6 +2,7 @@
   "common": {
     "loading": "Loading...",
     "user:": "User",
+    "user": "User",
     "actions": "Actions",
     "search": "Search",
     "upload": "Upload image",
@@ -31,7 +32,8 @@
   },
   "pagination": {
     "next": "Next",
-    "previous": "Previous"
+    "previous": "Previous",
+    "page": "Page"
   },
   "location": {
     "prepare": "Preparing your current location...",
@@ -51,6 +53,10 @@
   },
   "api": {
     "unexpectedError": "An unexpected error occurred."
+  },
+  "loadingError": {
+    "title": "Failed to load data",
+    "refetch": "Reload"
   },
   "app": {
     "title": "Public Transportation Dashboard",
@@ -194,6 +200,8 @@
     "changePassword": "Change password"
   },
   "sidebar": {
+    "trips": "Trips",
+    "schedules": "Schedules",
     "menu": {
       "organizations": "Organizations",
       "permissions": "Permissions",
@@ -238,6 +246,7 @@
     "integer": "Value must be an integer",
     "min1": "Value must be greater than zero",
     "invalidYear": "Invalid year",
+    "max64": "Must not exceed 64 characters",
     "selectAtLeastOneDay": "Select at least one operating day",
     "endDateAfterStartDate": "End date must be after start date",
     "passwordMin": "Password must be at least 8 characters",
@@ -246,6 +255,7 @@
     "passwordNumber": "Password must contain at least one number",
     "passwordsDoNotMatch": "Passwords do not match",
     "passwordSameAsCurrent": "New password cannot be the same as the current password",
+    "invalidColor": "Invalid color format. Use a value like #3A7CDF or #3A7CDF1D",
     "max120": "Must not exceed 120 characters",
     "invalidGtfsTime": "Invalid time format. Use HH:MM:SS like 08:30:00",
     "invalidGtfsPickupType": "Invalid pickup value",
@@ -292,7 +302,11 @@
       "subtitle": "Browse, search and filter previous operational runs",
       "backToToday": "Back to today's operations",
       "loadError": "Could not load the runs archive.",
+      "resultCount_zero": "{{count}} results",
       "resultCount_one": "{{count}} result",
+      "resultCount_two": "{{count}} results",
+      "resultCount_few": "{{count}} results",
+      "resultCount_many": "{{count}} results",
       "resultCount_other": "{{count}} results",
       "filters": {
         "title": "Archive filters",
@@ -345,7 +359,11 @@
     },
     "route": {
       "description": "Operational departures for this route",
+      "runCount_zero": "{{count}} runs",
       "runCount_one": "{{count}} run",
+      "runCount_two": "{{count}} runs",
+      "runCount_few": "{{count}} runs",
+      "runCount_many": "{{count}} runs",
       "runCount_other": "{{count}} runs",
       "expand": "Click to show route runs",
       "collapse": "Click to hide route runs"
@@ -399,7 +417,11 @@
       "currentStopSequence": "Current stop sequence",
       "lastPassedStop": "Last passed stop",
       "mapDescription": "Route path, stops and live bus position",
+      "stopsCount_zero": "{{count}} stops",
       "stopsCount_one": "{{count}} stop",
+      "stopsCount_two": "{{count}} stops",
+      "stopsCount_few": "{{count}} stops",
+      "stopsCount_many": "{{count}} stops",
       "stopsCount_other": "{{count}} stops",
       "followBus": "Follow bus",
       "followingBus": "Following bus",
@@ -571,7 +593,11 @@
       "description": "Select the hour and minutes without typing the time manually.",
       "serviceDay": "Service Day",
       "sameDay": "Same Service Day",
+      "nextDay_zero": "{{count}} Days Later",
       "nextDay_one": "Next Day",
+      "nextDay_two": "{{count}} Days Later",
+      "nextDay_few": "{{count}} Days Later",
+      "nextDay_many": "{{count}} Days Later",
       "nextDay_other": "{{count}} Days Later",
       "gtfsValue": "Value Sent to the System"
     },
@@ -808,10 +834,20 @@
     "exceptions": {
       "title": "Schedule Exceptions",
       "empty": "No exceptions for this schedule.",
+      "addTitle": "Add New Exception",
+      "addDescription": "Select the date and exception type, and optionally add a note explaining the reason.",
+      "listTitle": "Recorded Exceptions",
+      "listDescription": "Dates where service differs from the weekly operating pattern.",
+      "loadError": "Failed to load schedule exceptions.",
+      "emptyDescription": "Add an exception to run service on an additional date or stop it on a specific date.",
+      "noNote": "No note was added for this exception.",
+      "createdAt": "Added at",
       "form": {
         "date": "Exception Date",
         "type": "Exception Type",
-        "note": "Note"
+        "note": "Note",
+        "notePlaceholder": "Example: Additional service for an event or suspension for a public holiday",
+        "noteHint": "Optional, but useful for explaining the exception"
       },
       "delete": {
         "title": "Delete Exception",
@@ -922,6 +958,10 @@
       "manage": "Manage route stops",
       "description": "Select the stops linked to this route and set their order.",
       "ordering": "Ordering",
+      "errors": {
+        "invalidOrdering": "Enter a positive whole number for every selected stop order.",
+        "duplicateOrdering": "Each selected stop must have a unique order."
+      },
       "toast": {
         "updateSuccess": "Route stops updated successfully",
         "updateError": "Failed to update route stops"
@@ -950,7 +990,19 @@
       "selectLine": "Select route line",
       "saveLine": "Save line",
       "undoPoint": "Undo",
-      "clearLine": "Clear line"
+      "clearLine": "Clear line",
+      "pointTitle": "Point {{value}}",
+      "dragPointHint": "Drag this point to adjust its position on the route.",
+      "deletePoint": "Delete point",
+      "minPointsHint": "The route line must keep at least two points.",
+      "generateRouteOnRoads": "Generate route on roads",
+      "generatingRoute": "Generating route...",
+      "routingError": "Could not generate the route on roads."
+    },
+    "lineEditor": {
+      "pointTitle": "Point {{value}}",
+      "dragPointHint": "Drag this point to adjust its position on the route.",
+      "deletePoint": "Delete point"
     },
     "modes": {
       "air": "Air",
@@ -1124,6 +1176,8 @@
       "createdAt": "Created at"
     },
     "map": {
+      "selectPoint": "Select point on map",
+      "savePoint": "Save location",
       "showPlaces": "Show places on map",
       "noPlacesTitle": "No places to show",
       "noPlacesDescription": "There are no places with coordinates in the current results.",
@@ -1342,7 +1396,8 @@
     "delete": {
       "title": "Delete user",
       "description": "Are you sure you want to delete {{name}}?",
-      "tooltip": "Delete user"
+      "tooltip": "Delete user",
+      "driver": "Driver"
     },
     "title": "Users",
     "subtitle": "Manage system users and link them to organizations",

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  Alert,
   Box,
   Button,
   Checkbox,
@@ -28,7 +29,7 @@ type ManageRouteStopsProps = {
 
 type SelectedRouteStop = {
   stopId: string;
-  ordering: number;
+  ordering: string;
 };
 
 const getStopLabel = (stop: Stop) => {
@@ -40,8 +41,40 @@ const getInitialStopsFromRoute = (routeDetails?: TransitRoute): SelectedRouteSto
     .sort((a, b) => a.ordering - b.ordering)
     .map((routeNode) => ({
       stopId: routeNode.node.id,
-      ordering: routeNode.ordering,
+      ordering: String(routeNode.ordering),
     }));
+};
+
+const parseOrdering = (ordering: string) => {
+  const normalizedOrdering = ordering.trim();
+
+  if (!/^\d+$/.test(normalizedOrdering)) {
+    return null;
+  }
+
+  const parsedOrdering = Number(normalizedOrdering);
+
+  if (!Number.isInteger(parsedOrdering) || parsedOrdering <= 0) {
+    return null;
+  }
+
+  return parsedOrdering;
+};
+
+const getOrderingError = (selectedStops: SelectedRouteStop[]) => {
+  const orderings = selectedStops.map((item) => parseOrdering(item.ordering));
+
+  if (orderings.some((ordering) => ordering === null)) {
+    return "routes.stops.errors.invalidOrdering";
+  }
+
+  const uniqueOrderings = new Set(orderings);
+
+  if (uniqueOrderings.size !== orderings.length) {
+    return "routes.stops.errors.duplicateOrdering";
+  }
+
+  return null;
 };
 
 const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
@@ -95,7 +128,7 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
   const isSelected = (stopId: string) => selectedStopIds.includes(stopId);
 
   const getOrdering = (stopId: string) => {
-    return selectedStops.find((item) => item.stopId === stopId)?.ordering ?? 1;
+    return selectedStops.find((item) => item.stopId === stopId)?.ordering ?? "1";
   };
 
   const toggleStop = (stopId: string) => {
@@ -106,19 +139,23 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
         return current.filter((item) => item.stopId !== stopId);
       }
 
-      const maxOrdering = current.reduce((max, item) => Math.max(max, item.ordering), 0);
+      const maxOrdering = current.reduce((max, item) => {
+        const ordering = parseOrdering(item.ordering);
+
+        return Math.max(max, ordering ?? 0);
+      }, 0);
 
       return [
         ...current,
         {
           stopId,
-          ordering: maxOrdering + 1,
+          ordering: String(maxOrdering + 1),
         },
       ];
     });
   };
 
-  const updateOrdering = (stopId: string, ordering: number) => {
+  const updateOrdering = (stopId: string, ordering: string) => {
     setSelectedStops((current) =>
       current.map((item) =>
         item.stopId === stopId
@@ -146,8 +183,15 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
   };
 
   const handleSave = async () => {
+    if (orderingError) {
+      return;
+    }
+
     const payload = selectedStops
-      .filter((item) => item.ordering > 0)
+      .map((item) => ({
+        stopId: item.stopId,
+        ordering: Number(item.ordering),
+      }))
       .sort((a, b) => a.ordering - b.ordering)
       .map((item) => ({
         stopId: item.stopId,
@@ -164,6 +208,10 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
   const loading = stops.isLoading || routeDetails.isLoading || updateRouteStops.isPending;
 
   const hasError = stops.isError || routeDetails.isError;
+
+  const orderingError = useMemo(() => {
+    return getOrderingError(selectedStops);
+  }, [selectedStops]);
 
   return (
     <>
@@ -200,6 +248,8 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
               placeholder={t("table.search")}
               disabled={loading}
             />
+
+            {orderingError ? <Alert severity="error">{t(orderingError)}</Alert> : null}
 
             {loading ? (
               <Box
@@ -277,7 +327,7 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
                         label={t("routes.stops.ordering")}
                         value={checked ? getOrdering(stop.id) : ""}
                         onChange={(event) => {
-                          updateOrdering(stop.id, Number(event.target.value));
+                          updateOrdering(stop.id, event.target.value);
                         }}
                         disabled={!checked}
                         slotProps={{
@@ -310,7 +360,11 @@ const ManageRouteStops = ({ route }: ManageRouteStopsProps) => {
             {t("common.cancel")}
           </Button>
 
-          <Button variant="contained" onClick={handleSave} disabled={loading || hasError}>
+          <Button
+            variant="contained"
+            onClick={handleSave}
+            disabled={loading || hasError || Boolean(orderingError)}
+          >
             {updateRouteStops.isPending ? t("common.saving") : t("common.save")}
           </Button>
         </DialogActions>

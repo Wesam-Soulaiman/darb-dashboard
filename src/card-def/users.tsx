@@ -17,6 +17,7 @@ import ViewUserDetails from "../pages/admin/users/components/ViewUserDetails";
 
 type UsersCardOptions = {
   t: TFunction;
+  locale: string;
   isSuperAdmin: boolean;
   organizations?: Organization[];
 };
@@ -28,18 +29,19 @@ const getInitials = (firstName?: string, lastName?: string) => {
   return `${first}${last}`.toUpperCase() || "U";
 };
 
-const formatDate = (value?: string | null) => {
+const formatDate = (value: string | null | undefined, locale: string) => {
   if (!value) return "-";
 
   const date = new Date(value);
 
   if (Number.isNaN(date.getTime())) return "-";
 
-  return date.toLocaleDateString("ar-SY");
+  return date.toLocaleDateString(locale);
 };
 
 export const getUsersCard = ({
   t,
+  locale,
   isSuperAdmin,
   organizations = [],
 }: UsersCardOptions) => {
@@ -175,7 +177,7 @@ export const getUsersCard = ({
                     {t("users.organizationUsers.hireDate")}
                   </Typography>
                   <Typography variant="body2">
-                    {formatDate(user.profile.hireDate)}
+                    {formatDate(user.profile.hireDate, locale)}
                   </Typography>
                 </Box>
 
@@ -209,7 +211,7 @@ export const getUsersCard = ({
                       </Typography>
 
                       <Typography variant="body2">
-                        {formatDate(user.profile?.licenseExpiry)}
+                        {formatDate(user.profile?.licenseExpiry, locale)}
                       </Typography>
                     </Box>
                   </Stack>

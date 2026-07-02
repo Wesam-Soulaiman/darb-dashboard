@@ -39,7 +39,8 @@ const getFilterValue = (filters: MRT_ColumnFiltersState, id: string): string => 
 };
 
 const SchedulesPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language.startsWith("ar") ? "ar-SY" : "en-US";
   const params = useParams();
   const { user, isSuperAdmin } = useAuthContext();
 
@@ -71,8 +72,9 @@ const SchedulesPage = () => {
     () =>
       getSchedulesTableColumns({
         t,
+        locale,
       }),
-    [t],
+    [locale, t],
   );
 
   const renderScheduleCard = useMemo(

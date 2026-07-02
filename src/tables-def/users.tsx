@@ -9,6 +9,7 @@ import UserActions from "../pages/admin/users/components/UserActions";
 
 interface UsersTableColumnsProps {
   t: TFunction;
+  locale: string;
   isSuperAdmin: boolean;
   organizations: Organization[];
 }
@@ -20,7 +21,7 @@ const getInitials = (firstName?: string, lastName?: string) => {
   return `${first}${last}`.toUpperCase() || "U";
 };
 
-const formatDate = (value?: string | null) => {
+const formatDate = (value: string | null | undefined, locale: string) => {
   if (!value) return "-";
 
   const date = new Date(value);
@@ -29,11 +30,12 @@ const formatDate = (value?: string | null) => {
     return "-";
   }
 
-  return date.toLocaleDateString("ar-SY");
+  return date.toLocaleDateString(locale);
 };
 
 export const getUsersTableColumns = ({
   t,
+  locale,
   isSuperAdmin,
   organizations,
 }: UsersTableColumnsProps): MRT_ColumnDef<UserListItem>[] => {
@@ -251,7 +253,7 @@ export const getUsersTableColumns = ({
       enableColumnFilter: false,
       Cell: ({ row }) => (
         <Typography component="span">
-          {formatDate(row.original.profile?.hireDate)}
+          {formatDate(row.original.profile?.hireDate, locale)}
         </Typography>
       ),
     },
@@ -306,7 +308,9 @@ export const getUsersTableColumns = ({
       enableColumnFilter: false,
       Cell: ({ row }) => (
         <Typography component="span">
-          {row.original.isDriver ? formatDate(row.original.profile?.licenseExpiry) : "-"}
+          {row.original.isDriver
+            ? formatDate(row.original.profile?.licenseExpiry, locale)
+            : "-"}
         </Typography>
       ),
     },
@@ -316,7 +320,9 @@ export const getUsersTableColumns = ({
       enableGlobalFilter: false,
       enableColumnFilter: false,
       Cell: ({ row }) => (
-        <Typography component="span">{formatDate(row.original.createdAt)}</Typography>
+        <Typography component="span">
+          {formatDate(row.original.createdAt, locale)}
+        </Typography>
       ),
     },
     {

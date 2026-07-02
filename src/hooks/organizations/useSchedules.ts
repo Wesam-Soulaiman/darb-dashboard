@@ -135,6 +135,10 @@ export const useCreateScheduleException = (orgId: number, scheduleId: number) =>
         queryKey: schedulesQueryKeys.exceptions(orgId, scheduleId),
       });
 
+      queryClient.invalidateQueries({
+        queryKey: schedulesQueryKeys.org(orgId),
+      });
+
       toast.success(t("schedules.exceptions.toast.createSuccess"));
     },
     onError: (error) => {
@@ -153,6 +157,10 @@ export const useDeleteScheduleException = (orgId: number, scheduleId: number) =>
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: schedulesQueryKeys.exceptions(orgId, scheduleId),
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: schedulesQueryKeys.org(orgId),
       });
 
       toast.success(t("schedules.exceptions.toast.deleteSuccess"));

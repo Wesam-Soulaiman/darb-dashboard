@@ -9,6 +9,7 @@ import ScheduleExceptions from "../pages/admin/schedules/components/ScheduleExce
 
 interface SchedulesColumnsProps {
   t: TFunction;
+  locale: string;
 }
 
 const DAYS: Array<{
@@ -26,6 +27,7 @@ const DAYS: Array<{
 
 export const getSchedulesTableColumns = ({
   t,
+  locale,
 }: SchedulesColumnsProps): MRT_ColumnDef<Schedule>[] => {
   return [
     {
@@ -73,7 +75,7 @@ export const getSchedulesTableColumns = ({
       enableColumnFilter: false,
       Cell: ({ row }) =>
         row.original.startDate
-          ? new Date(row.original.startDate).toLocaleDateString("ar-SY")
+          ? new Date(row.original.startDate).toLocaleDateString(locale)
           : "-",
     },
     {
@@ -83,7 +85,7 @@ export const getSchedulesTableColumns = ({
       enableColumnFilter: false,
       Cell: ({ row }) =>
         row.original.endDate
-          ? new Date(row.original.endDate).toLocaleDateString("ar-SY")
+          ? new Date(row.original.endDate).toLocaleDateString(locale)
           : "-",
     },
     {
@@ -109,7 +111,7 @@ export const getSchedulesTableColumns = ({
       enableColumnFilter: false,
       Cell: ({ row }) =>
         row.original.updatedAt
-          ? new Date(row.original.updatedAt).toLocaleDateString("ar-SY")
+          ? new Date(row.original.updatedAt).toLocaleDateString(locale)
           : "-",
     },
     {

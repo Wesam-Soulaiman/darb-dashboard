@@ -5,16 +5,42 @@ import type { ScheduleDraft } from "./scheduleCalendar.types";
 export const DEFAULT_SCHEDULE_COLOR = "#3A7CDFFF";
 
 const hexColorRegex = /^#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
+const dateOnlyRegex = /^(\d{4})-(\d{2})-(\d{2})$/;
 
-export const getToday = () => new Date().toISOString().slice(0, 10);
+const formatDateOnly = (year: number, month: number, day: number) => {
+  return `${String(year).padStart(4, "0")}-${String(month).padStart(
+    2,
+    "0",
+  )}-${String(day).padStart(2, "0")}`;
+};
+
+export const getToday = () => {
+  const today = new Date();
+
+  return formatDateOnly(
+    today.getFullYear(),
+    today.getMonth() + 1,
+    today.getDate(),
+  );
+};
 
 export const addDays = (dateValue: string, days: number) => {
-  const date = new Date(`${dateValue}T00:00:00`);
+  const match = dateOnlyRegex.exec(dateValue);
 
-  if (Number.isNaN(date.getTime())) return dateValue;
+  if (!match) return dateValue;
 
-  date.setDate(date.getDate() + days);
-  return date.toISOString().slice(0, 10);
+  const [, yearValue, monthValue, dayValue] = match;
+  const year = Number(yearValue);
+  const month = Number(monthValue);
+  const day = Number(dayValue);
+
+  const date = new Date(Date.UTC(year, month - 1, day + days));
+
+  return formatDateOnly(
+    date.getUTCFullYear(),
+    date.getUTCMonth() + 1,
+    date.getUTCDate(),
+  );
 };
 
 export const toDateInputValue = (

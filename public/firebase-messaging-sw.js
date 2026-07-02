@@ -20,9 +20,34 @@ const getBody = (payload) => {
   return payload?.notification?.body || payload?.data?.body || "";
 };
 
+const FALLBACK_APP_PATH = "/";
+
+const getSafeAppPath = (value) => {
+  if (typeof value !== "string") {
+    return FALLBACK_APP_PATH;
+  }
+
+  const link = value.trim();
+
+  if (!link.startsWith("/") || link.startsWith("//")) {
+    return FALLBACK_APP_PATH;
+  }
+
+  try {
+    const url = new URL(link, self.location.origin);
+
+    if (url.origin !== self.location.origin) {
+      return FALLBACK_APP_PATH;
+    }
+
+    return `${url.pathname}${url.search}${url.hash}` || FALLBACK_APP_PATH;
+  } catch {
+    return FALLBACK_APP_PATH;
+  }
+};
+
 const getLink = (payload) => {
-  const link = payload?.data?.link || "/";
-  return new URL(link, self.location.origin).href;
+  return getSafeAppPath(payload?.data?.link);
 };
 
 messaging.onBackgroundMessage((payload) => {
@@ -43,7 +68,10 @@ messaging.onBackgroundMessage((payload) => {
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 
-  const url = event.notification?.data?.link || self.location.origin;
+  const url = new URL(
+    getSafeAppPath(event.notification?.data?.link),
+    self.location.origin,
+  ).href;
 
   event.waitUntil(
     clients
