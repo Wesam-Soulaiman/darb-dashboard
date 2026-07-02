@@ -12,11 +12,25 @@ import {
   getRefreshToken,
   updateAuthTokens,
 } from "../core/auth/authStorage";
+import {
+  gzipJsonPayload,
+  MIN_GZIP_SIZE_BYTES,
+  shouldCompressJsonPayload,
+} from "../utils/requestCompression";
+
+declare module "axios" {
+  export interface AxiosRequestConfig {
+    compress?: boolean;
+    compressionMinSizeBytes?: number;
+  }
+}
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
 
 const LOGIN_PATH = "/auth/login";
 const REFRESH_ENDPOINT = "/auth/refresh";
+const AUTH_ENDPOINT_PREFIX = "/auth";
+const COMPRESSIBLE_METHODS = new Set(["post", "put", "patch"]);
 
 type RawRefreshResponse = Partial<RefreshResponse> & {
   access_token?: string;
@@ -134,8 +148,77 @@ function getRefreshPromise(): Promise<string | null> {
   return refreshPromise;
 }
 
+function isCompressibleMethod(method?: string): boolean {
+  return COMPRESSIBLE_METHODS.has((method ?? "get").toLowerCase());
+}
+
+function isAuthEndpoint(url?: string): boolean {
+  if (!url) {
+    return false;
+  }
+
+  const normalizedUrl = url.startsWith("http")
+    ? new URL(url).pathname
+    : url.startsWith("/")
+      ? url
+      : `/${url}`;
+
+  return (
+    normalizedUrl === AUTH_ENDPOINT_PREFIX ||
+    normalizedUrl.startsWith(`${AUTH_ENDPOINT_PREFIX}/`)
+  );
+}
+
+function hasJsonContentType(headers: AxiosHeaders): boolean {
+  const contentType = headers.get("Content-Type");
+
+  if (!contentType) {
+    return true;
+  }
+
+  const normalizedContentType = String(contentType).toLowerCase();
+
+  return (
+    normalizedContentType.includes("application/json") ||
+    normalizedContentType.includes("+json")
+  );
+}
+
+function applyRequestCompression(config: InternalRequestConfig): InternalRequestConfig {
+  if (!config.compress || !isCompressibleMethod(config.method)) {
+    return config;
+  }
+
+  if (isAuthEndpoint(config.url)) {
+    return config;
+  }
+
+  const headers = AxiosHeaders.from(config.headers);
+
+  if (!hasJsonContentType(headers)) {
+    return config;
+  }
+
+  const minSize = config.compressionMinSizeBytes ?? MIN_GZIP_SIZE_BYTES;
+
+  if (!shouldCompressJsonPayload(config.data, minSize)) {
+    return config;
+  }
+
+  config.data = gzipJsonPayload(config.data);
+
+  headers.set("Content-Type", "application/json");
+  headers.set("Content-Encoding", "gzip");
+
+  config.headers = headers;
+
+  return config;
+}
+
 apiClient.interceptors.request.use((config) => {
   const requestConfig = config as InternalRequestConfig;
+
+  applyRequestCompression(requestConfig);
 
   if (requestConfig.skipAuth) {
     return requestConfig;

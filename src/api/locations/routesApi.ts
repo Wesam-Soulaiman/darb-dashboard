@@ -1,4 +1,5 @@
 import { apiClient } from "../apiClient";
+import { LARGE_JSON_GZIP_MIN_BYTES } from "../../utils/requestCompression";
 import type {
   CreateRoutePayload,
   GetRoutesParams,
@@ -26,7 +27,10 @@ export const routesApi = {
   },
 
   create: async (payload: CreateRoutePayload) => {
-    const response = await apiClient.post<TransitRoute>(ROUTES_ENDPOINT, payload);
+    const response = await apiClient.post<TransitRoute>(ROUTES_ENDPOINT, payload, {
+      compress: true,
+      compressionMinSizeBytes: LARGE_JSON_GZIP_MIN_BYTES,
+    });
 
     return response.data;
   },
@@ -35,6 +39,10 @@ export const routesApi = {
     const response = await apiClient.patch<TransitRoute>(
       `${ROUTES_ENDPOINT}/${id}`,
       payload,
+      {
+        compress: true,
+        compressionMinSizeBytes: LARGE_JSON_GZIP_MIN_BYTES,
+      },
     );
 
     return response.data;
@@ -44,6 +52,10 @@ export const routesApi = {
     const response = await apiClient.patch<TransitRoute>(
       `${ROUTES_ENDPOINT}/${id}/stops`,
       payload,
+      {
+        compress: true,
+        compressionMinSizeBytes: LARGE_JSON_GZIP_MIN_BYTES,
+      },
     );
 
     return response.data;

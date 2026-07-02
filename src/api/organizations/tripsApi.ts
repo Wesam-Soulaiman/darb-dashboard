@@ -1,6 +1,7 @@
 import { apiClient } from "../apiClient";
 
 import { localGtfsTimeToUtc, utcGtfsTimeToLocal } from "../../utils/gtfsTimeZone";
+import { LARGE_JSON_GZIP_MIN_BYTES } from "../../utils/requestCompression";
 
 import type {
   CreateTripPayload,
@@ -112,6 +113,10 @@ export const tripsApi = {
     const response = await apiClient.put<TripStopTime[]>(
       `${getTripsEndpoint(orgId)}/${tripId}/stop-times`,
       utcPayload,
+      {
+        compress: true,
+        compressionMinSizeBytes: LARGE_JSON_GZIP_MIN_BYTES,
+      },
     );
 
     return response.data.map(mapStopTimeToLocal);
@@ -127,6 +132,10 @@ export const tripsApi = {
     const response = await apiClient.put<TripFrequency[]>(
       `${getTripsEndpoint(orgId)}/${tripId}/frequencies`,
       utcPayload,
+      {
+        compress: true,
+        compressionMinSizeBytes: LARGE_JSON_GZIP_MIN_BYTES,
+      },
     );
 
     return response.data.map(mapFrequencyToLocal);

@@ -1,4 +1,5 @@
 import { apiClient } from "../../api/apiClient";
+import { LARGE_JSON_GZIP_MIN_BYTES } from "../../utils/requestCompression";
 
 import type {
   GenerateRouteOnRoadsPayload,
@@ -73,7 +74,14 @@ const generateRouteWithBackend = async ({
     coordinates: mapPointToGeoJsonCoordinate(point),
   }));
 
-  const response = await apiClient.post<GeoJsonLineString | null>("/directions", payload);
+  const response = await apiClient.post<GeoJsonLineString | null>(
+    "/directions",
+    payload,
+    {
+      compress: true,
+      compressionMinSizeBytes: LARGE_JSON_GZIP_MIN_BYTES,
+    },
+  );
 
   const lineString = response.data;
 
