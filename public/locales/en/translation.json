@@ -1015,6 +1015,10 @@
       "geolocationUnsupported": "This browser does not support geolocation.",
       "insecureContext": "Geolocation only works on HTTPS or localhost.",
       "rejectedPoint": "The last point was ignored because its accuracy was weak: {{accuracy}} meters.",
+      "editModeHint": "You can now drag route points to adjust their position, or delete extra points. The line will reconnect automatically between the remaining points.",
+      "editPointTitle": "Point {{value}}",
+      "dragPointHint": "Drag this point to adjust its position on the route.",
+      "deletePoint": "Delete point",
       "status": {
         "idle": "Ready",
         "recording": "Recording",
@@ -1123,7 +1127,14 @@
       "showPlaces": "Show places on map",
       "noPlacesTitle": "No places to show",
       "noPlacesDescription": "There are no places with coordinates in the current results.",
-      "visibleCount": "{{count}} places"
+      "visibleCount": "{{count}} places",
+      "pointTitle": "Point {{value}}",
+      "dragPointHint": "Drag this point to adjust its position on the route.",
+      "deletePoint": "Delete point",
+      "minPointsHint": "The route line must keep at least two points.",
+      "generateRouteOnRoads": "Generate route on roads",
+      "generatingRoute": "Generating route...",
+      "routingError": "Could not generate the route on roads."
     },
     "toast": {
       "createSuccess": "Place created successfully",
@@ -1189,6 +1200,11 @@
       "name": "Name",
       "codeName": "Code name",
       "codeNameHint": "Used internally and should be unique."
+    },
+    "lineEditor": {
+      "pointTitle": "Point {{value}}",
+      "dragPointHint": "Drag this point to adjust its position on the route.",
+      "deletePoint": "Delete point"
     },
     "table": {
       "organization": "Organization",

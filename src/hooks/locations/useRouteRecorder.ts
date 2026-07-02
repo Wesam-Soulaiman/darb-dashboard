@@ -54,10 +54,14 @@ const getIsSecureGeolocationContext = (): boolean => {
 
 export const useRouteRecorder = (initialOptions?: Partial<RouteRecorderOptions>) => {
   const [status, setStatus] = useState<RouteRecorderStatus>("idle");
+
   const [points, setPoints] = useState<RecordedRoutePoint[]>([]);
+  const [editablePoints, setEditablePoints] = useState<RecordedRoutePoint[]>([]);
+
   const [lastRejectedPoint, setLastRejectedPoint] = useState<RecordedRoutePoint | null>(
     null,
   );
+
   const [errorKey, setErrorKey] = useState<string | null>(null);
   const [elapsedMs, setElapsedMs] = useState(0);
 
@@ -68,6 +72,7 @@ export const useRouteRecorder = (initialOptions?: Partial<RouteRecorderOptions>)
 
   const watchIdRef = useRef<number | null>(null);
   const pointsRef = useRef<RecordedRoutePoint[]>([]);
+
   const optionsRef = useRef<RouteRecorderOptions>({
     ...DEFAULT_OPTIONS,
     ...initialOptions,
@@ -174,12 +179,15 @@ export const useRouteRecorder = (initialOptions?: Partial<RouteRecorderOptions>)
     clearWatch();
 
     setPoints([]);
+    setEditablePoints([]);
     pointsRef.current = [];
+
     setLastRejectedPoint(null);
     setErrorKey(null);
 
     elapsedBeforeSegmentRef.current = 0;
     activeSegmentStartedAtRef.current = Date.now();
+
     setElapsedMs(0);
 
     const started = startWatching();
@@ -199,6 +207,7 @@ export const useRouteRecorder = (initialOptions?: Partial<RouteRecorderOptions>)
     }
 
     activeSegmentStartedAtRef.current = null;
+
     setElapsedMs(elapsedBeforeSegmentRef.current);
     setStatus("paused");
   }, [clearWatch, status]);
@@ -226,7 +235,15 @@ export const useRouteRecorder = (initialOptions?: Partial<RouteRecorderOptions>)
 
     clearWatch();
 
+    const finalPoints = simplifyRecordedPoints(
+      pointsRef.current,
+      optionsRef.current.simplifyToleranceMeters,
+    );
+
+    setEditablePoints(finalPoints);
+
     activeSegmentStartedAtRef.current = null;
+
     setElapsedMs(elapsedBeforeSegmentRef.current);
     setStatus("finished");
   }, [clearWatch, status]);
@@ -235,8 +252,11 @@ export const useRouteRecorder = (initialOptions?: Partial<RouteRecorderOptions>)
     clearWatch();
 
     setStatus("idle");
+
     setPoints([]);
+    setEditablePoints([]);
     pointsRef.current = [];
+
     setLastRejectedPoint(null);
     setErrorKey(null);
     setElapsedMs(0);
@@ -246,12 +266,49 @@ export const useRouteRecorder = (initialOptions?: Partial<RouteRecorderOptions>)
   }, [clearWatch]);
 
   const removeLastPoint = useCallback(() => {
+    if (status === "finished") {
+      setEditablePoints((currentPoints) => currentPoints.slice(0, -1));
+      return;
+    }
+
     setPoints((currentPoints) => {
       const nextPoints = currentPoints.slice(0, -1);
       pointsRef.current = nextPoints;
 
       return nextPoints;
     });
+  }, [status]);
+
+  const updateRecordedPoint = useCallback(
+    (
+      pointIndex: number,
+      position: {
+        latitude: number;
+        longitude: number;
+      },
+    ) => {
+      setEditablePoints((currentPoints) =>
+        currentPoints.map((point, index) => {
+          if (index !== pointIndex) {
+            return point;
+          }
+
+          return {
+            ...point,
+            latitude: position.latitude,
+            longitude: position.longitude,
+            timestamp: new Date().toISOString(),
+          };
+        }),
+      );
+    },
+    [],
+  );
+
+  const deleteRecordedPoint = useCallback((pointIndex: number) => {
+    setEditablePoints((currentPoints) =>
+      currentPoints.filter((_, index) => index !== pointIndex),
+    );
   }, []);
 
   const setOptions = useCallback((patch: Partial<RouteRecorderOptions>) => {
@@ -288,19 +345,30 @@ export const useRouteRecorder = (initialOptions?: Partial<RouteRecorderOptions>)
     };
   }, [clearWatch]);
 
-  const simplifiedPoints = useMemo(() => {
+  const autoSimplifiedPoints = useMemo(() => {
     return simplifyRecordedPoints(points, options.simplifyToleranceMeters);
   }, [options.simplifyToleranceMeters, points]);
 
-  const distanceMeters = useMemo(() => {
-    return getRecordedRouteDistanceMeters(points);
-  }, [points]);
+  const simplifiedPoints = useMemo(() => {
+    if (status === "finished") {
+      return editablePoints;
+    }
 
-  const lastPoint = points.at(-1) ?? null;
+    return autoSimplifiedPoints;
+  }, [autoSimplifiedPoints, editablePoints, status]);
+
+  const activePoints = status === "finished" ? editablePoints : points;
+
+  const distanceMeters = useMemo(() => {
+    return getRecordedRouteDistanceMeters(activePoints);
+  }, [activePoints]);
+
+  const lastPoint = activePoints.at(-1) ?? null;
 
   return {
     status,
     points,
+    editablePoints,
     simplifiedPoints,
     lastPoint,
     lastRejectedPoint,
@@ -319,6 +387,8 @@ export const useRouteRecorder = (initialOptions?: Partial<RouteRecorderOptions>)
     finish,
     reset,
     removeLastPoint,
+    updateRecordedPoint,
+    deleteRecordedPoint,
     setOptions,
   };
 };

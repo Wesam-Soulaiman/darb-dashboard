@@ -1020,6 +1020,11 @@
       "line": "خط المسار",
       "pointsCount": "{{count}} نقطة محددة"
     },
+    "lineEditor": {
+      "pointTitle": "نقطة رقم {{value}}",
+      "dragPointHint": "اسحب هذه النقطة لتعديل مكانها على الخط.",
+      "deletePoint": "حذف النقطة"
+    },
     "table": {
       "name": "اسم المسار",
       "originPlace": "الانطلاق",
@@ -1032,7 +1037,14 @@
       "selectLine": "تحديد خط المسار",
       "saveLine": "حفظ الخط",
       "undoPoint": "تراجع",
-      "clearLine": "مسح الخط"
+      "clearLine": "مسح الخط",
+      "pointTitle": "نقطة رقم {{value}}",
+      "dragPointHint": "اسحب هذه النقطة لتعديل مكانها على الخط.",
+      "deletePoint": "حذف النقطة",
+      "minPointsHint": "يجب أن يبقى في الخط نقطتان على الأقل.",
+      "generateRouteOnRoads": "توليد المسار على الطريق",
+      "generatingRoute": "جارٍ توليد المسار...",
+      "routingError": "تعذر توليد المسار على الطريق."
     },
     "modes": {
       "air": "طيران",
@@ -1097,6 +1109,10 @@
       "geolocationUnsupported": "المتصفح الحالي لا يدعم تحديد الموقع الجغرافي.",
       "insecureContext": "تحديد الموقع يعمل فقط على HTTPS أو localhost.",
       "rejectedPoint": "تم تجاهل آخر نقطة لأن دقتها ضعيفة: {{accuracy}} متر.",
+      "editModeHint": "يمكنك الآن سحب نقاط المسار لتعديل مكانها، أو حذف النقاط الزائدة. سيتم وصل الخط تلقائيًا بين النقاط المتبقية.",
+      "editPointTitle": "نقطة رقم {{value}}",
+      "dragPointHint": "اسحب هذه النقطة لتعديل مكانها على المسار.",
+      "deletePoint": "حذف النقطة",
       "status": {
         "idle": "جاهز",
         "recording": "جارٍ التسجيل",

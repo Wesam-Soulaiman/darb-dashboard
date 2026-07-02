@@ -7,6 +7,7 @@ import L, { type LatLngExpression } from "leaflet";
 import {
   CircleMarker,
   MapContainer,
+  Marker,
   Polyline,
   Popup,
   TileLayer,
@@ -34,6 +35,15 @@ type RouteRecorderMapProps = {
   simplifiedPoints: RecordedRoutePoint[];
   currentPoint: RecordedRoutePoint | null;
   status: RouteRecorderStatus;
+  isEditable?: boolean;
+  onMoveRecordedPoint?: (
+    pointIndex: number,
+    position: {
+      latitude: number;
+      longitude: number;
+    },
+  ) => void;
+  onDeleteRecordedPoint?: (pointIndex: number) => void;
 };
 
 type MapViewportControllerProps = {
@@ -117,6 +127,45 @@ const MapInteractionController = ({ onManualMove }: MapInteractionControllerProp
   return null;
 };
 
+const createEditablePointIcon = ({
+  label,
+  backgroundColor,
+  foregroundColor,
+  borderColor,
+}: {
+  label: number;
+  backgroundColor: string;
+  foregroundColor: string;
+  borderColor: string;
+}) => {
+  return L.divIcon({
+    className: "",
+    html: `
+      <div
+        style="
+          width: 30px;
+          height: 30px;
+          border-radius: 999px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: ${backgroundColor};
+          color: ${foregroundColor};
+          border: 3px solid ${borderColor};
+          font-size: 11px;
+          font-weight: 900;
+          cursor: grab;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+        "
+      >
+        ${label}
+      </div>
+    `,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+  });
+};
+
 const RouteRecorderMap = ({
   routeName,
   existingRouteCoordinates,
@@ -124,6 +173,9 @@ const RouteRecorderMap = ({
   simplifiedPoints,
   currentPoint,
   status,
+  isEditable = false,
+  onMoveRecordedPoint,
+  onDeleteRecordedPoint,
 }: RouteRecorderMapProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -169,6 +221,7 @@ const RouteRecorderMap = ({
     DEFAULT_CENTER;
 
   const startPosition = recordedRoutePositions[0] ?? null;
+
   const endPosition =
     recordedRoutePositions.length > 1
       ? recordedRoutePositions[recordedRoutePositions.length - 1]
@@ -364,7 +417,68 @@ const RouteRecorderMap = ({
             />
           )}
 
-          {startPosition && (
+          {isEditable &&
+            recordedRoutePositions.map((position, index) => {
+              const icon = createEditablePointIcon({
+                label: index + 1,
+                backgroundColor: theme.palette.background.paper,
+                foregroundColor: theme.palette.primary.main,
+                borderColor: theme.palette.primary.main,
+              });
+
+              return (
+                <Marker
+                  key={`editable-point-${index}`}
+                  position={position}
+                  icon={icon}
+                  draggable
+                  eventHandlers={{
+                    dragend(event) {
+                      const marker = event.target as L.Marker;
+                      const nextPosition = marker.getLatLng();
+
+                      onMoveRecordedPoint?.(index, {
+                        latitude: nextPosition.lat,
+                        longitude: nextPosition.lng,
+                      });
+                    },
+                  }}
+                >
+                  <Popup>
+                    <Stack spacing={1}>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontWeight: 800,
+                        }}
+                      >
+                        {t("routes.recorder.editPointTitle", {
+                          value: index + 1,
+                        })}
+                      </Typography>
+
+                      <Typography variant="caption">
+                        {t("routes.recorder.dragPointHint")}
+                      </Typography>
+
+                      <Button
+                        size="small"
+                        color="error"
+                        variant="outlined"
+                        disabled={recordedRoutePositions.length <= 2}
+                        onClick={() => {
+                          onDeleteRecordedPoint?.(index);
+                        }}
+                      >
+                        {t("routes.recorder.deletePoint")}
+                      </Button>
+                    </Stack>
+                  </Popup>
+                </Marker>
+              );
+            })}
+
+          {!isEditable && startPosition && (
             <CircleMarker
               center={startPosition}
               radius={8}
@@ -381,7 +495,7 @@ const RouteRecorderMap = ({
             </CircleMarker>
           )}
 
-          {endPosition && (
+          {!isEditable && endPosition && (
             <CircleMarker
               center={endPosition}
               radius={8}
@@ -421,8 +535,9 @@ const RouteRecorderMap = ({
                   </Typography>
 
                   <Typography variant="caption">
-                    {currentPoint?.accuracy !== null
-                      ? `${Math.round(currentPoint?.accuracy ?? 0)} m`
+                    {currentPoint?.accuracy !== null &&
+                    currentPoint?.accuracy !== undefined
+                      ? `${Math.round(currentPoint.accuracy)} m`
                       : "—"}
                   </Typography>
                 </Stack>

@@ -379,6 +379,10 @@ const RouteRecorderPage = () => {
 
       <Alert severity="info">{t("routes.recorder.permissionNote")}</Alert>
 
+      {recorder.status === "finished" && (
+        <Alert severity="success">{t("routes.recorder.editModeHint")}</Alert>
+      )}
+
       <Box
         sx={{
           display: "grid",
@@ -456,6 +460,7 @@ const RouteRecorderPage = () => {
                     }}
                   >
                     <CircularProgress size={18} />
+
                     <Typography
                       variant="body2"
                       sx={{
@@ -682,7 +687,8 @@ const RouteRecorderPage = () => {
                   startIcon={<RemoveCircleOutlineRoundedIcon />}
                   onClick={recorder.removeLastPoint}
                   disabled={
-                    recorder.points.length === 0 || recorder.status === "recording"
+                    recorder.simplifiedPoints.length === 0 ||
+                    recorder.status === "recording"
                   }
                 >
                   {t("routes.recorder.removeLastPoint")}
@@ -785,6 +791,9 @@ const RouteRecorderPage = () => {
         simplifiedPoints={recorder.simplifiedPoints}
         currentPoint={recorder.lastPoint}
         status={recorder.status}
+        isEditable={recorder.status === "finished"}
+        onMoveRecordedPoint={recorder.updateRecordedPoint}
+        onDeleteRecordedPoint={recorder.deleteRecordedPoint}
       />
     </Stack>
   );
